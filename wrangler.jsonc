@@ -1,0 +1,14 @@
+// Cloudflare Workers (flow unifié avec Pages depuis 2025)
+// On sert dist/ comme static assets — pas de code serveur, pas de runtime.
+{
+  "name": "958-site",
+  "compatibility_date": "2025-01-15",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  },
+  "observability": {
+    "enabled": true
+  }
+}
