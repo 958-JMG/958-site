@@ -35,6 +35,13 @@ const cases = [
   { tag: 'Syndic de copropriété', pitch: "200 mails/jour triés, brouillons rédigés, courriers types générés." },
   { tag: 'Gestion de fortune', pitch: "Analyses patrimoniales transformées en supports client à la charte du cabinet." },
 ];
+
+const kpis = [
+  { n: '+500', l: 'Personnes formées' },
+  { n: '+20',  l: 'PME transformées' },
+  { n: '6 mois', l: 'Délai moyen d\u2019un cockpit' },
+  { n: '100%', l: 'Européen, souverain' },
+];
 ---
 
 <Base
@@ -46,7 +53,7 @@ const cases = [
        ========================================= -->
   <section class="hero" aria-labelledby="h-hero">
     <div class="container">
-      <p class="eyebrow reveal">Conseil IA · Vannes · Depuis 2023</p>
+      <p class="eyebrow reveal">Conseil IA · Vannes · Depuis 2022</p>
       <h1 id="h-hero" class="hero-title reveal">
         On installe l'IA
         <br>dans votre entreprise.
@@ -83,6 +90,22 @@ const cases = [
         <p>Ce n'est pas un problème d'outil. <strong>C'est un problème de méthode.</strong> Les outils se multiplient, les promesses aussi. Les résultats mesurables, eux, sont rares. Ce qui manque, ce n'est pas un abonnement de plus — c'est un cadre.</p>
       </div>
       <TiltSignature />
+    </div>
+  </section>
+
+  <!-- =========================================
+       KPIs — chiffres clés
+       ========================================= -->
+  <section class="kpi-band" aria-label="Chiffres clés">
+    <div class="container">
+      <ul class="kpis reveal-stagger" role="list">
+        {kpis.map((k) => (
+          <li class="kpi reveal">
+            <span class="kpi-n">{k.n}</span>
+            <span class="kpi-l">{k.l}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 
@@ -396,6 +419,56 @@ const cases = [
     color: var(--ink-3);
   }
   .sov-card--do h4 { color: var(--accent-2); }
+
+  /* ============ KPIs — chiffres clés ============ */
+  .kpi-band {
+    border-block: 1px solid var(--line);
+    padding-block: var(--s-8);
+    background: var(--bg-2);
+  }
+  .kpis {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--s-4);
+  }
+  .kpi {
+    padding: var(--s-4) var(--s-5);
+    border-left: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+  .kpi:first-child { border-left: 0; padding-left: 0; }
+  .kpi-n {
+    font-family: var(--font-display);
+    font-size: var(--step-6);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: var(--tr-tight);
+    color: var(--accent);
+  }
+  .kpi-l {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    text-transform: uppercase;
+    letter-spacing: var(--tr-mono);
+    color: var(--ink-2);
+    line-height: var(--lh-normal);
+  }
+
+  @media (max-width: 900px) {
+    .kpis { grid-template-columns: repeat(2, 1fr); }
+    .kpi:nth-child(odd) { border-left: 0; padding-left: 0; }
+    .kpi:nth-child(even) { border-left: 1px solid var(--line); }
+    .kpi:nth-child(n+3) { padding-top: var(--s-5); border-top: 1px solid var(--line); }
+  }
+  @media (max-width: 480px) {
+    .kpis { grid-template-columns: 1fr; }
+    .kpi { border-left: 0 !important; padding-left: 0 !important; }
+    .kpi + .kpi { border-top: 1px solid var(--line); padding-top: var(--s-5); }
+    .kpi-n { font-size: var(--step-5); }
+  }
 
   /* ============ PREUVE — 3 cases ============ */
   .cases {
