@@ -19,6 +19,14 @@ const { title, description, canonical, ogImage = '/og-image.png' } = Astro.props
 const canonicalUrl = canonical || new URL(Astro.url.pathname, Astro.site).toString();
 const ogImageUrl = new URL(ogImage, Astro.site).toString();
 const pageTitle = `${title} — 958 · Neuf Cinquante Huit`;
+
+const path = Astro.url.pathname;
+const showMobileCta = !(
+  path === '/diagnostic' ||
+  path === '/diagnostic/' ||
+  path === '/merci' ||
+  path === '/merci/'
+);
 ---
 
 <!DOCTYPE html>
@@ -105,6 +113,13 @@ const pageTitle = `${title} — 958 · Neuf Cinquante Huit`;
 
     <Footer />
 
+    {showMobileCta && (
+      <a href="/diagnostic" class="mobile-cta" aria-label="Demander un diagnostic">
+        <span>Demander un diagnostic</span>
+        <span class="mobile-cta-arrow" aria-hidden="true">→</span>
+      </a>
+    )}
+
     <script>
       const io = new IntersectionObserver(
         (entries) => {
@@ -139,4 +154,60 @@ const pageTitle = `${title} — 958 · Neuf Cinquante Huit`;
 <style is:global>
   html { scroll-padding-top: calc(var(--header-h) + 16px); }
   main { min-height: 60vh; padding-top: var(--header-h); }
+
+  /* ============ STICKY MOBILE CTA ============ */
+  .mobile-cta {
+    display: none;
+  }
+
+  @media (max-width: 720px) {
+    .mobile-cta {
+      position: fixed;
+      left: 50%;
+      bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+      transform: translateX(-50%);
+      z-index: 60;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.85rem 1.35rem;
+      background: var(--accent);
+      color: var(--bg);
+      font-family: var(--font-sans);
+      font-size: var(--step-0);
+      font-weight: 500;
+      letter-spacing: var(--tr-wide);
+      white-space: nowrap;
+      border-radius: 999px;
+      text-decoration: none;
+      box-shadow:
+        0 10px 30px -8px rgba(0, 0, 0, 0.55),
+        0 0 0 1px rgba(212, 255, 78, 0.15),
+        0 0 40px -12px rgba(212, 255, 78, 0.35);
+      transition: transform var(--dur-1) var(--ease),
+                  box-shadow var(--dur-1) var(--ease);
+      animation: mobile-cta-in 340ms var(--ease) 280ms both;
+    }
+    .mobile-cta:active {
+      transform: translateX(-50%) translateY(1px) scale(0.98);
+    }
+    .mobile-cta-arrow {
+      transition: transform var(--dur-1) var(--ease);
+    }
+    .mobile-cta:active .mobile-cta-arrow {
+      transform: translateX(2px);
+    }
+
+    /* Give bottom breathing room so content doesn't hide under the button */
+    main { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
+  }
+
+  @keyframes mobile-cta-in {
+    from { opacity: 0; transform: translateX(-50%) translateY(16px); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-cta { animation: none; }
+  }
 </style>
