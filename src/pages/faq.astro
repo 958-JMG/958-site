@@ -1,0 +1,181 @@
+---
+import Base from '../layouts/Base.astro';
+import CTAButton from '../components/CTAButton.astro';
+
+const groups = [
+  {
+    label: 'Périmètre & méthode',
+    items: [
+      {
+        q: "Est-ce que vous travaillez avec des entreprises hors Bretagne ?",
+        a: "Oui. Basés à Vannes, nous intervenons partout en France. La proximité compte pour les ateliers ; le reste peut se faire à distance.",
+      },
+      {
+        q: "Je n'y connais rien en IA. C'est un problème ?",
+        a: "Non. C'est même souvent mieux. Nos meilleurs clients sont des dirigeants qui n'avaient jamais prompté avant de nous rencontrer. Notre métier est de rendre l'IA accessible.",
+      },
+      {
+        q: "Quelle différence avec les formations IA vendues sur LinkedIn ?",
+        a: "Les influenceurs IA vendent des prompts. Nous construisons des systèmes. Un prompt bien trouvé ne change pas une entreprise. Un système pensé pour votre métier, lui, change votre quotidien.",
+      },
+      {
+        q: "Vous formez aussi ?",
+        a: "Oui. La formation fait partie de l'accompagnement. Nous intervenons en intra-entreprise, sur des cas d'usage métier concrets.",
+      },
+    ],
+  },
+  {
+    label: 'Données & souveraineté',
+    items: [
+      {
+        q: "Mes données vont-elles partir chez OpenAI ou Google ?",
+        a: "Non, pas sans votre accord explicite. La souveraineté des données est chez nous un filtre, pas une option. Nous privilégions systématiquement les solutions européennes : Mistral (France), Claude sous accord EU (Anthropic), n8n auto-hébergé, SeaTable, Proton, Infomaniak, Pennylane. Quand un outil américain est le plus pertinent pour votre cas, nous vous expliquons précisément ce que ça implique et vous décidez en connaissance de cause.",
+      },
+    ],
+  },
+  {
+    label: 'Budget & délais',
+    items: [
+      {
+        q: "Combien ça coûte ?",
+        a: "Un audit démarre à partir de 900 € HT. Un cockpit complet se chiffre après l'audit, selon le périmètre. Nous établissons un devis précis avant toute implémentation. Aucun engagement au-delà.",
+      },
+      {
+        q: "Combien de temps dure un projet ?",
+        a: "De 4 semaines (audit + petit chantier) à 6 mois (cockpit complet avec accompagnement). Nous privilégions les livraisons courtes et les itérations.",
+      },
+      {
+        q: "Qui fait le travail ?",
+        a: "Jean-Marc Geuring, fondateur. Pour certains chantiers techniques, des freelances partenaires sous contrat. Aucune équipe junior, aucune sous-traitance offshore.",
+      },
+    ],
+  },
+];
+
+const allFaqs = groups.flatMap((g) => g.items);
+---
+
+<Base
+  title="FAQ — Questions fréquentes"
+  description="Réponses aux questions les plus fréquentes sur nos services d'audit, structuration et implémentation IA."
+>
+  <section class="section is-tight" aria-labelledby="h-faq">
+    <div class="container is-default" style="text-align: center;">
+      <p class="eyebrow reveal">FAQ</p>
+      <h1 id="h-faq" class="reveal" style="margin-top: var(--s-3);">Questions fréquentes.</h1>
+      <p class="lead reveal" style="margin-inline: auto; margin-top: var(--s-5);">
+        Si votre question ne figure pas ici, écrivez-nous à <a href="mailto:jmg@958.fr">jmg@958.fr</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" aria-label="Liste des questions">
+    <div class="container is-default">
+      {groups.map((g) => (
+        <div class="faq-group">
+          <h2 class="faq-group-title">{g.label}</h2>
+          <div class="faq-list">
+            {g.items.map((f) => (
+              <details class="faq-item reveal">
+                <summary>
+                  <span>{f.q}</span>
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </summary>
+                <p>{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      ))}
+
+      <div class="reveal" style="text-align: center; margin-top: var(--s-9);">
+        <p class="lead" style="margin-inline: auto; margin-bottom: var(--s-5);">
+          Une autre question ? Demandez un diagnostic.
+        </p>
+        <CTAButton label="Demander un diagnostic" href="/diagnostic" size="lg" />
+      </div>
+    </div>
+  </section>
+
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: allFaqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    })}
+  />
+</Base>
+
+<style>
+  .faq-group + .faq-group { margin-top: var(--s-8); }
+  .faq-group-title {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    text-transform: uppercase;
+    letter-spacing: var(--tr-mono);
+    font-weight: 500;
+    color: var(--ink-3);
+    margin-bottom: var(--s-4);
+    padding-bottom: var(--s-3);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+  }
+  .faq-item {
+    border-bottom: 1px solid var(--line);
+    transition: background var(--dur-1) var(--ease);
+  }
+  .faq-item:first-child { border-top: 1px solid var(--line); }
+  .faq-item summary {
+    padding: var(--s-5) 0;
+    font-family: var(--font-sans);
+    font-size: var(--step-2);
+    font-weight: 500;
+    color: var(--ink);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-4);
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-icon {
+    width: 14px; height: 14px;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .faq-icon::before,
+  .faq-icon::after {
+    content: "";
+    position: absolute;
+    background: var(--ink-2);
+    transition: transform var(--dur-2) var(--ease);
+  }
+  .faq-icon::before {
+    left: 0; right: 0; top: calc(50% - 0.75px);
+    height: 1.5px;
+  }
+  .faq-icon::after {
+    top: 0; bottom: 0; left: calc(50% - 0.75px);
+    width: 1.5px;
+  }
+  .faq-item[open] .faq-icon::after { transform: scaleY(0); }
+  .faq-item[open] .faq-icon::before { background: var(--accent); }
+
+  .faq-item p {
+    padding: 0 0 var(--s-5);
+    font-size: var(--step-1);
+    color: var(--ink-2);
+    line-height: var(--lh-loose);
+    max-width: 70ch;
+  }
+</style>

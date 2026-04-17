@@ -1,0 +1,327 @@
+---
+import Base from '../layouts/Base.astro';
+
+const WEBHOOK = import.meta.env.PUBLIC_N8N_WEBHOOK_DIAGNOSTIC || '';
+---
+
+<Base
+  title="Demander un diagnostic IA"
+  description="30 minutes d'échange. Gratuit. Sous accord de confidentialité. Nous vous disons honnêtement si l'IA peut aider votre entreprise."
+>
+  <section class="section is-tight" aria-labelledby="h-diag">
+    <div class="container diag">
+      <!-- Colonne gauche : pitch -->
+      <div class="diag-pitch reveal">
+        <p class="eyebrow">Diagnostic</p>
+        <h1 id="h-diag" style="margin-top: var(--s-3);">
+          30 minutes d'échange.<br>
+          Pas 50 outils à installer.
+        </h1>
+        <p class="lead" style="margin-top: var(--s-5);">
+          Gratuit. Sans engagement pour la suite.
+          Nous regardons votre contexte. Nous vous disons honnêtement si l'IA peut vous aider — ou pas.
+        </p>
+
+        <dl class="diag-facts">
+          <div>
+            <dt>Réponse</dt>
+            <dd>Sous 48&nbsp;h ouvrées</dd>
+          </div>
+          <div>
+            <dt>Confidentialité</dt>
+            <dd>Accord systématique</dd>
+          </div>
+          <div>
+            <dt>Engagement</dt>
+            <dd>Aucun</dd>
+          </div>
+        </dl>
+
+        <blockquote class="diag-quote display-italic">
+          « Un dirigeant formateur, 28 ans d'entrepreneuriat, qui fait le travail lui-même. »
+        </blockquote>
+      </div>
+
+      <!-- Colonne droite : form -->
+      <div class="diag-form-wrap reveal">
+        <form
+          id="diagnostic-form"
+          class="diag-form"
+          novalidate
+          aria-label="Formulaire de diagnostic"
+          data-webhook={WEBHOOK}
+        >
+          <!-- Honeypot -->
+          <div class="sr-only" aria-hidden="true">
+            <label for="website">Ne pas remplir</label>
+            <input type="text" name="website" id="website" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <div class="field">
+            <label for="nom">Prénom et nom <span aria-hidden="true">*</span></label>
+            <input type="text" id="nom" name="nom" required autocomplete="name" />
+          </div>
+
+          <div class="field">
+            <label for="entreprise">Entreprise <span aria-hidden="true">*</span></label>
+            <input type="text" id="entreprise" name="entreprise" required autocomplete="organization" />
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="email">Email pro <span aria-hidden="true">*</span></label>
+              <input type="email" id="email" name="email" required autocomplete="email" />
+            </div>
+            <div class="field">
+              <label for="telephone">Téléphone <span class="optional">(optionnel)</span></label>
+              <input type="tel" id="telephone" name="telephone" autocomplete="tel" />
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="secteur">Secteur <span aria-hidden="true">*</span></label>
+              <select id="secteur" name="secteur" required>
+                <option value="">Choisir…</option>
+                <option>Immobilier</option>
+                <option>Construction</option>
+                <option>Services</option>
+                <option>Industrie</option>
+                <option>Conseil</option>
+                <option>Autre</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="taille">Taille <span aria-hidden="true">*</span></label>
+              <select id="taille" name="taille" required>
+                <option value="">Choisir…</option>
+                <option>1 à 5</option>
+                <option>6 à 20</option>
+                <option>21 à 50</option>
+                <option>51 à 200</option>
+                <option>200+</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="contexte">En une phrase : où en êtes-vous avec l'IA ? <span aria-hidden="true">*</span></label>
+            <textarea id="contexte" name="contexte" rows="3" required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn--primary btn--lg submit" id="submit-btn">
+            <span>Envoyer ma demande</span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </button>
+
+          <p class="form-legal">
+            Données hébergées en Europe. Utilisées uniquement pour vous recontacter. Aucun partage.
+            <a href="/mentions-legales">Mentions légales</a>
+          </p>
+
+          <div id="form-status" role="alert" aria-live="polite" class="form-status"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .diag {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-7);
+    align-items: start;
+  }
+  @media (min-width: 960px) {
+    .diag {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--s-8);
+    }
+    .diag-pitch { position: sticky; top: calc(var(--header-h) + var(--s-6)); }
+  }
+
+  /* ---- pitch ---- */
+  .diag-pitch h1 {
+    font-size: var(--step-6);
+    line-height: var(--lh-tight);
+  }
+  .diag-facts {
+    margin-top: var(--s-6);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-4);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding-block: var(--s-5);
+  }
+  .diag-facts dt {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    text-transform: uppercase;
+    letter-spacing: var(--tr-mono);
+    color: var(--ink-3);
+    margin-bottom: var(--s-2);
+  }
+  .diag-facts dd {
+    font-size: var(--step-1);
+    color: var(--ink);
+  }
+  @media (max-width: 560px) {
+    .diag-facts { grid-template-columns: 1fr 1fr; }
+  }
+
+  .diag-quote {
+    margin-top: var(--s-6);
+    font-size: var(--step-3);
+    color: var(--ink-2);
+    line-height: var(--lh-normal);
+    padding-left: var(--s-4);
+    border-left: 2px solid var(--accent);
+  }
+
+  /* ---- form ---- */
+  .diag-form-wrap {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    padding: var(--s-6);
+  }
+  .diag-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+  }
+  .field label {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    text-transform: uppercase;
+    letter-spacing: var(--tr-mono);
+    color: var(--ink-3);
+  }
+  .field label span:not(.optional) { color: var(--accent); }
+  .optional {
+    color: var(--ink-3);
+    text-transform: none;
+    letter-spacing: var(--tr-normal);
+  }
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    background: var(--bg);
+    border: 1px solid var(--line-2);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: var(--step-1);
+    border-radius: 2px;
+    transition: border-color var(--dur-1) var(--ease),
+                box-shadow var(--dur-1) var(--ease);
+  }
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  .field select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%236C6C66' stroke-width='1.5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+  }
+  .field textarea { resize: vertical; min-height: 96px; line-height: var(--lh-normal); }
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-4);
+  }
+  @media (max-width: 560px) {
+    .field-row { grid-template-columns: 1fr; }
+  }
+
+  .submit {
+    margin-top: var(--s-3);
+    width: 100%;
+    justify-content: center;
+  }
+  .form-legal {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--ink-3);
+    line-height: var(--lh-normal);
+    letter-spacing: var(--tr-wide);
+    max-width: none;
+  }
+  .form-legal a { color: var(--ink-2); text-decoration: underline; text-underline-offset: 3px; }
+  .form-status:not(:empty) {
+    margin-top: var(--s-3);
+    padding: var(--s-3) var(--s-4);
+    border: 1px solid var(--line-2);
+    font-size: var(--step-0);
+  }
+  .form-status.is-error { border-color: #d04f3c; color: #f49685; }
+</style>
+
+<script>
+  function bindForm() {
+    const form = document.getElementById('diagnostic-form') as HTMLFormElement | null;
+    if (!form) return;
+    const btn = document.getElementById('submit-btn') as HTMLButtonElement | null;
+    const status = document.getElementById('form-status');
+    const webhook = form.dataset.webhook || '';
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!btn || !status) return;
+
+      const fd = new FormData(form);
+      const data = Object.fromEntries(fd) as Record<string, string>;
+      if (data.website) return; // honeypot
+
+      if (!webhook) {
+        status.textContent = 'Configuration manquante. Écrivez-nous à jmg@958.fr.';
+        status.classList.add('is-error');
+        return;
+      }
+
+      btn.disabled = true;
+      const original = btn.innerHTML;
+      btn.innerHTML = '<span>Envoi en cours…</span>';
+      status.textContent = '';
+      status.classList.remove('is-error');
+
+      const payload = {
+        ...data,
+        timestamp: new Date().toISOString(),
+        source: 'site-958',
+        userAgent: navigator.userAgent,
+        referrer: document.referrer || null,
+      };
+
+      try {
+        const r = await fetch(webhook, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        window.location.href = '/merci';
+      } catch {
+        status.textContent = 'Erreur d\u2019envoi. Écrivez-nous à jmg@958.fr.';
+        status.classList.add('is-error');
+        btn.disabled = false;
+        btn.innerHTML = original;
+      }
+    });
+  }
+  bindForm();
+  document.addEventListener('astro:page-load', bindForm);
+</script>

@@ -1,17 +1,426 @@
 ---
+import Base from '../layouts/Base.astro';
+import CTAButton from '../components/CTAButton.astro';
+import TiltSignature from '../components/TiltSignature.astro';
 
+const steps = [
+  {
+    n: '01',
+    label: 'Audit',
+    duree: '1 à 2 jours',
+    body: "Immersion sous accord de confidentialité. On regarde comment vous travaillez vraiment. Vous repartez avec un rapport actionnable. Vous pouvez vous arrêter là.",
+  },
+  {
+    n: '02',
+    label: 'Structuration',
+    duree: '1 à 3 semaines',
+    body: "On identifie les 3 à 5 points où l'IA change tout. Plan d'implémentation chiffré, daté, validable.",
+  },
+  {
+    n: '03',
+    label: 'Implémentation',
+    duree: '3 à 12 semaines',
+    body: "Construction du cockpit. Bases de données, automatisations, intégrations. Livrables opérationnels, documentés.",
+  },
+  {
+    n: '04',
+    label: 'Formation & Accompagnement',
+    duree: '3 mois à l\u2019infini',
+    body: "Formation des équipes sur site. Ajustements. Support réactif. Vous devenez autonomes, pas dépendants.",
+  },
+];
+
+const cases = [
+  { tag: 'Immobilier', pitch: "Les commerciaux dictent sur le terrain. Le support client est prêt en minutes." },
+  { tag: 'Syndic de copropriété', pitch: "200 mails/jour triés, brouillons rédigés, courriers types générés." },
+  { tag: 'Gestion de fortune', pitch: "Analyses patrimoniales transformées en supports client à la charte du cabinet." },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Base
+  title="Installer l'IA dans votre entreprise"
+  description="Audit, structuration, implémentation et accompagnement IA pour dirigeants de PME. Méthode SPARI. Basé à Vannes. Sans bruit, sans jargon, sans dépendance."
+>
+  <!-- =========================================
+       HERO
+       ========================================= -->
+  <section class="hero" aria-labelledby="h-hero">
+    <div class="container">
+      <p class="eyebrow reveal">Conseil IA · Vannes · Depuis 2023</p>
+      <h1 id="h-hero" class="hero-title reveal">
+        On installe l'IA
+        <br>dans votre entreprise.
+        <span class="hero-title-soft">Sans bruit, sans jargon, sans dépendance.</span>
+      </h1>
+      <p class="lead reveal">
+        Audit, structuration, implémentation, accompagnement.
+        Pour les dirigeants de PME qui veulent comprendre, maîtriser, décider.
+      </p>
+      <div class="hero-ctas reveal">
+        <CTAButton label="Demander un diagnostic" href="/diagnostic" size="lg" />
+        <a href="/methode" class="link-arrow">Voir la méthode <span aria-hidden="true">→</span></a>
+      </div>
+      <ul class="hero-assurances reveal" aria-label="Engagements">
+        <li><span class="dot"></span>Réponse sous 48&nbsp;h</li>
+        <li><span class="dot"></span>Accord de confidentialité</li>
+        <li><span class="dot"></span>Paris &amp; Vannes</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- =========================================
+       CONSTAT
+       ========================================= -->
+  <section class="section" aria-labelledby="h-constat">
+    <div class="container is-default">
+      <p class="eyebrow reveal">01 · Le constat</p>
+      <h2 id="h-constat" class="reveal" style="margin-top: var(--s-3);">
+        L'IA est partout. Dans votre entreprise, nulle part.
+      </h2>
+      <div class="prose reveal">
+        <p>Vous lisez des articles. Vous testez ChatGPT le soir. Vous voyez vos concurrents publier sur LinkedIn.</p>
+        <p>Et dans votre entreprise, rien n'a changé.</p>
+        <p>Ce n'est pas un problème d'outil. <strong>C'est un problème de méthode.</strong> Les outils se multiplient, les promesses aussi. Les résultats mesurables, eux, sont rares. Ce qui manque, ce n'est pas un abonnement de plus — c'est un cadre.</p>
+      </div>
+      <TiltSignature />
+    </div>
+  </section>
+
+  <!-- =========================================
+       MÉTHODE (4 étapes)
+       ========================================= -->
+  <section class="section surface-elevated" aria-labelledby="h-methode">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow reveal">02 · Notre méthode</p>
+        <h2 class="reveal" id="h-methode">Nous installons l'IA.<br>Vous reprenez la main.</h2>
+        <p class="lead reveal">Un parcours en 4 étapes. Vous pouvez vous arrêter à l'audit.</p>
+      </div>
+
+      <ol class="steps reveal-stagger" role="list">
+        {steps.map((step) => (
+          <li class="step reveal">
+            <div class="step-num">{step.n}</div>
+            <div class="step-body">
+              <h3>{step.label}</h3>
+              <p class="step-duree">{step.duree}</p>
+              <p>{step.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      <div class="section-foot reveal">
+        <a href="/methode" class="link-arrow">Voir la méthode en détail <span aria-hidden="true">→</span></a>
+        <span class="section-note">Accord de confidentialité signé avant chaque mission · Audit à partir de 900 €&nbsp;HT</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       SOUVERAINETÉ
+       ========================================= -->
+  <section class="section" aria-labelledby="h-sov">
+    <div class="container">
+      <div class="sov">
+        <div class="sov-left reveal">
+          <p class="eyebrow">03 · Souveraineté</p>
+          <h2 id="h-sov">Vos données.<br>Votre destin.</h2>
+          <p class="lead">
+            Avec les solutions SaaS, vos données partent aux États-Unis. Avec nous,
+            <strong>vous reprenez le contrôle.</strong>
+          </p>
+        </div>
+
+        <div class="sov-right">
+          <div class="card reveal sov-card sov-card--do">
+            <h4>Ce que nous faisons</h4>
+            <ul>
+              <li>Modèles européens prioritaires (Mistral, Claude sous accord EU)</li>
+              <li>Automatisations auto-hébergées en Europe (n8n)</li>
+              <li>Traçabilité complète : où vont vos données, qui les lit, combien de temps</li>
+              <li>Systèmes rapatriables — tout tourne sans nous</li>
+            </ul>
+          </div>
+          <div class="card reveal sov-card sov-card--dont">
+            <h4>Ce que nous ne faisons jamais</h4>
+            <ul>
+              <li>Envoyer vos données dans des outils que vous ne maîtrisez pas</li>
+              <li>Recommander un outil US sans expliquer les implications</li>
+              <li>Construire un système que vous ne pouvez pas rapatrier</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       PREUVE — Teaser réalisations
+       ========================================= -->
+  <section class="section surface-elevated" aria-labelledby="h-preuve">
+    <div class="container">
+      <div class="section-head is-center">
+        <p class="eyebrow reveal">04 · Preuve</p>
+        <h2 class="reveal" id="h-preuve">Des résultats. Pas des démos.</h2>
+        <p class="lead reveal">Tous nos clients sont sous accord de confidentialité. Ci-dessous, 3 extraits anonymisés.</p>
+      </div>
+
+      <ul class="cases reveal-stagger" role="list">
+        {cases.map((c) => (
+          <li class="case reveal">
+            <p class="eyebrow">{c.tag}</p>
+            <p class="case-body">{c.pitch}</p>
+          </li>
+        ))}
+      </ul>
+
+      <div class="section-foot is-center reveal">
+        <CTAButton label="Voir les 6 réalisations" href="/realisations" variant="ghost" size="md" />
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       CTA FINAL
+       ========================================= -->
+  <section class="section is-loose" aria-labelledby="h-cta">
+    <div class="container is-narrow" style="text-align: center;">
+      <h2 class="reveal" id="h-cta">Commencez par un audit.</h2>
+      <p class="lead reveal" style="margin-top: var(--s-4);">
+        1 à 2 jours. Sous accord de confidentialité. Sans engagement pour la suite.
+        Nous regardons votre contexte et vous disons honnêtement si l'IA peut vous aider.
+      </p>
+      <div class="reveal" style="margin-top: var(--s-7);">
+        <CTAButton label="Demander un diagnostic" href="/diagnostic" size="lg" />
+      </div>
+      <p class="section-note reveal" style="margin-top: var(--s-4);">
+        Réponse sous 48&nbsp;h · Accord de confidentialité · Audit seul possible
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* ============ HERO ============ */
+  .hero {
+    padding-top: var(--s-9);
+    padding-bottom: var(--s-7);
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--step-8);
+    line-height: var(--lh-tight);
+    letter-spacing: var(--tr-tight);
+    color: var(--ink);
+    margin-top: var(--s-4);
+    max-width: 22ch;
+  }
+  .hero-title-soft {
+    display: block;
+    margin-top: var(--s-4);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--ink-2);
+    font-size: 0.52em;
+    letter-spacing: -0.01em;
+    line-height: var(--lh-snug);
+  }
+  .lead { margin-top: var(--s-5); }
+  .hero-ctas {
+    display: flex;
+    align-items: center;
+    gap: var(--s-5);
+    flex-wrap: wrap;
+    margin-top: var(--s-6);
+  }
+  .hero-assurances {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-5);
+    margin-top: var(--s-6);
+    padding-top: var(--s-5);
+    border-top: 1px solid var(--line);
+  }
+  .hero-assurances li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--ink-3);
+    letter-spacing: var(--tr-wide);
+    text-transform: uppercase;
+  }
+  .hero-assurances .dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--accent);
+  }
+
+  /* ============ SECTION PRIMITIVES ============ */
+  .section-head {
+    max-width: 48rem;
+    margin-bottom: var(--s-8);
+  }
+  .section-head.is-center {
+    margin-inline: auto;
+    text-align: center;
+  }
+  .section-head h2 { margin-top: var(--s-3); }
+  .section-head .lead { margin-top: var(--s-4); }
+  .section-head.is-center .lead { margin-inline: auto; }
+
+  .section-foot {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-4);
+    align-items: center;
+    margin-top: var(--s-7);
+  }
+  .section-foot.is-center {
+    justify-content: center;
+    text-align: center;
+  }
+  .section-note {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--ink-3);
+    letter-spacing: var(--tr-wide);
+  }
+
+  /* ============ CONSTAT ============ */
+  .prose {
+    margin-top: var(--s-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+  }
+  .prose p {
+    font-size: var(--step-2);
+    color: var(--ink-2);
+  }
+
+  /* ============ STEPS ============ */
+  .steps {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  .step {
+    padding: var(--s-6) var(--s-5);
+    border-left: 1px solid var(--line);
+    transition: border-color var(--dur-2) var(--ease);
+  }
+  .step:last-child { border-right: 1px solid var(--line); }
+  .step:hover h3 { color: var(--accent); }
+  .step-num {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--ink-3);
+    letter-spacing: var(--tr-mono);
+    margin-bottom: var(--s-4);
+  }
+  .step-body h3 {
+    font-size: var(--step-3);
+    margin-bottom: var(--s-2);
+    color: var(--ink);
+  }
+  .step-duree {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--accent-2);
+    margin-bottom: var(--s-3);
+    letter-spacing: var(--tr-wide);
+  }
+  .step-body p {
+    font-size: var(--step-0);
+    color: var(--ink-2);
+  }
+
+  @media (max-width: 1040px) {
+    .steps { grid-template-columns: repeat(2, 1fr); }
+    .step:nth-child(2) { border-right: 1px solid var(--line); }
+    .step:nth-child(n+3) { border-top: 1px solid var(--line); }
+  }
+  @media (max-width: 600px) {
+    .steps { grid-template-columns: 1fr; }
+    .step, .step:last-child { border-right: 0; }
+    .step + .step { border-top: 1px solid var(--line); }
+  }
+
+  /* ============ SOUVERAINETÉ ============ */
+  .sov {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-7);
+  }
+  @media (min-width: 900px) {
+    .sov { grid-template-columns: 0.9fr 1fr; gap: var(--s-8); }
+    .sov-left { position: sticky; top: calc(var(--header-h) + var(--s-6)); align-self: start; }
+  }
+  .sov-left h2 { margin-top: var(--s-3); }
+  .sov-left .lead { margin-top: var(--s-4); }
+  .sov-right { display: flex; flex-direction: column; gap: var(--s-4); }
+  .sov-card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    margin-top: var(--s-4);
+  }
+  .sov-card li {
+    font-size: var(--step-0);
+    color: var(--ink-2);
+    padding-left: 1.6rem;
+    position: relative;
+    line-height: var(--lh-normal);
+  }
+  .sov-card li::before {
+    position: absolute;
+    left: 0; top: 0.2rem;
+    font-family: var(--font-mono);
+    font-size: var(--step-0);
+    font-weight: 500;
+    line-height: 1;
+  }
+  .sov-card--do li::before { content: "+"; color: var(--accent); }
+  .sov-card--dont li::before { content: "×"; color: var(--ink-3); }
+  .sov-card h4 {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    text-transform: uppercase;
+    letter-spacing: var(--tr-mono);
+    color: var(--ink-3);
+  }
+  .sov-card--do h4 { color: var(--accent-2); }
+
+  /* ============ PREUVE — 3 cases ============ */
+  .cases {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-4);
+  }
+  .case {
+    padding: var(--s-6) var(--s-5);
+    border: 1px solid var(--line);
+    background: var(--bg);
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+    transition: border-color var(--dur-2) var(--ease);
+  }
+  .case:hover { border-color: var(--line-2); }
+  .case-body {
+    font-size: var(--step-2);
+    color: var(--ink);
+    line-height: var(--lh-normal);
+  }
+  @media (max-width: 900px) {
+    .cases { grid-template-columns: 1fr; }
+  }
+</style>

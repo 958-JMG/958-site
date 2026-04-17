@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="Page introuvable"
+  description="Cette page n'existe pas ou a été déplacée."
+>
+  <section class="section is-loose" aria-labelledby="h-404">
+    <div class="container is-narrow not-found">
+      <p class="not-found-num" aria-hidden="true">404</p>
+      <h1 id="h-404">Cette page n'existe pas — ou plus.</h1>
+      <p class="lead" style="margin-top: var(--s-5); margin-inline: auto;">
+        Essayez l'accueil, la méthode, ou écrivez-nous à <a href="mailto:jmg@958.fr">jmg@958.fr</a>.
+      </p>
+      <div class="not-found-links">
+        <a href="/" class="link-arrow">Accueil <span aria-hidden="true">→</span></a>
+        <a href="/methode" class="link-arrow">Méthode <span aria-hidden="true">→</span></a>
+        <a href="/diagnostic" class="link-arrow">Diagnostic <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .not-found { text-align: center; }
+  .not-found-num {
+    font-family: var(--font-display);
+    font-size: clamp(6rem, 18vw, 12rem);
+    font-weight: 500;
+    color: var(--ink-4);
+    line-height: 1;
+    letter-spacing: var(--tr-tight);
+    margin-bottom: var(--s-4);
+  }
+  .not-found h1 { font-size: var(--step-4); }
+  .not-found-links {
+    display: flex;
+    justify-content: center;
+    gap: var(--s-6);
+    flex-wrap: wrap;
+    margin-top: var(--s-7);
+  }
+</style>

@@ -1,0 +1,31 @@
+# 958.fr — Redirections SEO (Squarespace → Astro)
+# À placer sur Infomaniak (Apache)
+
+# Forcer HTTPS
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Forcer www → domaine apex (958.fr)
+RewriteCond %{HTTP_HOST} ^www\.958\.fr$ [NC]
+RewriteRule ^(.*)$ https://958.fr/$1 [L,R=301]
+
+# Redirections spécifiques (301 = permanent)
+Redirect 301 /formation-decouverte /methode
+Redirect 301 /ia-immobilier /realisations
+Redirect 301 /formation-transformation /methode
+Redirect 301 /formation-revolution /methode
+Redirect 301 /formations-ia-digital-vannes /methode
+Redirect 301 /mentions-lgales /mentions-legales
+Redirect 301 /foire-aux-questions-ia-958 /faq
+Redirect 301 /nouveau-menu-droulant /
+
+# Blog — tout redirigé vers réalisations en attendant
+RewriteRule ^blog/?$ /realisations [L,R=301]
+RewriteRule ^blog/(.*)$ /realisations [L,R=301]
+
+# Panier Squarespace — plus utilisé
+Redirect 410 /cart
+
+# Page 404 custom
+ErrorDocument 404 /404.html

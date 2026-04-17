@@ -1,0 +1,280 @@
+---
+import Base from '../layouts/Base.astro';
+import CTAButton from '../components/CTAButton.astro';
+import TiltSignature from '../components/TiltSignature.astro';
+
+const etapes = [
+  {
+    n: '01',
+    titre: 'Audit',
+    duree: '1 à 2 jours · sous accord de confidentialité',
+    intro: "Immersion dans votre quotidien. Entretiens équipe. Cartographie des processus. Identification des irritants.",
+    livre: "Un rapport de 15 à 25 pages. État des lieux, diagnostic, priorités hiérarchisées, estimation d'impact par chantier.",
+    change: "Vous savez où l'IA a du sens chez vous. Et où elle n'en a pas. Vous pouvez vous arrêter là.",
+  },
+  {
+    n: '02',
+    titre: 'Structuration',
+    duree: '1 à 3 semaines',
+    intro: "Choix des outils. Architecture des flux. Rédaction des prompts. Schéma de base. Cadrage des workflows.",
+    livre: "Un plan d'implémentation chiffré, daté, validable. Par qui, en combien de temps, pour combien.",
+    change: "Vous signez en connaissance de cause. Aucune surprise.",
+  },
+  {
+    n: '03',
+    titre: 'Implémentation',
+    duree: '3 à 12 semaines',
+    intro: "Construction du cockpit. Bases, automatisations, intégrations. Tests en conditions réelles. Itérations jusqu'à validation.",
+    livre: "Un système fonctionnel, documenté, prêt à tourner.",
+    change: "Votre entreprise produit différemment. Les irritants identifiés ont disparu.",
+  },
+  {
+    n: '04',
+    titre: 'Accompagnement',
+    duree: '3 mois à l\u2019infini',
+    intro: "Formation sur site. Points réguliers. Ajustements. Nouveaux chantiers. Support réactif.",
+    livre: "Un partenaire. Pas un prestataire qui disparaît après la facture.",
+    change: "Vous devenez autonomes. L'IA devient un réflexe interne, pas une dépendance externe.",
+  },
+];
+
+const spari = [
+  { l: 'S', mot: 'Scénario',     d: "Le contexte précis dans lequel l'IA intervient." },
+  { l: 'P', mot: 'Problème',     d: "Le résultat attendu, formulé comme un problème à résoudre." },
+  { l: 'A', mot: 'Action',       d: "Ce que l'IA doit faire, étape par étape." },
+  { l: 'R', mot: 'Résultat',     d: "Le format et les critères de qualité de la sortie." },
+  { l: 'I', mot: 'Instructions', d: "Les garde-fous, les interdits, les exigences." },
+];
+---
+
+<Base
+  title="Méthode — Audit, structuration, implémentation IA"
+  description="La méthode 9·58 en 4 étapes et le cadre SPARI. Comment nous installons l'IA dans les PME, sans jargon ni dépendance."
+>
+  <!-- ============ HERO ============ -->
+  <section class="section is-tight" aria-labelledby="h-title">
+    <div class="container is-default" style="text-align: center;">
+      <p class="eyebrow reveal">Méthode</p>
+      <h1 id="h-title" class="reveal" style="margin-top: var(--s-3);">Transformer une entreprise avec l'IA<br>ne s'improvise pas.</h1>
+      <p class="lead reveal" style="margin-inline: auto; margin-top: var(--s-5);">
+        Voici notre cadre. Le même pour tous nos clients. De l'audit à l'autonomie.
+      </p>
+      <TiltSignature />
+    </div>
+  </section>
+
+  <!-- ============ 4 ÉTAPES ============ -->
+  <section class="section surface-elevated" aria-label="Les 4 étapes">
+    <div class="container">
+      <div class="etapes reveal-stagger">
+        {etapes.map((e) => (
+          <article class="etape reveal" aria-labelledby={`e-${e.n}`}>
+            <header class="etape-head">
+              <span class="etape-n">{e.n}</span>
+              <div>
+                <h3 id={`e-${e.n}`}>{e.titre}</h3>
+                <p class="etape-duree">{e.duree}</p>
+              </div>
+            </header>
+            <dl class="etape-dl">
+              <div>
+                <dt>Ce que nous faisons</dt>
+                <dd>{e.intro}</dd>
+              </div>
+              <div>
+                <dt>Ce que vous recevez</dt>
+                <dd>{e.livre}</dd>
+              </div>
+              <div>
+                <dt>Ce qui change</dt>
+                <dd class="etape-change">{e.change}</dd>
+              </div>
+            </dl>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SPARI ============ -->
+  <section class="section" aria-labelledby="h-spari">
+    <div class="container">
+      <div class="section-head is-center">
+        <p class="eyebrow reveal">Cadre propriétaire</p>
+        <h2 id="h-spari" class="reveal">SPARI — écrire un prompt qui tient.</h2>
+        <p class="lead reveal">
+          Chaque prompt que nous écrivons suit ce cadre. Chaque prompt que vos équipes écriront après notre passage suivra ce cadre.
+        </p>
+      </div>
+
+      <ul class="spari reveal-stagger" role="list">
+        {spari.map((s) => (
+          <li class="spari-item reveal">
+            <span class="spari-letter">{s.l}</span>
+            <p class="spari-mot">{s.mot}</p>
+            <p class="spari-desc">{s.d}</p>
+          </li>
+        ))}
+      </ul>
+
+      <p class="spari-foot reveal">
+        Pourquoi ça marche : un cadre se transmet. Un prompt inspiré, non.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="section is-loose" aria-labelledby="h-cta">
+    <div class="container is-narrow" style="text-align: center;">
+      <h2 id="h-cta" class="reveal">
+        Savoir si cette méthode<br>s'applique à votre entreprise.
+      </h2>
+      <div class="reveal" style="margin-top: var(--s-7);">
+        <CTAButton label="Demander un diagnostic" href="/diagnostic" size="lg" />
+      </div>
+      <p class="section-note reveal" style="margin-top: var(--s-4);">
+        Échange de 30&nbsp;minutes · Sans engagement · Réponse sous 48&nbsp;h
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* ============ SECTION-HEAD (copie sobre du home) ============ */
+  .section-head {
+    max-width: 46rem;
+    margin: 0 auto var(--s-8);
+  }
+  .section-head.is-center { text-align: center; }
+  .section-head h2 { margin-top: var(--s-3); }
+  .section-head .lead { margin-top: var(--s-4); margin-inline: auto; }
+  .section-note {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--ink-3);
+    letter-spacing: var(--tr-wide);
+  }
+
+  /* ============ ÉTAPES ============ */
+  .etapes {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-4);
+  }
+  @media (min-width: 900px) {
+    .etapes { grid-template-columns: 1fr 1fr; }
+  }
+
+  .etape {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    padding: var(--s-6);
+    transition: border-color var(--dur-2) var(--ease);
+  }
+  .etape:hover { border-color: var(--line-2); }
+
+  .etape-head {
+    display: flex;
+    gap: var(--s-4);
+    align-items: baseline;
+    margin-bottom: var(--s-5);
+    padding-bottom: var(--s-4);
+    border-bottom: 1px solid var(--line);
+  }
+  .etape-n {
+    font-family: var(--font-mono);
+    font-size: var(--step-2);
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: var(--tr-wide);
+  }
+  .etape-head h3 { font-size: var(--step-4); margin-bottom: 2px; }
+  .etape-duree {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--ink-3);
+    letter-spacing: var(--tr-wide);
+  }
+
+  .etape-dl {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+  }
+  .etape-dl dt {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    text-transform: uppercase;
+    letter-spacing: var(--tr-mono);
+    color: var(--ink-3);
+    margin-bottom: var(--s-2);
+  }
+  .etape-dl dd {
+    font-size: var(--step-1);
+    color: var(--ink-2);
+    line-height: var(--lh-normal);
+  }
+  .etape-change { color: var(--ink) !important; }
+
+  /* ============ SPARI ============ */
+  .spari {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--s-4);
+    counter-reset: none;
+  }
+  .spari-item {
+    padding: var(--s-5);
+    border: 1px solid var(--line);
+    background: var(--bg-2);
+    text-align: left;
+    transition: border-color var(--dur-2) var(--ease);
+  }
+  .spari-item:hover { border-color: var(--accent-2); }
+  .spari-letter {
+    display: block;
+    font-family: var(--font-display);
+    font-size: var(--step-6);
+    font-weight: 500;
+    line-height: 1;
+    color: var(--accent);
+    margin-bottom: var(--s-3);
+    letter-spacing: var(--tr-tight);
+  }
+  .spari-mot {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    text-transform: uppercase;
+    letter-spacing: var(--tr-mono);
+    color: var(--ink);
+    margin-bottom: var(--s-3);
+  }
+  .spari-desc {
+    font-size: var(--step-0);
+    color: var(--ink-2);
+    line-height: var(--lh-normal);
+  }
+
+  .spari-foot {
+    margin-top: var(--s-7);
+    text-align: center;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--step-3);
+    color: var(--ink-2);
+    max-width: none;
+  }
+
+  @media (max-width: 1040px) {
+    .spari { grid-template-columns: repeat(3, 1fr); }
+    .spari-item:nth-child(4),
+    .spari-item:nth-child(5) { grid-column: span 1; }
+  }
+  @media (max-width: 640px) {
+    .spari { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 420px) {
+    .spari { grid-template-columns: 1fr; }
+  }
+</style>

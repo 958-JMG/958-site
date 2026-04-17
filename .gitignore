@@ -1,24 +1,31 @@
-# build output
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Astro build
 dist/
-# generated types
 .astro/
 
-# dependencies
-node_modules/
+# Env (secrets)
+.env
+.env.*
+!.env.example
 
-# logs
+# OS / editor
+.DS_Store
+*.swp
+*.swo
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+.idea/
+
+# Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+*.log
 
-
-# environment variables
-.env
-.env.production
-
-# macOS-specific files
-.DS_Store
-
-# jetbrains setting folder
-.idea/
+# Claude preview scaffolding (personnel)
+.claude/

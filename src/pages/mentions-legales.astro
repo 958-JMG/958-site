@@ -1,0 +1,108 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="Mentions légales"
+  description="Mentions légales du site 958.fr — NEUF CINQUANTE HUIT, SARL, SIREN 912 884 228."
+>
+  <section class="section" aria-labelledby="h-legal">
+    <div class="container is-narrow legal">
+      <p class="eyebrow reveal">Légal</p>
+      <h1 id="h-legal" class="reveal" style="margin-top: var(--s-3);">Mentions légales</h1>
+
+      <div class="legal-body reveal">
+        <h2>Éditeur du site</h2>
+        <p>
+          <strong>NEUF CINQUANTE HUIT</strong><br>
+          Société à responsabilité limitée (SARL) au capital de 1&nbsp;000&nbsp;€<br>
+          Siège social : 60 rue François 1<sup>er</sup>, 75008 Paris<br>
+          Bureaux : 1 bis rue Thiers, 56000 Vannes<br>
+          SIREN : 912 884 228 — RCS : Paris<br>
+          Nom commercial : 958
+        </p>
+
+        <h2>Directeur de la publication</h2>
+        <p>
+          Monsieur Jean-Marc Geuring, gérant.<br>
+          Contact : <a href="mailto:jmg@958.fr">jmg@958.fr</a>
+        </p>
+
+        <h2>Hébergement</h2>
+        <p>
+          <strong>Infomaniak Network SA</strong><br>
+          Rue Eugène-Marziano 25, 1227 Les Acacias — Genève, Suisse<br>
+          <a href="https://www.infomaniak.com" target="_blank" rel="noopener">infomaniak.com ↗</a>
+        </p>
+
+        <h2>Propriété intellectuelle</h2>
+        <p>
+          L'ensemble des contenus du site 958.fr (textes, graphismes, logo, images, vidéos)
+          est la propriété exclusive de NEUF CINQUANTE HUIT, sauf mention contraire.
+          Toute reproduction, représentation ou exploitation, totale ou partielle, est
+          strictement interdite sans autorisation écrite préalable.
+        </p>
+        <p>
+          <strong>Ça fait Tilt®</strong> est une marque déposée par NEUF CINQUANTE HUIT auprès de l'INPI.<br>
+          <strong>SPARI</strong> est une méthode propriétaire développée par NEUF CINQUANTE HUIT.
+        </p>
+
+        <h2>Données personnelles</h2>
+        <p>
+          Les données collectées via le formulaire de contact sont utilisées uniquement
+          pour répondre aux demandes. Elles sont hébergées en Europe (Infomaniak, Suisse —
+          pays reconnu par la Commission européenne comme offrant un niveau de protection
+          adéquat) et ne sont transmises à aucun tiers.
+        </p>
+        <p>
+          Conformément au RGPD et à la loi Informatique et Libertés, vous disposez d'un
+          droit d'accès, de rectification, de suppression et d'opposition concernant vos
+          données.
+        </p>
+        <p>
+          Pour exercer ces droits : <a href="mailto:jmg@958.fr">jmg@958.fr</a>. Autorité de
+          contrôle : CNIL, 3 Place de Fontenoy, 75007 Paris — <a href="https://www.cnil.fr" target="_blank" rel="noopener">cnil.fr ↗</a>
+        </p>
+
+        <h2>Cookies et traceurs</h2>
+        <p>
+          Le site utilise un outil d'analyse respectueux de la vie privée (Plausible Analytics),
+          qui ne dépose aucun cookie et ne collecte aucune donnée personnelle identifiable.
+          Aucun consentement cookie n'est donc requis.
+        </p>
+
+        <h2>Droit applicable</h2>
+        <p>
+          Les présentes mentions légales sont soumises au droit français. Tout litige
+          relève de la compétence exclusive des tribunaux du ressort du siège social.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .legal-body { margin-top: var(--s-7); }
+  .legal-body h2 {
+    font-family: var(--font-sans);
+    font-size: var(--step-3);
+    font-weight: 500;
+    color: var(--ink);
+    margin-top: var(--s-7);
+    margin-bottom: var(--s-3);
+    letter-spacing: -0.005em;
+  }
+  .legal-body h2:first-child { margin-top: 0; }
+  .legal-body p {
+    margin-bottom: var(--s-4);
+    font-size: var(--step-1);
+    color: var(--ink-2);
+    line-height: var(--lh-loose);
+    max-width: 68ch;
+  }
+  .legal-body a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>

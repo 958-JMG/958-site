@@ -1,0 +1,377 @@
+---
+import Base from '../layouts/Base.astro';
+import CTAButton from '../components/CTAButton.astro';
+import TiltSignature from '../components/TiltSignature.astro';
+
+const cas = [
+  {
+    n: '01',
+    tag: 'Immobilier',
+    titre: 'Groupe immobilier breton',
+    avant: "Les commerciaux passent des heures à produire des supports depuis leurs visites terrain. Le back-office croule.",
+    apres: "Le commercial dicte sur le terrain. L'IA structure, rédige, met en forme. Le support est prêt en minutes. L'équipe vend.",
+    phase: 'Audit → Structuration → Implémentation → Accompagnement en cours',
+  },
+  {
+    n: '02',
+    tag: 'Cuisiniste',
+    titre: 'PME cuisiniste — 40 collaborateurs',
+    avant: "Prospection, devis, SAV, recommandations — chaque domaine a son outil. Rien ne communique. Double saisie permanente.",
+    apres: "Un cockpit unifié. Une base, des tableaux de bord temps réel, des relances automatisées. Fin des doubles saisies.",
+    phase: 'Audit → Structuration → Implémentation (en cours)',
+  },
+  {
+    n: '03',
+    tag: 'Syndic',
+    titre: 'Acteur régional du syndic',
+    avant: "200 mails par jour. Courriers à rédiger. Comptes rendus d'AG. Une équipe au bord de la saturation.",
+    apres: "L'IA trie les mails, rédige les brouillons, génère les courriers types. L'équipe absorbe la croissance sans recruter.",
+    phase: 'Audit → Structuration → Implémentation',
+  },
+  {
+    n: '04',
+    tag: 'Gestion de fortune',
+    titre: 'Cabinet de gestion de fortune',
+    avant: "Transformer les analyses patrimoniales en supports client prend plusieurs heures par dossier.",
+    apres: "Une chaîne automatisée : l'outil métier sort l'analyse, le support client se génère à la charte du cabinet.",
+    phase: 'Structuration → Implémentation',
+  },
+  {
+    n: '05',
+    tag: 'Construction & Courtage',
+    titre: 'Deux acteurs régionaux',
+    avant: "Des budgets d'acquisition sur plusieurs canaux. Le reporting est manuel. Les arbitrages sont à l'intuition.",
+    apres: "Pilotage unifié multi-canal. Coût d'acquisition par canal en temps réel. Arbitrages budgétaires objectivés.",
+    phase: 'Structuration → Implémentation → Accompagnement mensuel',
+  },
+  {
+    n: '06',
+    tag: 'Aménagement foncier',
+    titre: 'Groupe d\u2019aménageurs',
+    avant: "9 développeurs fonciers qui veulent utiliser l'IA mais ne savent pas par où commencer.",
+    apres: "1 journée de formation sur site. 9 développeurs opérationnels dès le lendemain. Une bibliothèque de prompts métier qui grandit.",
+    phase: 'Audit express → Formation → Accompagnement sur demande',
+  },
+];
+---
+
+<Base
+  title="Réalisations — 6 projets IA en Bretagne et en France"
+  description="6 cas clients anonymisés. Immobilier, syndic, gestion de fortune, construction, aménagement foncier. Des résultats, pas des démos."
+>
+  <!-- ============ HERO ============ -->
+  <section class="section is-tight" aria-labelledby="h-hero">
+    <div class="container is-default" style="text-align: center;">
+      <p class="eyebrow reveal">Réalisations</p>
+      <h1 id="h-hero" class="reveal" style="margin-top: var(--s-3);">
+        Imaginez un cockpit.
+      </h1>
+      <p class="lead reveal" style="margin-top: var(--s-5); margin-inline: auto; font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: var(--step-4);">
+        3 boutons et votre entreprise s'active,<br>se gère, se pilote — en automatique.
+      </p>
+      <p class="reveal" style="margin-top: var(--s-4); margin-inline: auto; max-width: 52ch;">
+        Pas un dashboard de plus. Un système nerveux construit pour votre métier.
+      </p>
+      <p class="section-note reveal" style="margin-top: var(--s-5);">
+        Tous nos clients sont sous accord de confidentialité · Cas anonymisés · Chiffres réels
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ COCKPIT MOCK ============ -->
+  <section class="section is-tight" aria-hidden="true">
+    <div class="container is-default">
+      <div class="mock reveal">
+        <div class="mock-topbar">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+          <span class="mock-url">cockpit · votre-entreprise.app</span>
+        </div>
+        <div class="mock-body">
+          <div class="mock-tabs" role="tablist">
+            <button class="mock-tab is-active" role="tab" data-tab="piloter">📊 Piloter</button>
+            <button class="mock-tab" role="tab" data-tab="repondre">✉️ Répondre</button>
+            <button class="mock-tab" role="tab" data-tab="produire">📋 Produire</button>
+          </div>
+          <div class="mock-panes">
+            <p class="mock-pane is-active" data-pane="piloter">
+              Vos KPIs en temps réel. Pipeline, chiffre d'affaires, tâches. Un regard suffit.
+            </p>
+            <p class="mock-pane" data-pane="repondre">
+              Un mail arrive. L'IA le classe, identifie le client, rédige le brouillon. Vous validez.
+            </p>
+            <p class="mock-pane" data-pane="produire">
+              Un commercial dicte. L'IA structure, rédige, met en forme. Le support est prêt en minutes.
+            </p>
+          </div>
+        </div>
+      </div>
+      <p class="mock-caption reveal">
+        Chaque cockpit est unique. Construit pour votre métier, pas pour une démo.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 6 CAS ============ -->
+  <section class="section surface-elevated" aria-label="6 cas clients">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow reveal">Portfolio</p>
+        <h2 class="reveal">6 projets. 6 transformations.</h2>
+      </div>
+
+      <ol class="cases" role="list">
+        {cas.map((c) => (
+          <li class="case reveal" aria-labelledby={`c-${c.n}`}>
+            <div class="case-side">
+              <span class="case-n">{c.n}</span>
+              <span class="case-tag">{c.tag}</span>
+            </div>
+            <div class="case-main">
+              <h3 id={`c-${c.n}`}>{c.titre}</h3>
+              <div class="case-ba">
+                <div class="case-panel case-panel--before">
+                  <span class="case-panel-label">Avant</span>
+                  <p>{c.avant}</p>
+                </div>
+                <span class="case-arrow" aria-hidden="true">→</span>
+                <div class="case-panel case-panel--after">
+                  <span class="case-panel-label">Après</span>
+                  <p>{c.apres}</p>
+                </div>
+              </div>
+              <p class="case-phase">{c.phase}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="section is-loose" aria-labelledby="h-cta">
+    <div class="container is-narrow" style="text-align: center;">
+      <h2 id="h-cta" class="reveal">
+        Votre cas n'est pas ici.<br>Mais il pourrait y être.
+      </h2>
+      <TiltSignature />
+      <div class="reveal" style="margin-top: var(--s-6);">
+        <CTAButton label="Demander un diagnostic" href="/diagnostic" size="lg" />
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  function bindMock() {
+    const tabs = document.querySelectorAll<HTMLElement>('.mock-tab');
+    const panes = document.querySelectorAll<HTMLElement>('.mock-pane');
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const name = tab.dataset.tab;
+        tabs.forEach((t) => t.classList.toggle('is-active', t === tab));
+        panes.forEach((p) => p.classList.toggle('is-active', p.dataset.pane === name));
+      });
+    });
+  }
+  bindMock();
+  document.addEventListener('astro:page-load', bindMock);
+</script>
+
+<style>
+  .section-head {
+    max-width: 46rem;
+    margin-bottom: var(--s-7);
+  }
+  .section-head h2 { margin-top: var(--s-3); }
+  .section-note {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--ink-3);
+    letter-spacing: var(--tr-wide);
+  }
+
+  /* ============ MOCK ============ */
+  .mock {
+    border: 1px solid var(--line);
+    background: var(--bg-2);
+    max-width: 780px;
+    margin-inline: auto;
+    overflow: hidden;
+    border-radius: 6px;
+  }
+  .mock-topbar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid var(--line);
+    background: var(--bg-3);
+  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot.red { background: #FF5F57; }
+  .dot.yellow { background: #FEBC2E; }
+  .dot.green { background: #28C840; }
+  .mock-url {
+    margin-left: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--ink-3);
+  }
+  .mock-body {
+    padding: var(--s-6) var(--s-6) var(--s-6);
+  }
+  .mock-tabs {
+    display: flex;
+    gap: var(--s-3);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: var(--s-5);
+  }
+  .mock-tab {
+    padding: 0.7rem 1.1rem;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    color: var(--ink-2);
+    font-size: var(--step-0);
+    border-radius: 3px;
+    transition: border-color var(--dur-1) var(--ease), color var(--dur-1) var(--ease);
+  }
+  .mock-tab:hover { border-color: var(--line-2); color: var(--ink); }
+  .mock-tab.is-active {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .mock-pane {
+    display: none;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--step-3);
+    line-height: var(--lh-normal);
+    color: var(--ink);
+    max-width: 48ch;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .mock-pane.is-active { display: block; }
+  .mock-caption {
+    margin-top: var(--s-5);
+    text-align: center;
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--ink-2);
+    font-size: var(--step-2);
+    max-width: none;
+  }
+
+  /* ============ CAS ============ */
+  .cases {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+  }
+  .case {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: var(--s-6);
+    padding: var(--s-6) 0;
+    border-top: 1px solid var(--line);
+  }
+  .case:first-child { border-top: 0; }
+
+  .case-side {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+  }
+  .case-n {
+    font-family: var(--font-display);
+    font-size: var(--step-6);
+    font-weight: 500;
+    color: var(--ink-3);
+    line-height: 1;
+    letter-spacing: var(--tr-tight);
+  }
+  .case-tag {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    text-transform: uppercase;
+    letter-spacing: var(--tr-mono);
+    color: var(--accent);
+  }
+
+  .case-main h3 {
+    font-family: var(--font-sans);
+    font-size: var(--step-3);
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: var(--s-5);
+    letter-spacing: -0.005em;
+  }
+
+  .case-ba {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: start;
+    gap: var(--s-4);
+  }
+  .case-panel {
+    padding: var(--s-4);
+    border: 1px solid var(--line);
+  }
+  .case-panel--before {
+    background: var(--bg);
+  }
+  .case-panel--after {
+    background: var(--bg-3);
+    border-color: var(--accent-2);
+  }
+  .case-panel-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    text-transform: uppercase;
+    letter-spacing: var(--tr-mono);
+    color: var(--ink-3);
+    margin-bottom: var(--s-3);
+  }
+  .case-panel--after .case-panel-label { color: var(--accent-2); }
+  .case-panel p {
+    font-size: var(--step-0);
+    color: var(--ink-2);
+    line-height: var(--lh-normal);
+  }
+  .case-panel--after p { color: var(--ink); }
+
+  .case-arrow {
+    align-self: center;
+    font-size: var(--step-3);
+    color: var(--accent);
+    font-weight: 300;
+  }
+
+  .case-phase {
+    margin-top: var(--s-4);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--ink-3);
+    letter-spacing: var(--tr-wide);
+    max-width: none;
+  }
+
+  @media (max-width: 860px) {
+    .case {
+      grid-template-columns: 1fr;
+      gap: var(--s-4);
+    }
+    .case-side {
+      flex-direction: row;
+      align-items: baseline;
+      gap: var(--s-4);
+    }
+    .case-n { font-size: var(--step-5); }
+    .case-ba { grid-template-columns: 1fr; }
+    .case-arrow { transform: rotate(90deg); justify-self: center; }
+  }
+</style>

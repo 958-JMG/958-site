@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 300" width="200" height="300">
+  <!-- 9·58 Logo Mark — Recreated from brand asset -->
+  <!-- Container rounded rect -->
+  <rect width="200" height="300" rx="32" fill="currentColor"/>
+
+  <!-- =========================== -->
+  <!-- 9 (top) : circle + stem     -->
+  <!-- =========================== -->
+  <!-- Outer circle of 9 -->
+  <circle cx="110" cy="82" r="56" fill="var(--mark-bg, #0A0A0A)"/>
+  <!-- White ring of 9 (donut) -->
+  <circle cx="110" cy="82" r="56" fill="none" stroke="var(--mark-fg, #F5F5F2)" stroke-width="28"/>
+  <!-- Inner dark circle (hole of 9) -->
+  <circle cx="110" cy="82" r="28" fill="var(--mark-bg, #0A0A0A)"/>
+  <!-- Stem of 9 going down -->
+  <rect x="88" y="110" width="44" height="60" fill="var(--mark-fg, #F5F5F2)"/>
+
+  <!-- =========================== -->
+  <!-- · (interpunct square)        -->
+  <!-- =========================== -->
+  <rect x="40" y="136" width="24" height="24" fill="var(--mark-fg, #F5F5F2)"/>
+
+  <!-- =========================== -->
+  <!-- 8 (bottom) : open circle     -->
+  <!-- =========================== -->
+  <!-- Large outer circle -->
+  <circle cx="110" cy="222" r="56" fill="var(--mark-fg, #F5F5F2)"/>
+  <!-- Inner dark circle -->
+  <circle cx="110" cy="222" r="28" fill="var(--mark-bg, #0A0A0A)"/>
+  <!-- Gap on right side (creates the "c" opening) -->
+  <rect x="138" y="200" width="62" height="44" fill="var(--mark-bg, #0A0A0A)"/>
+  <!-- Small circle detail in the gap (bottom-right) -->
+  <circle cx="145" cy="250" r="20" fill="var(--mark-bg, #0A0A0A)"/>
+  <!-- Reconnect bottom-right curve -->
+  <path d="M 138 244 A 56 56 0 0 0 160 200" fill="none" stroke="var(--mark-fg, #F5F5F2)" stroke-width="0"/>
+</svg>

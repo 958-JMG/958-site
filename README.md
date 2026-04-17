@@ -1,43 +1,60 @@
-# Astro Starter Kit: Minimal
+# 958.fr — Site marketing
 
-```sh
-pnpm create astro@latest -- --template minimal
+Site statique de [**Neuf Cinquante Huit**](https://958.fr). Astro + Tailwind v4. Hébergé sur Infomaniak. Formulaire branché sur n8n.
+
+## Stack
+
+- **Framework** — [Astro 6](https://astro.build) (output statique)
+- **Styles** — Tailwind CSS v4 + design tokens custom (`src/styles/global.css`)
+- **Polices** — Fraunces Variable (display), Geist Variable (sans), Geist Mono
+- **Analytics** — [Plausible](https://plausible.io) (EU, sans cookie)
+- **Formulaire** — n8n (webhook → validation → email)
+
+---
+
+## Développement local
+
+Pré-requis : Node ≥ 22.12, [pnpm](https://pnpm.io).
+
+```bash
+pnpm install
+cp .env.example .env   # puis remplir PUBLIC_N8N_WEBHOOK_DIAGNOSTIC
+pnpm dev               # http://localhost:4321
+pnpm build             # build dans dist/
+pnpm preview           # aperçu du build
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Variables d'environnement
 
-## 🚀 Project Structure
+| Variable | Description |
+|---|---|
+| `PUBLIC_N8N_WEBHOOK_DIAGNOSTIC` | URL publique du webhook n8n qui reçoit les demandes de diagnostic. Le préfixe `PUBLIC_` la rend accessible côté navigateur. |
 
-Inside of your Astro project, you'll see the following folders and files:
+## Structure
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```
+src/
+├── components/     # Header, Footer, CTAButton, NoiseOverlay, TiltSignature
+├── layouts/        # Base.astro (SEO, a11y, reveal observer)
+├── pages/          # index, methode, realisations, diagnostic, faq,
+│                   # merci, mentions-legales, 404
+└── styles/
+    └── global.css  # Design tokens (8pt grid, échelle typo 1.25)
+public/             # logos, favicons, og-image, robots.txt, .htaccess
+deploy/             # workflow n8n + générateur OG + doc déploiement
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Design tokens (résumé)
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- Grille **8 pt** (`--s-0` à `--s-10`, 0→128 px)
+- Échelle typo **1.25** (`--step--1` à `--step-8`)
+- Containers : `is-narrow` 640 · `is-default` 920 · `is-wide` 1200
+- Palette : `--bg #0B0B0A`, `--ink #F4F4EF`, `--accent #D4FF4E` (lime), `--accent-2 #A6CC3E`
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Déploiement
 
-## 🧞 Commands
+Voir [`deploy/DEPLOY.md`](deploy/DEPLOY.md) pour la procédure Infomaniak pas-à-pas et [`deploy/n8n-diagnostic-form.json`](deploy/n8n-diagnostic-form.json) pour le workflow du formulaire.
 
-All commands are run from the root of the project, from a terminal:
+## Licence
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+© Neuf Cinquante Huit — Tous droits réservés. Ça fait Tilt® est une marque déposée.

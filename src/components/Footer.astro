@@ -1,0 +1,158 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-top">
+    <img
+      src="/logo-958-full.png"
+      alt="958 · Neuf Cinquante Huit"
+      class="footer-logo"
+      width="680"
+      height="412"
+    />
+    <p class="footer-tagline">
+      Installer l'IA dans votre entreprise. Sans bruit, sans jargon, sans dépendance.
+    </p>
+  </div>
+
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:jmg@958.fr">jmg@958.fr</a></li>
+        <li>60 rue François 1<sup>er</sup>, 75008 Paris</li>
+        <li>1 bis rue Thiers, 56000 Vannes</li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="/methode">Méthode</a></li>
+        <li><a href="/realisations">Réalisations</a></li>
+        <li><a href="/faq">FAQ</a></li>
+        <li><a href="/diagnostic">Diagnostic</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Légal</h4>
+      <ul>
+        <li><a href="/mentions-legales">Mentions légales</a></li>
+        <li>
+          <a href="https://www.linkedin.com/company/958-jmg/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container footer-meta">
+    <div>
+      <span>© {year}</span>
+      <span> · Neuf Cinquante Huit</span>
+      <span> · SIREN 912 884 228</span>
+    </div>
+    <div class="footer-gps">47.6587° N&nbsp;&nbsp;2.7603° W</div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: var(--s-10);
+    padding-block: var(--s-9) var(--s-6);
+    background: #F4F4EF;          /* papier */
+    color: #1A1A18;               /* encre noire */
+    border-top: 1px solid #1F1F1B;
+  }
+
+  /* ---- top : big logo ---- */
+  .footer-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-5);
+    text-align: center;
+    padding-bottom: var(--s-8);
+  }
+  .footer-logo {
+    height: auto;
+    width: min(520px, 100%);
+    display: block;
+  }
+  .footer-tagline {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--step-3);
+    color: #2E2E29;
+    max-width: 40ch;
+    line-height: var(--lh-snug);
+  }
+
+  /* ---- grid ---- */
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-7);
+    padding-block: var(--s-7);
+    border-top: 1px solid #D8D8D2;
+    border-bottom: 1px solid #D8D8D2;
+  }
+
+  .footer-col h4 {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: var(--tr-mono);
+    color: #6C6C66;
+    margin-bottom: var(--s-4);
+  }
+  .footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+  .footer-col li,
+  .footer-col a {
+    font-size: var(--step-0);
+    color: #2E2E29;
+  }
+  .footer-col a {
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--dur-1) var(--ease), color var(--dur-1) var(--ease);
+  }
+  .footer-col a:hover {
+    color: #1A1A18;
+    border-bottom-color: var(--accent-2);
+  }
+
+  /* ---- meta ---- */
+  .footer-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--s-3);
+    padding-top: var(--s-5);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: #6C6C66;
+    letter-spacing: var(--tr-wide);
+  }
+
+  /* ---- responsive ---- */
+  @media (max-width: 720px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--s-6);
+    }
+    .footer-logo { width: min(360px, 80%); }
+    .footer-tagline { font-size: var(--step-2); }
+    .footer-meta { justify-content: flex-start; }
+  }
+  @media (max-width: 480px) {
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+</style>

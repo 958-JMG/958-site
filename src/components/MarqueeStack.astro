@@ -1,0 +1,59 @@
+---
+// MarqueeStack — Bandeau défilant d'outils techniques
+// Geist Mono, color dim, 60s par boucle, pause au hover
+// Moins d'outils, plus de concepts "système"
+const tools = [
+  'Audit', 'Structuration', 'Implémentation', 'Formation',
+  'Cockpit', 'Automatisation', 'Souveraineté', 'Confidentialité',
+  'SPARI', 'Accompagnement', 'Bretagne', 'Paris',
+];
+// Dupliquer pour boucle infinie
+const items = [...tools, ...tools];
+---
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    {items.map((tool) => (
+      <span class="marquee-item">{tool}</span>
+    ))}
+  </div>
+</div>
+
+<style>
+  .marquee {
+    overflow: hidden;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-sm) 0;
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: 3rem;
+    white-space: nowrap;
+    animation: marquee-scroll 60s linear infinite;
+    width: max-content;
+  }
+
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  .marquee-item {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-ink-dim);
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+  }
+
+  @keyframes marquee-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+    }
+  }
+</style>

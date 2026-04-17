@@ -1,0 +1,229 @@
+{
+  "name": "958 · Formulaire Diagnostic",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "diagnostic-site",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "https://958.fr, https://www.958.fr, http://localhost:4321",
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "id": "a1111111-1111-1111-1111-111111111111",
+      "name": "Webhook · diagnostic-site",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        260,
+        320
+      ],
+      "webhookId": "diagnostic-site"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Normalise et valide la payload reçue du site 958.fr\nconst body = $input.first().json.body ?? $input.first().json;\n\nconst required = ['nom', 'entreprise', 'email', 'contexte', 'secteur', 'taille'];\nconst missing = required.filter((k) => !body[k] || String(body[k]).trim() === '');\n\nconst emailOk = typeof body.email === 'string' && /.+@.+\\..+/.test(body.email);\nconst isSpam = Boolean(body.website);\n\nreturn [{\n  json: {\n    valid: missing.length === 0 && emailOk && !isSpam,\n    missing,\n    emailOk,\n    isSpam,\n    nom: String(body.nom ?? '').trim(),\n    entreprise: String(body.entreprise ?? '').trim(),\n    email: String(body.email ?? '').trim(),\n    telephone: String(body.telephone ?? '').trim(),\n    secteur: String(body.secteur ?? '').trim(),\n    taille: String(body.taille ?? '').trim(),\n    contexte: String(body.contexte ?? '').trim(),\n    timestamp: body.timestamp ?? new Date().toISOString(),\n    source: body.source ?? 'site-958',\n    userAgent: body.userAgent ?? '',\n    referrer: body.referrer ?? null,\n  }\n}];"
+      },
+      "id": "b2222222-2222-2222-2222-222222222222",
+      "name": "Validation",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "c3333333-3333-3333-3333-333333333333",
+              "leftValue": "={{ $json.valid }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "c3333333-3333-3333-3333-333333333334",
+      "name": "Si valide ?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        700,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "jmg@958.fr",
+        "toEmail": "jmg@958.fr",
+        "subject": "=[958] Nouveau diagnostic · {{$json.nom}} — {{$json.entreprise}}",
+        "emailFormat": "html",
+        "html": "=<h2>Nouvelle demande de diagnostic</h2>\n<table style=\"font-family: sans-serif; line-height: 1.5;\">\n  <tr><td><strong>Nom</strong></td><td>{{$json.nom}}</td></tr>\n  <tr><td><strong>Entreprise</strong></td><td>{{$json.entreprise}}</td></tr>\n  <tr><td><strong>Email</strong></td><td><a href=\"mailto:{{$json.email}}\">{{$json.email}}</a></td></tr>\n  <tr><td><strong>Téléphone</strong></td><td>{{$json.telephone || '—'}}</td></tr>\n  <tr><td><strong>Secteur</strong></td><td>{{$json.secteur}}</td></tr>\n  <tr><td><strong>Taille</strong></td><td>{{$json.taille}}</td></tr>\n</table>\n<h3>Contexte</h3>\n<p>{{$json.contexte}}</p>\n<hr>\n<p style=\"color:#666;font-size:12px;\">Reçu le {{$json.timestamp}} depuis {{$json.source}}<br>UA : {{$json.userAgent}}<br>Referer : {{$json.referrer || 'direct'}}</p>",
+        "options": {
+          "replyTo": "={{$json.email}}"
+        }
+      },
+      "id": "d4444444-4444-4444-4444-444444444444",
+      "name": "Email · jmg@958.fr",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        920,
+        220
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "REMPLACER_PAR_ID_SMTP",
+          "name": "SMTP Infomaniak"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={ \"ok\": true }",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              },
+              {
+                "name": "Access-Control-Allow-Methods",
+                "value": "POST, OPTIONS"
+              }
+            ]
+          }
+        }
+      },
+      "id": "e5555555-5555-5555-5555-555555555555",
+      "name": "Réponse 200 OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1140,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={ \"ok\": false, \"error\": \"Payload invalide\", \"missing\": $json.missing, \"emailOk\": $json.emailOk }",
+        "options": {
+          "responseCode": 400,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "id": "f6666666-6666-6666-6666-666666666666",
+      "name": "Réponse 400",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        920,
+        440
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook · diagnostic-site": {
+      "main": [
+        [
+          {
+            "node": "Validation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validation": {
+      "main": [
+        [
+          {
+            "node": "Si valide ?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Si valide ?": {
+      "main": [
+        [
+          {
+            "node": "Email · jmg@958.fr",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Réponse 400",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email · jmg@958.fr": {
+      "main": [
+        [
+          {
+            "node": "Réponse 200 OK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "saveDataSuccessExecution": "all",
+    "saveExecutionProgress": true,
+    "saveManualExecutions": true
+  },
+  "versionId": "1",
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": "958-site"
+  },
+  "tags": [
+    {
+      "name": "958.fr",
+      "id": "tag-958"
+    }
+  ]
+}

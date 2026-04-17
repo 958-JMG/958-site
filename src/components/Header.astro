@@ -1,0 +1,251 @@
+---
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path === href || path.startsWith(href + '/');
+
+const nav = [
+  { href: '/methode', label: 'Méthode' },
+  { href: '/realisations', label: 'Réalisations' },
+  { href: '/faq', label: 'FAQ' },
+];
+---
+
+<header class="site-header" data-site-header>
+  <div class="container header-row">
+    <a href="/" class="brand" aria-label="958 — Neuf Cinquante Huit — Accueil">
+      <img
+        src="/logo-958-mark-white.png"
+        alt="958 · Neuf Cinquante Huit"
+        width="28"
+        height="38"
+        class="brand-mark"
+      />
+    </a>
+
+    <nav class="nav-desktop" aria-label="Principal">
+      <ul>
+        {nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class={isActive(item.href) ? 'is-active' : ''}
+              aria-current={isActive(item.href) ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="header-cta">
+      {!isActive('/diagnostic') && (
+        <a href="/diagnostic" class="btn btn--primary btn--sm">
+          <span>Diagnostic</span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      )}
+    </div>
+
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-label="Ouvrir le menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <!-- Mobile panel -->
+  <div class="menu-panel" id="mobile-menu" hidden>
+    <nav aria-label="Mobile">
+      <ul>
+        {nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class={isActive(item.href) ? 'is-active' : ''}
+              aria-current={isActive(item.href) ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+        <li class="menu-panel-cta">
+          <a href="/diagnostic" class="btn btn--primary">
+            <span>Demander un diagnostic</span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 50;
+    background: color-mix(in oklab, var(--bg) 82%, transparent);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border-bottom: 1px solid var(--line);
+    transition: background var(--dur-2) var(--ease);
+  }
+  .site-header[data-scrolled="true"] {
+    background: color-mix(in oklab, var(--bg) 95%, transparent);
+  }
+
+  .header-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    align-items: center;
+    gap: var(--s-5);
+    height: var(--header-h);
+  }
+
+  /* ---------- Brand ---------- */
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    color: var(--ink);
+  }
+  .brand-mark {
+    height: 32px;
+    width: auto;
+    display: block;
+    transition: opacity var(--dur-1) var(--ease);
+  }
+  .brand:hover .brand-mark { opacity: 0.85; }
+
+  /* ---------- Nav ---------- */
+  .nav-desktop ul {
+    list-style: none;
+    display: flex;
+    gap: var(--s-6);
+    justify-content: center;
+  }
+  .nav-desktop a {
+    position: relative;
+    font-size: var(--step-0);
+    color: var(--ink-2);
+    padding-block: 0.5rem;
+  }
+  .nav-desktop a::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: -2px;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur-2) var(--ease);
+  }
+  .nav-desktop a:hover,
+  .nav-desktop a.is-active { color: var(--ink); }
+  .nav-desktop a:hover::after,
+  .nav-desktop a.is-active::after { transform: scaleX(1); }
+
+  /* ---------- Menu toggle ---------- */
+  .menu-toggle {
+    display: none;
+    width: 40px; height: 40px;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .menu-toggle span {
+    display: block;
+    width: 20px; height: 1.5px;
+    background: var(--ink);
+    transition: transform var(--dur-2) var(--ease),
+                opacity var(--dur-2) var(--ease);
+  }
+  .menu-toggle[aria-expanded="true"] span:first-child {
+    transform: translateY(3.25px) rotate(45deg);
+  }
+  .menu-toggle[aria-expanded="true"] span:last-child {
+    transform: translateY(-3.25px) rotate(-45deg);
+  }
+
+  /* ---------- Mobile panel ---------- */
+  .menu-panel {
+    border-top: 1px solid var(--line);
+    background: var(--bg);
+  }
+  .menu-panel ul {
+    list-style: none;
+    padding: var(--s-5) var(--gutter);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+  }
+  .menu-panel a {
+    display: block;
+    font-family: var(--font-display);
+    font-size: var(--step-4);
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: var(--tr-tight);
+  }
+  .menu-panel a.is-active { color: var(--accent); }
+  .menu-panel-cta { padding-top: var(--s-3); }
+  .menu-panel-cta .btn { width: 100%; justify-content: center; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    .header-cta { display: none; }
+    .nav-desktop { display: none; }
+    .menu-toggle { display: inline-flex; }
+    .header-row { grid-template-columns: auto 1fr auto; }
+    .brand-mark { height: 28px; }
+  }
+</style>
+
+<script>
+  function bindHeader() {
+    const header = document.querySelector('[data-site-header]') as HTMLElement | null;
+    const toggle = document.querySelector('.menu-toggle') as HTMLButtonElement | null;
+    const panel = document.getElementById('mobile-menu');
+
+    if (header) {
+      const onScroll = () => {
+        header.dataset.scrolled = window.scrollY > 8 ? 'true' : 'false';
+      };
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+    }
+
+    if (toggle && panel) {
+      toggle.addEventListener('click', () => {
+        const open = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!open));
+        if (open) {
+          panel.setAttribute('hidden', '');
+          document.documentElement.style.overflow = '';
+        } else {
+          panel.removeAttribute('hidden');
+          document.documentElement.style.overflow = 'hidden';
+        }
+      });
+
+      // Close panel on link click
+      panel.querySelectorAll('a').forEach((a) => {
+        a.addEventListener('click', () => {
+          toggle.setAttribute('aria-expanded', 'false');
+          panel.setAttribute('hidden', '');
+          document.documentElement.style.overflow = '';
+        });
+      });
+    }
+  }
+
+  bindHeader();
+  document.addEventListener('astro:page-load', bindHeader);
+</script>

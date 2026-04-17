@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="Merci — Votre demande a été envoyée"
+  description="Votre message est arrivé. Réponse personnelle sous 48 heures ouvrées."
+>
+  <section class="section is-loose" aria-labelledby="h-merci">
+    <div class="container is-narrow merci">
+      <p class="eyebrow reveal">Envoyé</p>
+      <h1 id="h-merci" class="reveal display-italic">Merci.</h1>
+      <p class="lead reveal" style="margin-top: var(--s-5);">
+        Votre message est arrivé.<br>
+        Je vous réponds personnellement sous 48&nbsp;heures ouvrées.
+      </p>
+      <p class="reveal signature">— Jean-Marc</p>
+      <div class="reveal" style="margin-top: var(--s-8);">
+        <a href="/" class="link-arrow">Retour à l'accueil <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .merci { text-align: center; }
+  .merci h1 {
+    margin-top: var(--s-3);
+    font-size: var(--step-7);
+    color: var(--ink);
+  }
+  .signature {
+    margin-top: var(--s-5);
+    font-family: var(--font-mono);
+    font-size: var(--step-0);
+    color: var(--ink-3);
+    letter-spacing: var(--tr-wide);
+  }
+</style>

@@ -1,0 +1,40 @@
+---
+interface Props {
+  href?: string;
+  label?: string;
+  size?: 'sm' | 'md' | 'lg';
+  variant?: 'primary' | 'ghost';
+  type?: 'button' | 'submit';
+  class?: string;
+}
+
+const {
+  href,
+  label = 'Demander un diagnostic',
+  size = 'md',
+  variant = 'primary',
+  type = 'button',
+  class: extra = '',
+} = Astro.props;
+
+const classes = [
+  'btn',
+  variant === 'primary' ? 'btn--primary' : 'btn--ghost',
+  size === 'lg' ? 'btn--lg' : size === 'sm' ? 'btn--sm' : '',
+  extra,
+]
+  .filter(Boolean)
+  .join(' ');
+---
+
+{href ? (
+  <a href={href} class={classes}>
+    <span>{label}</span>
+    <span class="arrow" aria-hidden="true">→</span>
+  </a>
+) : (
+  <button type={type} class={classes}>
+    <span>{label}</span>
+    <span class="arrow" aria-hidden="true">→</span>
+  </button>
+)}
