@@ -1,16 +1,17 @@
-# 958.fr — Redirections SEO (Squarespace → Astro)
-# À placer sur Infomaniak (Apache)
+# 958.fr — Redirections SEO & HTTPS (Infomaniak Apache)
+# Canonique : https://www.958.fr
 
-# Forcer HTTPS
 RewriteEngine On
+
+# 1. Forcer HTTPS
 RewriteCond %{HTTPS} !=on
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# Forcer www → domaine apex (958.fr)
-RewriteCond %{HTTP_HOST} ^www\.958\.fr$ [NC]
-RewriteRule ^(.*)$ https://958.fr/$1 [L,R=301]
+# 2. Forcer apex (958.fr) → www.958.fr
+RewriteCond %{HTTP_HOST} ^958\.fr$ [NC]
+RewriteRule ^(.*)$ https://www.958.fr/$1 [L,R=301]
 
-# Redirections spécifiques (301 = permanent)
+# 3. Redirections SEO (anciennes URLs Squarespace)
 Redirect 301 /formation-decouverte /methode
 Redirect 301 /ia-immobilier /realisations
 Redirect 301 /formation-transformation /methode
@@ -20,12 +21,38 @@ Redirect 301 /mentions-lgales /mentions-legales
 Redirect 301 /foire-aux-questions-ia-958 /faq
 Redirect 301 /nouveau-menu-droulant /
 
-# Blog — tout redirigé vers réalisations en attendant
+# 4. Blog — tout redirigé vers réalisations en attendant
 RewriteRule ^blog/?$ /realisations [L,R=301]
 RewriteRule ^blog/(.*)$ /realisations [L,R=301]
 
-# Panier Squarespace — plus utilisé
+# 5. Panier Squarespace — plus utilisé (410 = gone)
 Redirect 410 /cart
 
-# Page 404 custom
+# 6. Page 404 custom (Astro génère /404.html)
 ErrorDocument 404 /404.html
+
+# 7. Cache & performance
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html                  "access plus 1 hour"
+  ExpiresByType text/css                   "access plus 1 year"
+  ExpiresByType application/javascript     "access plus 1 year"
+  ExpiresByType image/png                  "access plus 1 year"
+  ExpiresByType image/jpeg                 "access plus 1 year"
+  ExpiresByType image/svg+xml              "access plus 1 year"
+  ExpiresByType image/webp                 "access plus 1 year"
+  ExpiresByType font/woff2                 "access plus 1 year"
+</IfModule>
+
+# 8. Compression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript
+  AddOutputFilterByType DEFLATE image/svg+xml application/json
+</IfModule>
+
+# 9. Sécurité
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>

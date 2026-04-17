@@ -150,22 +150,30 @@ Secrets GitHub à créer (*Settings → Secrets and variables → Actions*) :
 
 ## 4. DNS 958.fr (5 min si le domaine n'est pas déjà chez Infomaniak)
 
+**URL canonique : `https://www.958.fr`** · L'apex `958.fr` redirige en 301 vers le www (cf `.htaccess`).
+Donc les **deux** doivent pointer vers l'hébergement Infomaniak.
+
 Si le domaine 958.fr est ailleurs (OVH, Gandi, Squarespace, etc.) :
 
-1. Récupérer les **IP Infomaniak** affichées dans la console Infomaniak
+1. Récupérer les **IP Infomaniak** affichées dans la console Infomaniak (Hébergement → Informations)
 2. Chez ton registrar actuel, éditer les DNS :
    - **A record** : `@` → IP Infomaniak
    - **A record** : `www` → IP Infomaniak (ou CNAME `www` → `958.fr.`)
-3. Attendre la propagation (quelques minutes à 24 h)
+3. Activer **Let's Encrypt** pour **les deux** : `958.fr` et `www.958.fr` (sinon la redirection HTTPS apex→www casse)
+4. Attendre la propagation (quelques minutes à 24 h)
 
-Une fois le DNS propagé + SSL généré, ouvrir [https://958.fr](https://958.fr) : le site est en ligne.
+Une fois propagé + SSL généré sur les deux noms :
+- [https://www.958.fr](https://www.958.fr) → site en ligne ✓
+- [https://958.fr](https://958.fr) → redirige en 301 vers www ✓
+- [http://www.958.fr](http://www.958.fr) → redirige en 301 vers https ✓
+- [http://958.fr](http://958.fr) → redirige en 301 vers https://www ✓
 
 ---
 
 ## 5. Vérifications post-déploiement
 
-- [ ] [https://958.fr](https://958.fr) s'ouvre en HTTPS
-- [ ] [https://www.958.fr](https://www.958.fr) redirige bien vers `https://958.fr`
+- [ ] [https://www.958.fr](https://www.958.fr) s'ouvre en HTTPS
+- [ ] [https://958.fr](https://958.fr) redirige bien vers `https://www.958.fr`
 - [ ] Les 8 pages répondent en 200 : `/`, `/methode`, `/realisations`, `/diagnostic`, `/faq`, `/merci`, `/mentions-legales` + une route inexistante → 404 custom
 - [ ] Le formulaire diagnostic envoie bien un email (tester avec ton propre email)
 - [ ] [https://958.fr/sitemap-index.xml](https://958.fr/sitemap-index.xml) existe
