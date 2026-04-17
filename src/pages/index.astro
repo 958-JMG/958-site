@@ -52,7 +52,7 @@ const kpis = [
        ========================================= -->
   <section class="hero" aria-labelledby="h-hero">
     <div class="container">
-      <p class="eyebrow reveal">Conseil IA · Vannes · Depuis 2022</p>
+      <p class="eyebrow reveal">Conseil IA · Bretagne · Paris · Depuis 2022</p>
       <h1 id="h-hero" class="hero-title reveal">
         On installe l'IA
         <br>dans votre entreprise.
@@ -281,25 +281,18 @@ const kpis = [
     background: var(--accent);
   }
 
-  /* ---- Mobile : hero compact, CTA above-the-fold ---- */
+  /* ---- Mobile : hero allégé en padding, typo grand format conservée ---- */
   @media (max-width: 720px) {
     .hero {
-      padding-top: var(--s-4);
-      padding-bottom: var(--s-6);
+      padding-top: var(--s-6);
+      padding-bottom: var(--s-7);
     }
     .hero-title {
-      font-size: clamp(2.1rem, 10vw, 3rem);
-      line-height: 1.02;
       max-width: none;
       margin-top: var(--s-3);
     }
     .hero-title-soft {
       margin-top: var(--s-3);
-      font-size: 0.58em;
-    }
-    .lead {
-      margin-top: var(--s-4);
-      font-size: var(--step-2);
     }
     .hero-ctas {
       margin-top: var(--s-5);
