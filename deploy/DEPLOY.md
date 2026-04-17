@@ -1,113 +1,191 @@
-# Déployer 958.fr — Infomaniak + n8n
+# Déployer 958.fr — Cloudflare Pages + n8n
 
-**Objectif** : site statique sur Infomaniak, formulaire branché sur n8n, déploiement automatique via Git.
+**Stack de déploiement** :
+- **Code** : GitHub (`958-JMG/958-site`)
+- **Hébergement** : Cloudflare Pages (gratuit, CDN mondial)
+- **DNS** : Infomaniak (on garde, pas de migration de NS)
+- **Formulaire** : webhook n8n
 
-Temps estimé : **15 min** pour la mise en place initiale, puis **0 min** pour chaque déploiement suivant (push = live).
+**Canonique** : `https://www.958.fr` (l'apex `958.fr` redirige en 301 vers le www via `.htaccess`… oui mais CF Pages ne lit pas `.htaccess`, du coup on gère la redirection différemment — voir §4)
 
----
-
-## 1. Préparer le repo GitHub (2 min)
-
-### 1.1. Créer le repo
-
-Sur [github.com/new](https://github.com/new) :
-
-- **Repository name** : `958-site`
-- **Owner** : `958-JMG`
-- **Visibility** : Private (ou Public si tu veux)
-- **⚠️ Ne cocher aucune case** (pas de README, pas de .gitignore, pas de licence — on pousse l'historique existant)
-
-### 1.2. Pousser le code (depuis le dossier `958-site/`)
-
-Les commandes sont prêtes dans [`push-to-github.sh`](./push-to-github.sh) — ou manuellement :
-
-```bash
-cd 958-site
-git remote add origin git@github.com:958-JMG/958-site.git
-git branch -M main
-git push -u origin main
-```
+Temps total : **~15 min** pour le premier setup, puis **0 min** pour chaque push suivant.
 
 ---
 
-## 2. Importer le workflow n8n (3 min)
+## 1. Importer le workflow n8n (3 min)
 
-### 2.1. Importer le JSON
+### 1.1. Import du JSON
 
-Dans ta console n8n Cloud ([jmg958.app.n8n.cloud](https://jmg958.app.n8n.cloud)) :
+Dans ta console n8n ([jmg958.app.n8n.cloud](https://jmg958.app.n8n.cloud)) :
 
 1. **Workflows** → **Add workflow** → menu **⋯** → **Import from File**
 2. Sélectionner [`deploy/n8n-diagnostic-form.json`](./n8n-diagnostic-form.json)
-3. Sauvegarder (**Ctrl+S**)
+3. Ctrl+S
 
-### 2.2. Brancher le SMTP Infomaniak (le seul credential à configurer)
+### 1.2. Brancher l'envoi d'email (Gmail au lieu de SMTP Proton)
 
 Sur le node **Email · jmg@958.fr** :
 
-1. Cliquer le node → **Credential → Create New**
-2. **Host** : `mail.infomaniak.com`
-3. **Port** : `465`
-4. **User** : `jmg@958.fr`
-5. **Password** : mot de passe de ton compte mail Infomaniak
-6. **SSL/TLS** : activé
-7. **Save** → renommer la credential « SMTP Infomaniak »
+1. Changer le type du node de **Send Email (SMTP)** → **Gmail** (tu l'as déjà configuré côté Claude/MCP)
+2. Mapper les champs :
+   - **To** : `jmg@958.fr`
+   - **Subject** : `[958] Nouveau diagnostic · {{$json.nom}} — {{$json.entreprise}}`
+   - **Message** : copier le HTML du node d'origine
+   - **Reply-To** : `{{$json.email}}`
 
-### 2.3. Activer le workflow
+### 1.3. Activer le workflow et copier l'URL
 
-- Basculer le **toggle** en haut à droite → **Active**
-- **Copier l'URL du webhook** affichée dans le node **Webhook · diagnostic-site** (section *Production URL*, pas Test URL)
-
-L'URL ressemble à :
-```
-https://jmg958.app.n8n.cloud/webhook/diagnostic-site
-```
+- Toggle en haut à droite → **Active**
+- Copier la **Production URL** affichée dans le node **Webhook · diagnostic-site**
+- L'URL ressemble à : `https://jmg958.app.n8n.cloud/webhook/diagnostic-site`
+- **Garde-la sous la main** — elle servira à l'étape 3
 
 ---
 
-## 3. Créer l'hébergement Infomaniak (5 min)
+## 2. Créer le projet Cloudflare Pages (5 min)
 
-> Si tu as déjà un hébergement pour 958.fr, saute en 3.3.
+### 2.1. Compte Cloudflare
 
-### 3.1. Nouveau site
+Si tu n'en as pas déjà un : [dash.cloudflare.com/sign-up](https://dash.cloudflare.com/sign-up) (gratuit, email + mot de passe, 30 sec).
 
-Console Infomaniak → **Hébergement Web** → **Ajouter un site** :
+### 2.2. Connecter GitHub et déployer
 
-- **Nom de domaine** : `958.fr`
-- **Emplacement** : `/sites/958.fr/` (ou équivalent)
-- **Version PHP** : la plus récente (même si on n'en fait pas usage, c'est l'hébergeur par défaut)
+1. Dashboard Cloudflare → menu gauche → **Workers & Pages**
+2. **Create** → onglet **Pages** → **Connect to Git**
+3. **Authorize Cloudflare** sur GitHub (pop-up OAuth) — tu peux limiter l'accès au seul repo `958-JMG/958-site`
+4. Sélectionner le repo **`958-JMG/958-site`** → **Begin setup**
 
-### 3.2. SSL
+### 2.3. Configuration du build
 
-Activer **Let's Encrypt** automatique (HTTPS forcé est déjà dans `.htaccess`).
-
-### 3.3. Déploiement automatique Git
-
-Console Infomaniak → ton site → **Déploiement automatique via Git** :
-
-1. **Ajouter un dépôt Git**
-2. **Fournisseur** : GitHub
-3. **Autoriser Infomaniak** à lire ton compte (OAuth)
-4. **Repository** : `958-JMG/958-site`
-5. **Branche** : `main`
-6. **Mode de déploiement** :
-   - Si Infomaniak propose « Build via Node » : **commande** `pnpm install && pnpm build`, **dossier de sortie** `dist`
-   - Sinon (déploiement direct) : voir plan B ci-dessous (GitHub Action)
-
-### 3.4. Variables d'environnement
-
-Dans la config du déploiement, ajouter :
-
-| Clé | Valeur |
+| Champ | Valeur |
 |---|---|
-| `PUBLIC_N8N_WEBHOOK_DIAGNOSTIC` | *URL copiée à l'étape 2.3* |
+| **Project name** | `958-site` (deviendra `958-site.pages.dev`) |
+| **Production branch** | `main` |
+| **Framework preset** | `Astro` (détecté auto) |
+| **Build command** | `pnpm install && pnpm build` |
+| **Build output directory** | `dist` |
+| **Root directory** | *(laisser vide)* |
+| **Environment variables** → **Add variable** | **Name** : `PUBLIC_N8N_WEBHOOK_DIAGNOSTIC` · **Value** : *l'URL du webhook n8n copiée à l'étape 1.3* |
+
+Bouton **Save and Deploy**.
+
+Le premier build prend ~1 min. À la fin, tu as une URL live du type :
+```
+https://958-site.pages.dev
+```
+
+**Ouvre-la** et vérifie que le site s'affiche bien avant de passer à l'étape 3.
 
 ---
 
-### Plan B — Si Infomaniak ne fait pas le build Node
+## 3. Brancher `www.958.fr` et `958.fr` (5 min)
 
-Utiliser **GitHub Actions** pour builder et pousser `dist/` en FTP vers Infomaniak.
+### 3.1. Ajouter les domaines custom dans Cloudflare
 
-Ajouter dans le repo `.github/workflows/deploy.yml` :
+Dans le projet `958-site` → onglet **Custom domains** → **Set up a custom domain** :
+
+1. Ajouter **`www.958.fr`** → Continue
+2. CF affiche un **CNAME** à créer dans ton DNS Infomaniak (type : `958-site.pages.dev` ou équivalent)
+
+Puis :
+
+3. Re-cliquer **Set up a custom domain**
+4. Ajouter **`958.fr`** (l'apex) → Continue
+5. CF te dira soit :
+   - (a) « Add these A records » avec 2 IPs Cloudflare, OU
+   - (b) « CNAME flattening required, move NS to Cloudflare »
+
+### 3.2. Éditer la zone DNS chez Infomaniak
+
+Dans la console Infomaniak → **Domaines** → **958.fr** → **Zone DNS** :
+
+**Supprimer** (héritage Squarespace, périmé) :
+
+| Source | Type | Valeur |
+|---|---|---|
+| `958.fr` | A | `198.185.159.144` |
+| `958.fr` | A | `198.185.159.145` |
+| `958.fr` | A | `198.49.23.144` |
+| `958.fr` | A | `198.49.23.145` |
+| `www.958.fr` | CNAME | `ext-cust.squarespace.com` |
+| `xd3l7er5prybcc6zgtpn.958.fr` | CNAME | `verify.squarespace.com` |
+
+**Ajouter** (valeurs exactes dictées par Cloudflare à l'étape 3.1) :
+
+| Source | Type | Valeur |
+|---|---|---|
+| `www.958.fr` | CNAME | `958-site.pages.dev` *(valeur CF)* |
+| `958.fr` | A | *1re IP CF* |
+| `958.fr` | A | *2e IP CF* |
+
+**À ne PAS toucher** (emails Proton, MailerLite, vérifs Google/OpenAI/Dust, DMARC) — ces lignes doivent rester telles quelles.
+
+### 3.3. Retour dans Cloudflare
+
+Dans Custom domains, CF va vérifier la propagation (1-5 min). Les deux domaines passent au statut **Active** avec SSL auto.
+
+### 3.4. Redirection apex → www
+
+Comme CF Pages ne lit pas `.htaccess`, il faut créer une règle de redirection :
+
+Dashboard Cloudflare → domaine `958.fr` (il doit apparaître automatiquement quand tu ajoutes le custom domain apex) → **Rules** → **Redirect Rules** → **Create rule** :
+
+- **Name** : Apex vers www
+- **When incoming requests match** : Custom filter expression
+  - Field : Hostname · Operator : equals · Value : `958.fr`
+- **Then** : Static redirect
+  - Type : Dynamic
+  - Expression : `concat("https://www.958.fr", http.request.uri.path)`
+  - Status : 301
+
+Deploy.
+
+---
+
+## 4. Vérifications post-déploiement
+
+Ouvre chaque URL dans un onglet privé :
+
+- [ ] [https://www.958.fr](https://www.958.fr) → site en ligne, SSL vert
+- [ ] [https://958.fr](https://958.fr) → redirige en 301 vers `https://www.958.fr`
+- [ ] [http://www.958.fr](http://www.958.fr) → redirige vers HTTPS
+- [ ] Les 8 pages répondent : `/`, `/methode`, `/realisations`, `/diagnostic`, `/faq`, `/merci`, `/mentions-legales` + une route inexistante → 404 custom
+- [ ] **Formulaire diagnostic** : remplir + envoyer → tu dois recevoir l'email sur jmg@958.fr + page `/merci` s'affiche
+- [ ] [https://www.958.fr/sitemap-index.xml](https://www.958.fr/sitemap-index.xml)
+- [ ] Preview OG : [opengraph.xyz/url/https://www.958.fr](https://www.opengraph.xyz/url/https%3A%2F%2Fwww.958.fr)
+
+---
+
+## 5. Déploiements suivants (zéro clic)
+
+```bash
+git add .
+git commit -m "…"
+git push
+```
+
+Cloudflare rebuilde + déploie en ~1 min. Tu peux suivre le build dans **Workers & Pages → 958-site → Deployments**.
+
+Chaque PR ouverte génère aussi automatiquement une **preview URL** type `https://<branch>.958-site.pages.dev` — pratique pour valider avant merge.
+
+---
+
+## Annexes
+
+### Limites du plan gratuit Cloudflare Pages
+- **500 builds/mois** (largement assez)
+- **Bande passante illimitée**
+- **20 000 fichiers** par projet
+- **Custom domains illimités**
+
+### Si un jour tu veux migrer sur Infomaniak Web Hosting
+Tout est réversible :
+1. Créer un hébergement Web Infomaniak (≈ 7 €/mois)
+2. Build en GitHub Action → FTP vers Infomaniak (config prête ci-dessous)
+3. Bascule DNS → IP Infomaniak
+4. Annuler CF Pages
+
+**GitHub Action FTP (plan B)** — à créer dans `.github/workflows/deploy.yml` :
 
 ```yaml
 name: Deploy to Infomaniak
@@ -122,15 +200,12 @@ jobs:
       - uses: pnpm/action-setup@v4
         with: { version: 10 }
       - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
+        with: { node-version: 22, cache: pnpm }
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
         env:
           PUBLIC_N8N_WEBHOOK_DIAGNOSTIC: ${{ secrets.N8N_WEBHOOK }}
-      - name: FTP deploy
-        uses: SamKirkland/FTP-Deploy-Action@v4
+      - uses: SamKirkland/FTP-Deploy-Action@v4
         with:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USER }}
@@ -139,63 +214,8 @@ jobs:
           server-dir: ./sites/958.fr/
 ```
 
-Secrets GitHub à créer (*Settings → Secrets and variables → Actions*) :
-
-- `N8N_WEBHOOK` → l'URL du webhook
-- `FTP_HOST` → `ftp.infomaniak.com` (ou l'hôte fourni par Infomaniak)
-- `FTP_USER` → nom d'utilisateur FTP Infomaniak
-- `FTP_PASSWORD` → mot de passe FTP Infomaniak
-
----
-
-## 4. DNS 958.fr (5 min si le domaine n'est pas déjà chez Infomaniak)
-
-**URL canonique : `https://www.958.fr`** · L'apex `958.fr` redirige en 301 vers le www (cf `.htaccess`).
-Donc les **deux** doivent pointer vers l'hébergement Infomaniak.
-
-Si le domaine 958.fr est ailleurs (OVH, Gandi, Squarespace, etc.) :
-
-1. Récupérer les **IP Infomaniak** affichées dans la console Infomaniak (Hébergement → Informations)
-2. Chez ton registrar actuel, éditer les DNS :
-   - **A record** : `@` → IP Infomaniak
-   - **A record** : `www` → IP Infomaniak (ou CNAME `www` → `958.fr.`)
-3. Activer **Let's Encrypt** pour **les deux** : `958.fr` et `www.958.fr` (sinon la redirection HTTPS apex→www casse)
-4. Attendre la propagation (quelques minutes à 24 h)
-
-Une fois propagé + SSL généré sur les deux noms :
-- [https://www.958.fr](https://www.958.fr) → site en ligne ✓
-- [https://958.fr](https://958.fr) → redirige en 301 vers www ✓
-- [http://www.958.fr](http://www.958.fr) → redirige en 301 vers https ✓
-- [http://958.fr](http://958.fr) → redirige en 301 vers https://www ✓
-
----
-
-## 5. Vérifications post-déploiement
-
-- [ ] [https://www.958.fr](https://www.958.fr) s'ouvre en HTTPS
-- [ ] [https://958.fr](https://958.fr) redirige bien vers `https://www.958.fr`
-- [ ] Les 8 pages répondent en 200 : `/`, `/methode`, `/realisations`, `/diagnostic`, `/faq`, `/merci`, `/mentions-legales` + une route inexistante → 404 custom
-- [ ] Le formulaire diagnostic envoie bien un email (tester avec ton propre email)
-- [ ] [https://958.fr/sitemap-index.xml](https://958.fr/sitemap-index.xml) existe
-- [ ] [https://958.fr/robots.txt](https://958.fr/robots.txt) accessible
-- [ ] La preview Open Graph s'affiche correctement : tester sur [opengraph.xyz/url/https://958.fr](https://www.opengraph.xyz/url/https%3A%2F%2F958.fr)
-
----
-
-## 6. Déploiements suivants
-
-```bash
-git add .
-git commit -m "…"
-git push
-```
-
-Infomaniak (ou l'action GitHub) reconstruit et déploie automatiquement en **1 à 3 min**.
-
----
-
-## Annexes
-
-- **Workflow n8n** : [`n8n-diagnostic-form.json`](./n8n-diagnostic-form.json)
-- **Script OG image** : [`generate-og.mjs`](./generate-og.mjs) — relancer avec `node deploy/generate-og.mjs` si tu changes le visuel
-- **`.htaccess`** : déjà prêt à la racine pour Apache Infomaniak (HTTPS forcé, redirections SEO Squarespace → Astro, 404 custom)
+### Fichiers du repo liés au déploiement
+- [`n8n-diagnostic-form.json`](./n8n-diagnostic-form.json) — workflow à importer
+- [`generate-og.mjs`](./generate-og.mjs) — régénère `public/og-image.png` si tu changes le visuel
+- [`push-to-github.sh`](./push-to-github.sh) — helper initial (plus besoin après le premier push)
+- [`../.htaccess`](../.htaccess) — devient inutile avec Cloudflare Pages, mais on le garde au cas où
