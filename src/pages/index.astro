@@ -39,7 +39,6 @@ const cases = [
 const kpis = [
   { n: '+500', l: 'Personnes formées' },
   { n: '+20',  l: 'PME transformées' },
-  { n: '6 mois', l: 'Délai moyen d\u2019un cockpit' },
   { n: '100%', l: 'Européen, souverain' },
 ];
 ---
@@ -429,7 +428,7 @@ const kpis = [
   .kpis {
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--s-4);
   }
   .kpi {
@@ -457,16 +456,10 @@ const kpis = [
     line-height: var(--lh-normal);
   }
 
-  @media (max-width: 900px) {
-    .kpis { grid-template-columns: repeat(2, 1fr); }
-    .kpi:nth-child(odd) { border-left: 0; padding-left: 0; }
-    .kpi:nth-child(even) { border-left: 1px solid var(--line); }
-    .kpi:nth-child(n+3) { padding-top: var(--s-5); border-top: 1px solid var(--line); }
-  }
-  @media (max-width: 480px) {
-    .kpis { grid-template-columns: 1fr; }
-    .kpi { border-left: 0 !important; padding-left: 0 !important; }
-    .kpi + .kpi { border-top: 1px solid var(--line); padding-top: var(--s-5); }
+  @media (max-width: 720px) {
+    .kpis { grid-template-columns: 1fr; gap: 0; }
+    .kpi { border-left: 0; padding-left: 0; padding-block: var(--s-5); }
+    .kpi + .kpi { border-top: 1px solid var(--line); }
     .kpi-n { font-size: var(--step-5); }
   }
 
