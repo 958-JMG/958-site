@@ -2,7 +2,8 @@
 import Base from '../../layouts/Base.astro';
 
 // Webhook partagé avec /diagnostic — n8n distingue via `source: formation-brief`.
-const WEBHOOK = import.meta.env.PUBLIC_N8N_WEBHOOK_DIAGNOSTIC || '';
+// Le form poste vers /api/lead (Cloudflare Pages Function) qui proxifie vers n8n.
+// Évite les blocages cross-origin des extensions navigateur.
 ---
 
 <Base
@@ -47,7 +48,6 @@ const WEBHOOK = import.meta.env.PUBLIC_N8N_WEBHOOK_DIAGNOSTIC || '';
           class="diag-form"
           novalidate
           aria-label="Brief formation"
-          data-webhook={WEBHOOK}
         >
           <!-- Honeypot -->
           <div class="sr-only" aria-hidden="true">
@@ -313,7 +313,6 @@ const WEBHOOK = import.meta.env.PUBLIC_N8N_WEBHOOK_DIAGNOSTIC || '';
     if (!form) return;
     const btn = document.getElementById('submit-btn') as HTMLButtonElement | null;
     const status = document.getElementById('form-status');
-    const webhook = form.dataset.webhook || '';
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -326,12 +325,6 @@ const WEBHOOK = import.meta.env.PUBLIC_N8N_WEBHOOK_DIAGNOSTIC || '';
       data.publics = fd.getAll('publics');
       if (!Array.isArray(data.publics) || data.publics.length === 0) {
         status.textContent = 'Sélectionnez au moins un public à former.';
-        status.classList.add('is-error');
-        return;
-      }
-
-      if (!webhook) {
-        status.textContent = 'Configuration manquante. Écrivez-nous à jmg@958.fr.';
         status.classList.add('is-error');
         return;
       }
@@ -359,7 +352,7 @@ const WEBHOOK = import.meta.env.PUBLIC_N8N_WEBHOOK_DIAGNOSTIC || '';
       };
 
       try {
-        const r = await fetch(webhook, {
+        const r = await fetch('/api/lead', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
