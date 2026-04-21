@@ -2,6 +2,8 @@
 import Base from '../layouts/Base.astro';
 import CTAButton from '../components/CTAButton.astro';
 import TiltSignature from '../components/TiltSignature.astro';
+import KpiBig from '../components/KpiBig.astro';
+import QuoteDisplay from '../components/QuoteDisplay.astro';
 
 // Typologies servies, par ordre de demande réelle.
 // Chacune avec un use-case concret — la promesse n'est pas "comprendre l'IA",
@@ -108,22 +110,16 @@ const programmes = [
   },
 ];
 
-const doDont = {
-  nous: [
-    "Des ateliers de terrain sur vos cas réels",
-    "Des livrables qui tournent le lendemain",
-    "Un cadre — SPARI — que vos équipes garderont",
-    "Des modèles européens, une souveraineté documentée",
-    "Un suivi post-formation qui ancre la pratique",
-  ],
-  non: [
-    "Des conférences générales sur l'IA",
-    "Des listes de 100 prompts à copier-coller",
-    "Des bootcamps génériques hors contexte",
-    "Des recommandations d'outils US sans avertissement",
-    "Des formations qui se terminent le vendredi soir",
-  ],
-};
+// Comparatif frontal — ligne à ligne, eux vs nous.
+const versus = [
+  { eux: "1 semaine en groupe, à distance",       nous: "1 à 10 jours chez vous, avec votre équipe" },
+  { eux: "Catalogue standardisé, promis à tous",  nous: "Programme construit sur vos cas réels" },
+  { eux: "Certificat joli à afficher",            nous: "Cockpit qui tourne dès lundi matin" },
+  { eux: "Liste de 100 prompts à copier-coller",  nous: "Un cadre — SPARI — qui se transmet" },
+  { eux: "Modèles US par défaut, sans carve-out", nous: "Modèles européens, souveraineté documentée" },
+  { eux: "Facture à l'inscription",               nous: "Proposition écrite après entretien" },
+  { eux: "Formateur jamais revu après",           nous: "Suivi 30 · 60 · 90 jours inclus" },
+];
 ---
 
 <Base
@@ -200,6 +196,17 @@ const doDont = {
   </section>
 
   <!-- =========================================
+       KPI GÉANT — +500 personnes formées (formation-centric)
+       ========================================= -->
+  <KpiBig
+    value={500}
+    prefix="+"
+    label="Personnes formées"
+    sub="Direction, sales, ops, métiers réglementés, tech. Depuis 2022, sur leurs cas."
+    variant="accent"
+  />
+
+  <!-- =========================================
        MÉTHODE PÉDAGOGIQUE — 3 temps
        ========================================= -->
   <section class="section" aria-labelledby="h-methode">
@@ -210,14 +217,20 @@ const doDont = {
         <p class="lead reveal">Ce qui transforme la formation en compétence : le cadrage avant, la traction après.</p>
       </div>
 
-      <ol class="temps reveal-stagger" role="list">
-        {temps.map((t) => (
-          <li class="temps-item reveal">
-            <span class="temps-n">{t.n}</span>
+      <ol class="temps reveal" role="list" data-temps>
+        <!-- Rail — ligne lime qui se trace au scroll -->
+        <span class="temps-rail" aria-hidden="true"></span>
+
+        {temps.map((t, i) => (
+          <li class="temps-item" style={`--temps-delay: ${i * 120}ms`}>
+            <span class="temps-node" aria-hidden="true">
+              <span class="temps-node-inner"></span>
+            </span>
             <div class="temps-body">
+              <p class="temps-n">{t.n}</p>
               <h3>{t.titre}</h3>
               <p class="temps-duree">{t.duree}</p>
-              <p>{t.corps}</p>
+              <p class="temps-corps">{t.corps}</p>
             </div>
           </li>
         ))}
@@ -226,32 +239,36 @@ const doDont = {
   </section>
 
   <!-- =========================================
-       DIFFÉRENCE — ce que nous sommes / ne sommes pas
+       DIFFÉRENCE — VS le marché (frontal, ligne à ligne)
        ========================================= -->
   <section class="section surface-elevated" aria-labelledby="h-diff">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow reveal">04 · Différence</p>
+        <p class="eyebrow reveal">04 · VS le marché</p>
         <h2 id="h-diff" class="reveal">Pas un énième bootcamp IA.</h2>
-        <p class="lead reveal">
-          Les influenceurs vendent des prompts. Les bootcamps vendent des certificats.
-          Nous construisons des compétences.
-        </p>
+        <p class="lead reveal">Même question, deux réponses. À chaque ligne, le choix devient évident.</p>
       </div>
 
-      <div class="dodont">
-        <div class="card reveal sov-card sov-card--do">
-          <h4>Ce que nous faisons</h4>
-          <ul>
-            {doDont.nous.map((li) => <li>{li}</li>)}
-          </ul>
+      <div class="vs reveal">
+        <div class="vs-head vs-head--eux">
+          <p class="vs-tag">Les bootcamps · formations LinkedIn</p>
         </div>
-        <div class="card reveal sov-card sov-card--dont">
-          <h4>Ce que nous ne faisons jamais</h4>
-          <ul>
-            {doDont.non.map((li) => <li>{li}</li>)}
-          </ul>
+        <div class="vs-head vs-head--nous">
+          <p class="vs-tag">9·58</p>
         </div>
+
+        {versus.map((row) => (
+          <>
+            <div class="vs-cell vs-cell--eux">
+              <span class="vs-mark" aria-hidden="true">×</span>
+              <span>{row.eux}</span>
+            </div>
+            <div class="vs-cell vs-cell--nous">
+              <span class="vs-mark" aria-hidden="true">+</span>
+              <span>{row.nous}</span>
+            </div>
+          </>
+        ))}
       </div>
     </div>
   </section>
@@ -289,6 +306,39 @@ const doDont = {
       </p>
     </div>
   </section>
+
+  <script>
+    // Active le schéma 3-temps (rail + nodes) au premier reveal.
+    function bindTempsSchema() {
+      document.querySelectorAll<HTMLElement>('[data-temps]').forEach((el) => {
+        if (el.dataset.bound === '1') return;
+        el.dataset.bound = '1';
+        const obs = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add('is-live');
+                obs.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.4 },
+        );
+        obs.observe(el);
+      });
+    }
+    bindTempsSchema();
+    document.addEventListener('astro:page-load', bindTempsSchema);
+  </script>
+
+  <!-- =========================================
+       QUOTE — preuve anonymisée
+       ========================================= -->
+  <QuoteDisplay
+    text="Nos 9 développeurs sont opérationnels dès le lendemain. Le cadre prompt que nous avons écrit ensemble, on l'utilise encore chaque semaine."
+    role="DSI"
+    context="éditeur SaaS B2B · 120 collaborateurs"
+  />
 
   <!-- =========================================
        CERTIFICATIONS & CADRE
@@ -486,31 +536,94 @@ const doDont = {
     .publics { grid-template-columns: 1fr; }
   }
 
-  /* ============ TEMPS (3 étapes pédagogiques) ============ */
+  /* ============ TEMPS (3 étapes pédagogiques — schéma animé) ============ */
   .temps {
     list-style: none;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0;
+    position: relative;
+    padding-top: 28px; /* place pour les nodes */
+    margin-top: var(--s-4);
   }
+
+  /* Rail horizontal — trait gris qui passe en lime au reveal */
+  .temps-rail {
+    position: absolute;
+    left: 8%;
+    right: 8%;
+    top: 28px;
+    height: 1px;
+    background: var(--line);
+  }
+  .temps-rail::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 1.6s cubic-bezier(.2, .85, .2, 1);
+  }
+  .temps.is-live .temps-rail::after { transform: scaleX(1); }
+
   .temps-item {
-    padding: var(--s-6) var(--s-5);
-    border-left: 1px solid var(--line);
+    padding: 0 var(--s-5) var(--s-5);
     display: flex;
     flex-direction: column;
     gap: var(--s-3);
+    position: relative;
+    align-items: center;
+    text-align: center;
   }
-  .temps-item:last-child { border-right: 1px solid var(--line); }
+
+  /* Node — petit cercle sur le rail */
+  .temps-node {
+    position: absolute;
+    top: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color .35s var(--ease);
+    transition-delay: var(--temps-delay, 0ms);
+  }
+  .temps-node-inner {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--ink-3);
+    transform: scale(0);
+    transition: transform .4s cubic-bezier(.2,.85,.2,1), background .35s var(--ease);
+    transition-delay: var(--temps-delay, 0ms);
+  }
+  .temps.is-live .temps-item .temps-node {
+    border-color: var(--accent);
+  }
+  .temps.is-live .temps-item .temps-node-inner {
+    transform: scale(1);
+    background: var(--accent);
+  }
+
   .temps-n {
     font-family: var(--font-mono);
     font-size: var(--step--1);
     color: var(--ink-3);
     letter-spacing: var(--tr-mono);
+    margin-top: var(--s-4);
   }
+  .temps-body { max-width: 34ch; }
   .temps-body h3 {
     font-size: var(--step-3);
     margin-bottom: var(--s-2);
     color: var(--ink);
+    line-height: var(--lh-snug);
   }
   .temps-duree {
     font-family: var(--font-mono);
@@ -519,58 +632,136 @@ const doDont = {
     margin-bottom: var(--s-3);
     letter-spacing: var(--tr-wide);
   }
-  .temps-body p:last-child {
+  .temps-corps {
     font-size: var(--step-0);
     color: var(--ink-2);
     line-height: var(--lh-normal);
-  }
-  @media (max-width: 900px) {
-    .temps { grid-template-columns: 1fr; }
-    .temps-item { border-right: 0 !important; }
-    .temps-item + .temps-item { border-top: 1px solid var(--line); }
   }
 
-  /* ============ DODONT — réutilise les primitives de l'index ============ */
-  .dodont {
+  /* Mobile — rail vertical à gauche, contenu aligné gauche */
+  @media (max-width: 900px) {
+    .temps {
+      grid-template-columns: 1fr;
+      padding-top: 0;
+      padding-left: var(--s-6);
+    }
+    .temps-rail {
+      left: 9px;
+      right: auto;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      height: auto;
+    }
+    .temps-rail::after {
+      transform-origin: top;
+      transform: scaleY(0);
+    }
+    .temps.is-live .temps-rail::after { transform: scaleY(1); }
+    .temps-item {
+      padding: var(--s-5) 0 var(--s-5) var(--s-4);
+      align-items: flex-start;
+      text-align: left;
+    }
+    .temps-item + .temps-item { border-top: 1px solid var(--line); }
+    .temps-node {
+      top: var(--s-5);
+      left: calc(var(--s-6) * -1 + 9px - 9px);
+      transform: translateX(0);
+    }
+    .temps-body { max-width: 48ch; }
+    .temps-n { margin-top: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .temps-rail::after { transform: scaleX(1); transition: none; }
+    .temps-node { border-color: var(--accent); transition: none; }
+    .temps-node-inner { transform: scale(1); background: var(--accent); transition: none; }
+  }
+
+  /* ============ VS le marché ============ */
+  .vs {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--s-4);
+    gap: 0;
+    border: 1px solid var(--line);
   }
-  @media (max-width: 900px) {
-    .dodont { grid-template-columns: 1fr; }
+  .vs-head {
+    padding: var(--s-5) var(--s-5);
+    border-bottom: 1px solid var(--line);
   }
-  .sov-card ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-3);
-    margin-top: var(--s-4);
+  .vs-head--eux {
+    background: transparent;
+    border-right: 1px solid var(--line);
   }
-  .sov-card li {
-    font-size: var(--step-0);
-    color: var(--ink-2);
-    padding-left: 1.6rem;
+  .vs-head--nous {
+    background: color-mix(in oklab, var(--accent) 12%, var(--bg));
     position: relative;
-    line-height: var(--lh-normal);
   }
-  .sov-card li::before {
+  .vs-head--nous::before {
+    content: "";
     position: absolute;
-    left: 0; top: 0.2rem;
-    font-family: var(--font-mono);
-    font-size: var(--step-0);
-    font-weight: 500;
-    line-height: 1;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--accent);
   }
-  .sov-card--do li::before { content: "+"; color: var(--accent); }
-  .sov-card--dont li::before { content: "×"; color: var(--ink-3); }
-  .sov-card h4 {
+  .vs-tag {
     font-family: var(--font-mono);
     font-size: var(--step--1);
     text-transform: uppercase;
     letter-spacing: var(--tr-mono);
-    color: var(--ink-3);
   }
-  .sov-card--do h4 { color: var(--accent-2); }
+  .vs-head--eux .vs-tag { color: var(--ink-3); }
+  .vs-head--nous .vs-tag { color: var(--accent); font-weight: 500; }
+
+  .vs-cell {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: var(--s-3);
+    padding: var(--s-5) var(--s-5);
+    border-bottom: 1px solid var(--line);
+    font-size: var(--step-1);
+    line-height: var(--lh-normal);
+    align-items: baseline;
+  }
+  .vs-cell:nth-last-child(-n+2) { border-bottom: 0; }
+
+  .vs-cell--eux {
+    color: var(--ink-3);
+    text-decoration: line-through;
+    text-decoration-color: var(--line-2);
+    text-decoration-thickness: 1px;
+    border-right: 1px solid var(--line);
+  }
+  .vs-cell--nous {
+    color: var(--ink);
+    background: color-mix(in oklab, var(--accent) 6%, var(--bg));
+    position: relative;
+  }
+  .vs-cell--nous::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    opacity: 0.35;
+  }
+  .vs-mark {
+    font-family: var(--font-mono);
+    font-size: var(--step-1);
+    font-weight: 500;
+    line-height: 1;
+    padding-top: 0.1em;
+  }
+  .vs-cell--eux .vs-mark { color: var(--ink-3); }
+  .vs-cell--nous .vs-mark { color: var(--accent); }
+
+  @media (max-width: 760px) {
+    .vs { grid-template-columns: 1fr; }
+    .vs-head--eux, .vs-cell--eux { border-right: 0; }
+    .vs-cell { padding: var(--s-4) var(--s-5); }
+    .vs-cell:nth-last-child(2) { border-bottom: 1px solid var(--line); }
+  }
 
   /* ============ PROGRAMMES (catalogue 3x2) ============ */
   .programmes {

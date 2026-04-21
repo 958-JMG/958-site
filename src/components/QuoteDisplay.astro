@@ -1,0 +1,84 @@
+---
+// Quote client full-width, mise en scène éditoriale.
+// Citations anonymisées (clients sous NDA). Le tag secteur fait la crédibilité.
+//
+// Usage :
+//   <QuoteDisplay
+//     text="Nos 9 développeurs sont opérationnels dès le lendemain."
+//     role="DSI"
+//     context="éditeur SaaS · 120 collab."
+//   />
+
+interface Props {
+  text: string;
+  role: string;
+  context?: string;
+}
+const { text, role, context } = Astro.props;
+---
+
+<figure class="quote-disp reveal">
+  <div class="quote-disp-inner container is-default">
+    <span class="quote-disp-mark" aria-hidden="true">“</span>
+    <blockquote class="quote-disp-text">{text}</blockquote>
+    <figcaption class="quote-disp-cap">
+      <span class="quote-disp-role">{role}</span>
+      {context && <span class="quote-disp-ctx"> · {context}</span>}
+    </figcaption>
+  </div>
+</figure>
+
+<style>
+  .quote-disp {
+    padding-block: var(--s-9);
+    border-block: 1px solid var(--line);
+    position: relative;
+    background:
+      radial-gradient(
+        ellipse at 50% 0%,
+        color-mix(in oklab, var(--accent) 5%, transparent) 0%,
+        transparent 55%
+      ),
+      var(--bg);
+  }
+  .quote-disp-inner {
+    display: grid;
+    justify-items: start;
+    gap: var(--s-5);
+    position: relative;
+  }
+  .quote-disp-mark {
+    font-family: var(--font-display);
+    font-size: clamp(6rem, 12vw, 9rem);
+    line-height: 0.6;
+    color: var(--accent);
+    opacity: 0.55;
+    display: block;
+    margin-bottom: calc(-1 * var(--s-5));
+  }
+  .quote-disp-text {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(1.75rem, 3.6vw, 3rem);
+    line-height: var(--lh-snug);
+    color: var(--ink);
+    letter-spacing: var(--tr-tight);
+    margin: 0;
+    max-width: 28ch;
+  }
+  .quote-disp-cap {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    text-transform: uppercase;
+    letter-spacing: var(--tr-mono);
+    color: var(--ink-3);
+    padding-top: var(--s-4);
+    border-top: 1px solid var(--line);
+  }
+  .quote-disp-role { color: var(--accent-2); font-weight: 500; }
+
+  @media (max-width: 720px) {
+    .quote-disp { padding-block: var(--s-7); }
+  }
+</style>

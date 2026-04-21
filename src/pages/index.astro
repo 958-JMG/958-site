@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import CTAButton from '../components/CTAButton.astro';
 import TiltSignature from '../components/TiltSignature.astro';
+import KpiBig from '../components/KpiBig.astro';
 
 const steps = [
   {
@@ -138,6 +139,17 @@ const kpis = [
       </div>
     </div>
   </section>
+
+  <!-- =========================================
+       KPI GÉANT — +500 personnes formées
+       ========================================= -->
+  <KpiBig
+    value={500}
+    prefix="+"
+    label="Personnes formées"
+    sub="Depuis 2022 · PME, grands comptes, ateliers intra-entreprise"
+    variant="accent"
+  />
 
   <!-- =========================================
        SOUVERAINETÉ

@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import CTAButton from '../components/CTAButton.astro';
 import TiltSignature from '../components/TiltSignature.astro';
+import QuoteDisplay from '../components/QuoteDisplay.astro';
 
 const cas = [
   {
@@ -148,6 +149,13 @@ const cas = [
       </ol>
     </div>
   </section>
+
+  <!-- ============ QUOTE ============ -->
+  <QuoteDisplay
+    text="Ils ont fait en 3 semaines ce que notre SI n'arrivait pas à faire depuis deux ans."
+    role="Directeur général"
+    context="groupe immobilier · 80 collaborateurs"
+  />
 
   <!-- ============ CTA ============ -->
   <section class="section is-loose" aria-labelledby="h-cta">

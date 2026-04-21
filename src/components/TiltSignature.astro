@@ -1,18 +1,22 @@
 ---
-// Signature "Ça fait Tilt®" — sobre, un seul filet, pas d'animation.
+// "Ça fait Tilt®" — marque déposée 9·58.
+// Au scroll-reveal, un trait lime se trace de gauche à droite sous le mot Tilt,
+// et la typo passe en accent ; micro-pulse du ® pour ancrer le déclic.
+// Respecte prefers-reduced-motion.
 ---
-<p class="tilt-sig display-italic">
-  Et là, ça fait <span class="tilt-word">tilt<span class="tilt-dot">.</span></span>
+
+<p class="tilt-sig display-italic" data-tilt aria-label="Ça fait Tilt, marque déposée">
+  Ça fait <span class="tilt-word"><span class="tilt-letters">Tilt</span><sup class="tilt-r">®</sup></span>
 </p>
 
 <style>
   .tilt-sig {
-    font-size: var(--step-4);
+    font-size: var(--step-5);
     color: var(--ink-2);
     text-align: center;
     line-height: var(--lh-snug);
     max-width: none;
-    padding-block: var(--s-5);
+    padding-block: var(--s-6);
     position: relative;
   }
   .tilt-sig::before {
@@ -23,10 +27,94 @@
     background: var(--line-2);
     margin: 0 auto var(--s-5);
   }
-  .tilt-word { color: var(--accent); font-weight: 500; }
-  .tilt-dot  { color: var(--accent); }
+
+  /* --- Mot Tilt : rail pour l'effet --- */
+  .tilt-word {
+    position: relative;
+    display: inline-block;
+    isolation: isolate;
+    padding: 0 0.1em;
+  }
+  .tilt-letters {
+    position: relative;
+    color: var(--ink);
+    font-weight: 500;
+    transition: color .4s .35s var(--ease);
+    z-index: 2;
+  }
+
+  /* Trait lime qui se trace de gauche à droite */
+  .tilt-word::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0.08em;
+    height: 0.34em;
+    background: var(--accent);
+    transform-origin: left;
+    transform: scaleX(0);
+    border-radius: 1px;
+    z-index: 1;
+    transition: transform .7s cubic-bezier(.2, .85, .2, 1);
+  }
+
+  /* ® — petit flash au moment du trait */
+  .tilt-r {
+    font-size: 0.38em;
+    color: var(--ink-3);
+    font-weight: 400;
+    font-style: normal;
+    top: -1.3em;
+    position: relative;
+    margin-left: 0.12em;
+    letter-spacing: 0;
+    transition: color .4s .55s var(--ease),
+                transform .35s .55s var(--ease);
+  }
+
+  /* --- État révélé --- */
+  .tilt-sig.is-tilted .tilt-word::before { transform: scaleX(1); }
+  .tilt-sig.is-tilted .tilt-letters      { color: var(--ink); }
+  .tilt-sig.is-tilted .tilt-r {
+    color: var(--accent);
+    transform: scale(1.1);
+  }
 
   @media (max-width: 720px) {
-    .tilt-sig { font-size: var(--step-3); }
+    .tilt-sig { font-size: var(--step-4); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tilt-word::before { transform: scaleX(1); transition: none; }
+    .tilt-letters { color: var(--ink); transition: none; }
+    .tilt-r { color: var(--accent); transition: none; }
   }
 </style>
+
+<script>
+  function bindTilt() {
+    const nodes = document.querySelectorAll<HTMLElement>('[data-tilt]');
+    nodes.forEach((el) => {
+      if (el.dataset.tiltBound === '1') return;
+      el.dataset.tiltBound = '1';
+
+      // Si JS désactivé ou prefers-reduced-motion : le CSS gère déjà l'état final.
+      const obs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              // Léger délai pour que le regard arrive au mot avant que ça tilt.
+              setTimeout(() => e.target.classList.add('is-tilted'), 140);
+              obs.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.65, rootMargin: '0px 0px -10% 0px' },
+      );
+      obs.observe(el);
+    });
+  }
+  bindTilt();
+  document.addEventListener('astro:page-load', bindTilt);
+</script>
