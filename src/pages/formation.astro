@@ -376,6 +376,38 @@ const versus = [
   </section>
 
   <!-- =========================================
+       JSON-LD — Course catalog (rich snippets pour "formation IA")
+       ========================================= -->
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      itemListElement: programmes.map((p, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        item: {
+          '@type': 'Course',
+          name: p.titre,
+          description: p.livre,
+          courseCode: p.code,
+          provider: { '@type': 'Organization', '@id': 'https://www.958.fr/#organization' },
+          hasCourseInstance: {
+            '@type': 'CourseInstance',
+            courseMode: ['Onsite', 'Online', 'Hybrid'],
+            location: { '@type': 'Place', address: { '@type': 'PostalAddress', addressCountry: 'FR' } },
+            courseWorkload: p.duree,
+          },
+          educationalLevel: 'Professional',
+          audience: { '@type': 'Audience', audienceType: p.pour },
+          inLanguage: 'fr-FR',
+          teaches: p.livre,
+        },
+      })),
+    })}
+  />
+
+  <!-- =========================================
        CTA FINAL
        ========================================= -->
   <section class="section is-loose" aria-labelledby="h-cta">

@@ -1,0 +1,91 @@
+# =====================================================================
+# Redirections 301 — Cloudflare Pages
+# =====================================================================
+# Format : <source> <destination> <code>
+# Cloudflare lit ce fichier automatiquement à chaque déploiement.
+# Wildcards autorisés. Plus spécifique d'abord.
+#
+# ⚠ La redirection apex 958.fr → www.958.fr se gère au niveau DNS
+#   (Page Rule Cloudflare) — pas ici.
+# =====================================================================
+
+# --- Anciennes URLs de l'ex-site 958.fr ---
+# À enrichir quand on détecte d'autres 404 dans les logs.
+
+# Contact / démo / commerce
+/contact              /diagnostic           301
+/contact/*            /diagnostic           301
+/contactez-nous       /diagnostic           301
+/contactez-nous/*     /diagnostic           301
+/demande              /diagnostic           301
+/demo                 /diagnostic           301
+/rdv                  /diagnostic           301
+/rendez-vous          /diagnostic           301
+/prendre-rdv          /diagnostic           301
+/booking              /diagnostic           301
+
+# Services / tarifs
+/services             /methode              301
+/services/*           /methode              301
+/tarif                /methode              301
+/tarifs               /methode              301
+/tarif/*              /methode              301
+/tarifs/*             /methode              301
+/prix                 /methode              301
+/offres               /methode              301
+/nos-services         /methode              301
+
+# Cas clients / portfolio / projets
+/portfolio            /realisations         301
+/portfolio/*          /realisations         301
+/cas-clients          /realisations         301
+/cas-clients/*        /realisations         301
+/cas-client           /realisations         301
+/nos-cas              /realisations         301
+/references           /realisations         301
+/projets              /realisations         301
+/projets/*            /realisations         301
+/work                 /realisations         301
+
+# Formation (pluriel, ancien)
+/formations           /formation            301
+/formations/*         /formation            301
+/catalogue            /formation            301
+/catalogue-formation  /formation            301
+
+# About / agence / équipe
+/about                /                     301
+/about/*              /                     301
+/a-propos             /                     301
+/agence               /                     301
+/equipe               /                     301
+/qui-sommes-nous      /                     301
+/jean-marc-geuring    /                     301
+
+# Blog / actualités (pas de blog actuel)
+/blog                 /                     301
+/blog/*               /                     301
+/actualites           /                     301
+/actualites/*         /                     301
+/news                 /                     301
+/news/*               /                     301
+
+# Méthode / approche
+/approche             /methode               301
+/methodo              /methode               301
+/methodologie         /methode               301
+
+# Trailing slash + index.html legacy
+/index                /                     301
+/index.html           /                     301
+/index.php            /                     301
+/home                 /                     301
+/accueil              /                     301
+
+# Mentions / RGPD / CGV
+/mentions             /mentions-legales     301
+/mentions-legales.html /mentions-legales    301
+/rgpd                 /mentions-legales     301
+/confidentialite      /mentions-legales     301
+/cgv                  /mentions-legales     301
+/cgu                  /mentions-legales     301

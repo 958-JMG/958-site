@@ -13,12 +13,16 @@ interface Props {
   description: string;
   canonical?: string;
   ogImage?: string;
+  /** Ordre pour le title : brand-last (défaut, SEO-friendly) ou brand-first */
+  titleMode?: 'brand-last' | 'brand-first';
 }
 
-const { title, description, canonical, ogImage = '/og-image.png' } = Astro.props;
+const { title, description, canonical, ogImage = '/og-image.png', titleMode = 'brand-last' } = Astro.props;
 const canonicalUrl = canonical || new URL(Astro.url.pathname, Astro.site).toString();
 const ogImageUrl = new URL(ogImage, Astro.site).toString();
-const pageTitle = `${title} — 958 · Neuf Cinquante Huit`;
+const pageTitle = titleMode === 'brand-first'
+  ? `958 · ${title}`
+  : `${title} · 958 · Neuf Cinquante Huit`;
 
 const path = Astro.url.pathname;
 const showMobileCta = !(
@@ -27,6 +31,36 @@ const showMobileCta = !(
   path === '/merci' ||
   path === '/merci/'
 );
+
+// BreadcrumbList auto — généré depuis le chemin pour les rich snippets Google.
+function buildBreadcrumbs(p: string) {
+  const base = { '@type': 'ListItem', position: 1, name: 'Accueil', item: 'https://www.958.fr/' };
+  const trail: any[] = [base];
+  const segs = p.split('/').filter(Boolean);
+  let acc = '';
+  const labels: Record<string, string> = {
+    methode: 'Méthode',
+    formation: 'Formation',
+    brief: 'Brief formation',
+    realisations: 'Réalisations',
+    diagnostic: 'Diagnostic',
+    faq: 'FAQ',
+    'mentions-legales': 'Mentions légales',
+    merci: 'Merci',
+  };
+  segs.forEach((seg, i) => {
+    acc += '/' + seg;
+    const label = labels[seg] || seg;
+    trail.push({
+      '@type': 'ListItem',
+      position: i + 2,
+      name: label,
+      item: `https://www.958.fr${acc}/`,
+    });
+  });
+  return trail;
+}
+const breadcrumbs = buildBreadcrumbs(path);
 ---
 
 <!DOCTYPE html>
@@ -60,17 +94,26 @@ const showMobileCta = !(
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
 
-    <!-- JSON-LD -->
+    <!-- JSON-LD — Organization / ProfessionalService (site-wide) -->
     <script
       type="application/ld+json"
       set:html={JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'ProfessionalService',
+        '@id': 'https://www.958.fr/#organization',
         name: 'Neuf Cinquante Huit',
-        alternateName: '9·58',
+        alternateName: ['9·58', '958'],
         url: 'https://www.958.fr',
         logo: 'https://www.958.fr/logo-958-mark.svg',
-        founder: { '@type': 'Person', name: 'Jean-Marc Geuring' },
+        image: 'https://www.958.fr/og-image.png',
+        founder: {
+          '@type': 'Person',
+          name: 'Jean-Marc Geuring',
+          jobTitle: 'Fondateur · Consultant IA pour PME',
+          sameAs: ['https://www.linkedin.com/in/jean-marc-geuring/'],
+        },
+        email: 'jmg@958.fr',
+        foundingDate: '2022',
         address: [
           {
             '@type': 'PostalAddress',
@@ -88,10 +131,49 @@ const showMobileCta = !(
             addressCountry: 'FR',
           },
         ],
-        areaServed: 'FR',
+        areaServed: ['FR', { '@type': 'Country', name: 'France' }],
+        priceRange: '€€',
+        sameAs: ['https://www.linkedin.com/in/jean-marc-geuring/'],
         description:
-          "Conseil, audit et implémentation de solutions IA pour les dirigeants de PME. Méthode propriétaire SPARI.",
+          "Conseil, audit, implémentation et formation IA pour dirigeants de PME. Méthode propriétaire SPARI. Basé à Vannes et Paris. Souveraineté européenne par défaut.",
         serviceType: ['Audit IA', 'Implémentation IA', 'Formation IA', 'Accompagnement IA'],
+        knowsAbout: [
+          'Intelligence artificielle',
+          'Audit IA',
+          'Implémentation IA',
+          'Formation IA intra-entreprise',
+          'Souveraineté numérique',
+          'RGPD',
+          'Automatisation n8n',
+          'Mistral AI',
+          'Claude',
+          'Prompt engineering',
+        ],
+      })}
+    />
+
+    <!-- JSON-LD — BreadcrumbList (rich snippets par page) -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: breadcrumbs,
+      })}
+    />
+
+    <!-- JSON-LD — WebSite avec SearchAction (rich result Google) -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        '@id': 'https://www.958.fr/#website',
+        url: 'https://www.958.fr',
+        name: '958 · Neuf Cinquante Huit',
+        description: "Installer l'IA dans votre entreprise. Sans bruit, sans jargon, sans dépendance.",
+        inLanguage: 'fr-FR',
+        publisher: { '@id': 'https://www.958.fr/#organization' },
       })}
     />
 
