@@ -1,10 +1,14 @@
-// Cloudflare Workers (flow unifié avec Pages depuis 2025)
-// On sert dist/ comme static assets — pas de code serveur, pas de runtime.
+// Cloudflare Workers — flow unifié avec static assets (2025).
+// Le worker TypeScript gère les routes dynamiques (/api/*),
+// tout le reste est servi depuis dist/ via le binding ASSETS.
 {
   "name": "958-site",
+  "main": "./src/worker.ts",
   "compatibility_date": "2025-01-15",
+  "compatibility_flags": ["nodejs_compat"],
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
     "not_found_handling": "404-page",
     "html_handling": "auto-trailing-slash"
   },
