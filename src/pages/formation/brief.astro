@@ -1,26 +1,25 @@
 ---
 import Base from '../../layouts/Base.astro';
 
-// Le webhook est partagé avec /diagnostic — n8n distingue via le champ `source`.
+// Webhook partagé avec /diagnostic — n8n distingue via `source: formation-brief`.
 const WEBHOOK = import.meta.env.PUBLIC_N8N_WEBHOOK_DIAGNOSTIC || '';
 ---
 
 <Base
-  title="Brief formation — 15 min, proposition sous 48 h"
-  description="Formulaire de brief formation IA : qui former, combien, quelle durée, quelle prise en charge OPCO. Réponse écrite sous 48 h avec un parcours sur mesure."
+  title="Brief formation — Proposition sous 48 h"
+  description="Formulaire court et ciblé pour un brief de formation IA : qui former, combien, quel objectif. Réponse écrite sous 48 h."
 >
   <section class="section is-tight" aria-labelledby="h-brief">
     <div class="container diag">
-      <!-- ===== Colonne gauche : pitch formation ===== -->
+      <!-- ===== Colonne gauche : pitch court ===== -->
       <div class="diag-pitch reveal">
         <p class="eyebrow">Brief formation</p>
         <h1 id="h-brief" style="margin-top: var(--s-3);">
-          15 min pour comprendre.<br>
-          48 h pour vous répondre.
+          7 champs.<br>
+          Une proposition sous 48&nbsp;h.
         </h1>
         <p class="lead" style="margin-top: var(--s-5);">
-          Nous construisons un parcours sur vos cas, pas sur un catalogue.
-          Ce brief nous donne les bons points de départ.
+          Le reste se dit au téléphone. On appelle, on écoute, on propose.
         </p>
 
         <dl class="diag-facts">
@@ -29,21 +28,10 @@ const WEBHOOK = import.meta.env.PUBLIC_N8N_WEBHOOK_DIAGNOSTIC || '';
             <dd>NDA en cours · Qualiopi prévu</dd>
           </div>
           <div>
-            <dt>Réponse</dt>
-            <dd>Sous 48&nbsp;h ouvrées</dd>
-          </div>
-          <div>
             <dt>Engagement</dt>
             <dd>Aucun</dd>
           </div>
         </dl>
-
-        <ul class="pitch-points" role="list">
-          <li><span class="pt-dot"></span> Intra-entreprise, jamais en inter-entreprises bâclé</li>
-          <li><span class="pt-dot"></span> Ateliers sur vos données, sous accord de confidentialité</li>
-          <li><span class="pt-dot"></span> Livrables qui tournent le lundi qui suit</li>
-          <li><span class="pt-dot"></span> Suivi 30/60/90 jours inclus</li>
-        </ul>
 
         <p class="pitch-back">
           <a href="/formation" class="link-arrow">
@@ -52,183 +40,88 @@ const WEBHOOK = import.meta.env.PUBLIC_N8N_WEBHOOK_DIAGNOSTIC || '';
         </p>
       </div>
 
-      <!-- ===== Colonne droite : form formation ===== -->
+      <!-- ===== Colonne droite : form ultra-court ===== -->
       <div class="diag-form-wrap reveal">
         <form
           id="formation-form"
           class="diag-form"
           novalidate
-          aria-label="Formulaire de brief formation"
+          aria-label="Brief formation"
           data-webhook={WEBHOOK}
         >
-          <!-- Honeypot anti-spam -->
+          <!-- Honeypot -->
           <div class="sr-only" aria-hidden="true">
             <label for="website">Ne pas remplir</label>
             <input type="text" name="website" id="website" tabindex="-1" autocomplete="off" />
           </div>
 
-          <!-- ===== Identité ===== -->
-          <fieldset class="fs">
-            <legend>Vous</legend>
-
+          <!-- 1. Identité courte -->
+          <div class="field-row">
             <div class="field">
-              <label for="nom">Prénom et nom <span aria-hidden="true">*</span></label>
+              <label for="nom">Prénom & nom <span aria-hidden="true">*</span></label>
               <input type="text" id="nom" name="nom" required autocomplete="name" />
             </div>
+            <div class="field">
+              <label for="email">Email pro <span aria-hidden="true">*</span></label>
+              <input type="email" id="email" name="email" required autocomplete="email" />
+            </div>
+          </div>
 
+          <div class="field-row">
             <div class="field">
               <label for="entreprise">Entreprise <span aria-hidden="true">*</span></label>
               <input type="text" id="entreprise" name="entreprise" required autocomplete="organization" />
             </div>
-
-            <div class="field-row">
-              <div class="field">
-                <label for="email">Email pro <span aria-hidden="true">*</span></label>
-                <input type="email" id="email" name="email" required autocomplete="email" />
-              </div>
-              <div class="field">
-                <label for="telephone">Téléphone <span class="optional">(optionnel)</span></label>
-                <input type="tel" id="telephone" name="telephone" autocomplete="tel" />
-              </div>
-            </div>
-
             <div class="field">
-              <label for="fonction">Votre fonction <span class="optional">(DRH, DG, Ops Manager…)</span></label>
-              <input type="text" id="fonction" name="fonction" />
+              <label for="telephone">Téléphone <span class="optional">(optionnel)</span></label>
+              <input type="tel" id="telephone" name="telephone" autocomplete="tel" />
             </div>
-          </fieldset>
+          </div>
 
-          <!-- ===== Qui former ===== -->
-          <fieldset class="fs">
-            <legend>Qui former</legend>
-
-            <div class="field">
-              <label>Public principal <span aria-hidden="true">*</span></label>
-              <div class="chips">
-                {[
-                  'Dirigeants · COMEX',
-                  'Commerciaux · ADV',
-                  'Ops · back-office',
-                  'Métier réglementé',
-                  'Tech · dev',
-                  'RH · communication',
-                  'Autre',
-                ].map((p) => (
-                  <label class="chip">
-                    <input type="checkbox" name="publics" value={p} />
-                    <span>{p}</span>
-                  </label>
-                ))}
-              </div>
+          <!-- 2. Qui former (chips, visuel) -->
+          <div class="field">
+            <label>Qui former <span aria-hidden="true">*</span></label>
+            <div class="chips">
+              {[
+                'Dirigeants',
+                'Commerciaux',
+                'Ops · back-office',
+                'Métier réglementé',
+                'Tech · dev',
+                'RH · com',
+                'Autre',
+              ].map((p) => (
+                <label class="chip">
+                  <input type="checkbox" name="publics" value={p} />
+                  <span>{p}</span>
+                </label>
+              ))}
             </div>
+          </div>
 
-            <div class="field-row">
-              <div class="field">
-                <label for="effectif">Nombre de personnes <span aria-hidden="true">*</span></label>
-                <select id="effectif" name="effectif" required>
-                  <option value="">Choisir…</option>
-                  <option>1 à 5</option>
-                  <option>6 à 10</option>
-                  <option>11 à 20</option>
-                  <option>21 à 50</option>
-                  <option>50+</option>
-                </select>
-              </div>
-              <div class="field">
-                <label for="secteur">Secteur <span aria-hidden="true">*</span></label>
-                <select id="secteur" name="secteur" required>
-                  <option value="">Choisir…</option>
-                  <option>Immobilier</option>
-                  <option>Finance · patrimoine</option>
-                  <option>Santé · médico-social</option>
-                  <option>Juridique · notariat</option>
-                  <option>Construction · industrie</option>
-                  <option>Services · conseil</option>
-                  <option>Tech · SaaS</option>
-                  <option>Autre</option>
-                </select>
-              </div>
-            </div>
-          </fieldset>
+          <!-- 3. Combien -->
+          <div class="field">
+            <label for="effectif">Combien de personnes <span aria-hidden="true">*</span></label>
+            <select id="effectif" name="effectif" required>
+              <option value="">Choisir…</option>
+              <option>1 à 5</option>
+              <option>6 à 15</option>
+              <option>16 à 50</option>
+              <option>50+</option>
+            </select>
+          </div>
 
-          <!-- ===== Format ===== -->
-          <fieldset class="fs">
-            <legend>Format souhaité</legend>
-
-            <div class="field-row">
-              <div class="field">
-                <label for="duree">Durée envisagée <span aria-hidden="true">*</span></label>
-                <select id="duree" name="duree" required>
-                  <option value="">Choisir…</option>
-                  <option>1 jour — découverte</option>
-                  <option>2 à 3 jours — approfondissement</option>
-                  <option>4 à 5 jours — parcours complet</option>
-                  <option>6 à 10 jours — cockpit en équipe</option>
-                  <option>À définir ensemble</option>
-                </select>
-              </div>
-              <div class="field">
-                <label for="modalite">Modalité <span aria-hidden="true">*</span></label>
-                <select id="modalite" name="modalite" required>
-                  <option value="">Choisir…</option>
-                  <option>Présentiel chez vous</option>
-                  <option>Distanciel</option>
-                  <option>Hybride (présentiel + distanciel)</option>
-                  <option>À définir</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="field-row">
-              <div class="field">
-                <label for="echeance">Échéance</label>
-                <select id="echeance" name="echeance">
-                  <option value="">Choisir…</option>
-                  <option>Dans le mois</option>
-                  <option>1 à 3 mois</option>
-                  <option>3 à 6 mois</option>
-                  <option>Plus de 6 mois</option>
-                  <option>Pas de contrainte</option>
-                </select>
-              </div>
-              <div class="field">
-                <label for="opco">Prise en charge OPCO</label>
-                <select id="opco" name="opco">
-                  <option value="">Choisir…</option>
-                  <option>Souhaitée</option>
-                  <option>Non nécessaire</option>
-                  <option>À étudier</option>
-                  <option>Je ne sais pas</option>
-                </select>
-              </div>
-            </div>
-          </fieldset>
-
-          <!-- ===== Contexte ===== -->
-          <fieldset class="fs">
-            <legend>Contexte</legend>
-
-            <div class="field">
-              <label for="objectif">Objectif en une phrase <span aria-hidden="true">*</span></label>
-              <textarea
-                id="objectif"
-                name="objectif"
-                rows="3"
-                required
-                placeholder="Ex : « Nos 12 commerciaux doivent maîtriser l'IA pour préparer leurs rendez-vous avant fin T3. »"
-              ></textarea>
-            </div>
-
-            <div class="field">
-              <label for="contexte">Cas d'usage ou irritants connus <span class="optional">(optionnel)</span></label>
-              <textarea
-                id="contexte"
-                name="contexte"
-                rows="3"
-                placeholder="Ex : tri de mails, synthèse de comptes-rendus, rédaction de propositions, extraction de documents…"
-              ></textarea>
-            </div>
-          </fieldset>
+          <!-- 4. Objectif (le champ qui compte le plus) -->
+          <div class="field">
+            <label for="objectif">Votre objectif, en une phrase <span aria-hidden="true">*</span></label>
+            <textarea
+              id="objectif"
+              name="objectif"
+              rows="3"
+              required
+              placeholder="Ex : « Nos commerciaux doivent maîtriser l'IA pour préparer leurs rendez-vous avant fin T3. »"
+            ></textarea>
+          </div>
 
           <button type="submit" class="btn btn--primary btn--lg submit" id="submit-btn">
             <span>Envoyer le brief</span>
@@ -236,7 +129,7 @@ const WEBHOOK = import.meta.env.PUBLIC_N8N_WEBHOOK_DIAGNOSTIC || '';
           </button>
 
           <p class="form-legal">
-            Données hébergées en Europe. Utilisées uniquement pour construire votre proposition. Aucun partage.
+            Données hébergées en Europe. Utilisées pour vous recontacter. Aucun partage.
             <a href="/mentions-legales">Mentions légales</a>
           </p>
 
@@ -248,7 +141,7 @@ const WEBHOOK = import.meta.env.PUBLIC_N8N_WEBHOOK_DIAGNOSTIC || '';
 </Base>
 
 <style>
-  /* Reprend la grille du /diagnostic pour cohérence visuelle */
+  /* Layout split, même grille que /diagnostic */
   .diag {
     display: grid;
     grid-template-columns: 1fr;
@@ -264,7 +157,7 @@ const WEBHOOK = import.meta.env.PUBLIC_N8N_WEBHOOK_DIAGNOSTIC || '';
   .diag-facts {
     margin-top: var(--s-6);
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--s-4);
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
@@ -282,37 +175,13 @@ const WEBHOOK = import.meta.env.PUBLIC_N8N_WEBHOOK_DIAGNOSTIC || '';
   @media (max-width: 560px) {
     .diag-facts { grid-template-columns: 1fr; }
   }
-
-  .pitch-points {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-3);
-    margin-top: var(--s-6);
-  }
-  .pitch-points li {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--s-3);
-    font-size: var(--step-0);
-    color: var(--ink-2);
-    line-height: var(--lh-normal);
-  }
-  .pitch-points .pt-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-    margin-top: 0.55rem;
-    flex-shrink: 0;
-  }
-
   .pitch-back {
     margin-top: var(--s-7);
     padding-top: var(--s-5);
     border-top: 1px solid var(--line);
   }
 
-  /* ---- Form ---- */
+  /* Form */
   .diag-form-wrap {
     background: var(--bg-2);
     border: 1px solid var(--line);
@@ -321,31 +190,8 @@ const WEBHOOK = import.meta.env.PUBLIC_N8N_WEBHOOK_DIAGNOSTIC || '';
   .diag-form {
     display: flex;
     flex-direction: column;
-    gap: var(--s-5);
-  }
-
-  .fs {
-    border: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
     gap: var(--s-4);
   }
-  .fs + .fs {
-    padding-top: var(--s-5);
-    border-top: 1px solid var(--line);
-  }
-  .fs legend {
-    font-family: var(--font-mono);
-    font-size: var(--step--1);
-    text-transform: uppercase;
-    letter-spacing: var(--tr-mono);
-    color: var(--accent-2);
-    padding: 0;
-    margin-bottom: var(--s-1);
-  }
-
   .field {
     display: flex;
     flex-direction: column;
@@ -364,7 +210,6 @@ const WEBHOOK = import.meta.env.PUBLIC_N8N_WEBHOOK_DIAGNOSTIC || '';
     text-transform: none;
     letter-spacing: var(--tr-normal);
   }
-
   .field input,
   .field select,
   .field textarea {
@@ -393,7 +238,7 @@ const WEBHOOK = import.meta.env.PUBLIC_N8N_WEBHOOK_DIAGNOSTIC || '';
     background-position: right 14px center;
     padding-right: 36px;
   }
-  .field textarea { resize: vertical; min-height: 96px; line-height: var(--lh-normal); }
+  .field textarea { resize: vertical; min-height: 88px; line-height: var(--lh-normal); }
   .field-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -403,7 +248,7 @@ const WEBHOOK = import.meta.env.PUBLIC_N8N_WEBHOOK_DIAGNOSTIC || '';
     .field-row { grid-template-columns: 1fr; }
   }
 
-  /* ---- Chips (multi-select publics) ---- */
+  /* Chips multi-select */
   .chips {
     display: flex;
     flex-wrap: wrap;
@@ -451,7 +296,6 @@ const WEBHOOK = import.meta.env.PUBLIC_N8N_WEBHOOK_DIAGNOSTIC || '';
     color: var(--ink-3);
     line-height: var(--lh-normal);
     letter-spacing: var(--tr-wide);
-    max-width: none;
   }
   .form-legal a { color: var(--ink-2); text-decoration: underline; text-underline-offset: 3px; }
   .form-status:not(:empty) {
@@ -479,10 +323,7 @@ const WEBHOOK = import.meta.env.PUBLIC_N8N_WEBHOOK_DIAGNOSTIC || '';
       const data: Record<string, any> = Object.fromEntries(fd);
       if (data.website) return; // honeypot
 
-      // Multi-select des publics
       data.publics = fd.getAll('publics');
-
-      // Au moins un public requis
       if (!Array.isArray(data.publics) || data.publics.length === 0) {
         status.textContent = 'Sélectionnez au moins un public à former.';
         status.classList.add('is-error');
