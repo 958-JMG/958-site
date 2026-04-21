@@ -342,8 +342,16 @@ const WEBHOOK = import.meta.env.PUBLIC_N8N_WEBHOOK_DIAGNOSTIC || '';
       status.textContent = '';
       status.classList.remove('is-error');
 
+      // Alias des champs pour rester compatible avec le workflow n8n existant
+      // (qui attend nom, entreprise, email, secteur, taille, contexte).
+      const publicsStr = Array.isArray(data.publics) ? data.publics.join(' · ') : '';
       const payload = {
         ...data,
+        // Compat n8n — mêmes clés que /diagnostic
+        secteur: `Formation · ${publicsStr || 'non précisé'}`,
+        taille: data.effectif || '',
+        contexte: `[BRIEF FORMATION]\nPublic(s) : ${publicsStr}\nEffectif : ${data.effectif || '—'}\n\nObjectif : ${data.objectif || ''}`,
+        // Meta
         source: 'formation-brief',
         timestamp: new Date().toISOString(),
         userAgent: navigator.userAgent,
@@ -356,10 +364,13 @@ const WEBHOOK = import.meta.env.PUBLIC_N8N_WEBHOOK_DIAGNOSTIC || '';
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
         });
-        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        if (!r.ok) {
+          const body = await r.text().catch(() => '');
+          throw new Error(`HTTP ${r.status}${body ? ' · ' + body.slice(0, 80) : ''}`);
+        }
         window.location.href = '/merci?sujet=formation';
-      } catch {
-        status.textContent = 'Erreur d\u2019envoi. Écrivez-nous à jmg@958.fr.';
+      } catch (err: any) {
+        status.textContent = `Erreur d'envoi (${err?.message || 'réseau'}). Écrivez-nous à jmg@958.fr.`;
         status.classList.add('is-error');
         btn.disabled = false;
         btn.innerHTML = original;
