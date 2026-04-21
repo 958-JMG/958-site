@@ -1,0 +1,684 @@
+---
+import Base from '../layouts/Base.astro';
+import CTAButton from '../components/CTAButton.astro';
+import TiltSignature from '../components/TiltSignature.astro';
+
+// Typologies servies, par ordre de demande réelle.
+// Chacune avec un use-case concret — la promesse n'est pas "comprendre l'IA",
+// c'est "ramener quelque chose d'utile lundi matin".
+const publics = [
+  {
+    tag: 'Dirigeants',
+    titre: 'Comprendre sans coder.',
+    corps: "Décider en connaissance de cause : quoi outsourcer, quoi internaliser, combien ça coûte, ce qu'il faut refuser.",
+  },
+  {
+    tag: 'Commerciaux · ADV',
+    titre: 'Vendre et suivre avec une longueur d\'avance.',
+    corps: "Synthèse d'appels, relances personnalisées, comptes-rendus dictés, propale en minutes. Les CRM deviennent lisibles.",
+  },
+  {
+    tag: 'Opérations · Back-office',
+    titre: 'Trier, rédiger, acheminer.',
+    corps: "Tri de mails, brouillons automatiques, courriers types générés, extraction de documents. Le bruit s'efface.",
+  },
+  {
+    tag: 'Métiers réglementés',
+    titre: 'Rigueur et confidentialité d\'abord.',
+    corps: "CGP, notariat, juridique, santé, comptabilité. Sur modèles européens, avec garde-fous documentés. Ce qui sort peut se défendre.",
+  },
+  {
+    tag: 'Tech · Dev',
+    titre: 'De la productivité au système.',
+    corps: "Claude Code, Cursor, agents d'ingénierie, prompts de spec. De 1 dev productif à 1 équipe augmentée.",
+  },
+  {
+    tag: 'RH · Communication',
+    titre: 'Accélérer sans déshumaniser.',
+    corps: "Annonces, briefs, supports internes, synthèse d'entretiens. La voix de l'entreprise reste la vôtre.",
+  },
+];
+
+// 3 temps pédagogiques — le format est aussi important que le contenu.
+const temps = [
+  {
+    n: '01',
+    titre: 'Avant — le cadrage',
+    duree: '30 à 60 min · visio',
+    corps: "Entretien avec vous ou votre équipe. On repère les irritants, les cas concrets, le niveau de départ. Le programme se bâtit sur vos données, pas sur un PDF d'éditeur.",
+  },
+  {
+    n: '02',
+    titre: 'Pendant — l\'atelier',
+    duree: '1 à 10 jours · sur site',
+    corps: "Ateliers pratiques sur vos cas réels. Chaque participant repart avec 3 prompts qui tournent, 1 workflow testé, 1 outil configuré pour son poste.",
+  },
+  {
+    n: '03',
+    titre: 'Après — la traction',
+    duree: '30 · 60 · 90 jours',
+    corps: "Trois points de contrôle. On mesure ce qui a tenu, on corrige ce qui a glissé. Une bibliothèque interne de prompts métier se constitue.",
+  },
+];
+
+// Programmes types — exemples de parcours sur-mesure.
+// Durées indicatives. Le contenu réel est toujours adapté à vos cas.
+const programmes = [
+  {
+    code: 'F-01',
+    titre: 'IA pour dirigeants',
+    duree: '1 jour',
+    pour: 'DG, COMEX, fondateurs',
+    livre: "Cadre de décision, grille de souveraineté, cartographie des outils pertinents pour votre secteur.",
+  },
+  {
+    code: 'F-02',
+    titre: 'IA commerciale appliquée',
+    duree: '2 jours',
+    pour: 'Équipes sales · ADV · account managers',
+    livre: "Workflow complet prospection → proposition → relance. 12 prompts métier validés et signés.",
+  },
+  {
+    code: 'F-03',
+    titre: 'Automatisation back-office',
+    duree: '3 jours',
+    pour: 'Ops · assistants · middle-office',
+    livre: "Chaîne de traitement mails, documents, extractions. n8n auto-hébergé. Zéro dépendance US.",
+  },
+  {
+    code: 'F-04',
+    titre: 'IA en métier réglementé',
+    duree: '2 jours',
+    pour: 'CGP · notaires · juristes · santé',
+    livre: "Cadre RGPD, modèles EU, traçabilité, validation humaine. Ce qui sort est défendable.",
+  },
+  {
+    code: 'F-05',
+    titre: 'Cockpit en équipe',
+    duree: '5 jours',
+    pour: 'Équipes produit · dev · ops intégrées',
+    livre: "Conception et livraison d'un cockpit interne sur votre cas. L'équipe le maintient ensuite.",
+  },
+  {
+    code: 'F-06',
+    titre: 'Parcours sur mesure',
+    duree: 'à définir',
+    pour: 'Autre métier, autre besoin',
+    livre: "On construit ensemble à partir de votre audit. Tous les précédents ont commencé ainsi.",
+  },
+];
+
+const doDont = {
+  nous: [
+    "Des ateliers de terrain sur vos cas réels",
+    "Des livrables qui tournent le lendemain",
+    "Un cadre — SPARI — que vos équipes garderont",
+    "Des modèles européens, une souveraineté documentée",
+    "Un suivi post-formation qui ancre la pratique",
+  ],
+  non: [
+    "Des conférences générales sur l'IA",
+    "Des listes de 100 prompts à copier-coller",
+    "Des bootcamps génériques hors contexte",
+    "Des recommandations d'outils US sans avertissement",
+    "Des formations qui se terminent le vendredi soir",
+  ],
+};
+---
+
+<Base
+  title="Formation — L'IA installée dans vos équipes"
+  description="Formations IA sur-mesure, intra-entreprise, pour dirigeants et équipes métier. Ateliers de terrain, cas réels, suivi post-formation. Souveraineté européenne. NDA en cours, Qualiopi prévu."
+>
+  <!-- =========================================
+       HERO
+       ========================================= -->
+  <section class="hero" aria-labelledby="h-hero">
+    <div class="container">
+      <p class="eyebrow reveal">Formation · Intra-entreprise · Sur-mesure</p>
+      <h1 id="h-hero" class="hero-title reveal">
+        Le déclic.
+        <br>Pas le discours.
+        <span class="hero-title-soft">Des ateliers qui font tilt<sup>®</sup>. Des équipes qui repartent avec quelque chose qui tourne dès le lundi.</span>
+      </h1>
+      <p class="lead reveal">
+        Formations IA pour dirigeants et équipes métier. Ateliers sur vos cas réels.
+        Livrables opérationnels. Suivi post-formation.
+      </p>
+      <div class="hero-ctas reveal">
+        <CTAButton label="Brief formation" href="/diagnostic?sujet=formation" size="lg" />
+        <a href="#publics" class="link-arrow">Voir pour qui <span aria-hidden="true">→</span></a>
+      </div>
+      <ul class="hero-assurances reveal" aria-label="Engagements formation">
+        <li><span class="dot"></span>NDA en cours</li>
+        <li><span class="dot"></span>Qualiopi prévu</li>
+        <li><span class="dot"></span>Accord de confidentialité</li>
+        <li><span class="dot"></span>+500 personnes formées</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- =========================================
+       CONSTAT — manifeste pédagogique
+       ========================================= -->
+  <section class="section" aria-labelledby="h-constat">
+    <div class="container is-default">
+      <p class="eyebrow reveal">01 · Le parti pris</p>
+      <h2 id="h-constat" class="reveal" style="margin-top: var(--s-3);">
+        Une formation IA ne vaut rien si elle se finit le vendredi soir.
+      </h2>
+      <div class="prose reveal">
+        <p>Ce qui compte, ce n'est pas ce qu'on dit en formation. C'est ce que vos équipes emportent le lundi matin.</p>
+        <p>Un prompt trouvé ensemble, un workflow testé sur un vrai dossier, un outil branché sur vos données, un cadre qui se transmet : voilà ce qui reste.</p>
+        <p><strong>Le reste — slides, théorie, catalogues — n'est pas notre métier.</strong></p>
+      </div>
+      <TiltSignature />
+    </div>
+  </section>
+
+  <!-- =========================================
+       POUR QUI
+       ========================================= -->
+  <section id="publics" class="section surface-elevated" aria-labelledby="h-publics">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow reveal">02 · Pour qui</p>
+        <h2 class="reveal" id="h-publics">Un parcours par métier.<br>Jamais un catalogue générique.</h2>
+        <p class="lead reveal">Chaque métier a ses objets, ses contraintes, ses irritants. La formation aussi.</p>
+      </div>
+
+      <ul class="publics reveal-stagger" role="list">
+        {publics.map((p) => (
+          <li class="public reveal">
+            <p class="public-tag">{p.tag}</p>
+            <h3 class="public-titre">{p.titre}</h3>
+            <p class="public-corps">{p.corps}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- =========================================
+       MÉTHODE PÉDAGOGIQUE — 3 temps
+       ========================================= -->
+  <section class="section" aria-labelledby="h-methode">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow reveal">03 · Méthode pédagogique</p>
+        <h2 class="reveal" id="h-methode">Trois temps. Toujours.</h2>
+        <p class="lead reveal">Ce qui transforme la formation en compétence : le cadrage avant, la traction après.</p>
+      </div>
+
+      <ol class="temps reveal-stagger" role="list">
+        {temps.map((t) => (
+          <li class="temps-item reveal">
+            <span class="temps-n">{t.n}</span>
+            <div class="temps-body">
+              <h3>{t.titre}</h3>
+              <p class="temps-duree">{t.duree}</p>
+              <p>{t.corps}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- =========================================
+       DIFFÉRENCE — ce que nous sommes / ne sommes pas
+       ========================================= -->
+  <section class="section surface-elevated" aria-labelledby="h-diff">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow reveal">04 · Différence</p>
+        <h2 id="h-diff" class="reveal">Pas un énième bootcamp IA.</h2>
+        <p class="lead reveal">
+          Les influenceurs vendent des prompts. Les bootcamps vendent des certificats.
+          Nous construisons des compétences.
+        </p>
+      </div>
+
+      <div class="dodont">
+        <div class="card reveal sov-card sov-card--do">
+          <h4>Ce que nous faisons</h4>
+          <ul>
+            {doDont.nous.map((li) => <li>{li}</li>)}
+          </ul>
+        </div>
+        <div class="card reveal sov-card sov-card--dont">
+          <h4>Ce que nous ne faisons jamais</h4>
+          <ul>
+            {doDont.non.map((li) => <li>{li}</li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       PROGRAMMES TYPES
+       ========================================= -->
+  <section class="section" aria-labelledby="h-prog">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow reveal">05 · Programmes types</p>
+        <h2 class="reveal" id="h-prog">Des parcours inspirés du terrain.</h2>
+        <p class="lead reveal">
+          Tous nos programmes sont adaptés au contexte du client. Voici six points de départ
+          pour que la conversation aille vite.
+        </p>
+      </div>
+
+      <ul class="programmes reveal-stagger" role="list">
+        {programmes.map((p) => (
+          <li class="prog reveal">
+            <div class="prog-head">
+              <span class="prog-code">{p.code}</span>
+              <span class="prog-duree">{p.duree}</span>
+            </div>
+            <h3 class="prog-titre">{p.titre}</h3>
+            <p class="prog-pour">{p.pour}</p>
+            <p class="prog-livre">{p.livre}</p>
+          </li>
+        ))}
+      </ul>
+
+      <p class="section-note reveal" style="margin-top: var(--s-6); text-align: center;">
+        Devis en 48&nbsp;h · Prise en charge OPCO à étudier avec votre organisme
+      </p>
+    </div>
+  </section>
+
+  <!-- =========================================
+       CERTIFICATIONS & CADRE
+       ========================================= -->
+  <section class="section surface-elevated" aria-labelledby="h-certif">
+    <div class="container">
+      <div class="certif-grid">
+        <div class="reveal">
+          <p class="eyebrow">06 · Cadre</p>
+          <h2 id="h-certif" style="margin-top: var(--s-3);">Un cadre qui avance.</h2>
+          <p class="lead" style="margin-top: var(--s-4);">
+            Parce que votre service achats ou votre OPCO va nous demander les pièces.
+          </p>
+        </div>
+
+        <ul class="certifs reveal-stagger" role="list">
+          <li class="certif reveal">
+            <p class="certif-statut is-progress">En cours</p>
+            <h3>Déclaration d'activité (NDA)</h3>
+            <p>Dossier déposé. Couvre les formations 9·58 en intra-entreprise.</p>
+          </li>
+          <li class="certif reveal">
+            <p class="certif-statut is-next">À suivre</p>
+            <h3>Certification Qualiopi</h3>
+            <p>Engagée dès l'obtention du NDA. Condition préalable à une prise en charge OPCO pleine et entière.</p>
+          </li>
+          <li class="certif reveal">
+            <p class="certif-statut is-done">Acquis</p>
+            <h3>Confidentialité</h3>
+            <p>Accord de confidentialité systématique. Matériel pédagogique construit sur vos cas, sans fuite vers l'extérieur.</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       CTA FINAL
+       ========================================= -->
+  <section class="section is-loose" aria-labelledby="h-cta">
+    <div class="container is-narrow" style="text-align: center;">
+      <h2 class="reveal" id="h-cta">
+        Racontez-nous votre équipe.<br>On vous propose un parcours.
+      </h2>
+      <p class="lead reveal" style="margin-top: var(--s-4);">
+        15 minutes au téléphone. On comprend vos cas, vos contraintes, votre calendrier.
+        Vous recevez une proposition écrite sous 48&nbsp;heures.
+      </p>
+      <div class="reveal" style="margin-top: var(--s-7);">
+        <CTAButton label="Brief formation" href="/diagnostic?sujet=formation" size="lg" />
+      </div>
+      <p class="section-note reveal" style="margin-top: var(--s-4);">
+        Sans engagement · Accord de confidentialité · Réponse sous 48&nbsp;h
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* ============ HERO (aligné /index) ============ */
+  .hero {
+    padding-top: var(--s-9);
+    padding-bottom: var(--s-7);
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--step-8);
+    line-height: var(--lh-tight);
+    letter-spacing: var(--tr-tight);
+    color: var(--ink);
+    margin-top: var(--s-4);
+    max-width: 22ch;
+  }
+  .hero-title-soft {
+    display: block;
+    margin-top: var(--s-4);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--ink-2);
+    font-size: 0.42em;
+    letter-spacing: -0.01em;
+    line-height: var(--lh-snug);
+    max-width: 46ch;
+  }
+  .hero-title-soft sup {
+    font-size: 0.55em;
+    color: var(--accent);
+    top: -0.7em;
+    position: relative;
+  }
+  .lead { margin-top: var(--s-5); }
+  .hero-ctas {
+    display: flex;
+    align-items: center;
+    gap: var(--s-5);
+    flex-wrap: wrap;
+    margin-top: var(--s-6);
+  }
+  .hero-assurances {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-4) var(--s-5);
+    margin-top: var(--s-6);
+    padding-top: var(--s-5);
+    border-top: 1px solid var(--line);
+  }
+  .hero-assurances li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--ink-3);
+    letter-spacing: var(--tr-wide);
+    text-transform: uppercase;
+  }
+  .hero-assurances .dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--accent);
+  }
+  @media (max-width: 720px) {
+    .hero { padding-top: var(--s-6); padding-bottom: var(--s-7); }
+    .hero-title { max-width: none; margin-top: var(--s-3); }
+    .hero-title-soft { margin-top: var(--s-3); }
+    .hero-ctas { margin-top: var(--s-5); gap: var(--s-4); }
+    .hero-assurances { margin-top: var(--s-5); padding-top: var(--s-4); gap: var(--s-3) var(--s-4); }
+  }
+
+  /* ============ SECTION PRIMITIVES ============ */
+  .section-head { max-width: 48rem; margin-bottom: var(--s-8); }
+  .section-head h2 { margin-top: var(--s-3); }
+  .section-head .lead { margin-top: var(--s-4); }
+
+  .section-note {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--ink-3);
+    letter-spacing: var(--tr-wide);
+  }
+
+  /* ============ CONSTAT ============ */
+  .prose {
+    margin-top: var(--s-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+  }
+  .prose p {
+    font-size: var(--step-2);
+    color: var(--ink-2);
+  }
+
+  /* ============ PUBLICS (grille 3x2) ============ */
+  .publics {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-4);
+  }
+  .public {
+    padding: var(--s-6) var(--s-5);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    transition: border-color var(--dur-2) var(--ease);
+    min-height: 220px;
+  }
+  .public:hover { border-color: var(--line-2); }
+  .public-tag {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--accent-2);
+    letter-spacing: var(--tr-wide);
+    text-transform: uppercase;
+  }
+  .public-titre {
+    font-size: var(--step-3);
+    color: var(--ink);
+    line-height: var(--lh-snug);
+  }
+  .public-corps {
+    font-size: var(--step-0);
+    color: var(--ink-2);
+    line-height: var(--lh-normal);
+    margin-top: auto;
+  }
+  @media (max-width: 1040px) {
+    .publics { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .publics { grid-template-columns: 1fr; }
+  }
+
+  /* ============ TEMPS (3 étapes pédagogiques) ============ */
+  .temps {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+  .temps-item {
+    padding: var(--s-6) var(--s-5);
+    border-left: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+  .temps-item:last-child { border-right: 1px solid var(--line); }
+  .temps-n {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--ink-3);
+    letter-spacing: var(--tr-mono);
+  }
+  .temps-body h3 {
+    font-size: var(--step-3);
+    margin-bottom: var(--s-2);
+    color: var(--ink);
+  }
+  .temps-duree {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--accent-2);
+    margin-bottom: var(--s-3);
+    letter-spacing: var(--tr-wide);
+  }
+  .temps-body p:last-child {
+    font-size: var(--step-0);
+    color: var(--ink-2);
+    line-height: var(--lh-normal);
+  }
+  @media (max-width: 900px) {
+    .temps { grid-template-columns: 1fr; }
+    .temps-item { border-right: 0 !important; }
+    .temps-item + .temps-item { border-top: 1px solid var(--line); }
+  }
+
+  /* ============ DODONT — réutilise les primitives de l'index ============ */
+  .dodont {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-4);
+  }
+  @media (max-width: 900px) {
+    .dodont { grid-template-columns: 1fr; }
+  }
+  .sov-card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    margin-top: var(--s-4);
+  }
+  .sov-card li {
+    font-size: var(--step-0);
+    color: var(--ink-2);
+    padding-left: 1.6rem;
+    position: relative;
+    line-height: var(--lh-normal);
+  }
+  .sov-card li::before {
+    position: absolute;
+    left: 0; top: 0.2rem;
+    font-family: var(--font-mono);
+    font-size: var(--step-0);
+    font-weight: 500;
+    line-height: 1;
+  }
+  .sov-card--do li::before { content: "+"; color: var(--accent); }
+  .sov-card--dont li::before { content: "×"; color: var(--ink-3); }
+  .sov-card h4 {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    text-transform: uppercase;
+    letter-spacing: var(--tr-mono);
+    color: var(--ink-3);
+  }
+  .sov-card--do h4 { color: var(--accent-2); }
+
+  /* ============ PROGRAMMES (catalogue 3x2) ============ */
+  .programmes {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-4);
+  }
+  .prog {
+    padding: var(--s-6) var(--s-5);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    transition: border-color var(--dur-2) var(--ease);
+  }
+  .prog:hover { border-color: var(--accent-2); }
+  .prog-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: var(--s-3);
+    border-bottom: 1px solid var(--line);
+  }
+  .prog-code {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--accent);
+    letter-spacing: var(--tr-wide);
+  }
+  .prog-duree {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--ink-3);
+    letter-spacing: var(--tr-wide);
+  }
+  .prog-titre {
+    font-size: var(--step-3);
+    color: var(--ink);
+    line-height: var(--lh-snug);
+    margin-top: var(--s-2);
+  }
+  .prog-pour {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--ink-3);
+    letter-spacing: var(--tr-wide);
+    text-transform: uppercase;
+  }
+  .prog-livre {
+    font-size: var(--step-0);
+    color: var(--ink-2);
+    line-height: var(--lh-normal);
+    margin-top: auto;
+  }
+  @media (max-width: 1040px) {
+    .programmes { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .programmes { grid-template-columns: 1fr; }
+  }
+
+  /* ============ CERTIFICATIONS ============ */
+  .certif-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-7);
+  }
+  @media (min-width: 900px) {
+    .certif-grid { grid-template-columns: 0.9fr 1fr; gap: var(--s-8); }
+  }
+  .certifs {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+  }
+  .certif {
+    padding: var(--s-5) var(--s-6);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+  .certif-statut {
+    display: inline-flex;
+    align-self: flex-start;
+    padding: 2px 10px;
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: var(--tr-wide);
+    text-transform: uppercase;
+    border: 1px solid var(--line-2);
+    border-radius: 999px;
+  }
+  .certif-statut.is-progress { color: var(--accent); border-color: var(--accent); }
+  .certif-statut.is-next { color: var(--accent-2); border-color: var(--accent-2); }
+  .certif-statut.is-done { color: var(--ink-2); border-color: var(--ink-3); }
+  .certif h3 {
+    font-size: var(--step-3);
+    color: var(--ink);
+    line-height: var(--lh-snug);
+  }
+  .certif p {
+    font-size: var(--step-0);
+    color: var(--ink-2);
+    line-height: var(--lh-normal);
+  }
+</style>
