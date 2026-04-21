@@ -38,9 +38,8 @@ const cases = [
 ];
 
 const kpis = [
-  { n: '+500', l: 'Personnes formées' },
-  { n: '+20',  l: 'PME transformées' },
-  { n: '100%', l: 'Européen, souverain' },
+  { n: 'Depuis 2022', l: 'Dans l\'IA appliquée aux PME' },
+  { n: '100%',        l: 'Européen, souverain' },
 ];
 ---
 
@@ -497,8 +496,9 @@ const kpis = [
   .kpis {
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--s-4);
+    max-width: 48rem;
   }
   .kpi {
     padding: var(--s-4) var(--s-5);
