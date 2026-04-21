@@ -28,8 +28,15 @@ function jsonResponse(obj: unknown, status = 200): Response {
   });
 }
 
-export async function onRequestPost(context: Context): Promise<Response> {
+export async function onRequest(context: Context): Promise<Response> {
   const { request, env } = context;
+
+  if (request.method !== 'POST') {
+    return new Response('Method Not Allowed', {
+      status: 405,
+      headers: { allow: 'POST', 'content-type': 'text/plain' },
+    });
+  }
   const webhook = env.N8N_WEBHOOK_URL || env.PUBLIC_N8N_WEBHOOK_DIAGNOSTIC;
 
   if (!webhook) {
@@ -77,10 +84,3 @@ export async function onRequestPost(context: Context): Promise<Response> {
   });
 }
 
-// Méthodes non-POST : refus explicite.
-export async function onRequest(): Promise<Response> {
-  return new Response('Method Not Allowed', {
-    status: 405,
-    headers: { allow: 'POST', 'content-type': 'text/plain' },
-  });
-}
