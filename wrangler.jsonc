@@ -14,5 +14,10 @@
   },
   "observability": {
     "enabled": true
+  },
+  // Variables injectées dans env au runtime. Publiques (pas de secret).
+  // Le webhook n8n est de toute façon déjà exposé dans le HTML historiquement.
+  "vars": {
+    "N8N_WEBHOOK_URL": "https://jmg958.app.n8n.cloud/webhook/diagnostic-site"
   }
 }
