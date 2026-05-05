@@ -13,7 +13,7 @@ import Base from '../layouts/Base.astro';
     <div class="container diag">
       <!-- Colonne gauche : pitch -->
       <div class="diag-pitch reveal">
-        <p class="eyebrow">Diagnostic</p>
+        <p class="eyebrow" id="diag-eyebrow">Diagnostic</p>
         <h1 id="h-diag" style="margin-top: var(--s-3);">
           30 minutes d'échange.<br>
           Pas 50 outils à installer.
@@ -84,10 +84,13 @@ import Base from '../layouts/Base.astro';
               <select id="secteur" name="secteur" required>
                 <option value="">Choisir…</option>
                 <option>Immobilier</option>
+                <option>Promotion foncière</option>
                 <option>Construction</option>
+                <option>Expertise-comptable</option>
+                <option>Gestion de patrimoine</option>
+                <option>Conseil</option>
                 <option>Services</option>
                 <option>Industrie</option>
-                <option>Conseil</option>
                 <option>Autre</option>
               </select>
             </div>
@@ -271,6 +274,46 @@ import Base from '../layouts/Base.astro';
 </style>
 
 <script>
+  // Mapping ?secteur=slug → option du select (depuis demo.958.fr)
+  const SECTEUR_MAP: Record<string, string> = {
+    'immobilier': 'Immobilier',
+    'promotion-fonciere': 'Promotion foncière',
+    'gestion-patrimoine': 'Gestion de patrimoine',
+    'artisan-btp': 'Construction',
+    'cabinet-conseil': 'Conseil',
+    'expertise-comptable': 'Expertise-comptable',
+  };
+  const SECTEUR_BRAND: Record<string, string> = {
+    'immobilier': 'Korrigan Immobilier',
+    'promotion-fonciere': 'Foncière Atlantique Développement',
+    'gestion-patrimoine': 'Cabinet Lucet',
+    'artisan-btp': 'Le Goëllec Bâtiment',
+    'cabinet-conseil': 'Almavia Conseil',
+    'expertise-comptable': 'Galaad Expertise',
+  };
+
+  function preselectSecteur() {
+    const params = new URLSearchParams(window.location.search);
+    const slug = (params.get('secteur') || '').trim().toLowerCase();
+    if (!slug) return;
+
+    const mapped = SECTEUR_MAP[slug];
+    const select = document.getElementById('secteur') as HTMLSelectElement | null;
+    if (mapped && select) {
+      const opt = Array.from(select.options).find((o) => o.text === mapped || o.value === mapped);
+      if (opt) {
+        select.value = opt.value || opt.text;
+      }
+    }
+
+    // Eyebrow contextuel : "Vous arrivez de la démo X"
+    const brand = SECTEUR_BRAND[slug];
+    const eyebrow = document.getElementById('diag-eyebrow');
+    if (brand && eyebrow) {
+      eyebrow.textContent = `Diagnostic · vous arrivez de la démo ${brand}`;
+    }
+  }
+
   function bindForm() {
     const form = document.getElementById('diagnostic-form') as HTMLFormElement | null;
     if (!form) return;
@@ -319,5 +362,9 @@ import Base from '../layouts/Base.astro';
     });
   }
   bindForm();
-  document.addEventListener('astro:page-load', bindForm);
+  preselectSecteur();
+  document.addEventListener('astro:page-load', () => {
+    bindForm();
+    preselectSecteur();
+  });
 </script>

@@ -41,6 +41,16 @@ const kpis = [
   { n: 'Depuis 2022', l: 'Dans l\'IA appliquée aux PME' },
   { n: 'Souverain',   l: 'Par défaut · vous gardez le choix' },
 ];
+
+// Grille hub démo — 6 cockpits sectoriels (alignée sur demo.958.fr)
+const cockpits = [
+  { brand: 'Galaad Expertise',     sector: 'Expertise-comptable',   city: 'Rennes',    slug: 'expertise-comptable',  color: '#1E40AF', accent: '#F59E0B' },
+  { brand: 'Korrigan Immobilier',  sector: 'Agence immobilière',    city: 'Quiberon',  slug: 'immobilier',           color: '#0B3D5C', accent: '#C97B5C' },
+  { brand: 'F.A.D.',                sector: 'Promotion foncière',    city: 'Nantes',    slug: 'promotion-fonciere',   color: '#111827', accent: '#FACC15' },
+  { brand: 'Cabinet Lucet',        sector: 'Gestion de patrimoine', city: 'Bordeaux',  slug: 'gestion-patrimoine',   color: '#1A2E1F', accent: '#D4AF37' },
+  { brand: 'Le Goëllec Bâtiment',  sector: 'Artisan BTP',           city: 'Pluvigner', slug: 'artisan-btp',          color: '#FF6B35', accent: '#FBBF24' },
+  { brand: 'Almavia Conseil',      sector: 'Cabinet de conseil',    city: 'Lyon',      slug: 'cabinet-conseil',      color: '#0F172A', accent: '#A78BFA' },
+];
 ---
 
 <Base
@@ -243,6 +253,59 @@ const kpis = [
 
       <div class="section-foot is-center reveal">
         <CTAButton label="Voir les 6 réalisations" href="/realisations" variant="ghost" size="md" />
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       PROJECTION — Hub démo sectoriel
+       ========================================= -->
+  <section class="section" aria-labelledby="h-demo">
+    <div class="container">
+      <div class="section-head is-center">
+        <p class="eyebrow reveal">05 · Projection</p>
+        <h2 class="reveal" id="h-demo">
+          Voyez votre cockpit.<br><span class="display-italic">Avant de le commander.</span>
+        </h2>
+        <p class="lead reveal">
+          Six métiers, six ambiances. Une bande-annonce visuelle pour vous projeter
+          dans ce que peut être un cockpit IA dans votre entreprise.
+        </p>
+      </div>
+
+      <ul class="hub-grid reveal-stagger" role="list">
+        {cockpits.map((c) => (
+          <li class="hub-card reveal">
+            <a
+              href={`https://demo.958.fr/${c.slug}?utm_source=958.fr&utm_medium=home_hub&utm_campaign=${c.slug}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={`--brand: ${c.color}; --brand-accent: ${c.accent};`}
+              class="hub-card-link"
+            >
+              <span class="hub-card-band" aria-hidden="true"></span>
+              <div class="hub-card-body">
+                <strong class="hub-card-brand">{c.brand}</strong>
+                <span class="hub-card-meta">{c.sector} · {c.city}</span>
+              </div>
+              <span class="hub-card-arrow" aria-hidden="true">↗</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <div class="section-foot is-center reveal">
+        <a
+          href="https://demo.958.fr"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link-arrow"
+        >
+          Explorer le hub démo complet <span aria-hidden="true">→</span>
+        </a>
+        <span class="section-note">
+          Démonstration fictive — données simulées · Sous-domaine demo.958.fr
+        </span>
       </div>
     </div>
   </section>
@@ -605,5 +668,82 @@ const kpis = [
   }
   @media (max-width: 900px) {
     .cases { grid-template-columns: 1fr; }
+  }
+
+  /* ============ HUB DÉMO ============ */
+  .hub-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-4);
+    list-style: none;
+    margin-top: var(--s-7);
+    padding: 0;
+  }
+  .hub-card {
+    list-style: none;
+  }
+  .hub-card-link {
+    --brand: var(--accent);
+    --brand-accent: var(--accent-2);
+    display: grid;
+    grid-template-columns: 8px 1fr auto;
+    gap: var(--s-4);
+    align-items: stretch;
+    padding: 0;
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    transition:
+      transform var(--dur-2) var(--ease),
+      border-color var(--dur-2) var(--ease),
+      box-shadow var(--dur-2) var(--ease);
+    position: relative;
+    overflow: hidden;
+  }
+  .hub-card-link:hover {
+    transform: translateY(-2px);
+    border-color: var(--brand-accent);
+    box-shadow: 0 12px 30px -16px color-mix(in oklab, var(--brand) 60%, transparent);
+  }
+  .hub-card-band {
+    background: linear-gradient(180deg, var(--brand) 0%, var(--brand-accent) 100%);
+  }
+  .hub-card-body {
+    padding: var(--s-5) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-1);
+    min-width: 0;
+  }
+  .hub-card-brand {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--step-3);
+    color: var(--ink);
+    letter-spacing: var(--tr-tight);
+    line-height: var(--lh-snug);
+  }
+  .hub-card-meta {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: var(--tr-mono);
+  }
+  .hub-card-arrow {
+    align-self: center;
+    padding-right: var(--s-5);
+    color: var(--ink-3);
+    font-size: var(--step-2);
+    transition: color var(--dur-2) var(--ease), transform var(--dur-2) var(--ease);
+  }
+  .hub-card-link:hover .hub-card-arrow {
+    color: var(--accent);
+    transform: translate(2px, -2px);
+  }
+  @media (max-width: 900px) {
+    .hub-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .hub-grid { grid-template-columns: 1fr; }
   }
 </style>
