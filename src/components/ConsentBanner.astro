@@ -287,26 +287,28 @@
 <script is:inline>
   (function () {
     const STORAGE_KEY = 'consent-958';
-    const VERSION = 'v1';
-    const CONSENT_TYPES = [
-      'ad_storage',
-      'ad_user_data',
-      'ad_personalization',
-      'analytics_storage',
-      'personalization_storage',
-    ];
+    const VERSION = 'v2';
 
-    function gtagSafe() {
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push(arguments);
+    // 7 signaux Consent Mode v2 (Advanced). functionality_storage et
+    // security_storage restent toujours "granted" (cookies techniques requis).
+    function buildPayload(state) {
+      return {
+        ad_storage:            state.ad_storage            ? 'granted' : 'denied',
+        ad_user_data:          state.ad_user_data          ? 'granted' : 'denied',
+        ad_personalization:    state.ad_personalization    ? 'granted' : 'denied',
+        analytics_storage:     state.analytics_storage     ? 'granted' : 'denied',
+        functionality_storage: 'granted',
+        personalization_storage: state.personalization_storage ? 'granted' : 'denied',
+        security_storage:      'granted'
+      };
     }
 
     function applyConsent(state) {
-      const payload = {};
-      CONSENT_TYPES.forEach((t) => {
-        payload[t] = state[t] ? 'granted' : 'denied';
-      });
-      gtagSafe('consent', 'update', payload);
+      // Utilise window.gtag défini dans Base.astro (même dataLayer)
+      var g = (typeof window !== 'undefined' && typeof window.gtag === 'function')
+        ? window.gtag
+        : function () { (window.dataLayer = window.dataLayer || []).push(arguments); };
+      g('consent', 'update', buildPayload(state));
     }
 
     function readSaved() {
