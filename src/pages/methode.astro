@@ -45,11 +45,43 @@ const spari = [
   { l: 'R', mot: 'Résultat',     d: "Le format et les critères de qualité de la sortie." },
   { l: 'I', mot: 'Instructions', d: "Les garde-fous, les interdits, les exigences." },
 ];
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': 'https://www.958.fr/methode/#service',
+  serviceType: 'Implémentation IA en entreprise',
+  name: 'Méthode 9·58 — Audit, structuration, implémentation IA',
+  description: "Méthode propriétaire SPARI en 4 étapes : audit, structuration, implémentation, accompagnement. Pour installer l'IA dans une PME sans dépendance.",
+  provider: { '@id': 'https://www.958.fr/#organization' },
+  areaServed: { '@type': 'Country', name: 'France' },
+  audience: { '@type': 'BusinessAudience', audienceType: 'Dirigeants de TPE et PME' },
+  category: 'Conseil en intelligence artificielle',
+  offers: {
+    '@type': 'Offer',
+    priceCurrency: 'EUR',
+    price: '900',
+    availability: 'https://schema.org/InStock',
+    url: 'https://www.958.fr/diagnostic/',
+    description: "Audit IA à partir de 900 € HT. Devis sur mesure ensuite.",
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Étapes 9·58',
+    itemListElement: [
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Audit IA' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Structuration & roadmap IA' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Implémentation IA' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Accompagnement IA' } },
+    ],
+  },
+};
 ---
 
 <Base
-  title="Méthode — Audit, structuration, implémentation IA"
-  description="La méthode 9·58 en 4 étapes et le cadre SPARI. Comment nous installons l'IA dans les PME, sans jargon ni dépendance."
+  title="Méthode — Audit & implémentation IA pour PME"
+  description="Notre méthode en 4 étapes et le cadre SPARI. Audit, structuration, implémentation, accompagnement. Pour installer l'IA dans une PME sans jargon ni dépendance."
+  jsonLd={serviceSchema}
 >
   <!-- ============ HERO ============ -->
   <section class="section is-tight" aria-labelledby="h-title">
@@ -123,18 +155,24 @@ const spari = [
     </div>
   </section>
 
-  <!-- ============ PASSERELLE FORMATION ============ -->
+  <!-- ============ PASSERELLE FORMATION + AUDIT ============ -->
   <section class="section" aria-labelledby="h-pass">
     <div class="container is-default" style="text-align: center;">
-      <p class="eyebrow reveal">Parcours alternatif</p>
-      <h2 id="h-pass" class="reveal" style="margin-top: var(--s-3);">Ou commencer par la formation.</h2>
+      <p class="eyebrow reveal">Portes d'entrée</p>
+      <h2 id="h-pass" class="reveal" style="margin-top: var(--s-3);">Trois manières de commencer.</h2>
       <p class="lead reveal" style="margin-top: var(--s-4); margin-inline: auto;">
-        Si vos équipes veulent s'approprier l'IA d'abord, on intervient en intra-entreprise.
-        1 à 10 jours, sur vos cas, pour dirigeants ou métiers spécialisés.
+        Selon votre maturité IA et votre urgence, l'entrée se fait par l'audit, la formation
+        ou un échange initial.
       </p>
-      <div class="reveal" style="margin-top: var(--s-6);">
+      <div class="reveal" style="margin-top: var(--s-6); display: flex; flex-direction: column; gap: var(--s-3); align-items: center;">
+        <a href="/audit-ia-pme" class="link-arrow">
+          Voir la page audit IA PME <span aria-hidden="true">→</span>
+        </a>
         <a href="/formation" class="link-arrow">
           Voir les programmes de formation <span aria-hidden="true">→</span>
+        </a>
+        <a href="/consultant-ia-vannes" class="link-arrow">
+          Consultant IA basé à Vannes <span aria-hidden="true">→</span>
         </a>
       </div>
     </div>

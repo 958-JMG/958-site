@@ -1,0 +1,623 @@
+---
+import Base from '../layouts/Base.astro';
+import CTAButton from '../components/CTAButton.astro';
+import TiltSignature from '../components/TiltSignature.astro';
+
+const etapes = [
+  {
+    n: '01',
+    titre: 'Immersion',
+    duree: '0,5 jour · sur site ou visio',
+    body: "Entretiens avec la direction et les équipes. On regarde comment vous travaillez vraiment, où le temps se perd, où les irritants s'accumulent.",
+  },
+  {
+    n: '02',
+    titre: 'Cartographie',
+    duree: '0,5 à 1 jour',
+    body: "Cartographie des processus métier. Identification des cas d'usage IA pertinents. Classement par effort, gain attendu, risque RGPD.",
+  },
+  {
+    n: '03',
+    titre: 'Priorisation',
+    duree: '0,5 jour',
+    body: "Sélection des 3 à 5 chantiers à plus fort impact. Estimation budgétaire indicative. Choix des outils compatibles avec votre niveau de souveraineté.",
+  },
+  {
+    n: '04',
+    titre: 'Restitution',
+    duree: '2 h · présentielle',
+    body: "Présentation du rapport au COMEX ou au dirigeant. Décision en connaissance de cause. Vous pouvez vous arrêter là, ou enchaîner sur l'implémentation.",
+  },
+];
+
+const livrables = [
+  "Un rapport de 15 à 25 pages, écrit en français clair, sans jargon.",
+  "Une cartographie des cas d'usage IA hiérarchisés par votre métier.",
+  "Une fourchette budgétaire et un planning indicatifs pour chaque chantier.",
+  "Une grille de souveraineté : ce qui peut partir aux États-Unis, ce qui ne peut pas.",
+  "Une bibliothèque de prompts adaptés à votre secteur (5 à 10 prompts).",
+  "Un plan d'action 30/60/90 jours, validable par étapes.",
+];
+
+const problemes = [
+  { tag: 'Productivité', body: "Vos équipes passent des heures sur des tâches répétitives — mails, comptes-rendus, supports, devis." },
+  { tag: 'Croissance bloquée', body: "Vous voulez absorber plus de volume sans recruter, mais vous ne savez pas par où commencer." },
+  { tag: 'Outils éparpillés', body: "Vous avez testé ChatGPT, Copilot, Notion AI — sans cadre. Rien ne s'intègre, rien ne tient." },
+  { tag: 'Souveraineté', body: "Vous voulez utiliser l'IA, mais vos données sont sensibles : juridique, santé, finance, immobilier." },
+  { tag: 'Pression concurrence', body: "Vos concurrents annoncent des projets IA sur LinkedIn. Vous ne savez pas si c'est du vent ou pas." },
+  { tag: 'Décision', body: "On vous propose des prestations à 50 k€. Vous voulez un avis indépendant avant de signer." },
+];
+
+const faq = [
+  {
+    q: "Combien coûte un audit IA PME ?",
+    a: "L'audit démarre à 900 € HT pour une TPE et atteint 4 500 € HT pour une PME de 50 à 200 collaborateurs. Le devis exact dépend du nombre d'entretiens et de la complexité des processus. Devis ferme sous 48 heures après un échange de 30 minutes.",
+  },
+  {
+    q: "Combien de temps prend un audit IA ?",
+    a: "Entre 1 et 2 jours d'intervention sur 2 à 3 semaines calendaires. La restitution intervient sous 10 jours ouvrés après le dernier entretien.",
+  },
+  {
+    q: "L'audit IA peut-il être un livrable autonome ?",
+    a: "Oui. C'est même le cas le plus fréquent. Vous repartez avec un rapport actionnable que vous pouvez exécuter en interne, confier à un prestataire tiers ou nous confier. Aucun engagement de suite.",
+  },
+  {
+    q: "Comment gérez-vous les données confidentielles pendant l'audit ?",
+    a: "Accord de confidentialité signé avant le premier entretien. Aucune donnée client n'est envoyée à un LLM tiers pendant l'audit. Les notes sont stockées en Europe (Infomaniak, Proton).",
+  },
+  {
+    q: "Travaillez-vous avec des PME hors Bretagne ?",
+    a: "Oui. Basés à Vannes et Paris, nous intervenons partout en France. Les entretiens peuvent se faire en visio, la restitution finale en présentiel.",
+  },
+  {
+    q: "L'audit IA est-il compatible RGPD ?",
+    a: "Le rapport inclut systématiquement une analyse RGPD par cas d'usage : nature des données, base légale, durée de conservation, sous-traitants. Les cas incompatibles sont écartés ou redirigés vers des modèles européens.",
+  },
+];
+
+const auditServiceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': 'https://www.958.fr/audit-ia-pme/#service',
+  serviceType: 'Audit IA',
+  name: 'Audit IA pour TPE et PME',
+  description: "Audit IA en 4 étapes pour TPE et PME : immersion, cartographie des cas d'usage, priorisation, restitution. Rapport actionnable de 15 à 25 pages, fourchette budgétaire, analyse RGPD.",
+  provider: { '@id': 'https://www.958.fr/#organization' },
+  areaServed: [
+    { '@type': 'Country', name: 'France' },
+    { '@type': 'AdministrativeArea', name: 'Bretagne' },
+  ],
+  audience: { '@type': 'BusinessAudience', audienceType: 'Dirigeants de TPE et PME' },
+  category: 'Conseil en intelligence artificielle',
+  offers: {
+    '@type': 'Offer',
+    priceCurrency: 'EUR',
+    price: '900',
+    priceSpecification: {
+      '@type': 'PriceSpecification',
+      minPrice: 900,
+      maxPrice: 4500,
+      priceCurrency: 'EUR',
+    },
+    availability: 'https://schema.org/InStock',
+    url: 'https://www.958.fr/diagnostic/',
+    description: "À partir de 900 € HT (TPE) jusqu'à 4 500 € HT (PME 50-200 collaborateurs).",
+  },
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<Base
+  title="Audit IA PME — Cartographie, livrables, ROI"
+  description="Audit IA pour TPE et PME : cartographie des cas d'usage, priorisation, rapport actionnable de 15 à 25 pages. À partir de 900 € HT. Basé à Vannes, intervention France entière."
+  jsonLd={[auditServiceSchema, faqSchema]}
+>
+  <!-- ============ HERO ============ -->
+  <section class="hero" aria-labelledby="h-hero">
+    <div class="container">
+      <p class="eyebrow reveal">Audit IA · TPE & PME · France entière</p>
+      <h1 id="h-hero" class="hero-title reveal">
+        Savoir où l'IA a du sens chez vous.
+        <span class="hero-title-soft">Et où elle n'en a pas. En 2 jours, noir sur blanc, sans jargon.</span>
+      </h1>
+      <p class="lead reveal">
+        Un audit IA en 4 étapes pour dirigeants de TPE et PME. Cartographie des cas d'usage,
+        priorisation, fourchette budgétaire, analyse RGPD. Un rapport actionnable que vous pouvez exécuter
+        en interne — ou nous confier.
+      </p>
+      <div class="hero-ctas reveal">
+        <CTAButton label="Demander un diagnostic" href="/diagnostic" size="lg" />
+        <a href="#etapes" class="link-arrow">Voir le déroulé <span aria-hidden="true">→</span></a>
+      </div>
+      <ul class="hero-assurances reveal" aria-label="Engagements">
+        <li><span class="dot"></span>À partir de 900&nbsp;€ HT</li>
+        <li><span class="dot"></span>Rapport sous 10 jours</li>
+        <li><span class="dot"></span>Accord de confidentialité</li>
+        <li><span class="dot"></span>Aucun engagement de suite</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ POURQUOI ============ -->
+  <section class="section" aria-labelledby="h-pourquoi">
+    <div class="container is-default">
+      <p class="eyebrow reveal">01 · À qui s'adresse l'audit</p>
+      <h2 id="h-pourquoi" class="reveal" style="margin-top: var(--s-3);">
+        Six situations qui amènent un dirigeant à demander un audit IA.
+      </h2>
+      <ul class="problems reveal-stagger" role="list">
+        {problemes.map((p) => (
+          <li class="problem reveal">
+            <p class="problem-tag">{p.tag}</p>
+            <p class="problem-body">{p.body}</p>
+          </li>
+        ))}
+      </ul>
+      <TiltSignature />
+    </div>
+  </section>
+
+  <!-- ============ ÉTAPES ============ -->
+  <section id="etapes" class="section surface-elevated" aria-labelledby="h-etapes">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow reveal">02 · Déroulé</p>
+        <h2 class="reveal" id="h-etapes">Quatre étapes. Deux jours. Un rapport.</h2>
+        <p class="lead reveal">L'audit IA suit le même protocole pour toutes les PME. Le contenu, lui, est unique à chaque entreprise.</p>
+      </div>
+
+      <ol class="steps reveal-stagger" role="list">
+        {etapes.map((step) => (
+          <li class="step reveal">
+            <div class="step-num">{step.n}</div>
+            <div class="step-body">
+              <h3>{step.titre}</h3>
+              <p class="step-duree">{step.duree}</p>
+              <p>{step.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ LIVRABLES ============ -->
+  <section class="section" aria-labelledby="h-livrables">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow reveal">03 · Livrables</p>
+        <h2 class="reveal" id="h-livrables">Ce que vous recevez.</h2>
+        <p class="lead reveal">Le rapport est rédigé pour être lu par un dirigeant non technique. Et exécuté par une équipe ops.</p>
+      </div>
+      <ul class="livrables reveal-stagger" role="list">
+        {livrables.map((l) => (
+          <li class="livrable reveal">
+            <span class="livrable-plus" aria-hidden="true">+</span>
+            <p>{l}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ BUDGET ============ -->
+  <section class="section surface-elevated" aria-labelledby="h-budget">
+    <div class="container is-default">
+      <p class="eyebrow reveal">04 · Budget</p>
+      <h2 id="h-budget" class="reveal" style="margin-top: var(--s-3);">Une fourchette claire.</h2>
+      <div class="budget-grid reveal-stagger">
+        <div class="budget reveal">
+          <p class="budget-tag">TPE · jusqu'à 10 personnes</p>
+          <p class="budget-amount">900&nbsp;€ HT</p>
+          <p class="budget-body">1 jour d'audit, 2 entretiens, rapport de 15 pages, restitution en visio.</p>
+        </div>
+        <div class="budget reveal">
+          <p class="budget-tag">PME · 11 à 50 personnes</p>
+          <p class="budget-amount">2&nbsp;500&nbsp;€ HT</p>
+          <p class="budget-body">1,5 jour d'audit, 4 à 6 entretiens, rapport de 20 pages, restitution sur site.</p>
+        </div>
+        <div class="budget reveal">
+          <p class="budget-tag">PME · 51 à 200 personnes</p>
+          <p class="budget-amount">4&nbsp;500&nbsp;€ HT</p>
+          <p class="budget-body">2 jours d'audit, 6 à 10 entretiens multi-services, rapport de 25 pages, restitution COMEX.</p>
+        </div>
+      </div>
+      <p class="section-note reveal" style="margin-top: var(--s-6);">
+        Devis ferme sous 48 heures après un diagnostic de 30 minutes. Sans engagement de suite.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="section" aria-labelledby="h-faq">
+    <div class="container is-default">
+      <div class="section-head">
+        <p class="eyebrow reveal">05 · Questions fréquentes</p>
+        <h2 id="h-faq" class="reveal">Audit IA — questions fréquentes.</h2>
+      </div>
+      <div class="faq-list">
+        {faq.map((f) => (
+          <details class="faq-item reveal">
+            <summary>
+              <span>{f.q}</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LIENS INTERNES ============ -->
+  <section class="section" aria-labelledby="h-links">
+    <div class="container is-default">
+      <p class="eyebrow reveal">Aller plus loin</p>
+      <h2 id="h-links" class="reveal" style="margin-top: var(--s-3);">Vous voulez aller plus loin.</h2>
+      <ul class="related reveal-stagger" role="list">
+        <li class="related-item reveal">
+          <a href="/methode">
+            <h3>Méthode 9·58</h3>
+            <p>Le cadre SPARI, les 4 étapes complètes, du diagnostic à l'autonomie.</p>
+            <span class="link-arrow">Voir la méthode <span aria-hidden="true">→</span></span>
+          </a>
+        </li>
+        <li class="related-item reveal">
+          <a href="/realisations">
+            <h3>Réalisations</h3>
+            <p>6 cas clients anonymisés : immobilier, syndic, gestion de fortune, BTP.</p>
+            <span class="link-arrow">Voir les réalisations <span aria-hidden="true">→</span></span>
+          </a>
+        </li>
+        <li class="related-item reveal">
+          <a href="/formation">
+            <h3>Formation IA</h3>
+            <p>Si l'audit révèle un besoin de montée en compétence d'abord.</p>
+            <span class="link-arrow">Voir la formation <span aria-hidden="true">→</span></span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ CTA FINAL ============ -->
+  <section class="section is-loose" aria-labelledby="h-cta">
+    <div class="container is-narrow" style="text-align: center;">
+      <h2 class="reveal" id="h-cta">Commencer par un diagnostic.</h2>
+      <p class="lead reveal" style="margin-top: var(--s-4);">
+        30 minutes au téléphone. On comprend votre contexte. Vous recevez un devis ferme
+        d'audit sous 48 heures, ou une orientation honnête si l'audit n'est pas utile.
+      </p>
+      <div class="reveal" style="margin-top: var(--s-7);">
+        <CTAButton label="Demander un diagnostic" href="/diagnostic" size="lg" />
+      </div>
+      <p class="section-note reveal" style="margin-top: var(--s-4);">
+        Gratuit · Sans engagement · Réponse sous 48&nbsp;h
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* ============ HERO ============ */
+  .hero {
+    padding-top: var(--s-9);
+    padding-bottom: var(--s-7);
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--step-7);
+    line-height: var(--lh-tight);
+    letter-spacing: var(--tr-tight);
+    color: var(--ink);
+    margin-top: var(--s-4);
+    max-width: 26ch;
+  }
+  .hero-title-soft {
+    display: block;
+    margin-top: var(--s-4);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--ink-2);
+    font-size: 0.5em;
+    letter-spacing: -0.01em;
+    line-height: var(--lh-snug);
+  }
+  .lead { margin-top: var(--s-5); }
+  .hero-ctas {
+    display: flex;
+    align-items: center;
+    gap: var(--s-5);
+    flex-wrap: wrap;
+    margin-top: var(--s-6);
+  }
+  .hero-assurances {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-4) var(--s-5);
+    margin-top: var(--s-6);
+    padding-top: var(--s-5);
+    border-top: 1px solid var(--line);
+  }
+  .hero-assurances li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--ink-3);
+    letter-spacing: var(--tr-wide);
+    text-transform: uppercase;
+  }
+  .hero-assurances .dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--accent);
+  }
+  @media (max-width: 720px) {
+    .hero { padding-top: var(--s-6); padding-bottom: var(--s-7); }
+    .hero-title { max-width: none; margin-top: var(--s-3); }
+  }
+
+  /* ============ SECTION-HEAD ============ */
+  .section-head { max-width: 48rem; margin-bottom: var(--s-8); }
+  .section-head h2 { margin-top: var(--s-3); }
+  .section-head .lead { margin-top: var(--s-4); }
+  .section-note {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--ink-3);
+    letter-spacing: var(--tr-wide);
+  }
+
+  /* ============ PROBLEMS ============ */
+  .problems {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-4);
+    margin-top: var(--s-6);
+  }
+  .problem {
+    padding: var(--s-5);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+  .problem-tag {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--accent-2);
+    letter-spacing: var(--tr-wide);
+    text-transform: uppercase;
+  }
+  .problem-body {
+    font-size: var(--step-0);
+    color: var(--ink-2);
+    line-height: var(--lh-normal);
+  }
+  @media (max-width: 1040px) {
+    .problems { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .problems { grid-template-columns: 1fr; }
+  }
+
+  /* ============ STEPS ============ */
+  .steps {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  .step {
+    padding: var(--s-6) var(--s-5);
+    border-left: 1px solid var(--line);
+  }
+  .step:last-child { border-right: 1px solid var(--line); }
+  .step-num {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--accent);
+    letter-spacing: var(--tr-mono);
+    margin-bottom: var(--s-4);
+  }
+  .step-body h3 {
+    font-size: var(--step-3);
+    margin-bottom: var(--s-2);
+    color: var(--ink);
+  }
+  .step-duree {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--accent-2);
+    margin-bottom: var(--s-3);
+    letter-spacing: var(--tr-wide);
+  }
+  .step-body p {
+    font-size: var(--step-0);
+    color: var(--ink-2);
+    line-height: var(--lh-normal);
+  }
+  @media (max-width: 1040px) {
+    .steps { grid-template-columns: repeat(2, 1fr); }
+    .step:nth-child(2) { border-right: 1px solid var(--line); }
+    .step:nth-child(n+3) { border-top: 1px solid var(--line); }
+  }
+  @media (max-width: 600px) {
+    .steps { grid-template-columns: 1fr; }
+    .step, .step:last-child { border-right: 0; }
+    .step + .step { border-top: 1px solid var(--line); }
+  }
+
+  /* ============ LIVRABLES ============ */
+  .livrables {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-3) var(--s-5);
+  }
+  .livrable {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: var(--s-3);
+    align-items: baseline;
+    padding: var(--s-3) 0;
+    border-top: 1px solid var(--line);
+  }
+  .livrable-plus {
+    font-family: var(--font-mono);
+    font-size: var(--step-2);
+    color: var(--accent);
+    line-height: 1;
+  }
+  .livrable p {
+    font-size: var(--step-1);
+    color: var(--ink);
+    line-height: var(--lh-normal);
+  }
+  @media (max-width: 720px) {
+    .livrables { grid-template-columns: 1fr; }
+  }
+
+  /* ============ BUDGET ============ */
+  .budget-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-4);
+    margin-top: var(--s-6);
+  }
+  .budget {
+    padding: var(--s-6) var(--s-5);
+    border: 1px solid var(--line);
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+  .budget-tag {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: var(--tr-wide);
+  }
+  .budget-amount {
+    font-family: var(--font-display);
+    font-size: var(--step-5);
+    font-weight: 500;
+    color: var(--accent);
+    line-height: 1;
+    letter-spacing: var(--tr-tight);
+  }
+  .budget-body {
+    font-size: var(--step-0);
+    color: var(--ink-2);
+    line-height: var(--lh-normal);
+  }
+  @media (max-width: 900px) {
+    .budget-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ============ FAQ ============ */
+  .faq-list { display: flex; flex-direction: column; }
+  .faq-item {
+    border-bottom: 1px solid var(--line);
+  }
+  .faq-item:first-child { border-top: 1px solid var(--line); }
+  .faq-item summary {
+    padding: var(--s-5) 0;
+    font-family: var(--font-sans);
+    font-size: var(--step-2);
+    font-weight: 500;
+    color: var(--ink);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-4);
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-icon {
+    width: 14px; height: 14px;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .faq-icon::before,
+  .faq-icon::after {
+    content: "";
+    position: absolute;
+    background: var(--ink-2);
+    transition: transform var(--dur-2) var(--ease);
+  }
+  .faq-icon::before {
+    left: 0; right: 0; top: calc(50% - 0.75px);
+    height: 1.5px;
+  }
+  .faq-icon::after {
+    top: 0; bottom: 0; left: calc(50% - 0.75px);
+    width: 1.5px;
+  }
+  .faq-item[open] .faq-icon::after { transform: scaleY(0); }
+  .faq-item[open] .faq-icon::before { background: var(--accent); }
+  .faq-item p {
+    padding: 0 0 var(--s-5);
+    font-size: var(--step-1);
+    color: var(--ink-2);
+    line-height: var(--lh-loose);
+    max-width: 70ch;
+  }
+
+  /* ============ RELATED ============ */
+  .related {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-4);
+    margin-top: var(--s-6);
+  }
+  .related-item {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    transition: border-color var(--dur-2) var(--ease);
+  }
+  .related-item:hover { border-color: var(--accent-2); }
+  .related-item a {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    padding: var(--s-5);
+    color: inherit;
+  }
+  .related-item h3 {
+    font-size: var(--step-3);
+    color: var(--ink);
+    line-height: var(--lh-snug);
+  }
+  .related-item p {
+    font-size: var(--step-0);
+    color: var(--ink-2);
+    line-height: var(--lh-normal);
+  }
+  .related-item .link-arrow {
+    margin-top: auto;
+    color: var(--accent);
+    font-size: var(--step-0);
+  }
+  @media (max-width: 900px) {
+    .related { grid-template-columns: 1fr; }
+  }
+</style>

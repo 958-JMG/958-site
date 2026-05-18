@@ -1,0 +1,486 @@
+---
+import Base from '../layouts/Base.astro';
+import CTAButton from '../components/CTAButton.astro';
+
+const departements = [
+  { code: '56', nom: 'Morbihan',         villes: 'Vannes, Lorient, Auray, Pontivy, Quiberon' },
+  { code: '35', nom: 'Ille-et-Vilaine',  villes: 'Rennes, Saint-Malo, Fougères, Redon, Vitré' },
+  { code: '29', nom: 'Finistère',        villes: 'Brest, Quimper, Morlaix, Concarneau, Landerneau' },
+  { code: '22', nom: "Côtes-d'Armor",    villes: 'Saint-Brieuc, Lannion, Dinan, Guingamp, Lamballe' },
+  { code: '44', nom: 'Loire-Atlantique', villes: 'Nantes, Saint-Nazaire, Châteaubriant, Pornic (Bretagne historique)' },
+];
+
+const formats = [
+  {
+    tag: 'Intra · sur site',
+    titre: "Vos équipes, vos locaux, vos cas.",
+    body: "Le format majoritaire. 1 à 10 jours sur site en Bretagne ou région voisine. Ateliers construits sur vos dossiers réels.",
+  },
+  {
+    tag: 'Distanciel',
+    titre: "Visio, pour les équipes distribuées.",
+    body: "Quand l'équipe est répartie entre Vannes, Rennes, Brest et Paris. Mêmes contenus, format adapté à la visio.",
+  },
+  {
+    tag: 'Hybride',
+    titre: "Le meilleur des deux.",
+    body: "Lancement et clôture en présentiel à Vannes ou Rennes. Sessions intermédiaires en visio. Économe en déplacement.",
+  },
+];
+
+const themes = [
+  { tag: 'Dirigeants',           body: "Cadrer une stratégie IA pour PME bretonne. Décider en connaissance de cause." },
+  { tag: 'Commerciaux · ADV',    body: "Vendre et suivre avec ChatGPT, Claude et Mistral. Synthèse d'appels, relances." },
+  { tag: 'Ops · back-office',    body: "Trier mails, rédiger courriers, extraire données. n8n auto-hébergé en Europe." },
+  { tag: 'Métiers réglementés',  body: "Notariat, expertise comptable, gestion de patrimoine. Cadre RGPD, modèles européens." },
+  { tag: 'Tech · dev',           body: "Claude Code, Cursor, agents d'ingénierie. De 1 dev à 1 équipe augmentée." },
+  { tag: 'RH · communication',   body: "Annonces, supports internes, synthèses d'entretiens. La voix de l'entreprise reste la vôtre." },
+];
+
+const faq = [
+  {
+    q: "Où intervenez-vous en Bretagne ?",
+    a: "Partout. Notre adresse principale est à Vannes (Morbihan). Nous nous déplaçons sans surcoût à Rennes, Lorient, Auray, Quimper, Brest, Saint-Brieuc, Saint-Malo et Nantes. Au-delà, frais kilométriques ou train (≤ 250 €).",
+  },
+  {
+    q: "La formation IA peut-elle être prise en charge par un OPCO ?",
+    a: "La déclaration d'activité d'organisme de formation est obtenue (NDA 11757585175 auprès du préfet de région d'Île-de-France). La certification Qualiopi est en cours et conditionnera la prise en charge OPCO. En attendant, plusieurs clients bretons financent la formation en prestation de conseil.",
+  },
+  {
+    q: "Quels formats pour une PME bretonne ?",
+    a: "Intra-entreprise sur-mesure principalement, de 1 à 10 jours selon le périmètre. Aussi quelques sessions inter-entreprises ponctuelles autour de Vannes pour les TPE de moins de 5 personnes.",
+  },
+  {
+    q: "Combien coûte une formation IA en Bretagne ?",
+    a: "À titre indicatif : 1 800 € HT pour une journée intra-entreprise (6 à 12 participants), 6 800 € HT pour un parcours de 4 jours avec suivi 30/60/90 jours. Devis sous 48 heures après un brief.",
+  },
+  {
+    q: "Quels outils utilisez-vous pendant la formation ?",
+    a: "Mistral AI (Paris), Claude (sous accord Europe), ChatGPT en option, n8n auto-hébergé pour l'automatisation, SeaTable pour les bases. Tous les workflows construits restent rapatriables.",
+  },
+  {
+    q: "Mes données vont-elles partir aux États-Unis ?",
+    a: "Non. Par défaut nous travaillons sur Mistral (France) et Claude EU. Les modèles US ne sont utilisés qu'avec votre accord explicite et après cadrage RGPD.",
+  },
+];
+
+const courseSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Course',
+  '@id': 'https://www.958.fr/formation-ia-bretagne/#course',
+  name: 'Formation IA en Bretagne — Intra-entreprise sur-mesure',
+  description: "Formation IA intra-entreprise pour PME bretonnes. Intervention à Vannes, Rennes, Lorient, Brest, Saint-Brieuc, Saint-Malo et Nantes. 1 à 10 jours selon le périmètre.",
+  provider: { '@id': 'https://www.958.fr/#organization' },
+  inLanguage: 'fr-FR',
+  educationalLevel: 'Professional',
+  audience: { '@type': 'BusinessAudience', audienceType: 'Dirigeants et équipes métier de TPE et PME' },
+  hasCourseInstance: {
+    '@type': 'CourseInstance',
+    courseMode: ['Onsite', 'Online', 'Hybrid'],
+    location: {
+      '@type': 'Place',
+      name: 'Bretagne',
+      address: { '@type': 'PostalAddress', addressRegion: 'Bretagne', addressCountry: 'FR' },
+    },
+    courseWorkload: 'PT8H à PT80H',
+    inLanguage: 'fr-FR',
+  },
+  offers: {
+    '@type': 'Offer',
+    priceCurrency: 'EUR',
+    price: '1800',
+    availability: 'https://schema.org/InStock',
+    url: 'https://www.958.fr/formation/brief/',
+  },
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<Base
+  title="Formation IA en Bretagne — Intra-entreprise"
+  description="Formation IA pour PME bretonnes : Vannes, Rennes, Lorient, Brest, Saint-Brieuc, Nantes. Intra-entreprise, 1 à 10 jours, sur vos cas réels. Organisme enregistré, Qualiopi en cours."
+  jsonLd={[courseSchema, faqSchema]}
+>
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="h-hero">
+    <div class="container">
+      <p class="eyebrow reveal">Formation IA · Bretagne · Vannes & Rennes</p>
+      <h1 id="h-hero" class="hero-title reveal">
+        Former vos équipes à l'IA, à 1 heure de chez vous.
+        <span class="hero-title-soft">Vannes, Rennes, Lorient, Brest, Saint-Brieuc, Saint-Malo, Nantes. Sur vos cas.</span>
+      </h1>
+      <p class="lead reveal">
+        Organisme de formation enregistré, basé à Vannes (Morbihan). Formations IA intra-entreprise
+        pour dirigeants et équipes métier de PME bretonnes. De 1 à 10 jours, sur vos cas réels,
+        avec suivi 30/60/90 jours.
+      </p>
+      <div class="hero-ctas reveal">
+        <CTAButton label="Brief formation" href="/formation/brief" size="lg" />
+        <a href="/formation" class="link-arrow">Voir les programmes <span aria-hidden="true">→</span></a>
+      </div>
+      <ul class="hero-assurances reveal" aria-label="Cadre">
+        <li><span class="dot"></span>NDA 11757585175</li>
+        <li><span class="dot"></span>Qualiopi en cours</li>
+        <li><span class="dot"></span>Modèles européens</li>
+        <li><span class="dot"></span>Suivi 30/60/90 jours</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- POURQUOI BRETAGNE -->
+  <section class="section" aria-labelledby="h-bzh">
+    <div class="container is-default">
+      <p class="eyebrow reveal">01 · Pourquoi un formateur breton</p>
+      <h2 id="h-bzh" class="reveal" style="margin-top: var(--s-3);">
+        Une PME bretonne ne forme pas comme une start-up parisienne.
+      </h2>
+      <div class="prose reveal">
+        <p>Les PME bretonnes que nous formons ont en commun une exigence pratique : ce qui se dit en formation doit produire de la valeur dès le lundi.</p>
+        <p>Notre adresse à Vannes (1 bis rue Thiers, 56000) nous permet d'intervenir en présentiel sans frais de déplacement de Vannes à Rennes, Lorient, Auray, Quiberon, Saint-Brieuc, Saint-Malo, Brest, Quimper et Nantes.</p>
+        <p><strong>La proximité compte pour les ateliers terrain.</strong> La visio compte pour les sessions de suivi.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DÉPARTEMENTS DESSERVIS -->
+  <section class="section surface-elevated" aria-labelledby="h-dept">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow reveal">02 · Zone d'intervention</p>
+        <h2 class="reveal" id="h-dept">Bretagne historique + Loire-Atlantique.</h2>
+        <p class="lead reveal">Aucun frais de déplacement à l'intérieur de cette zone.</p>
+      </div>
+      <ul class="dept-grid reveal-stagger" role="list">
+        {departements.map((d) => (
+          <li class="dept reveal">
+            <span class="dept-code">{d.code}</span>
+            <div>
+              <h3 class="dept-nom">{d.nom}</h3>
+              <p class="dept-villes">{d.villes}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- FORMATS -->
+  <section class="section" aria-labelledby="h-formats">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow reveal">03 · Formats</p>
+        <h2 id="h-formats" class="reveal">Intra, distanciel, hybride.</h2>
+        <p class="lead reveal">Le format suit le besoin de l'équipe, pas l'inverse.</p>
+      </div>
+      <ul class="formats reveal-stagger" role="list">
+        {formats.map((f) => (
+          <li class="format reveal">
+            <p class="format-tag">{f.tag}</p>
+            <h3 class="format-titre">{f.titre}</h3>
+            <p class="format-body">{f.body}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- THÈMES -->
+  <section class="section surface-elevated" aria-labelledby="h-themes">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow reveal">04 · Publics & thèmes</p>
+        <h2 id="h-themes" class="reveal">Six entrées pédagogiques.</h2>
+      </div>
+      <ul class="themes reveal-stagger" role="list">
+        {themes.map((t) => (
+          <li class="theme reveal">
+            <p class="theme-tag">{t.tag}</p>
+            <p class="theme-body">{t.body}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- FINANCEMENT -->
+  <section class="section" aria-labelledby="h-finance">
+    <div class="container is-default">
+      <p class="eyebrow reveal">05 · Financement</p>
+      <h2 id="h-finance" class="reveal" style="margin-top: var(--s-3);">
+        OPCO, plan de développement, fonds propres.
+      </h2>
+      <div class="prose reveal">
+        <p>958 est enregistré comme organisme de formation sous le numéro 11757585175 (préfet de région d'Île-de-France). Cet enregistrement ne vaut pas agrément de l'État.</p>
+        <p>La certification <strong>Qualiopi</strong> est en cours. Elle conditionnera la prise en charge OPCO pleine et entière. En attendant, plusieurs PME bretonnes financent la formation en prestation de conseil ou intra hors OPCO.</p>
+        <p>Demandez-nous une estimation : on regarde avec votre service RH ou votre OPCO de branche (Akto, OPCO EP, Atlas, OCAPIAT…) ce qui est mobilisable aujourd'hui.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section surface-elevated" aria-labelledby="h-faq">
+    <div class="container is-default">
+      <div class="section-head">
+        <p class="eyebrow reveal">06 · Questions fréquentes</p>
+        <h2 id="h-faq" class="reveal">Formation IA en Bretagne — FAQ.</h2>
+      </div>
+      <div class="faq-list">
+        {faq.map((f) => (
+          <details class="faq-item reveal">
+            <summary>
+              <span>{f.q}</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="section is-loose" aria-labelledby="h-cta">
+    <div class="container is-narrow" style="text-align: center;">
+      <h2 class="reveal" id="h-cta">
+        Racontez-nous votre équipe.<br>On vous propose un parcours.
+      </h2>
+      <p class="lead reveal" style="margin-top: var(--s-4);">
+        7 champs. Une proposition écrite sous 48&nbsp;heures.
+      </p>
+      <div class="reveal" style="margin-top: var(--s-7);">
+        <CTAButton label="Brief formation" href="/formation/brief" size="lg" />
+      </div>
+      <p class="section-note reveal" style="margin-top: var(--s-4);">
+        Sans engagement · Accord de confidentialité · Réponse sous 48&nbsp;h
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    padding-top: var(--s-9);
+    padding-bottom: var(--s-7);
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--step-7);
+    line-height: var(--lh-tight);
+    letter-spacing: var(--tr-tight);
+    color: var(--ink);
+    margin-top: var(--s-4);
+    max-width: 26ch;
+  }
+  .hero-title-soft {
+    display: block;
+    margin-top: var(--s-4);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--ink-2);
+    font-size: 0.5em;
+    letter-spacing: -0.01em;
+    line-height: var(--lh-snug);
+  }
+  .lead { margin-top: var(--s-5); }
+  .hero-ctas {
+    display: flex;
+    align-items: center;
+    gap: var(--s-5);
+    flex-wrap: wrap;
+    margin-top: var(--s-6);
+  }
+  .hero-assurances {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-4) var(--s-5);
+    margin-top: var(--s-6);
+    padding-top: var(--s-5);
+    border-top: 1px solid var(--line);
+  }
+  .hero-assurances li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--ink-3);
+    letter-spacing: var(--tr-wide);
+    text-transform: uppercase;
+  }
+  .hero-assurances .dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--accent);
+  }
+  @media (max-width: 720px) {
+    .hero { padding-top: var(--s-6); }
+    .hero-title { max-width: none; margin-top: var(--s-3); }
+  }
+
+  .section-head { max-width: 48rem; margin-bottom: var(--s-8); }
+  .section-head h2 { margin-top: var(--s-3); }
+  .section-head .lead { margin-top: var(--s-4); }
+  .section-note {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--ink-3);
+    letter-spacing: var(--tr-wide);
+  }
+  .prose { margin-top: var(--s-6); display: flex; flex-direction: column; gap: var(--s-4); }
+  .prose p { font-size: var(--step-2); color: var(--ink-2); }
+
+  /* DÉPARTEMENTS */
+  .dept-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-4);
+  }
+  .dept {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    align-items: start;
+    padding: var(--s-5);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    gap: var(--s-3);
+  }
+  .dept-code {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--step-5);
+    color: var(--accent);
+    line-height: 1;
+    letter-spacing: var(--tr-tight);
+  }
+  .dept-nom {
+    font-size: var(--step-3);
+    color: var(--ink);
+    line-height: var(--lh-snug);
+    margin-bottom: var(--s-2);
+  }
+  .dept-villes {
+    font-size: var(--step-0);
+    color: var(--ink-2);
+    line-height: var(--lh-normal);
+  }
+  @media (max-width: 760px) {
+    .dept-grid { grid-template-columns: 1fr; }
+  }
+
+  /* FORMATS */
+  .formats {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-4);
+  }
+  .format {
+    padding: var(--s-6) var(--s-5);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+  .format-tag {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--accent-2);
+    letter-spacing: var(--tr-wide);
+    text-transform: uppercase;
+  }
+  .format-titre {
+    font-size: var(--step-3);
+    color: var(--ink);
+    line-height: var(--lh-snug);
+  }
+  .format-body {
+    font-size: var(--step-0);
+    color: var(--ink-2);
+    line-height: var(--lh-normal);
+    margin-top: auto;
+  }
+  @media (max-width: 900px) {
+    .formats { grid-template-columns: 1fr; }
+  }
+
+  /* THEMES */
+  .themes {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-4);
+  }
+  .theme {
+    padding: var(--s-5);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+  .theme-tag {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--accent-2);
+    text-transform: uppercase;
+    letter-spacing: var(--tr-wide);
+  }
+  .theme-body {
+    font-size: var(--step-0);
+    color: var(--ink-2);
+    line-height: var(--lh-normal);
+  }
+  @media (max-width: 1040px) {
+    .themes { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .themes { grid-template-columns: 1fr; }
+  }
+
+  /* FAQ — réutilise le pattern de l'audit-ia-pme */
+  .faq-list { display: flex; flex-direction: column; }
+  .faq-item { border-bottom: 1px solid var(--line); }
+  .faq-item:first-child { border-top: 1px solid var(--line); }
+  .faq-item summary {
+    padding: var(--s-5) 0;
+    font-family: var(--font-sans);
+    font-size: var(--step-2);
+    font-weight: 500;
+    color: var(--ink);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-4);
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-icon { width: 14px; height: 14px; position: relative; flex-shrink: 0; }
+  .faq-icon::before, .faq-icon::after {
+    content: ""; position: absolute; background: var(--ink-2);
+    transition: transform var(--dur-2) var(--ease);
+  }
+  .faq-icon::before { left: 0; right: 0; top: calc(50% - 0.75px); height: 1.5px; }
+  .faq-icon::after { top: 0; bottom: 0; left: calc(50% - 0.75px); width: 1.5px; }
+  .faq-item[open] .faq-icon::after { transform: scaleY(0); }
+  .faq-item[open] .faq-icon::before { background: var(--accent); }
+  .faq-item p {
+    padding: 0 0 var(--s-5);
+    font-size: var(--step-1);
+    color: var(--ink-2);
+    line-height: var(--lh-loose);
+    max-width: 70ch;
+  }
+</style>

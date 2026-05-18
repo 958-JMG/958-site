@@ -110,6 +110,23 @@ const programmes = [
   },
 ];
 
+const formationService = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': 'https://www.958.fr/formation/#service',
+  serviceType: 'Formation IA intra-entreprise',
+  name: 'Formation IA sur-mesure pour dirigeants et équipes métier',
+  description: "Formations IA intra-entreprise de 1 à 10 jours, sur les cas réels du client. Ateliers terrain, livrables opérationnels, suivi 30/60/90 jours. Souveraineté européenne.",
+  provider: { '@id': 'https://www.958.fr/#organization' },
+  areaServed: [
+    { '@type': 'Country', name: 'France' },
+    { '@type': 'AdministrativeArea', name: 'Bretagne' },
+  ],
+  audience: { '@type': 'BusinessAudience', audienceType: 'Dirigeants, commerciaux, ops, métiers réglementés, tech, RH' },
+  category: 'Formation professionnelle continue',
+  identifier: 'NDA 11757585175',
+};
+
 // Comparatif frontal — ligne à ligne, eux vs nous.
 const versus = [
   { eux: "1 semaine en groupe, à distance",       nous: "1 à 10 jours chez vous, avec votre équipe" },
@@ -123,8 +140,9 @@ const versus = [
 ---
 
 <Base
-  title="Formation — L'IA installée dans vos équipes"
-  description="Formations IA sur-mesure, intra-entreprise, pour dirigeants et équipes métier. Ateliers de terrain, cas réels, suivi post-formation. Souveraineté européenne. Organisme de formation enregistré (NDA 11757585175), Qualiopi prévu."
+  title="Formation IA en entreprise — Intra, sur-mesure"
+  description="Formations IA intra-entreprise pour dirigeants et équipes métier. 1 à 10 jours sur vos cas réels. Organisme enregistré (NDA 11757585175), Qualiopi en cours."
+  jsonLd={formationService}
 >
   <!-- =========================================
        HERO
@@ -303,6 +321,9 @@ const versus = [
 
       <p class="section-note reveal" style="margin-top: var(--s-6); text-align: center;">
         Devis en 48&nbsp;h · Prise en charge OPCO à étudier avec votre organisme
+      </p>
+      <p class="section-note reveal" style="margin-top: var(--s-3); text-align: center;">
+        Vous êtes en Bretagne ? <a href="/formation-ia-bretagne" class="link-arrow" style="display: inline;">Voir notre page dédiée Formation IA en Bretagne <span aria-hidden="true">→</span></a>
       </p>
     </div>
   </section>
