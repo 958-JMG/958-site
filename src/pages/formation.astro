@@ -116,7 +116,7 @@ const formationService = {
   '@id': 'https://www.958.fr/formation/#service',
   serviceType: 'Formation IA intra-entreprise',
   name: 'Formation IA sur-mesure pour dirigeants et équipes métier',
-  description: "Formations IA intra-entreprise de 1 à 10 jours, sur les cas réels du client. Ateliers terrain, livrables opérationnels, suivi 30/60/90 jours. Souveraineté européenne.",
+  description: "Formations IA intra-entreprise certifiées Qualiopi, de 1 à 10 jours, sur les cas réels du client. Ateliers terrain, livrables opérationnels, suivi 30/60/90 jours. Souveraineté européenne.",
   provider: { '@id': 'https://www.958.fr/#organization' },
   areaServed: [
     { '@type': 'Country', name: 'France' },
@@ -125,6 +125,20 @@ const formationService = {
   audience: { '@type': 'BusinessAudience', audienceType: 'Dirigeants, commerciaux, ops, métiers réglementés, tech, RH' },
   category: 'Formation professionnelle continue',
   identifier: 'NDA 11757585175',
+  hasCredential: [
+    {
+      '@type': 'EducationalOccupationalCredential',
+      name: 'Certification Qualiopi',
+      credentialCategory: 'Catégorie « Actions de formation »',
+      recognizedBy: { '@type': 'Organization', name: 'France compétences' },
+    },
+    {
+      '@type': 'EducationalOccupationalCredential',
+      name: "Déclaration d'activité d'organisme de formation",
+      identifier: '11757585175',
+      recognizedBy: { '@type': 'Organization', name: "Préfet de région d'Île-de-France" },
+    },
+  ],
 };
 
 // Comparatif frontal — ligne à ligne, eux vs nous.
@@ -141,7 +155,7 @@ const versus = [
 
 <Base
   title="Formation IA en entreprise — Intra, sur-mesure"
-  description="Formations IA intra-entreprise pour dirigeants et équipes métier. 1 à 10 jours sur vos cas réels. Organisme enregistré (NDA 11757585175), Qualiopi en cours."
+  description="Formations IA intra-entreprise certifiées Qualiopi pour dirigeants et équipes métier. 1 à 10 jours sur vos cas réels. Organisme enregistré (NDA 11757585175), prise en charge OPCO possible."
   jsonLd={formationService}
 >
   <!-- =========================================
@@ -164,9 +178,9 @@ const versus = [
         <a href="#publics" class="link-arrow">Voir pour qui <span aria-hidden="true">→</span></a>
       </div>
       <ul class="hero-assurances reveal" aria-label="Engagements formation">
+        <li><span class="dot"></span>Certifié Qualiopi</li>
         <li><span class="dot"></span>Organisme de formation enregistré</li>
-        <li><span class="dot"></span>Qualiopi prévu</li>
-        <li><span class="dot"></span>Accord de confidentialité</li>
+        <li><span class="dot"></span>Prise en charge OPCO possible</li>
         <li><span class="dot"></span>+500 personnes formées</li>
       </ul>
     </div>
@@ -320,7 +334,7 @@ const versus = [
       </ul>
 
       <p class="section-note reveal" style="margin-top: var(--s-6); text-align: center;">
-        Devis en 48&nbsp;h · Prise en charge OPCO à étudier avec votre organisme
+        Devis en 48&nbsp;h · Certifié Qualiopi · Prise en charge OPCO possible
       </p>
       <p class="section-note reveal" style="margin-top: var(--s-3); text-align: center;">
         Vous êtes en Bretagne ? <a href="/formation-ia-bretagne" class="link-arrow" style="display: inline;">Voir notre page dédiée Formation IA en Bretagne <span aria-hidden="true">→</span></a>
@@ -382,9 +396,9 @@ const versus = [
             <p>Enregistré sous le numéro 11757585175 auprès du préfet de région d'Île-de-France. Cet enregistrement ne vaut pas agrément de l'État.</p>
           </li>
           <li class="certif reveal">
-            <p class="certif-statut is-progress">En cours</p>
+            <p class="certif-statut is-done">Acquis</p>
             <h3>Certification Qualiopi</h3>
-            <p>Engagée maintenant que le NDA est obtenu. Condition préalable à une prise en charge OPCO pleine et entière.</p>
+            <p>958 est certifié Qualiopi au titre de la catégorie « Actions de formation ». Cette certification ouvre la prise en charge par les OPCO et autres financeurs publics de la formation professionnelle.</p>
           </li>
           <li class="certif reveal">
             <p class="certif-statut is-done">Acquis</p>
