@@ -51,7 +51,7 @@ const problemes = [
 const faq = [
   {
     q: "Combien coûte un audit IA PME ?",
-    a: "L'audit démarre à 900 € HT pour une TPE et atteint 4 500 € HT pour une PME de 50 à 200 collaborateurs. Le devis exact dépend du nombre d'entretiens et de la complexité des processus. Devis ferme sous 48 heures après un échange de 30 minutes.",
+    a: "L'audit est à 1 200 € HT en tarif standard. Tarif de lancement promotionnel à 900 € HT jusqu'au 31 juillet 2026. Au-delà de 2 jours d'intervention ou pour les PME au-dessus de 50 collaborateurs, devis sur-mesure après un échange de 30 minutes.",
   },
   {
     q: "Combien de temps prend un audit IA ?",
@@ -93,15 +93,10 @@ const auditServiceSchema = {
     '@type': 'Offer',
     priceCurrency: 'EUR',
     price: '900',
-    priceSpecification: {
-      '@type': 'PriceSpecification',
-      minPrice: 900,
-      maxPrice: 4500,
-      priceCurrency: 'EUR',
-    },
     availability: 'https://schema.org/InStock',
     url: 'https://www.958.fr/diagnostic/',
-    description: "À partir de 900 € HT (TPE) jusqu'à 4 500 € HT (PME 50-200 collaborateurs).",
+    description: "Tarif standard 1 200 € HT — tarif de lancement 900 € HT jusqu'au 31 juillet 2026.",
+    priceValidUntil: '2026-07-31',
   },
 };
 
@@ -118,7 +113,7 @@ const faqSchema = {
 
 <Base
   title="Audit IA PME — Cartographie, livrables, ROI"
-  description="Audit IA pour TPE et PME : cartographie des cas d'usage, priorisation, rapport actionnable de 15 à 25 pages. À partir de 900 € HT. Basé à Vannes, intervention France entière."
+  description="Audit IA pour TPE et PME : cartographie des cas d'usage, priorisation, rapport actionnable de 15 à 25 pages. 1 200 € HT — 900 € HT en lancement jusqu'au 31/07. Basé à Vannes."
   jsonLd={[auditServiceSchema, faqSchema]}
 >
   <!-- ============ HERO ============ -->
@@ -126,20 +121,21 @@ const faqSchema = {
     <div class="container">
       <p class="eyebrow reveal">Audit IA · TPE & PME · France entière</p>
       <h1 id="h-hero" class="hero-title reveal">
-        Savoir où l'IA a du sens chez vous.
-        <span class="hero-title-soft">Et où elle n'en a pas. En 2 jours, noir sur blanc, sans jargon.</span>
+        Le tilt<sup>®</sup>
+        <br>avant l'investissement.
+        <span class="hero-title-soft">Pas après. Deux jours pour savoir où l'IA paie chez vous — et où elle ne paie pas.</span>
       </h1>
       <p class="lead reveal">
-        Un audit IA en 4 étapes pour dirigeants de TPE et PME. Cartographie des cas d'usage,
-        priorisation, fourchette budgétaire, analyse RGPD. Un rapport actionnable que vous pouvez exécuter
-        en interne — ou me confier.
+        Audit IA en 4 étapes pour dirigeants de TPE et PME. Cartographie des cas d'usage,
+        priorisation, fourchette budgétaire, analyse RGPD. Un rapport actionnable que vous pouvez
+        exécuter en interne — ou me confier. Aucun engagement de suite.
       </p>
       <div class="hero-ctas reveal">
         <CTAButton label="Demander un diagnostic" href="/diagnostic" size="lg" />
         <a href="#etapes" class="link-arrow">Voir le déroulé <span aria-hidden="true">→</span></a>
       </div>
       <ul class="hero-assurances reveal" aria-label="Engagements">
-        <li><span class="dot"></span>À partir de 900&nbsp;€ HT</li>
+        <li><span class="dot"></span>1&nbsp;200&nbsp;€ HT · <s>1&nbsp;200</s> 900&nbsp;€ jusqu'au 31/07</li>
         <li><span class="dot"></span>Rapport sous 10 jours</li>
         <li><span class="dot"></span>Accord de confidentialité</li>
         <li><span class="dot"></span>Aucun engagement de suite</li>
@@ -150,9 +146,9 @@ const faqSchema = {
   <!-- ============ POURQUOI ============ -->
   <section class="section" aria-labelledby="h-pourquoi">
     <div class="container is-default">
-      <p class="eyebrow reveal">01 · À qui s'adresse l'audit</p>
+      <p class="eyebrow reveal">01 · Pour qui</p>
       <h2 id="h-pourquoi" class="reveal" style="margin-top: var(--s-3);">
-        Six situations qui amènent un dirigeant à demander un audit IA.
+        Six raisons d'appeler.<br>Une seule de bonne raison de signer.
       </h2>
       <ul class="problems reveal-stagger" role="list">
         {problemes.map((p) => (
@@ -172,7 +168,7 @@ const faqSchema = {
       <div class="section-head">
         <p class="eyebrow reveal">02 · Déroulé</p>
         <h2 class="reveal" id="h-etapes">Quatre étapes. Deux jours. Un rapport.</h2>
-        <p class="lead reveal">L'audit IA suit le même protocole pour toutes les PME. Le contenu, lui, est unique à chaque entreprise.</p>
+        <p class="lead reveal">Le protocole est le même chez tous mes clients. Le contenu, lui, ne se répète jamais.</p>
       </div>
 
       <ol class="steps reveal-stagger" role="list">
@@ -195,8 +191,8 @@ const faqSchema = {
     <div class="container">
       <div class="section-head">
         <p class="eyebrow reveal">03 · Livrables</p>
-        <h2 class="reveal" id="h-livrables">Ce que vous recevez.</h2>
-        <p class="lead reveal">Le rapport est rédigé pour être lu par un dirigeant non technique. Et exécuté par une équipe ops.</p>
+        <h2 class="reveal" id="h-livrables">Lisible par un dirigeant.<br>Exécutable par une équipe.</h2>
+        <p class="lead reveal">Le rapport est écrit pour faire le tilt<sup>®</sup> en COMEX. Pas pour finir dans un classeur.</p>
       </div>
       <ul class="livrables reveal-stagger" role="list">
         {livrables.map((l) => (
@@ -213,26 +209,31 @@ const faqSchema = {
   <section class="section surface-elevated" aria-labelledby="h-budget">
     <div class="container is-default">
       <p class="eyebrow reveal">04 · Budget</p>
-      <h2 id="h-budget" class="reveal" style="margin-top: var(--s-3);">Une fourchette claire.</h2>
-      <div class="budget-grid reveal-stagger">
-        <div class="budget reveal">
-          <p class="budget-tag">TPE · jusqu'à 10 personnes</p>
-          <p class="budget-amount">900&nbsp;€ HT</p>
-          <p class="budget-body">1 jour d'audit, 2 entretiens, rapport de 15 pages, restitution en visio.</p>
+      <h2 id="h-budget" class="reveal" style="margin-top: var(--s-3);">Un prix. Pas trois pages de devis.</h2>
+
+      <div class="price-card reveal">
+        <div class="price-head">
+          <span class="price-tag-promo">Offre de lancement · jusqu'au 31&nbsp;juillet&nbsp;2026</span>
         </div>
-        <div class="budget reveal">
-          <p class="budget-tag">PME · 11 à 50 personnes</p>
-          <p class="budget-amount">2&nbsp;500&nbsp;€ HT</p>
-          <p class="budget-body">1,5 jour d'audit, 4 à 6 entretiens, rapport de 20 pages, restitution sur site.</p>
+        <div class="price-row">
+          <div class="price-amount">
+            <span class="price-strike">1&nbsp;200&nbsp;€&nbsp;HT</span>
+            <span class="price-now">900&nbsp;€&nbsp;HT</span>
+          </div>
+          <p class="price-body">
+            Forfait audit IA · jusqu'à 2 jours d'intervention · rapport de 15 à 25&nbsp;pages ·
+            restitution incluse · accord de confidentialité.
+          </p>
         </div>
-        <div class="budget reveal">
-          <p class="budget-tag">PME · 51 à 200 personnes</p>
-          <p class="budget-amount">4&nbsp;500&nbsp;€ HT</p>
-          <p class="budget-body">2 jours d'audit, 6 à 10 entretiens multi-services, rapport de 25 pages, restitution COMEX.</p>
-        </div>
+        <p class="price-fineprint">
+          Après le 31&nbsp;juillet 2026 : tarif standard 1&nbsp;200&nbsp;€&nbsp;HT.
+          PME au-delà de 50 collaborateurs ou périmètre multi-services : devis sur-mesure
+          après un diagnostic gratuit de 30&nbsp;minutes.
+        </p>
       </div>
+
       <p class="section-note reveal" style="margin-top: var(--s-6);">
-        Devis ferme sous 48 heures après un diagnostic de 30 minutes. Sans engagement de suite.
+        Devis ferme sous 48&nbsp;h après le diagnostic. Sans engagement de suite.
       </p>
     </div>
   </section>
@@ -292,10 +293,10 @@ const faqSchema = {
   <!-- ============ CTA FINAL ============ -->
   <section class="section is-loose" aria-labelledby="h-cta">
     <div class="container is-narrow" style="text-align: center;">
-      <h2 class="reveal" id="h-cta">Commencer par un diagnostic.</h2>
+      <h2 class="reveal" id="h-cta">Trente minutes.<br>Puis le tilt<sup>®</sup>, ou rien du tout.</h2>
       <p class="lead reveal" style="margin-top: var(--s-4);">
-        30 minutes au téléphone. Je comprends votre contexte. Vous recevez un devis ferme
-        d'audit sous 48 heures, ou une orientation honnête si l'audit n'est pas utile.
+        Un appel pour comprendre votre contexte. Vous repartez avec un devis ferme d'audit
+        sous 48 heures — ou avec mon avis honnête que l'audit n'est pas utile pour vous.
       </p>
       <div class="reveal" style="margin-top: var(--s-7);">
         <CTAButton label="Demander un diagnostic" href="/diagnostic" size="lg" />
@@ -332,6 +333,15 @@ const faqSchema = {
     font-size: 0.5em;
     letter-spacing: -0.01em;
     line-height: var(--lh-snug);
+  }
+  .hero-title sup,
+  .hero-title-soft sup {
+    font-size: 0.42em;
+    color: var(--accent);
+    top: -0.7em;
+    position: relative;
+    font-style: normal;
+    font-weight: 400;
   }
   .lead { margin-top: var(--s-5); }
   .hero-ctas {
@@ -492,43 +502,77 @@ const faqSchema = {
     .livrables { grid-template-columns: 1fr; }
   }
 
-  /* ============ BUDGET ============ */
-  .budget-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--s-4);
+  /* ============ BUDGET — carte unique + promo ============ */
+  .price-card {
     margin-top: var(--s-6);
-  }
-  .budget {
-    padding: var(--s-6) var(--s-5);
     border: 1px solid var(--line);
     background: var(--bg);
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-3);
+    padding: var(--s-6);
+    position: relative;
   }
-  .budget-tag {
+  .price-card::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--accent);
+  }
+  .price-head { margin-bottom: var(--s-5); }
+  .price-tag-promo {
+    display: inline-block;
+    padding: 0.35rem 0.85rem;
     font-family: var(--font-mono);
     font-size: var(--step--1);
-    color: var(--ink-3);
     text-transform: uppercase;
     letter-spacing: var(--tr-wide);
+    color: var(--bg);
+    background: var(--accent);
+    border-radius: 999px;
+    font-weight: 500;
   }
-  .budget-amount {
+  .price-row {
+    display: grid;
+    grid-template-columns: minmax(220px, auto) 1fr;
+    gap: var(--s-6);
+    align-items: baseline;
+    padding-bottom: var(--s-5);
+    border-bottom: 1px solid var(--line);
+    margin-bottom: var(--s-5);
+  }
+  .price-amount {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-1);
+  }
+  .price-strike {
+    font-family: var(--font-mono);
+    font-size: var(--step-0);
+    color: var(--ink-3);
+    text-decoration: line-through;
+    text-decoration-color: var(--line-2);
+    letter-spacing: var(--tr-wide);
+  }
+  .price-now {
     font-family: var(--font-display);
-    font-size: var(--step-5);
+    font-size: clamp(2.6rem, 6vw, 4rem);
     font-weight: 500;
     color: var(--accent);
     line-height: 1;
     letter-spacing: var(--tr-tight);
   }
-  .budget-body {
+  .price-body {
+    font-size: var(--step-1);
+    color: var(--ink);
+    line-height: var(--lh-normal);
+  }
+  .price-fineprint {
     font-size: var(--step-0);
     color: var(--ink-2);
     line-height: var(--lh-normal);
+    max-width: 70ch;
   }
-  @media (max-width: 900px) {
-    .budget-grid { grid-template-columns: 1fr; }
+  @media (max-width: 720px) {
+    .price-row { grid-template-columns: 1fr; gap: var(--s-4); }
   }
 
   /* ============ FAQ ============ */

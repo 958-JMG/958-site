@@ -65,11 +65,11 @@ const localFaq = [
   },
   {
     q: "Combien coûte un consultant IA à Vannes ?",
-    a: "L'audit démarre à 900 € HT. Une journée de formation intra-entreprise : 1 800 € HT. Un cockpit IA complet : devis après audit, généralement entre 8 000 et 35 000 € HT selon le périmètre.",
+    a: "L'audit IA est à 1 200 € HT — 900 € HT en tarif de lancement jusqu'au 31 juillet 2026. Une journée de formation intra-entreprise : 1 800 € HT. Un cockpit IA complet : devis après audit, généralement entre 8 000 et 35 000 € HT selon le périmètre.",
   },
   {
     q: "Qui réalise les missions ?",
-    a: "Jean-Marc Geuring, fondateur de 958, basé à Vannes depuis 2022. 28 ans d'entrepreneuriat. Pour certains chantiers techniques, des freelances partenaires sous contrat. Aucune sous-traitance offshore, aucune équipe junior.",
+    a: "Jean Marc Geuring, fondateur de 958, basé à Vannes depuis 2022. 28 ans d'entrepreneuriat. Pour certains chantiers techniques, des freelances partenaires sous contrat. Aucune sous-traitance offshore, aucune équipe junior.",
   },
   {
     q: "Quel délai pour démarrer une mission depuis Vannes ?",
@@ -133,22 +133,24 @@ const faqSchema = {
     <div class="container">
       <p class="eyebrow reveal">Consultant IA · Vannes (56) · Bretagne · Depuis 2022</p>
       <h1 id="h-hero" class="hero-title reveal">
-        Consultant IA à Vannes.
-        <span class="hero-title-soft">Au service des dirigeants de PME bretonnes et de France entière.</span>
+        Un consultant IA.
+        <br>Pas une agence.
+        <span class="hero-title-soft">Vous appelez, je décroche. Je vous écoute, je propose, je livre. Et ça fait tilt<sup>®</sup>.</span>
       </h1>
       <p class="lead reveal">
-        Audit, formation, implémentation et accompagnement IA. Basé 1 bis rue Thiers à Vannes,
-        à 5 minutes de la gare. Intervention sans frais de déplacement dans tout le Morbihan,
-        et présence régulière à Rennes, Lorient, Brest, Saint-Brieuc, Saint-Malo, Nantes et Paris.
+        Audit, formation, implémentation et accompagnement IA pour dirigeants de PME bretonnes.
+        Bureau à Vannes (1 bis rue Thiers, à 5 min de la gare). Intervention sans frais de
+        déplacement dans tout le Morbihan, présence régulière à Rennes, Lorient, Brest,
+        Saint-Brieuc, Saint-Malo, Nantes et Paris.
       </p>
       <div class="hero-ctas reveal">
         <CTAButton label="Demander un diagnostic" href="/diagnostic" size="lg" />
         <a href="#services" class="link-arrow">Voir les services <span aria-hidden="true">→</span></a>
       </div>
       <ul class="hero-assurances reveal" aria-label="Cadre">
-        <li><span class="dot"></span>Certifié Qualiopi</li>
         <li><span class="dot"></span>+500 personnes formées</li>
         <li><span class="dot"></span>6 cockpits livrés</li>
+        <li><span class="dot"></span>Organisme de formation enregistré</li>
         <li><span class="dot"></span>Modèles européens</li>
       </ul>
     </div>
@@ -159,10 +161,10 @@ const faqSchema = {
     <div class="container is-default">
       <p class="eyebrow reveal">01 · Positionnement</p>
       <h2 id="h-positionnement" class="reveal" style="margin-top: var(--s-3);">
-        Un consultant. Pas une agence offshore.
+        Le même qui vend.<br>Le même qui livre.
       </h2>
       <div class="prose reveal">
-        <p>Quand vous appelez 958, c'est <strong>Jean-Marc Geuring</strong> qui répond. Le même qui anime
+        <p>Quand vous appelez 958, c'est <strong>Jean Marc Geuring</strong> qui répond. Le même qui anime
         les ateliers, qui rédige l'audit, qui supervise l'implémentation. 28 ans d'entrepreneuriat avant de fonder 958 en 2022, à Vannes.</p>
         <p>La grande différence avec les agences IA parisiennes : ici, le dirigeant qui vend la mission est le même qui la livre. Aucune équipe junior, aucune sous-traitance offshore.</p>
         <p>La grande différence avec les freelances IA : un cadre méthodologique propriétaire (SPARI), une déclaration d'activité d'organisme de formation, un ancrage local et un suivi 30/60/90 jours après chaque intervention.</p>
@@ -176,8 +178,8 @@ const faqSchema = {
     <div class="container">
       <div class="section-head">
         <p class="eyebrow reveal">02 · Services</p>
-        <h2 class="reveal" id="h-services">Quatre services. Une méthode unique.</h2>
-        <p class="lead reveal">Chaque service est un point d'entrée possible. La méthode SPARI les relie.</p>
+        <h2 class="reveal" id="h-services">Quatre portes d'entrée.<br>Une seule méthode.</h2>
+        <p class="lead reveal">Audit, implémentation, formation, accompagnement : à vous de choisir où vous accrochez. SPARI fait le reste.</p>
       </div>
       <ul class="services reveal-stagger" role="list">
         {services.map((s) => (
@@ -248,7 +250,7 @@ const faqSchema = {
             </li>
             <li>
               <span class="contact-label">LinkedIn</span>
-              <a href="https://www.linkedin.com/in/jean-marc-geuring/" target="_blank" rel="noopener noreferrer">Jean-Marc Geuring ↗</a>
+              <a href="https://www.linkedin.com/in/jean-marc-geuring/" target="_blank" rel="noopener noreferrer">Jean Marc Geuring ↗</a>
             </li>
             <li>
               <span class="contact-label">SIREN</span>
@@ -256,7 +258,7 @@ const faqSchema = {
             </li>
             <li>
               <span class="contact-label">Formation</span>
-              <span>Certifié Qualiopi · NDA 11757585175</span>
+              <span>NDA 11757585175 · Qualiopi en cours</span>
             </li>
           </ul>
           <CTAButton label="Demander un diagnostic" href="/diagnostic" size="md" />
@@ -289,10 +291,10 @@ const faqSchema = {
   <!-- CTA FINAL -->
   <section class="section is-loose" aria-labelledby="h-cta">
     <div class="container is-narrow" style="text-align: center;">
-      <h2 class="reveal" id="h-cta">Un café à Vannes, ou un appel.</h2>
+      <h2 class="reveal" id="h-cta">Un café à Vannes.<br>Ou un appel.</h2>
       <p class="lead reveal" style="margin-top: var(--s-4);">
-        30 minutes d'échange. Vous décrivez votre contexte. Je vous dis honnêtement
-        si l'IA peut aider votre entreprise — ou pas.
+        Trente minutes. Vous racontez. J'écoute. Je vous dis si l'IA fait tilt<sup>®</sup>
+        chez vous — ou si elle peut attendre.
       </p>
       <div class="reveal" style="margin-top: var(--s-7);">
         <CTAButton label="Demander un diagnostic" href="/diagnostic" size="lg" />
@@ -328,6 +330,15 @@ const faqSchema = {
     font-size: 0.5em;
     letter-spacing: -0.01em;
     line-height: var(--lh-snug);
+  }
+  .hero-title sup,
+  .hero-title-soft sup {
+    font-size: 0.42em;
+    color: var(--accent);
+    top: -0.7em;
+    position: relative;
+    font-style: normal;
+    font-weight: 400;
   }
   .lead { margin-top: var(--s-5); }
   .hero-ctas {
