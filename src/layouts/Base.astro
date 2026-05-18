@@ -204,31 +204,44 @@ const breadcrumbs = buildBreadcrumbs(path);
       <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     ))}
 
-    <!-- Plausible (EU, cookieless, sans consentement requis) -->
-    <script defer data-domain="958.fr" src="https://plausible.io/js/script.js"></script>
-
-    {/* Google Consent Mode v2 — défaut "denied" pour EEE (requis avant gtag.js) */}
+    {/* ─────────────────────────────────────────────────────────────
+       Google Consent Mode v2 — Advanced
+       Doc : developers.google.com/tag-platform/security/guides/consent?consentmode=advanced
+       Placé en TÊTE des scripts de mesure, avant Plausible et gtag.js.
+       L'utilisateur EEE conserve un état "denied" par défaut tant qu'il
+       n'a pas interagi avec la bannière (ConsentBanner.astro).
+       ───────────────────────────────────────────────────────────── */}
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      // État par défaut : tout refusé tant que l'utilisateur n'a pas choisi.
-      // S'applique à l'EEE + reste du monde — politique unifiée.
+      window.gtag = gtag;
+
+      // Default state — 7 signaux explicites (spec Consent Mode v2)
       gtag('consent', 'default', {
         ad_storage: 'denied',
         ad_user_data: 'denied',
         ad_personalization: 'denied',
         analytics_storage: 'denied',
-        personalization_storage: 'denied',
         functionality_storage: 'granted',
+        personalization_storage: 'denied',
         security_storage: 'granted',
-        wait_for_update: 500,
+        wait_for_update: 500
       });
+
+      // Garde-fous EEE supplémentaires (Google recommended for denied default)
       gtag('set', 'ads_data_redaction', true);
       gtag('set', 'url_passthrough', true);
+
       gtag('js', new Date());
-      gtag('config', 'G-V5X0XXQPWF', { anonymize_ip: true });
+      gtag('config', 'G-V5X0XXQPWF', {
+        anonymize_ip: true,
+        send_page_view: true
+      });
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X0XXQPWF"></script>
+
+    <!-- Plausible (EU, cookieless, sans consentement requis) -->
+    <script defer data-domain="958.fr" src="https://plausible.io/js/script.js"></script>
 
     <ClientRouter />
   </head>
