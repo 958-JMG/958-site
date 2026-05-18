@@ -15,9 +15,14 @@ interface Props {
   ogImage?: string;
   /** Ordre pour le title : brand-last (défaut, SEO-friendly) ou brand-first */
   titleMode?: 'brand-last' | 'brand-first';
+  /** Indique aux moteurs de ne pas indexer (pages de confirmation, etc.) */
+  noindex?: boolean;
+  /** JSON-LD spécifique à la page (Service, Course…), injecté en plus des schémas site-wide */
+  jsonLd?: unknown | unknown[];
 }
 
-const { title, description, canonical, ogImage = '/og-image.png', titleMode = 'brand-last' } = Astro.props;
+const { title, description, canonical, ogImage = '/og-image.png', titleMode = 'brand-last', noindex = false, jsonLd } = Astro.props;
+const extraJsonLd: unknown[] = jsonLd === undefined ? [] : Array.isArray(jsonLd) ? jsonLd : [jsonLd];
 const canonicalUrl = canonical || new URL(Astro.url.pathname, Astro.site).toString();
 const ogImageUrl = new URL(ogImage, Astro.site).toString();
 const pageTitle = titleMode === 'brand-first'
@@ -47,6 +52,9 @@ function buildBreadcrumbs(p: string) {
     faq: 'FAQ',
     'mentions-legales': 'Mentions légales',
     merci: 'Merci',
+    'audit-ia-pme': 'Audit IA PME',
+    'formation-ia-bretagne': 'Formation IA Bretagne',
+    'consultant-ia-vannes': 'Consultant IA Vannes',
   };
   segs.forEach((seg, i) => {
     acc += '/' + seg;
@@ -70,6 +78,7 @@ const breadcrumbs = buildBreadcrumbs(path);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
     <link rel="canonical" href={canonicalUrl} />
 
     <!-- Favicons -->
@@ -99,10 +108,10 @@ const breadcrumbs = buildBreadcrumbs(path);
       type="application/ld+json"
       set:html={JSON.stringify({
         '@context': 'https://schema.org',
-        '@type': 'ProfessionalService',
+        '@type': ['ProfessionalService', 'LocalBusiness'],
         '@id': 'https://www.958.fr/#organization',
         name: 'Neuf Cinquante Huit',
-        alternateName: ['9·58', '958'],
+        alternateName: ['9·58', '958', '958.fr'],
         url: 'https://www.958.fr',
         logo: 'https://www.958.fr/logo-958-mark.svg',
         image: 'https://www.958.fr/og-image.png',
@@ -114,6 +123,8 @@ const breadcrumbs = buildBreadcrumbs(path);
         },
         email: 'jmg@958.fr',
         foundingDate: '2022',
+        taxID: '912884228',
+        vatID: 'FR' + '912884228',
         address: [
           {
             '@type': 'PostalAddress',
@@ -131,17 +142,28 @@ const breadcrumbs = buildBreadcrumbs(path);
             addressCountry: 'FR',
           },
         ],
-        areaServed: ['FR', { '@type': 'Country', name: 'France' }],
+        geo: { '@type': 'GeoCoordinates', latitude: 47.6587, longitude: -2.7603 },
+        areaServed: [
+          { '@type': 'Country', name: 'France' },
+          { '@type': 'AdministrativeArea', name: 'Bretagne' },
+          { '@type': 'AdministrativeArea', name: 'Île-de-France' },
+          { '@type': 'City', name: 'Vannes' },
+          { '@type': 'City', name: 'Paris' },
+        ],
         priceRange: '€€',
         sameAs: ['https://www.linkedin.com/in/jean-marc-geuring/'],
         description:
           "Conseil, audit, implémentation et formation IA pour dirigeants de TPE et PME. Méthode propriétaire SPARI. Basé à Vannes et Paris. Souveraineté européenne par défaut.",
-        serviceType: ['Audit IA', 'Implémentation IA', 'Formation IA', 'Accompagnement IA'],
+        slogan: "Installer l'IA dans votre entreprise. Sans bruit, sans jargon, sans dépendance.",
+        serviceType: ['Audit IA', 'Implémentation IA', 'Formation IA', 'Accompagnement IA', 'Automatisation no-code'],
         knowsAbout: [
           'Intelligence artificielle',
-          'Audit IA',
+          'Audit IA PME',
           'Implémentation IA',
           'Formation IA intra-entreprise',
+          'Formation ChatGPT entreprise',
+          'Consultant IA Vannes',
+          'Consultant IA Bretagne',
           'Souveraineté numérique',
           'RGPD',
           'Automatisation n8n',
@@ -176,6 +198,10 @@ const breadcrumbs = buildBreadcrumbs(path);
         publisher: { '@id': 'https://www.958.fr/#organization' },
       })}
     />
+
+    {extraJsonLd.map((schema) => (
+      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    ))}
 
     <!-- Plausible (EU, cookieless) -->
     <script defer data-domain="958.fr" src="https://plausible.io/js/script.js"></script>

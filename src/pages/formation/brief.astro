@@ -20,13 +20,13 @@ import Base from '../../layouts/Base.astro';
           Une proposition sous 48&nbsp;h.
         </h1>
         <p class="lead" style="margin-top: var(--s-5);">
-          Le reste se dit au téléphone. On appelle, on écoute, on propose.
+          Le reste se dit au téléphone. J'appelle, j'écoute, je propose.
         </p>
 
         <dl class="diag-facts">
           <div>
             <dt>Cadre</dt>
-            <dd>Organisme de formation enregistré · Qualiopi prévu</dd>
+            <dd>Certifié Qualiopi · Organisme de formation enregistré</dd>
           </div>
           <div>
             <dt>Engagement</dt>
@@ -363,7 +363,7 @@ import Base from '../../layouts/Base.astro';
         }
         window.location.href = '/merci?sujet=formation';
       } catch (err: any) {
-        status.textContent = `Erreur d'envoi (${err?.message || 'réseau'}). Écrivez-nous à jmg@958.fr.`;
+        status.textContent = `Erreur d'envoi (${err?.message || 'réseau'}). Écrivez-moi à jmg@958.fr.`;
         status.classList.add('is-error');
         btn.disabled = false;
         btn.innerHTML = original;

@@ -38,6 +38,15 @@ const year = new Date().getFullYear();
     </div>
 
     <div class="footer-col">
+      <h4>Services IA</h4>
+      <ul>
+        <li><a href="/audit-ia-pme">Audit IA PME</a></li>
+        <li><a href="/formation-ia-bretagne">Formation IA Bretagne</a></li>
+        <li><a href="/consultant-ia-vannes">Consultant IA Vannes</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
       <h4>Légal</h4>
       <ul>
         <li><a href="/mentions-legales">Mentions légales</a></li>
@@ -93,8 +102,8 @@ const year = new Date().getFullYear();
   /* ---- grid ---- */
   .footer-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--s-7);
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--s-6);
     padding-block: var(--s-7);
     border-top: 1px solid #D8D8D2;
     border-bottom: 1px solid #D8D8D2;
@@ -144,11 +153,13 @@ const year = new Date().getFullYear();
   }
 
   /* ---- responsive ---- */
-  @media (max-width: 720px) {
+  @media (max-width: 980px) {
     .footer-grid {
       grid-template-columns: 1fr 1fr;
       gap: var(--s-6);
     }
+  }
+  @media (max-width: 720px) {
     .footer-logo { width: min(360px, 80%); }
     .footer-tagline { font-size: var(--step-2); }
     .footer-meta { justify-content: flex-start; }
