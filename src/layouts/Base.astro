@@ -7,6 +7,7 @@ import { ClientRouter } from 'astro:transitions';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import NoiseOverlay from '../components/NoiseOverlay.astro';
+import ConsentBanner from '../components/ConsentBanner.astro';
 
 interface Props {
   title: string;
@@ -203,8 +204,31 @@ const breadcrumbs = buildBreadcrumbs(path);
       <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     ))}
 
-    <!-- Plausible (EU, cookieless) -->
+    <!-- Plausible (EU, cookieless, sans consentement requis) -->
     <script defer data-domain="958.fr" src="https://plausible.io/js/script.js"></script>
+
+    {/* Google Consent Mode v2 — défaut "denied" pour EEE (requis avant gtag.js) */}
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      // État par défaut : tout refusé tant que l'utilisateur n'a pas choisi.
+      // S'applique à l'EEE + reste du monde — politique unifiée.
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        personalization_storage: 'denied',
+        functionality_storage: 'granted',
+        security_storage: 'granted',
+        wait_for_update: 500,
+      });
+      gtag('set', 'ads_data_redaction', true);
+      gtag('set', 'url_passthrough', true);
+      gtag('js', new Date());
+      gtag('config', 'G-V5X0XXQPWF', { anonymize_ip: true });
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X0XXQPWF"></script>
 
     <ClientRouter />
   </head>
@@ -220,6 +244,8 @@ const breadcrumbs = buildBreadcrumbs(path);
     </main>
 
     <Footer />
+
+    <ConsentBanner />
 
     {showMobileCta && (
       <a href="/diagnostic" class="mobile-cta" aria-label="Demander un diagnostic">

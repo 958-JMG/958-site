@@ -1,0 +1,415 @@
+---
+// Bannière de consentement RGPD compatible Google Consent Mode v2.
+// Couvre les exigences EEE depuis mars 2024 (ad_user_data, ad_personalization).
+// Le state par défaut est "denied" — défini inline dans <head> avant gtag.js.
+---
+
+<div
+  id="consent-banner"
+  class="consent-banner"
+  role="dialog"
+  aria-labelledby="consent-title"
+  aria-describedby="consent-body"
+  hidden
+>
+  <div class="consent-inner">
+    <div class="consent-text">
+      <p class="consent-title" id="consent-title">Cookies & mesure d'audience</p>
+      <p class="consent-body" id="consent-body">
+        Ce site utilise des cookies de mesure d'audience anonyme pour comprendre comment il est utilisé.
+        Vous pouvez accepter, refuser ou personnaliser votre choix. Plus d'informations dans les
+        <a href="/mentions-legales">mentions légales</a>.
+      </p>
+    </div>
+    <div class="consent-actions">
+      <button type="button" class="consent-btn consent-btn--ghost" data-consent="customize">
+        Personnaliser
+      </button>
+      <button type="button" class="consent-btn consent-btn--secondary" data-consent="refuse">
+        Tout refuser
+      </button>
+      <button type="button" class="consent-btn consent-btn--primary" data-consent="accept">
+        Tout accepter
+      </button>
+    </div>
+  </div>
+
+  <!-- Panneau "Personnaliser" — caché par défaut -->
+  <div class="consent-custom" data-consent-custom hidden>
+    <ul class="consent-list" role="list">
+      <li class="consent-item">
+        <div class="consent-item-head">
+          <label class="consent-item-label" for="cc-analytics">
+            <input type="checkbox" id="cc-analytics" data-consent-cat="analytics_storage" />
+            <span class="consent-item-title">Mesure d'audience</span>
+          </label>
+          <span class="consent-item-tag">Google Analytics 4</span>
+        </div>
+        <p class="consent-item-desc">
+          Statistiques anonymes de navigation. Aide à améliorer le site. Aucune donnée commerciale.
+        </p>
+      </li>
+      <li class="consent-item">
+        <div class="consent-item-head">
+          <label class="consent-item-label" for="cc-ads">
+            <input type="checkbox" id="cc-ads"
+              data-consent-cat="ad_storage,ad_user_data,ad_personalization,personalization_storage" />
+            <span class="consent-item-title">Personnalisation publicitaire</span>
+          </label>
+          <span class="consent-item-tag">Optionnel</span>
+        </div>
+        <p class="consent-item-desc">
+          Permet d'afficher des annonces personnalisées en dehors du site. Non utilisé actuellement.
+        </p>
+      </li>
+      <li class="consent-item consent-item--locked">
+        <div class="consent-item-head">
+          <span class="consent-item-title">Fonctionnement & sécurité</span>
+          <span class="consent-item-tag">Requis</span>
+        </div>
+        <p class="consent-item-desc">
+          Cookies techniques indispensables (formulaire, anti-spam). Aucune mesure publicitaire.
+        </p>
+      </li>
+    </ul>
+    <div class="consent-actions consent-actions--custom">
+      <button type="button" class="consent-btn consent-btn--primary" data-consent="save">
+        Enregistrer mes choix
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .consent-banner {
+    position: fixed;
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    z-index: 70;
+    background: var(--bg, #0B0B0A);
+    color: var(--ink, #F4F4EF);
+    border: 1px solid var(--line, #2E2E29);
+    box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.7),
+                0 0 0 1px rgba(212, 255, 78, 0.08);
+    border-radius: 4px;
+    max-width: 1080px;
+    margin-inline: auto;
+    font-family: var(--font-sans);
+    animation: consent-in 320ms cubic-bezier(.2,.85,.2,1) 100ms both;
+  }
+
+  .consent-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--s-5, 1.25rem);
+    align-items: center;
+    padding: var(--s-5, 1.25rem) var(--s-6, 1.5rem);
+  }
+
+  .consent-title {
+    font-family: var(--font-mono);
+    font-size: var(--step--1, 0.825rem);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-3, #6C6C66);
+    margin-bottom: 0.5rem;
+  }
+  .consent-body {
+    font-size: var(--step-0, 0.95rem);
+    color: var(--ink-2, #C7C7C0);
+    line-height: 1.55;
+    max-width: 64ch;
+  }
+  .consent-body a {
+    color: var(--ink, #F4F4EF);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .consent-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .consent-btn {
+    appearance: none;
+    border: 1px solid transparent;
+    padding: 0.6rem 1rem;
+    font-family: var(--font-sans);
+    font-size: var(--step--1, 0.825rem);
+    font-weight: 500;
+    line-height: 1;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 180ms ease, border-color 180ms ease, color 180ms ease;
+  }
+  .consent-btn--primary {
+    background: var(--accent, #D4FF4E);
+    color: #0B0B0A;
+  }
+  .consent-btn--primary:hover { filter: brightness(1.05); }
+  .consent-btn--secondary {
+    background: transparent;
+    border-color: var(--line-2, #4A4A44);
+    color: var(--ink, #F4F4EF);
+  }
+  .consent-btn--secondary:hover { border-color: var(--ink-2, #C7C7C0); }
+  .consent-btn--ghost {
+    background: transparent;
+    color: var(--ink-3, #6C6C66);
+    padding-inline: 0.4rem;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .consent-btn--ghost:hover { color: var(--ink, #F4F4EF); }
+
+  /* Panneau "Personnaliser" */
+  .consent-custom {
+    border-top: 1px solid var(--line, #2E2E29);
+    padding: var(--s-5, 1.25rem) var(--s-6, 1.5rem);
+  }
+  .consent-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4, 1rem);
+    margin: 0;
+    padding: 0;
+  }
+  .consent-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding-bottom: var(--s-4, 1rem);
+    border-bottom: 1px solid var(--line, #2E2E29);
+  }
+  .consent-item:last-child { border-bottom: 0; padding-bottom: 0; }
+  .consent-item-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .consent-item-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    cursor: pointer;
+  }
+  .consent-item-label input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--line-2, #4A4A44);
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+    background: transparent;
+    flex-shrink: 0;
+  }
+  .consent-item-label input[type="checkbox"]:checked {
+    background: var(--accent, #D4FF4E);
+    border-color: var(--accent, #D4FF4E);
+  }
+  .consent-item-label input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    left: 5px; top: 1px;
+    width: 5px; height: 10px;
+    border: solid #0B0B0A;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  .consent-item-title {
+    font-size: var(--step-0, 0.95rem);
+    color: var(--ink, #F4F4EF);
+    font-weight: 500;
+  }
+  .consent-item-tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-3, #6C6C66);
+  }
+  .consent-item-desc {
+    font-size: var(--step--1, 0.825rem);
+    color: var(--ink-2, #C7C7C0);
+    line-height: 1.5;
+    padding-left: calc(18px + 0.6rem);
+    max-width: 70ch;
+  }
+  .consent-item--locked .consent-item-title {
+    color: var(--ink-2, #C7C7C0);
+  }
+  .consent-item--locked .consent-item-desc {
+    padding-left: 0;
+  }
+  .consent-actions--custom {
+    margin-top: var(--s-5, 1.25rem);
+  }
+
+  @keyframes consent-in {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ---- Mobile ---- */
+  @media (max-width: 720px) {
+    .consent-banner {
+      left: 8px;
+      right: 8px;
+      bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+    }
+    .consent-inner {
+      grid-template-columns: 1fr;
+      gap: var(--s-4, 1rem);
+      padding: var(--s-5, 1.25rem);
+    }
+    .consent-actions {
+      justify-content: stretch;
+    }
+    .consent-actions .consent-btn:not(.consent-btn--ghost) {
+      flex: 1 1 auto;
+    }
+    .consent-custom { padding: var(--s-4, 1rem) var(--s-5, 1.25rem); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .consent-banner { animation: none; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    const STORAGE_KEY = 'consent-958';
+    const VERSION = 'v1';
+    const CONSENT_TYPES = [
+      'ad_storage',
+      'ad_user_data',
+      'ad_personalization',
+      'analytics_storage',
+      'personalization_storage',
+    ];
+
+    function gtagSafe() {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(arguments);
+    }
+
+    function applyConsent(state) {
+      const payload = {};
+      CONSENT_TYPES.forEach((t) => {
+        payload[t] = state[t] ? 'granted' : 'denied';
+      });
+      gtagSafe('consent', 'update', payload);
+    }
+
+    function readSaved() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        if (parsed && parsed.v === VERSION && parsed.state) return parsed.state;
+      } catch (e) { /* ignore */ }
+      return null;
+    }
+
+    function save(state) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ v: VERSION, ts: Date.now(), state }));
+      } catch (e) { /* ignore */ }
+    }
+
+    function hideBanner() {
+      const el = document.getElementById('consent-banner');
+      if (el) el.hidden = true;
+    }
+
+    function showBanner() {
+      const el = document.getElementById('consent-banner');
+      if (el) el.hidden = false;
+    }
+
+    function bind() {
+      const banner = document.getElementById('consent-banner');
+      if (!banner || banner.dataset.bound === '1') return;
+      banner.dataset.bound = '1';
+
+      // Si choix déjà enregistré → applique-le silencieusement, pas de bannière
+      const saved = readSaved();
+      if (saved) {
+        applyConsent(saved);
+        banner.hidden = true;
+        return;
+      }
+      banner.hidden = false;
+
+      const customPanel = banner.querySelector('[data-consent-custom]');
+      const analyticsBox = banner.querySelector('#cc-analytics');
+      const adsBox = banner.querySelector('#cc-ads');
+
+      banner.querySelectorAll('[data-consent]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const action = btn.getAttribute('data-consent');
+
+          if (action === 'accept') {
+            const state = {
+              analytics_storage: true,
+              ad_storage: true,
+              ad_user_data: true,
+              ad_personalization: true,
+              personalization_storage: true,
+            };
+            applyConsent(state);
+            save(state);
+            hideBanner();
+          } else if (action === 'refuse') {
+            const state = {
+              analytics_storage: false,
+              ad_storage: false,
+              ad_user_data: false,
+              ad_personalization: false,
+              personalization_storage: false,
+            };
+            applyConsent(state);
+            save(state);
+            hideBanner();
+          } else if (action === 'customize') {
+            if (customPanel) {
+              customPanel.hidden = !customPanel.hidden;
+            }
+          } else if (action === 'save') {
+            const analyticsOn = !!(analyticsBox && analyticsBox.checked);
+            const adsOn = !!(adsBox && adsBox.checked);
+            const state = {
+              analytics_storage: analyticsOn,
+              ad_storage: adsOn,
+              ad_user_data: adsOn,
+              ad_personalization: adsOn,
+              personalization_storage: adsOn,
+            };
+            applyConsent(state);
+            save(state);
+            hideBanner();
+          }
+        });
+      });
+    }
+
+    // Expose une fonction globale pour rouvrir la bannière depuis les mentions légales
+    window.openConsent = function () {
+      const banner = document.getElementById('consent-banner');
+      if (banner) {
+        banner.hidden = false;
+      }
+    };
+
+    bind();
+    document.addEventListener('astro:page-load', bind);
+  })();
+</script>

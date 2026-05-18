@@ -79,9 +79,23 @@ import Base from '../layouts/Base.astro';
 
         <h2>Cookies et traceurs</h2>
         <p>
-          Le site utilise un outil d'analyse respectueux de la vie privée (Plausible Analytics),
-          qui ne dépose aucun cookie et ne collecte aucune donnée personnelle identifiable.
-          Aucun consentement cookie n'est donc requis.
+          Le site utilise deux outils de mesure d'audience :
+        </p>
+        <ul class="legal-list">
+          <li>
+            <strong>Plausible Analytics</strong> (hébergement européen, sans cookie, sans collecte
+            de donnée personnelle identifiable). Aucun consentement requis — utilisé en permanence
+            pour le suivi anonyme global.
+          </li>
+          <li>
+            <strong>Google Analytics 4</strong> (G-V5X0XXQPWF), activé uniquement après votre
+            consentement explicite. Mode « Consent Mode v2 » : par défaut, tous les paramètres
+            (mesure, publicité, personnalisation) sont sur « denied ». Les cookies GA ne sont
+            déposés qu'après acceptation.
+          </li>
+        </ul>
+        <p>
+          Vous pouvez à tout moment <button type="button" class="legal-link-btn" data-open-consent>modifier vos préférences cookies</button>.
         </p>
 
         <h2>Droit applicable</h2>
@@ -118,4 +132,39 @@ import Base from '../layouts/Base.astro';
     text-decoration: underline;
     text-underline-offset: 3px;
   }
+  .legal-list {
+    margin-bottom: var(--s-4);
+    padding-left: var(--s-5);
+  }
+  .legal-list li {
+    margin-bottom: var(--s-3);
+    font-size: var(--step-1);
+    color: var(--ink-2);
+    line-height: var(--lh-loose);
+    max-width: 68ch;
+  }
+  .legal-link-btn {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    color: var(--accent);
+    font: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+  }
+  .legal-link-btn:hover { filter: brightness(1.1); }
 </style>
+
+<script is:inline>
+  document.addEventListener('click', (e) => {
+    const target = e.target;
+    if (target && target.matches && target.matches('[data-open-consent]')) {
+      if (typeof window.openConsent === 'function') {
+        window.openConsent();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  });
+</script>
