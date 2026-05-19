@@ -205,9 +205,9 @@ const breadcrumbs = buildBreadcrumbs(path);
     ))}
 
     {/* ─────────────────────────────────────────────────────────────
-       Google Consent Mode v2 — Advanced
-       Doc : developers.google.com/tag-platform/security/guides/consent?consentmode=advanced
-       Placé en TÊTE des scripts de mesure, avant Plausible et gtag.js.
+       Consent Mode v2 (Advanced) — initialisation
+       S'exécute AVANT le chargement de gtag.js pour respecter la spec
+       Google : developers.google.com/tag-platform/security/guides/consent?consentmode=advanced
        L'utilisateur EEE conserve un état "denied" par défaut tant qu'il
        n'a pas interagi avec la bannière (ConsentBanner.astro).
        ───────────────────────────────────────────────────────────── */}
@@ -216,7 +216,6 @@ const breadcrumbs = buildBreadcrumbs(path);
       function gtag(){dataLayer.push(arguments);}
       window.gtag = gtag;
 
-      // Default state — 7 signaux explicites (spec Consent Mode v2)
       gtag('consent', 'default', {
         ad_storage: 'denied',
         ad_user_data: 'denied',
@@ -227,18 +226,16 @@ const breadcrumbs = buildBreadcrumbs(path);
         security_storage: 'granted',
         wait_for_update: 500
       });
-
-      // Garde-fous EEE supplémentaires (Google recommended for denied default)
       gtag('set', 'ads_data_redaction', true);
       gtag('set', 'url_passthrough', true);
-
-      gtag('js', new Date());
-      gtag('config', 'G-V5X0XXQPWF', {
-        anonymize_ip: true,
-        send_page_view: true
-      });
     </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5X0XXQPWF"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-V5X0XXQPWF"></script>
+    <script is:inline>
+      gtag('js', new Date());
+      gtag('config', 'G-V5X0XXQPWF');
+    </script>
 
     <!-- Plausible (EU, cookieless, sans consentement requis) -->
     <script defer data-domain="958.fr" src="https://plausible.io/js/script.js"></script>
