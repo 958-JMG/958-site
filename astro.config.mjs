@@ -7,7 +7,9 @@ export default defineConfig({
   site: 'https://www.958.fr',
   output: 'static',
   integrations: [
-    sitemap(),
+    sitemap({
+      filter: (page) => !page.includes('/preview/'),
+    }),
   ],
   vite: {
     plugins: [tailwindcss()],

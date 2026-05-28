@@ -1,17 +1,22 @@
 User-agent: *
 Allow: /
+Disallow: /preview/
 
 # Autoriser explicitement les crawlers IA (Search IA)
 User-agent: GPTBot
 Allow: /
+Disallow: /preview/
 
 User-agent: ClaudeBot
 Allow: /
+Disallow: /preview/
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /preview/
 
 User-agent: Google-Extended
 Allow: /
+Disallow: /preview/
 
 Sitemap: https://958.fr/sitemap-index.xml
