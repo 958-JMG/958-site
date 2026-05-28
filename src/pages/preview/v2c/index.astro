@@ -6,44 +6,44 @@ const terrain = [
   {
     icon: 'hard-hat',
     secteur: 'Bâtiment',
-    titre: 'Le pointage des heures du vendredi.',
-    body: '4 h chaque vendredi à reporter Pierre, Sophie, Marc dans l\'Excel des heures, croiser avec les chantiers, préparer la paie. 9·58 le fait en continu, à partir des saisies terrain.',
-    gain: '4 h récupérées chaque vendredi',
+    titre: 'Le pointage des heures de fin de semaine.',
+    body: 'Reporter Pierre, Sophie, Marc dans l\'Excel des heures, croiser avec les chantiers, préparer la paie. 9·58 le fait en continu, à partir des saisies terrain.',
+    gain: 'Le vendredi après-midi vous est rendu',
   },
   {
     icon: 'home',
     secteur: 'Agence immo',
-    titre: 'La diffusion d\'un mandat sur 6 portails.',
-    body: '3 h par bien à reformuler l\'annonce, recadrer les photos, dupliquer sur Apimo, SeLoger, Leboncoin… 9·58 publie sur les 6 portails en 5 min depuis votre fiche mandat.',
-    gain: '3 h → 5 min par bien',
+    titre: 'La diffusion d\'un mandat sur plusieurs portails.',
+    body: 'Reformuler l\'annonce, recadrer les photos, dupliquer sur chaque plateforme. 9·58 publie depuis votre fiche mandat, en cohérence avec votre charte.',
+    gain: 'Vos après-midis ne sont plus dans les portails',
   },
   {
     icon: 'building-2',
     secteur: 'Promotion',
     titre: 'La modification d\'un PLU pour un foncier.',
-    body: '1 journée à éplucher 80 pages, recouper les zonages, refaire la fiche de faisabilité avec la mise en page maison. 9·58 lit le PLU, l\'interprète pour votre projet et sort la note à votre charte.',
-    gain: '1 jour → 30 min par foncier',
+    body: 'Éplucher 80 pages, recouper les zonages, refaire la fiche de faisabilité avec la mise en page maison. 9·58 lit le PLU, l\'interprète pour votre projet et sort la note à votre charte.',
+    gain: 'Vous lisez la note. Vous ne l\'écrivez plus.',
   },
   {
     icon: 'users',
     secteur: 'Équipe',
-    titre: 'Le compte-rendu de réunion du lundi matin.',
-    body: '1 h après chaque réunion à rédiger, mettre en forme, envoyer à tous. 9·58 transcrit, structure, rédige à votre ton et envoie. Vous sortez de la réunion, le CR est déjà dans la boîte de l\'équipe.',
-    gain: 'La réunion finit, le CR est envoyé',
+    titre: 'Le compte-rendu de la réunion du lundi.',
+    body: 'Rédiger, mettre en forme, envoyer à tous. 9·58 transcrit, structure à votre ton, envoie. Vous sortez de la réunion, le CR est déjà dans la boîte de l\'équipe.',
+    gain: 'La réunion finit. Le CR est envoyé.',
   },
   {
     icon: 'mail',
     secteur: 'Syndic',
-    titre: 'Cinq cents mails de copropriétaires chaque jour.',
-    body: '9·58 trie, repère les 12 urgents, rédige les brouillons à votre charte. Vous tranchez les vraies décisions, l\'IA fait le reste — courriers types, accusés, relances.',
-    gain: '3 h → 30 min / jour',
+    titre: 'Les centaines de mails de copropriétaires chaque jour.',
+    body: '9·58 trie, repère les urgents, rédige les brouillons à votre charte — courriers types, accusés, relances. Vous tranchez les vraies décisions.',
+    gain: 'Vous tranchez. L\'IA fait le reste.',
   },
   {
     icon: 'briefcase',
     secteur: 'TPE / PME',
     titre: 'La proposition commerciale personnalisée.',
-    body: '2 h par prospect à adapter le Word, intégrer les photos, ajuster le tarif, exporter en PDF propre. 9·58 sort le doc à votre charte en 3 min. Vous appelez le prospect au lieu de mettre en page.',
-    gain: '2 h → 3 min par proposition',
+    body: 'Adapter le Word, intégrer les photos, ajuster le tarif, exporter en PDF propre. 9·58 sort le doc à votre charte. Vous appelez le prospect au lieu de mettre en page.',
+    gain: 'Vous appelez le prospect. La proposition est partie.',
   },
 ];
 
@@ -57,18 +57,18 @@ const proofs = [
 const temoignages = [
   {
     secteur: 'Promotion foncière',
-    quote: 'On a passé deux jours à expliquer comment on travaille. Trois mois plus tard, je ne reviendrai pas à mon Excel.',
+    quote: 'On a passé deux jours à expliquer comment on travaille. Quelques mois plus tard, je ne reviendrai pas à mon Excel.',
     result: 'Suivi multi-opérations consolidé',
   },
   {
     secteur: 'Syndic de copropriété',
-    quote: 'Cinq cents mails par jour. Avant, je rentrais chez moi à 21 h. Aujourd\'hui à 18 h 30, et mieux fait.',
-    result: '2,5 h gagnées par jour',
+    quote: 'Avant, je rentrais chez moi tard, la tête pleine. Aujourd\'hui je rentre plus tôt, et mieux fait.',
+    result: 'Le soir est rendu à la famille',
   },
   {
     secteur: 'Gestion de patrimoine',
     quote: 'Les analyses sont devenues des supports clients à la charte du cabinet. En un clic, je présente.',
-    result: 'Présentations en 1 clic',
+    result: 'La présentation est prête quand le client arrive',
   },
 ];
 ---
@@ -621,13 +621,13 @@ const temoignages = [
                 <em>dans 7 jours</em>.
               </h3>
               <p class="terrain-body">
-                9·58 le repère, croise son historique d'achat des 3 dernières années
+                9·58 le repère, croise son historique avec vous
                 et rédige le message personnalisé avec une <strong>offre adaptée à son cycle</strong>.
-                Vous validez en 1 clic. Il signe une commande de plus.
+                Vous relisez. Vous validez. Vous lui faites signe — au lieu de rater la date.
               </p>
               <div class="terrain-gain">
                 <span class="terrain-gain-arrow"><Icon name="arrow-right" size={14} strokeWidth={2} /></span>
-                <span class="terrain-gain-label">4 ventes additionnelles / mois</span>
+                <span class="terrain-gain-label">Un geste juste, au bon moment</span>
               </div>
             </div>
 
@@ -645,7 +645,7 @@ const temoignages = [
                 </p>
                 <div class="pmock-offer">
                   <span class="pmock-offer-tag">Offre suggérée par l'IA</span>
-                  <span class="pmock-offer-val">−15 % sur menuiserie ext.</span>
+                  <span class="pmock-offer-val">Adaptée à son cycle d'achat</span>
                 </div>
                 <div class="pmock-actions">
                   <span class="pmock-btn pmock-btn--primary">Envoyer J-3</span>
