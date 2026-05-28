@@ -6,44 +6,44 @@ const terrain = [
   {
     icon: 'hard-hat',
     secteur: 'Bâtiment',
-    titre: 'Un chantier qui commence à glisser.',
-    body: '9·58 détecte le décalage à J-10, recroise les heures saisies, et déclenche l\'appel client préventif avec le brouillon de mail prêt.',
-    gain: '3 jours gagnés / mois',
+    titre: 'Le pointage des heures du vendredi.',
+    body: '4 h chaque vendredi à reporter Pierre, Sophie, Marc dans l\'Excel des heures, croiser avec les chantiers, préparer la paie. 9·58 le fait en continu, à partir des saisies terrain.',
+    gain: '4 h récupérées chaque vendredi',
   },
   {
     icon: 'home',
     secteur: 'Agence immo',
-    titre: 'Un compromis qui traîne 3 semaines.',
-    body: '9·58 repère le doute de l\'acquéreur dans ses derniers échanges, génère le mail de relance personnalisé et propose la visite qui débloque.',
-    gain: '+18 % de signatures',
+    titre: 'La diffusion d\'un mandat sur 6 portails.',
+    body: '3 h par bien à reformuler l\'annonce, recadrer les photos, dupliquer sur Apimo, SeLoger, Leboncoin… 9·58 publie sur les 6 portails en 5 min depuis votre fiche mandat.',
+    gain: '3 h → 5 min par bien',
   },
   {
     icon: 'building-2',
     secteur: 'Promotion',
-    titre: 'Une tréso à −3 200 € prévue semaine 34.',
-    body: '9·58 anticipe le trou 8 semaines avant. Vous appelez votre banquier dans le calme, ou décalez deux fournisseurs sans crise.',
-    gain: '8 semaines d\'avance',
+    titre: 'La modification d\'un PLU pour un foncier.',
+    body: '1 journée à éplucher 80 pages, recouper les zonages, refaire la fiche de faisabilité avec la mise en page maison. 9·58 lit le PLU, l\'interprète pour votre projet et sort la note à votre charte.',
+    gain: '1 jour → 30 min par foncier',
   },
   {
     icon: 'users',
     secteur: 'Équipe',
-    titre: 'Votre commercial qui part en mars.',
-    body: '9·58 archive ses échanges clients et ses notes en continu. Son remplaçant reprend les 40 dossiers en 2 jours, pas en 6 mois.',
-    gain: '5 mois et demi sauvés',
+    titre: 'Le compte-rendu de réunion du lundi matin.',
+    body: '1 h après chaque réunion à rédiger, mettre en forme, envoyer à tous. 9·58 transcrit, structure, rédige à votre ton et envoie. Vous sortez de la réunion, le CR est déjà dans la boîte de l\'équipe.',
+    gain: 'La réunion finit, le CR est envoyé',
   },
   {
     icon: 'mail',
     secteur: 'Syndic',
-    titre: 'Cinq cents mails copros chaque jour.',
-    body: '9·58 trie, repère les 12 urgents, rédige les brouillons de réponse à votre charte. Vous tranchez les vraies décisions, l\'IA fait le reste.',
+    titre: 'Cinq cents mails de copropriétaires chaque jour.',
+    body: '9·58 trie, repère les 12 urgents, rédige les brouillons à votre charte. Vous tranchez les vraies décisions, l\'IA fait le reste — courriers types, accusés, relances.',
     gain: '3 h → 30 min / jour',
   },
   {
     icon: 'briefcase',
     secteur: 'TPE / PME',
-    titre: 'Un Excel à 28 onglets que Marie maîtrise seule.',
-    body: '9·58 ingère ces 28 onglets, les recroise, les met à jour seul. Chacun voit ce qui le concerne — Marie son scope, vous l\'ensemble, le chef de chantier ses chantiers. La paie reste à la paie, vos marges restent à vous.',
-    gain: 'Marie part. Le savoir reste.',
+    titre: 'La proposition commerciale personnalisée.',
+    body: '2 h par prospect à adapter le Word, intégrer les photos, ajuster le tarif, exporter en PDF propre. 9·58 sort le doc à votre charte en 3 min. Vous appelez le prospect au lieu de mettre en page.',
+    gain: '2 h → 3 min par proposition',
   },
 ];
 
@@ -579,11 +579,17 @@ const temoignages = [
   <section id="terrain" class="section section--soft" aria-labelledby="terrain-title">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow reveal">Ce qu'on connaît du métier</p>
+        <p class="eyebrow reveal">Les heures qu'on vous rend</p>
         <h2 id="terrain-title" class="reveal section-h2">
-          Ils vous parlent d'IA.<br>
-          <em>Nous, on vous parle de ce qui vous empêche de dormir.</em>
+          Les heures que vous passez<br>
+          dans la paperasse, <em>vous ne les passez pas</em><br>
+          avec vos clients.
         </h2>
+        <p class="reveal section-sub">
+          Voici les tâches qui prennent du temps, qui n'apportent rien,
+          et que 9·58 prend en charge. Le temps que vous récupérez,
+          vous le rendez à votre métier — votre commercial, votre équipe, votre vraie vie.
+        </p>
       </div>
 
       <div class="terrain-grid">
@@ -680,8 +686,8 @@ const temoignages = [
       </div>
 
       <p class="reveal terrain-outro">
-        Voilà ce qu'on connaît. Voilà pourquoi on installe l'IA <em>chez vous</em>,
-        pas dans un datacenter à Boston.
+        Ces heures-là, vous ne les retrouverez pas en attendant.
+        On vous les rend — pour que vous fassiez <em>ce que personne d'autre que vous ne peut faire</em>.
       </p>
     </div>
   </section>
