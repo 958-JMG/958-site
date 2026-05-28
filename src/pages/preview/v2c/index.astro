@@ -6,38 +6,44 @@ const terrain = [
   {
     icon: 'hard-hat',
     secteur: 'Bâtiment',
-    titre: 'Un chantier qui glisse de 3 semaines.',
-    body: 'Ce n\'est pas du retard. C\'est un client qui décide de ne plus jamais vous rappeler.',
+    titre: 'Un chantier qui commence à glisser.',
+    body: '9·58 détecte le décalage à J-10, recroise les heures saisies, et déclenche l\'appel client préventif avec le brouillon de mail prêt.',
+    gain: '3 jours gagnés / mois',
   },
   {
     icon: 'home',
     secteur: 'Agence immo',
     titre: 'Un compromis qui traîne 3 semaines.',
-    body: 'Ce n\'est pas un délai. C\'est un acquéreur qui doute — et qui ira voir la concurrence dans 8 jours.',
+    body: '9·58 repère le doute de l\'acquéreur dans ses derniers échanges, génère le mail de relance personnalisé et propose la visite qui débloque.',
+    gain: '+18 % de signatures',
   },
   {
     icon: 'building-2',
     secteur: 'Promotion',
-    titre: 'Une tréso à −3 200 € en semaine 34.',
-    body: 'Ce n\'est pas un trou. C\'est 14 nuits sans dormir et un appel à votre banquier qui vous démange.',
+    titre: 'Une tréso à −3 200 € prévue semaine 34.',
+    body: '9·58 anticipe le trou 8 semaines avant. Vous appelez votre banquier dans le calme, ou décalez deux fournisseurs sans crise.',
+    gain: '8 semaines d\'avance',
   },
   {
     icon: 'users',
     secteur: 'Équipe',
     titre: 'Votre commercial qui part en mars.',
-    body: 'Ce n\'est pas une démission. C\'est 40 % de votre CA à reconstruire en 6 mois, avec deux fournisseurs qu\'il était le seul à connaître.',
+    body: '9·58 archive ses échanges clients et ses notes en continu. Son remplaçant reprend les 40 dossiers en 2 jours, pas en 6 mois.',
+    gain: '5 mois et demi sauvés',
   },
   {
     icon: 'mail',
     secteur: 'Syndic',
-    titre: 'Une copro de 30 lots.',
-    body: 'Ce n\'est pas 30 copropriétaires. C\'est 28 normaux et 2 qui prennent 80 % de votre temps — et qui le savent.',
+    titre: 'Cinq cents mails copros chaque jour.',
+    body: '9·58 trie, repère les 12 urgents, rédige les brouillons de réponse à votre charte. Vous tranchez les vraies décisions, l\'IA fait le reste.',
+    gain: '3 h → 30 min / jour',
   },
   {
     icon: 'briefcase',
     secteur: 'TPE / PME',
-    titre: 'Un Excel à 28 onglets.',
-    body: 'Ce n\'est pas un fichier. C\'est l\'âme de votre boîte. Si Marie l\'emporte avec elle, vous êtes mort.',
+    titre: 'Un Excel à 28 onglets que Marie maîtrise seule.',
+    body: '9·58 ingère ces 28 onglets en une semaine, les recroise, les met à jour seul. Ce que Marie voyait, toute votre équipe le voit — en temps réel.',
+    gain: 'Marie part en vacances tranquille',
   },
 ];
 
@@ -584,11 +590,15 @@ const temoignages = [
         {terrain.map((t) => (
           <article class="terrain-card reveal">
             <div class="terrain-head">
-              <span class="terrain-icon"><Icon name={t.icon} size={20} strokeWidth={1.6} /></span>
+              <span class="terrain-icon"><Icon name={t.icon} size={26} strokeWidth={1.6} /></span>
               <span class="terrain-secteur">{t.secteur}</span>
             </div>
             <h3 class="terrain-titre">{t.titre}</h3>
             <p class="terrain-body">{t.body}</p>
+            <div class="terrain-gain">
+              <span class="terrain-gain-arrow"><Icon name="arrow-right" size={14} strokeWidth={2} /></span>
+              <span class="terrain-gain-label">{t.gain}</span>
+            </div>
           </article>
         ))}
 
@@ -1785,14 +1795,19 @@ const temoignages = [
     gap: var(--s-2);
   }
   .terrain-icon {
-    width: 32px;
-    height: 32px;
+    width: 44px;
+    height: 44px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: var(--cuivre-soft);
-    color: var(--cuivre);
-    border-radius: var(--r-2);
+    background: var(--cuivre);
+    color: var(--bg);
+    border-radius: var(--r-3);
+    transition: transform var(--dur-2) var(--ease), box-shadow var(--dur-2) var(--ease);
+  }
+  .terrain-card:hover .terrain-icon {
+    transform: scale(1.08) rotate(-3deg);
+    box-shadow: var(--glow-cuivre);
   }
   .terrain-secteur {
     font-family: var(--font-mono);
@@ -1819,6 +1834,36 @@ const temoignages = [
     margin: 0;
     max-width: none;
   }
+
+  /* Indicateur de gain en pied de carte */
+  .terrain-gain {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: auto;
+    padding-top: var(--s-3);
+    border-top: 1px dashed var(--line-2);
+  }
+  .terrain-gain-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    background: var(--vert-mousse-soft);
+    color: var(--vert-mousse);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .terrain-gain-label {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--vert-mousse);
+    font-weight: 600;
+  }
+
   .terrain-outro {
     font-family: var(--font-display);
     font-style: italic;
