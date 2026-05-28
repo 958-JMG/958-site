@@ -140,10 +140,31 @@ const temoignages = [
               <div class="cc-head">
                 <span class="cc-label">3 chantiers en cours</span>
               </div>
-              <ul class="cc-list">
-                <li><span class="cc-tag cc-tag--ok">✓</span> Devis Klein signé hier</li>
-                <li><span class="cc-tag cc-tag--warn">!</span> Heures sem 22 : +18 %</li>
-                <li><span class="cc-tag">·</span> Livraison Lefèvre — vendredi</li>
+              <ul class="cc-chantiers">
+                <li>
+                  <div class="cc-chantier-row">
+                    <span class="cc-tag cc-tag--ok">✓</span>
+                    <span class="cc-chantier-nom">Klein — gros œuvre</span>
+                    <span class="cc-chantier-pct">68 %</span>
+                  </div>
+                  <div class="cc-progress"><span style="width: 68%; background: var(--vert-mousse);"></span></div>
+                </li>
+                <li>
+                  <div class="cc-chantier-row">
+                    <span class="cc-tag cc-tag--warn">!</span>
+                    <span class="cc-chantier-nom">Lefèvre — second œuvre</span>
+                    <span class="cc-chantier-pct">42 %</span>
+                  </div>
+                  <div class="cc-progress"><span style="width: 42%; background: var(--warn);"></span></div>
+                </li>
+                <li>
+                  <div class="cc-chantier-row">
+                    <span class="cc-tag">·</span>
+                    <span class="cc-chantier-nom">Dupuis — finitions</span>
+                    <span class="cc-chantier-pct">91 %</span>
+                  </div>
+                  <div class="cc-progress"><span style="width: 91%; background: var(--cuivre);"></span></div>
+                </li>
               </ul>
             </article>
 
@@ -161,7 +182,67 @@ const temoignages = [
               </div>
             </article>
 
-            <!-- Card Suggestion IA (large) -->
+            <!-- Card RH / Équipe -->
+            <article class="cockpit-card cockpit-card--rh">
+              <div class="cc-head">
+                <span class="cc-label">Équipe — semaine 22</span>
+              </div>
+              <ul class="cc-rh">
+                <li>
+                  <span class="cc-rh-name">Pierre M.</span>
+                  <div class="cc-progress"><span style="width: 82%; background: var(--vert-mousse);"></span></div>
+                  <span class="cc-rh-pct">82 %</span>
+                </li>
+                <li>
+                  <span class="cc-rh-name">Sophie L.</span>
+                  <div class="cc-progress"><span style="width: 91%; background: var(--cuivre);"></span></div>
+                  <span class="cc-rh-pct">91 %</span>
+                </li>
+                <li>
+                  <span class="cc-rh-name">Marc D.</span>
+                  <div class="cc-progress"><span style="width: 38%; background: var(--ink-3);"></span></div>
+                  <span class="cc-rh-pct">38 %</span>
+                </li>
+              </ul>
+              <p class="cc-note cc-note--info">+ 1 congé prévu semaine 24</p>
+            </article>
+
+            <!-- Card Pipeline Kanban (full-width) -->
+            <article class="cockpit-card cockpit-card--kanban">
+              <div class="cc-head">
+                <span class="cc-label cc-label--ai">
+                  <span class="cc-pulse" aria-hidden="true"></span>
+                  Pipeline — auto-trié par l'IA
+                </span>
+                <span class="cc-kanban-meta">↻ 2 cartes déplacées ce matin</span>
+              </div>
+              <div class="cc-kanban">
+                <div class="cc-kcol">
+                  <span class="cc-kcol-h">Devis</span>
+                  <span class="cc-kcard">Garage L. — 8 200 €</span>
+                  <span class="cc-kcard cc-kcard--moving">Cabinet R. — 4 750 €</span>
+                  <span class="cc-kcol-count">3</span>
+                </div>
+                <div class="cc-kcol">
+                  <span class="cc-kcol-h">Accepté</span>
+                  <span class="cc-kcard">Klein — 18 400 €</span>
+                  <span class="cc-kcol-count">2</span>
+                </div>
+                <div class="cc-kcol">
+                  <span class="cc-kcol-h">Chantier</span>
+                  <span class="cc-kcard">Lefèvre — 32 100 €</span>
+                  <span class="cc-kcard">Dupuis — 7 800 €</span>
+                  <span class="cc-kcol-count">4</span>
+                </div>
+                <div class="cc-kcol">
+                  <span class="cc-kcol-h">Facturé</span>
+                  <span class="cc-kcard">Morel — 12 600 €</span>
+                  <span class="cc-kcol-count">1</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Card Suggestion IA (full-width) -->
             <article class="cockpit-card cockpit-card--ai">
               <div class="cc-head">
                 <span class="cc-label cc-label--ai">
@@ -770,6 +851,150 @@ const temoignages = [
     align-items: center;
     gap: 8px;
     line-height: 1.4;
+  }
+
+  /* Chantiers — progress rows */
+  .cc-chantiers {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .cc-chantiers li {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .cc-chantier-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: var(--ink-2);
+  }
+  .cc-chantier-nom { flex: 1; }
+  .cc-chantier-pct {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--ink-3);
+    letter-spacing: 0.02em;
+  }
+  .cc-progress {
+    height: 4px;
+    background: var(--bg);
+    border-radius: 999px;
+    overflow: hidden;
+    position: relative;
+  }
+  .cc-progress > span {
+    display: block;
+    height: 100%;
+    border-radius: 999px;
+    transition: width 0.8s var(--ease-out);
+  }
+
+  /* RH / Équipe */
+  .cc-rh {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .cc-rh li {
+    display: grid;
+    grid-template-columns: 60px 1fr 32px;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: var(--ink-2);
+  }
+  .cc-rh-name {
+    font-weight: 500;
+    color: var(--ivoire-2);
+  }
+  .cc-rh-pct {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--ink-3);
+    text-align: right;
+    letter-spacing: 0.02em;
+  }
+  .cc-note--info {
+    color: var(--ink-3);
+    margin-top: 4px;
+  }
+
+  /* Pipeline kanban */
+  .cockpit-card--kanban {
+    grid-column: 1 / -1;
+    padding: var(--s-4) var(--s-5);
+  }
+  .cc-kanban-meta {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--ink-3);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .cc-kanban {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .cc-kcol {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: relative;
+    min-height: 110px;
+  }
+  .cc-kcol-h {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--cuivre);
+    font-weight: 600;
+  }
+  .cc-kcard {
+    background: var(--bg-3);
+    border: 1px solid var(--line-2);
+    border-radius: 4px;
+    padding: 5px 7px;
+    font-size: 10px;
+    color: var(--ivoire-2);
+    line-height: 1.3;
+    transition: transform 0.6s var(--ease), background 0.6s var(--ease);
+  }
+  .cc-kcard--moving {
+    animation: kanban-move 6s var(--ease) infinite;
+    border-color: var(--cuivre);
+    box-shadow: 0 0 0 1px var(--cuivre-soft);
+  }
+  @keyframes kanban-move {
+    0%, 25% { transform: translate(0, 0); background: var(--bg-3); }
+    50%, 75% { transform: translate(calc(100% + 12px), -32px); background: var(--cuivre-soft); }
+    100% { transform: translate(0, 0); background: var(--bg-3); }
+  }
+  .cc-kcol-count {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--ink-3);
+    background: var(--bg-3);
+    padding: 1px 5px;
+    border-radius: 999px;
   }
   .cc-tag {
     display: inline-flex;
