@@ -602,7 +602,55 @@ const temoignages = [
           </article>
         ))}
 
-        <!-- Card 7 : manifeste plein largeur — Interroger ≠ Interpréter -->
+        <!-- Card "IA proactive" — Anniversaire client (full-width avec mini-mockup) -->
+        <article class="terrain-card terrain-card--proactive reveal">
+          <div class="proactive-grid">
+            <div class="proactive-copy">
+              <div class="terrain-head">
+                <span class="terrain-icon terrain-icon--vert"><Icon name="gift" size={26} strokeWidth={1.6} /></span>
+                <span class="terrain-secteur terrain-secteur--vert">Commercial — IA proactive</span>
+              </div>
+              <h3 class="terrain-titre">
+                L'anniversaire de votre meilleur client,<br>
+                <em>dans 7 jours</em>.
+              </h3>
+              <p class="terrain-body">
+                9·58 le repère, croise son historique d'achat des 3 dernières années
+                et rédige le message personnalisé avec une <strong>offre adaptée à son cycle</strong>.
+                Vous validez en 1 clic. Il signe une commande de plus.
+              </p>
+              <div class="terrain-gain">
+                <span class="terrain-gain-arrow"><Icon name="arrow-right" size={14} strokeWidth={2} /></span>
+                <span class="terrain-gain-label">4 ventes additionnelles / mois</span>
+              </div>
+            </div>
+
+            <!-- Mini-mockup du mail anniversaire -->
+            <div class="proactive-mock" aria-hidden="true">
+              <div class="pmock-bar">
+                <span class="pmock-from"><Icon name="calendar" size={12} strokeWidth={1.8} /> J-7 · anniversaire détecté</span>
+              </div>
+              <div class="pmock-body">
+                <div class="pmock-to">→ Sophie Lefort · cliente depuis 2021</div>
+                <div class="pmock-subject">Sophie, un petit mot pour vos 42 ans</div>
+                <p class="pmock-text">
+                  Bonjour Sophie,<br>
+                  Vos rénovations du printemps dernier ont 18 mois — c'est souvent le moment où l'on pense aux finitions extérieures…
+                </p>
+                <div class="pmock-offer">
+                  <span class="pmock-offer-tag">Offre suggérée par l'IA</span>
+                  <span class="pmock-offer-val">−15 % sur menuiserie ext.</span>
+                </div>
+                <div class="pmock-actions">
+                  <span class="pmock-btn pmock-btn--primary">Envoyer J-3</span>
+                  <span class="pmock-btn">Modifier</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 8 : manifeste plein largeur — Interroger ≠ Interpréter -->
         <article class="terrain-card terrain-card--manifest reveal">
           <div class="terrain-manifest-grid">
             <div>
@@ -1876,6 +1924,131 @@ const temoignages = [
     text-wrap: balance;
   }
   .terrain-outro em { color: var(--cuivre); font-style: italic; font-weight: 500; }
+
+  /* Card IA proactive — Anniversaire client (full-width, distinguée vert) */
+  .terrain-card--proactive {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg,
+      var(--vert-mousse-soft) 0%,
+      var(--bg) 60%,
+      var(--cuivre-soft) 100%);
+    border: 1px solid var(--vert-mousse);
+    padding: var(--s-6);
+    position: relative;
+    overflow: hidden;
+  }
+  .terrain-icon--vert {
+    background: var(--vert-mousse);
+    color: var(--bg);
+  }
+  .terrain-secteur--vert {
+    color: var(--vert-mousse);
+  }
+  .proactive-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: var(--s-6);
+    align-items: center;
+  }
+  .proactive-copy { display: flex; flex-direction: column; gap: var(--s-3); }
+  .proactive-copy .terrain-gain {
+    border-top: 1px dashed var(--vert-mousse);
+    margin-top: var(--s-3);
+    padding-top: var(--s-3);
+  }
+  .terrain-card--proactive .terrain-titre em {
+    color: var(--vert-mousse);
+    font-style: italic;
+  }
+
+  /* Mini-mockup du mail anniversaire */
+  .proactive-mock {
+    background: var(--bg-2);
+    border: 1px solid var(--line-2);
+    border-radius: var(--r-3);
+    overflow: hidden;
+    box-shadow: 0 20px 50px -20px rgba(0,0,0,0.6);
+  }
+  .pmock-bar {
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    padding: 8px 12px;
+  }
+  .pmock-from {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--vert-mousse);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .pmock-body { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+  .pmock-to {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--ink-3);
+    letter-spacing: 0.04em;
+  }
+  .pmock-subject {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--ivoire);
+    letter-spacing: -0.01em;
+  }
+  .pmock-text {
+    font-size: 11px;
+    color: var(--ivoire-2);
+    line-height: 1.55;
+    margin: 0;
+    max-width: none;
+  }
+  .pmock-offer {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px 10px;
+    background: var(--cuivre-soft);
+    border-left: 2px solid var(--cuivre);
+    border-radius: 4px;
+  }
+  .pmock-offer-tag {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--cuivre);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .pmock-offer-val {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--ivoire);
+  }
+  .pmock-actions { display: flex; gap: 6px; margin-top: 2px; }
+  .pmock-btn {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--line-2);
+    background: transparent;
+    color: var(--ink-2);
+  }
+  .pmock-btn--primary {
+    background: var(--vert-mousse);
+    color: var(--bg);
+    border-color: var(--vert-mousse);
+  }
+
+  @media (max-width: 900px) {
+    .proactive-grid { grid-template-columns: 1fr; gap: var(--s-5); }
+  }
 
   /* Card manifeste pleine largeur — Interroger ≠ Interpréter */
   .terrain-card--manifest {
