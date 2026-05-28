@@ -286,6 +286,44 @@ const temoignages = [
         tresoEl.textContent = val.toLocaleString('fr-FR');
       }, 4200);
     }
+
+    // Compteurs animés sur les chiffres preuve (au scroll-in)
+    function parseProofValue(str) {
+      const match = str.match(/^([+\-]?)(\d+)(.*)$/);
+      if (!match) return null;
+      return { prefix: match[1] || '', number: parseInt(match[2], 10), suffix: match[3] || '' };
+    }
+    function animateCounter(el, parsed) {
+      const duration = 1400;
+      const start = performance.now();
+      const target = parsed.number;
+      const step = (now) => {
+        const t = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - t, 3); // ease-out cubic
+        const current = Math.round(target * eased);
+        el.textContent = `${parsed.prefix}${current}${parsed.suffix}`;
+        if (t < 1) requestAnimationFrame(step);
+        else el.textContent = `${parsed.prefix}${target}${parsed.suffix}`;
+      };
+      requestAnimationFrame(step);
+    }
+    const proofObs = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        if (el.dataset.animated) return;
+        el.dataset.animated = '1';
+        const parsed = parseProofValue(el.dataset.final || el.textContent.trim());
+        if (parsed) animateCounter(el, parsed);
+        proofObs.unobserve(el);
+      });
+    }, { threshold: 0.4 });
+    document.querySelectorAll('.proof-v').forEach((el) => {
+      // Démarre à 0 pour donner l'effet "le chiffre apparaît"
+      const parsed = parseProofValue(el.dataset.final || el.textContent.trim());
+      if (parsed) el.textContent = `${parsed.prefix}0${parsed.suffix}`;
+      proofObs.observe(el);
+    });
   </script>
 
   <!-- =========================================
@@ -422,51 +460,6 @@ const temoignages = [
     </div>
   </section>
 
-  <!-- =========================================
-       SECTION 2 — VOS DONNÉES DORMENT
-       ========================================= -->
-  <section id="vos-donnees" class="section" aria-labelledby="dorment-title">
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow reveal">On vous facilite la tâche</p>
-        <h2 id="dorment-title" class="reveal section-h2">
-          Développer une entreprise<br>
-          n'est pas chose facile.<br>
-          <em>9·58 vous facilite la tâche. Plus d'oubli.</em>
-        </h2>
-        <p class="reveal section-sub">
-          Vos données sont déjà là. Vos logiciels ne les regardent pas. Nous, si.
-        </p>
-      </div>
-
-      <div class="dorment-grid">
-        <article class="dorment-item reveal">
-          <span class="dorment-n">01</span>
-          <h3 class="dorment-h">Ils stockent. Ils n'analysent pas.</h3>
-          <p>Vos logiciels métier — quels qu'ils soient — enregistrent vos devis, vos mails, vos heures, vos relevés bancaires. Mais aucun ne croise ces données pour vous dire ce qu'elles signifient pour <em>votre</em> boîte, à <em>votre</em> moment, dans <em>votre</em> secteur.</p>
-        </article>
-
-        <article class="dorment-item reveal">
-          <span class="dorment-n">02</span>
-          <h3 class="dorment-h">Ils décrivent. Ils n'anticipent pas.</h3>
-          <p>Votre tableau de bord vous montre votre tréso au 30 mai. 9·58 vous dit : <em>« attention, le client X tarde sur 3 factures, le chantier Y accélère ses appels — vous avez un trou tréso programmé pour le 18 août. Voici les 3 leviers. »</em></p>
-        </article>
-
-        <article class="dorment-item reveal">
-          <span class="dorment-n">03</span>
-          <h3 class="dorment-h">Ils servent tout le monde. Ils ne vous servent pas <em>vous</em>.</h3>
-          <p>Un logiciel acheté pense pour 50 000 entreprises à la fois. Forcément, il vous parle à 25 %. Les 75 % restants — vos process, votre secteur, votre clientèle — il n'en sait rien. C'est ce 75 % qu'on récupère.</p>
-        </article>
-      </div>
-
-      <div class="reveal dorment-chiffre">
-        <p class="display-quote">
-          « 60 % de votre croissance dort déjà dans vos données. »
-        </p>
-        <p class="dorment-source">— Constat partagé par les dirigeants qu'on accompagne.</p>
-      </div>
-    </div>
-  </section>
 
   <!-- =========================================
        SECTION 3 — CE QU'ON CONSTRUIT (3 piliers)
@@ -582,7 +575,7 @@ const temoignages = [
       <div class="proofs-grid">
         {proofs.map((p) => (
           <div class="proof reveal">
-            <span class="proof-v">{p.value}</span>
+            <span class="proof-v" data-target={p.value} data-final={p.value}>{p.value}</span>
             <span class="proof-l">{p.label}</span>
           </div>
         ))}
@@ -1016,6 +1009,7 @@ const temoignages = [
   .cockpit-card--kanban {
     grid-column: 1 / -1;
     padding: var(--s-4) var(--s-5);
+    overflow: hidden;
   }
   .cc-kanban-meta {
     font-family: var(--font-mono);
@@ -1065,10 +1059,10 @@ const temoignages = [
     box-shadow: 0 0 0 1px var(--cuivre-soft);
   }
   @keyframes kanban-move {
-    0%, 25% { transform: translate(0, 0); background: var(--bg-3); }
-    35%, 40% { transform: translate(0, 60px); background: var(--cuivre-soft); opacity: 0.7; }
-    50%, 75% { transform: translate(calc(100% + 12px), 60px); background: var(--cuivre-soft); opacity: 1; }
-    85%, 90% { transform: translate(calc(100% + 12px), 0); background: var(--cuivre-soft); }
+    0%, 22% { transform: translate(0, 0); background: var(--bg-3); opacity: 1; }
+    30%, 35% { transform: translate(0, 32px); background: var(--cuivre-soft); opacity: 0.6; }
+    48%, 70% { transform: translate(calc(100% + 12px), 32px); background: var(--cuivre-soft); opacity: 1; }
+    80%, 85% { transform: translate(calc(100% + 12px), 0); background: var(--cuivre-soft); }
     100% { transform: translate(0, 0); background: var(--bg-3); opacity: 1; }
   }
   .cc-kcol-count {
