@@ -67,47 +67,144 @@ const temoignages = [
   </header>
 
   <!-- =========================================
-       HERO — "On installe l'IA" + WHY Sinek
+       HERO — Pivot B : texte court + démo cockpit live
        ========================================= -->
   <section class="hero" aria-labelledby="hero-title">
-    <div class="container is-default">
-      <p class="eyebrow reveal">
-        9·58 — L'IA installée chez les artisans, promoteurs, agences immo &amp; syndics — Bretagne, depuis 2022
-      </p>
+    <div class="container hero-grid">
 
-      <h1 id="hero-title" class="manifesto reveal">
-        On installe l'IA<br>
-        dans votre entreprise.
-      </h1>
+      <!-- Colonne texte (gauche) -->
+      <div class="hero-copy">
+        <p class="eyebrow reveal">
+          9·58 — Bretagne, depuis 2022
+        </p>
 
-      <p class="killer-line reveal">
-        Votre entreprise<br>
-        dans votre poche.
-      </p>
+        <h1 id="hero-title" class="manifesto reveal">
+          On installe l'IA<br>
+          dans votre entreprise.
+        </h1>
 
-      <p class="lead reveal">
-        Vos devis, vos mandats, vos chantiers, vos mails, votre tréso…
-        et bien plus — au même endroit. <strong>À votre nom.</strong>
-      </p>
+        <p class="killer-line reveal">
+          Votre entreprise<br>
+          dans votre poche.
+        </p>
 
-      <div class="hero-ctas reveal">
-        <a href="#contact" class="btn btn--primary btn--lg">
-          Demander un diagnostic
-          <Icon name="arrow-right" size={18} class="arrow" />
-        </a>
-        <a href="https://demo.958.fr" class="btn btn--ghost btn--lg">
-          Voir une démo sectorielle
-          <Icon name="arrow-up-right" size={18} class="arrow" />
-        </a>
+        <div class="hero-ctas reveal">
+          <a href="#contact" class="btn btn--primary btn--lg">
+            Demander un diagnostic
+            <Icon name="arrow-right" size={18} class="arrow" />
+          </a>
+          <a href="https://demo.958.fr" class="btn btn--ghost btn--lg">
+            Voir une démo
+            <Icon name="arrow-up-right" size={18} class="arrow" />
+          </a>
+        </div>
+
+        <ul class="hero-assurances reveal">
+          <li>Réponse sous 48 h</li>
+          <li>NDA</li>
+          <li>Premier échange offert</li>
+        </ul>
       </div>
 
-      <ul class="hero-assurances reveal">
-        <li>Réponse sous 48 h</li>
-        <li>Accord de confidentialité</li>
-        <li>Premier échange offert</li>
-      </ul>
+      <!-- Colonne démo cockpit (droite) -->
+      <div class="hero-demo reveal" aria-label="Aperçu de l'écran 9·58">
+        <div class="cockpit">
+          <header class="cockpit-bar">
+            <span class="cockpit-brand">9·58</span>
+            <span class="cockpit-cabinet">Cabinet Martin · Vannes</span>
+            <span class="cockpit-time" id="cockpit-time">08:47</span>
+          </header>
+
+          <div class="cockpit-grid">
+            <!-- Card Tréso -->
+            <article class="cockpit-card cockpit-card--treso">
+              <div class="cc-head">
+                <span class="cc-label">Tréso prévue 90 j</span>
+                <span class="cc-dot cc-dot--warn" aria-hidden="true"></span>
+              </div>
+              <div class="cc-value">
+                +<span class="treso-num">28 540</span> €
+              </div>
+              <div class="cc-spark" aria-hidden="true">
+                <svg viewBox="0 0 100 30" preserveAspectRatio="none">
+                  <polyline points="0,18 12,15 24,20 36,12 48,14 60,8 72,16 84,22 96,26"
+                            fill="none" stroke="currentColor" stroke-width="1.6"/>
+                  <circle cx="96" cy="26" r="2.5" fill="currentColor"/>
+                </svg>
+              </div>
+              <p class="cc-note">↘ -3 200 € prévu semaine 34</p>
+            </article>
+
+            <!-- Card Chantiers -->
+            <article class="cockpit-card cockpit-card--chantiers">
+              <div class="cc-head">
+                <span class="cc-label">3 chantiers en cours</span>
+              </div>
+              <ul class="cc-list">
+                <li><span class="cc-tag cc-tag--ok">✓</span> Devis Klein signé hier</li>
+                <li><span class="cc-tag cc-tag--warn">!</span> Heures sem 22 : +18 %</li>
+                <li><span class="cc-tag">·</span> Livraison Lefèvre — vendredi</li>
+              </ul>
+            </article>
+
+            <!-- Card Mails IA -->
+            <article class="cockpit-card cockpit-card--mails">
+              <div class="cc-head">
+                <span class="cc-label">12 mails lus ce matin</span>
+              </div>
+              <div class="cc-mail-draft">
+                <span class="cc-mail-to">→ Sophie Lefort</span>
+                <p class="cc-mail-body">
+                  <span class="typing">Bonjour Sophie, suite à notre…</span>
+                </p>
+                <span class="cc-mail-badge">Brouillon prêt</span>
+              </div>
+            </article>
+
+            <!-- Card Suggestion IA (large) -->
+            <article class="cockpit-card cockpit-card--ai">
+              <div class="cc-head">
+                <span class="cc-label cc-label--ai">
+                  <span class="cc-pulse" aria-hidden="true"></span>
+                  Suggestion IA
+                </span>
+              </div>
+              <p class="cc-ai-text">
+                Client Klein paie en moyenne <strong>+22 jours</strong> de retard sur les 3 derniers chantiers.
+                Demander un acompte de 30 % au prochain devis ?
+              </p>
+              <div class="cc-ai-actions">
+                <button class="cc-ai-btn cc-ai-btn--primary" type="button">Appliquer</button>
+                <button class="cc-ai-btn" type="button">Plus tard</button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
+
+  <script>
+    // Anim subtile : l'heure qui avance + le chiffre tréso qui varie légèrement
+    const timeEl = document.getElementById('cockpit-time');
+    const tresoEl = document.querySelector('.treso-num');
+    if (timeEl) {
+      let h = 8, m = 47;
+      setInterval(() => {
+        m++;
+        if (m >= 60) { m = 0; h++; }
+        timeEl.textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+      }, 3500);
+    }
+    if (tresoEl) {
+      let val = 28540;
+      setInterval(() => {
+        val += Math.round((Math.random() - 0.5) * 800);
+        tresoEl.textContent = val.toLocaleString('fr-FR');
+      }, 4200);
+    }
+  </script>
 
   <!-- =========================================
        SECTION 1 — POURQUOI MAINTENANT (schéma adoption)
@@ -117,12 +214,12 @@ const temoignages = [
       <div class="section-head">
         <p class="eyebrow reveal">Pourquoi maintenant</p>
         <h2 id="adoption-title" class="reveal section-h2">
-          L'IA n'est pas une mode.<br>
-          C'est <em>un virage</em>. Et la fenêtre se ferme.
+          Tout le monde parle d'IA.<br>
+          <em>Très peu l'installent vraiment.</em>
         </h2>
         <p class="reveal section-sub">
-          Ceux qui s'y mettent maintenant prennent une avance durable.
-          Ceux qui attendent 2027 paieront le rattrapage. Vous êtes ici.
+          La courbe d'adoption avance. Les pionniers prennent l'avantage.
+          Pas en panique. À votre rythme. Vous êtes ici.
         </p>
       </div>
 
@@ -460,21 +557,27 @@ const temoignages = [
     .nav-desktop, .header-cta { display: none; }
   }
 
-  /* ============ HERO ============ */
+  /* ============ HERO (layout 2 col + démo) ============ */
   .hero {
-    padding-block: var(--s-11) var(--s-9);
+    padding-block: var(--s-10) var(--s-9);
   }
-  .hero .eyebrow { margin-bottom: var(--s-6); }
-  .hero .manifesto {
-    margin-bottom: var(--s-6);
-    max-width: 18ch;
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    gap: var(--s-9);
+    align-items: center;
   }
-  .hero .killer-line {
+  .hero-copy {
+    display: flex;
+    flex-direction: column;
+  }
+  .hero-copy .eyebrow { margin-bottom: var(--s-5); }
+  .hero-copy .manifesto {
     margin-bottom: var(--s-5);
+    max-width: 14ch;
   }
-  .hero .lead {
-    margin-bottom: var(--s-7);
-    max-width: 56ch;
+  .hero-copy .killer-line {
+    margin-bottom: var(--s-6);
   }
   .hero-ctas {
     display: flex;
@@ -486,7 +589,7 @@ const temoignages = [
     display: flex;
     flex-wrap: wrap;
     gap: var(--s-5);
-    margin-top: var(--s-7);
+    margin-top: var(--s-6);
     list-style: none;
     padding: 0;
   }
@@ -511,9 +614,282 @@ const temoignages = [
     border-radius: 50%;
   }
 
+  @media (max-width: 1024px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: var(--s-8);
+    }
+    .hero-copy .manifesto { max-width: 100%; }
+  }
+
   @media (max-width: 720px) {
-    .hero { padding-block: var(--s-8) var(--s-7); }
-    .hero .manifesto { max-width: 100%; }
+    .hero { padding-block: var(--s-7) var(--s-7); }
+  }
+
+  /* ============ COCKPIT DEMO (mockup) ============ */
+  .hero-demo {
+    perspective: 1200px;
+  }
+  .cockpit {
+    background: var(--bg-2);
+    border: 1px solid var(--line-2);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow:
+      0 30px 80px -20px rgba(0,0,0,0.6),
+      0 0 0 1px rgba(244, 236, 220, 0.05),
+      0 8px 24px -8px rgba(199, 95, 45, 0.18);
+    transform: rotateY(-2deg) rotateX(2deg);
+    transition: transform 0.6s var(--ease);
+  }
+  .cockpit:hover {
+    transform: rotateY(0) rotateX(0);
+  }
+
+  .cockpit-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+    padding: 12px 16px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+  }
+  .cockpit-brand {
+    font-family: var(--font-display);
+    font-weight: 500;
+    color: var(--cuivre);
+    font-size: 16px;
+    letter-spacing: -0.02em;
+  }
+  .cockpit-cabinet {
+    color: var(--ink-2);
+    flex: 1;
+    text-transform: uppercase;
+  }
+  .cockpit-time {
+    color: var(--ink-3);
+  }
+
+  .cockpit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--line);
+  }
+  .cockpit-card {
+    background: var(--bg-2);
+    padding: var(--s-4) var(--s-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    min-height: 130px;
+  }
+  .cockpit-card--ai {
+    grid-column: 1 / -1;
+    background: linear-gradient(180deg, var(--cuivre-soft) 0%, var(--bg-2) 100%);
+    border-top: 1px solid var(--cuivre);
+  }
+  .cc-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .cc-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .cc-label--ai {
+    color: var(--cuivre);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .cc-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--vert-mousse);
+  }
+  .cc-dot--warn { background: var(--warn); }
+  .cc-pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--cuivre);
+    box-shadow: 0 0 0 0 var(--cuivre);
+    animation: cc-pulse 2s var(--ease) infinite;
+  }
+  @keyframes cc-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(199, 95, 45, 0.6); }
+    50% { box-shadow: 0 0 0 8px transparent; }
+  }
+
+  .cc-value {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--ivoire);
+  }
+  .cc-spark {
+    color: var(--cuivre);
+    margin-top: -4px;
+  }
+  .cc-spark svg {
+    width: 100%;
+    height: 24px;
+  }
+  .cc-note {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--warn);
+    margin: 0;
+    max-width: none;
+    letter-spacing: 0.02em;
+  }
+
+  .cc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .cc-list li {
+    font-size: 12px;
+    color: var(--ink-2);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 1.4;
+  }
+  .cc-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    flex-shrink: 0;
+    background: var(--bg-3);
+    color: var(--ink-3);
+  }
+  .cc-tag--ok { background: var(--vert-mousse-soft); color: var(--vert-mousse); }
+  .cc-tag--warn { background: var(--warn-soft); color: var(--warn); }
+
+  .cc-mail-draft {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    position: relative;
+  }
+  .cc-mail-to {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--ink-3);
+    letter-spacing: 0.04em;
+  }
+  .cc-mail-body {
+    margin: 0;
+    max-width: none;
+    font-size: 12px;
+    color: var(--ivoire-2);
+    line-height: 1.4;
+  }
+  .typing {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 1.5px solid var(--cuivre);
+    animation: typing 4s steps(28) infinite, blink 1s step-end infinite;
+    width: 28ch;
+    max-width: 100%;
+  }
+  @keyframes typing {
+    0% { width: 0; }
+    60% { width: 28ch; }
+    90% { width: 28ch; }
+    100% { width: 0; }
+  }
+  @keyframes blink {
+    50% { border-color: transparent; }
+  }
+  .cc-mail-badge {
+    position: absolute;
+    top: -8px;
+    right: 8px;
+    background: var(--cuivre);
+    color: var(--bg);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 999px;
+  }
+
+  .cc-ai-text {
+    margin: 0;
+    max-width: none;
+    font-size: 13px;
+    color: var(--ivoire);
+    line-height: 1.5;
+  }
+  .cc-ai-text strong {
+    color: var(--cuivre);
+    font-weight: 600;
+  }
+  .cc-ai-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .cc-ai-btn {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--line-2);
+    background: transparent;
+    color: var(--ink-2);
+    cursor: pointer;
+    transition: all var(--dur-1) var(--ease);
+  }
+  .cc-ai-btn:hover {
+    border-color: var(--cuivre);
+    color: var(--cuivre);
+  }
+  .cc-ai-btn--primary {
+    background: var(--cuivre);
+    color: var(--bg);
+    border-color: var(--cuivre);
+  }
+  .cc-ai-btn--primary:hover {
+    background: var(--cuivre-hover);
+    color: var(--bg);
+  }
+
+  @media (max-width: 720px) {
+    .cockpit { transform: none; }
+    .cockpit-grid { grid-template-columns: 1fr; }
+    .cockpit-card { min-height: auto; }
+    .cc-value { font-size: 24px; }
   }
 
   /* ============ SECTION HEAD ============ */
