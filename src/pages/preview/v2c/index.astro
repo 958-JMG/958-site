@@ -112,6 +112,7 @@ const temoignages = [
           <header class="cockpit-bar">
             <span class="cockpit-brand">9·58</span>
             <span class="cockpit-cabinet">Cabinet Martin · Vannes</span>
+            <span class="cockpit-version">v1.7 · sur-mesure</span>
             <span class="cockpit-time" id="cockpit-time">08:47</span>
           </header>
 
@@ -288,7 +289,21 @@ const temoignages = [
   </script>
 
   <!-- =========================================
-       SECTION 1 — POURQUOI MAINTENANT (schéma adoption)
+       BANDEAU CLARIF — anti "ça fait CRM"
+       ========================================= -->
+  <section class="section section--clarif is-tight" aria-label="Précision sur le produit">
+    <div class="container is-default">
+      <p class="reveal clarif-text">
+        Ce que vous venez de voir, c'est l'écran d'un <strong>artisan bâtiment de Bretagne</strong>.
+        Construit pour <em>ses</em> devis, <em>ses</em> chantiers, <em>son</em> équipe.
+        <strong>Pas un CRM. Pas un logiciel comptable. Pas un outil pour tout le monde.</strong>
+        Le vôtre ne lui ressemblera pas — il vous ressemblera, à vous.
+      </p>
+    </div>
+  </section>
+
+  <!-- =========================================
+       SECTION 1 — POURQUOI MAINTENANT (courbe d'adoption)
        ========================================= -->
   <section id="pourquoi-maintenant" class="section section--soft" aria-labelledby="adoption-title">
     <div class="container">
@@ -299,50 +314,109 @@ const temoignages = [
           <em>Très peu l'installent vraiment.</em>
         </h2>
         <p class="reveal section-sub">
-          La courbe d'adoption avance. Les pionniers prennent l'avantage.
-          Pas en panique. À votre rythme. Vous êtes ici.
+          La courbe d'adoption est lancée. Pas en panique. À votre rythme.
+          Mais sachez où vous êtes — et où sont les autres.
         </p>
       </div>
 
-      <!-- Schéma adoption -->
-      <div class="adoption-schema reveal">
-        <div class="adoption-line" aria-hidden="true"></div>
+      <!-- Courbe d'adoption SVG (S-curve Rogers) -->
+      <div class="adoption-curve reveal">
+        <svg viewBox="0 0 1000 380" preserveAspectRatio="xMidYMid meet" class="adoption-svg" role="img" aria-label="Courbe d'adoption de l'IA dans les TPE-PME 2024-2027">
 
-        <div class="adoption-points">
-          <article class="adoption-point ap-pioneer">
-            <span class="ap-dot" aria-hidden="true"></span>
-            <span class="ap-year">2024</span>
-            <h3 class="ap-state">Pionniers en action</h3>
-            <p class="ap-desc">Avantage concurrentiel pris.</p>
-          </article>
+          <!-- Grille discrète -->
+          <line x1="60" y1="320" x2="960" y2="320" stroke="currentColor" stroke-opacity="0.12" stroke-dasharray="2 4"/>
+          <line x1="60" y1="200" x2="960" y2="200" stroke="currentColor" stroke-opacity="0.06" stroke-dasharray="2 4"/>
+          <line x1="60" y1="80"  x2="960" y2="80"  stroke="currentColor" stroke-opacity="0.06" stroke-dasharray="2 4"/>
 
-          <article class="adoption-point ap-now">
-            <span class="ap-here">Vous êtes ici</span>
-            <span class="ap-dot ap-dot-pulse" aria-hidden="true"></span>
-            <span class="ap-year">2025–2026</span>
-            <h3 class="ap-state">Différenciation possible</h3>
-            <p class="ap-desc">Le marché est encore ouvert.</p>
-          </article>
+          <!-- Aire sous la courbe (subtile) -->
+          <path d="M 60,320 C 220,318 320,310 420,240 C 520,170 640,90 800,70 C 880,62 940,60 960,60 L 960,320 Z"
+                fill="url(#curveGradient)" opacity="0.18"/>
+          <defs>
+            <linearGradient id="curveGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#C75F2D" stop-opacity="0.5"/>
+              <stop offset="100%" stop-color="#C75F2D" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
 
-          <article class="adoption-point ap-standard">
-            <span class="ap-dot" aria-hidden="true"></span>
-            <span class="ap-year">2027</span>
-            <h3 class="ap-state">Standard de l'industrie</h3>
-            <p class="ap-desc">Le coût d'entrée devient élevé.</p>
-          </article>
+          <!-- Courbe en S -->
+          <path class="adoption-path"
+                d="M 60,320 C 220,318 320,310 420,240 C 520,170 640,90 800,70 C 880,62 940,60 960,60"
+                fill="none" stroke="#C75F2D" stroke-width="3"
+                stroke-linecap="round"/>
 
-          <article class="adoption-point ap-late">
-            <span class="ap-dot" aria-hidden="true"></span>
-            <span class="ap-year">Après</span>
-            <h3 class="ap-state">Retardataires</h3>
-            <p class="ap-desc">Prix de l'attente — rattrapage.</p>
-          </article>
+          <!-- Dot 1 — 2024 Pionniers -->
+          <g transform="translate(160, 316)" class="ap-svg-g">
+            <circle r="9" fill="#6B8E54"/>
+            <circle r="13" fill="none" stroke="#6B8E54" stroke-opacity="0.3" stroke-width="2"/>
+          </g>
+
+          <!-- Dot 2 — 2025-2026 Vous êtes ici (mimosa pulse) -->
+          <g transform="translate(420, 240)" class="ap-svg-g ap-svg-here">
+            <circle r="11" fill="#FEF86C"/>
+            <circle r="11" fill="#FEF86C" opacity="0.5">
+              <animate attributeName="r" from="11" to="26" dur="2s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" from="0.5" to="0" dur="2s" repeatCount="indefinite"/>
+            </circle>
+          </g>
+
+          <!-- Dot 3 — 2027 Standard -->
+          <g transform="translate(700, 90)" class="ap-svg-g">
+            <circle r="9" fill="#8A8068"/>
+          </g>
+
+          <!-- Dot 4 — Retardataires -->
+          <g transform="translate(900, 65)" class="ap-svg-g">
+            <circle r="9" fill="#8A8068" opacity="0.55"/>
+          </g>
+
+          <!-- Labels -->
+          <g class="ap-label">
+            <text x="160" y="350" text-anchor="middle" class="ap-year-txt">2024</text>
+            <text x="160" y="370" text-anchor="middle" class="ap-state-txt">Pionniers</text>
+          </g>
+          <g class="ap-label ap-label--here">
+            <text x="420" y="220" text-anchor="middle" class="ap-year-txt ap-year-here">2025–2026</text>
+            <text x="420" y="205" text-anchor="middle" class="ap-state-txt ap-state-here">Différenciation</text>
+            <text x="420" y="270" text-anchor="middle" class="ap-here-txt">↑ Vous êtes ici</text>
+          </g>
+          <g class="ap-label">
+            <text x="700" y="55" text-anchor="middle" class="ap-year-txt">2027</text>
+            <text x="700" y="40" text-anchor="middle" class="ap-state-txt">Standard</text>
+          </g>
+          <g class="ap-label">
+            <text x="900" y="40" text-anchor="middle" class="ap-year-txt">Après</text>
+            <text x="900" y="25" text-anchor="middle" class="ap-state-txt">Retardataires</text>
+          </g>
+
+          <!-- Axe X : adoption en % -->
+          <text x="60"  y="345" class="ap-axis">2 %</text>
+          <text x="960" y="345" text-anchor="end" class="ap-axis">~ 100 %</text>
+        </svg>
+
+        <!-- Bénéfices/coûts sous la courbe -->
+        <div class="adoption-meta">
+          <div class="adoption-cell adoption-cell--pioneer">
+            <span class="ac-tag">2024</span>
+            <p>Avantage concurrentiel pris.</p>
+          </div>
+          <div class="adoption-cell adoption-cell--here">
+            <span class="ac-tag ac-tag--here">2025–2026 · ici</span>
+            <p>Le marché est encore ouvert.</p>
+          </div>
+          <div class="adoption-cell adoption-cell--std">
+            <span class="ac-tag">2027</span>
+            <p>Le coût d'entrée devient élevé.</p>
+          </div>
+          <div class="adoption-cell adoption-cell--late">
+            <span class="ac-tag">Après</span>
+            <p>Prix de l'attente.</p>
+          </div>
         </div>
       </div>
 
       <p class="reveal adoption-cta">
         <a href="#contact" class="link-arrow">
-          Pendant que la fenêtre est ouverte <Icon name="arrow-right" size={16} class="arrow" />
+          Bouger pendant que la courbe monte <Icon name="arrow-right" size={16} class="arrow" />
         </a>
       </p>
     </div>
@@ -753,6 +827,16 @@ const temoignages = [
   .cockpit-time {
     color: var(--ink-3);
   }
+  .cockpit-version {
+    font-size: 10px;
+    color: var(--cuivre);
+    border: 1px solid var(--cuivre);
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--cuivre-soft);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
 
   .cockpit-grid {
     display: grid;
@@ -982,8 +1066,10 @@ const temoignages = [
   }
   @keyframes kanban-move {
     0%, 25% { transform: translate(0, 0); background: var(--bg-3); }
-    50%, 75% { transform: translate(calc(100% + 12px), -32px); background: var(--cuivre-soft); }
-    100% { transform: translate(0, 0); background: var(--bg-3); }
+    35%, 40% { transform: translate(0, 60px); background: var(--cuivre-soft); opacity: 0.7; }
+    50%, 75% { transform: translate(calc(100% + 12px), 60px); background: var(--cuivre-soft); opacity: 1; }
+    85%, 90% { transform: translate(calc(100% + 12px), 0); background: var(--cuivre-soft); }
+    100% { transform: translate(0, 0); background: var(--bg-3); opacity: 1; }
   }
   .cc-kcol-count {
     position: absolute;
@@ -1145,7 +1231,138 @@ const temoignages = [
     margin: 0;
   }
 
-  /* ============ SCHÉMA ADOPTION ============ */
+  /* ============ BANDEAU CLARIF (anti "ça fait CRM") ============ */
+  .section--clarif {
+    background: var(--bg);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding-block: var(--s-7);
+  }
+  .clarif-text {
+    font-family: var(--font-display);
+    font-size: clamp(1.125rem, 1.5vw + 0.3rem, 1.5rem);
+    line-height: 1.5;
+    color: var(--ivoire-2);
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+    text-wrap: balance;
+    font-weight: 400;
+  }
+  .clarif-text strong { color: var(--ivoire); font-weight: 500; }
+  .clarif-text em { color: var(--cuivre); font-style: italic; font-weight: 500; }
+
+  /* ============ COURBE D'ADOPTION (SVG) ============ */
+  .adoption-curve {
+    margin-top: var(--s-7);
+    color: var(--ivoire);
+  }
+  .adoption-svg {
+    width: 100%;
+    height: auto;
+    max-height: 440px;
+    display: block;
+  }
+  .adoption-path {
+    stroke-dasharray: 1500;
+    stroke-dashoffset: 1500;
+    animation: drawCurve 2.4s var(--ease-out) 0.3s forwards;
+  }
+  @keyframes drawCurve {
+    to { stroke-dashoffset: 0; }
+  }
+
+  .ap-year-txt {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-3);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .ap-state-txt {
+    font-family: var(--font-display);
+    font-size: 14px;
+    fill: var(--ivoire);
+    font-weight: 500;
+  }
+  .ap-year-here {
+    fill: var(--mimosa);
+    font-weight: 600;
+  }
+  .ap-state-here {
+    fill: var(--mimosa);
+    font-style: italic;
+  }
+  .ap-here-txt {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--mimosa);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .ap-axis {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    fill: var(--ink-3);
+    letter-spacing: 0.04em;
+  }
+
+  /* Tableau métadonnées sous la courbe */
+  .adoption-meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--s-3);
+    margin-top: var(--s-5);
+  }
+  .adoption-cell {
+    padding: var(--s-4);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--r-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+  }
+  .adoption-cell--here {
+    background: rgba(254, 248, 108, 0.06);
+    border-color: var(--mimosa);
+  }
+  .adoption-cell--pioneer .ac-tag { color: var(--vert-mousse); border-color: var(--vert-mousse); }
+  .adoption-cell--std .ac-tag { color: var(--ink-3); }
+  .adoption-cell--late .ac-tag { color: var(--ink-3); opacity: 0.7; }
+  .ac-tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--cuivre);
+    padding: 3px 8px;
+    border: 1px solid currentColor;
+    border-radius: var(--r-pill);
+    align-self: flex-start;
+    font-weight: 500;
+  }
+  .ac-tag--here {
+    color: var(--mimosa);
+    background: var(--mimosa);
+    color: var(--bg);
+    border-color: var(--mimosa);
+  }
+  .adoption-cell p {
+    font-size: var(--step-0);
+    color: var(--ink-2);
+    margin: 0;
+    line-height: var(--lh-normal);
+    max-width: none;
+  }
+
+  @media (max-width: 720px) {
+    .adoption-meta { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ============ SCHÉMA ADOPTION (legacy, conservé) ============ */
   .adoption-schema {
     position: relative;
     margin-top: var(--s-7);
