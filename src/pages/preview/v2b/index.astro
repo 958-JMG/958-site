@@ -1,0 +1,853 @@
+---
+import V2bLayout from '../../../layouts/V2bLayout.astro';
+import Icon from '../../../components/v2/Icon.astro';
+
+const cibles = [
+  { icon: 'hard-hat',    metier: 'Artisans BTP',                pitch: 'Vos chantiers, vos devis, votre tréso — sur un seul écran.' },
+  { icon: 'building',    metier: 'Architectes',                 pitch: 'Vos affaires pilotées, votre focus création préservé.' },
+  { icon: 'building-2',  metier: 'Promoteurs immobiliers',      pitch: 'Du foncier à la livraison, vos opérations en temps réel.' },
+  { icon: 'home',        metier: 'Agences immobilières',        pitch: 'Mandats, prospects, commercialisations — un seul flux.' },
+  { icon: 'mail',        metier: 'Syndics & gestion locative',  pitch: 'Cinq cents mails triés, courriers générés, AG suivies.' },
+  { icon: 'sparkles',    metier: 'Un autre métier ?',           pitch: '9·58 répond à toute TPE qui a perdu la vue d\'ensemble.' },
+];
+
+const pourquoi = [
+  {
+    n: '01',
+    titre: 'Parce que votre métier n\'est pas un cas générique.',
+    body: 'Aucun script ne sait ce qu\'est un avenant TS, une réunion de copro un mardi soir, ou un compromis qui glisse de trois semaines. Nous, si.',
+  },
+  {
+    n: '02',
+    titre: 'Parce que vos données ne devraient pas dormir à Dallas.',
+    body: 'Mistral, Scaleway, n8n auto-hébergé. Tout reste en Europe, traçable, rapatriable. Vous gardez la main.',
+  },
+  {
+    n: '03',
+    titre: 'Parce qu\'un SaaS qui triple ses tarifs, vous l\'avez déjà vécu.',
+    body: 'Votre outil 9·58 est à vous. Il évolue au rythme de l\'IA, sans surcoût imposé. Vous n\'êtes pieds et poings liés à personne.',
+  },
+];
+
+const proofs = [
+  { value: '+500', label: 'personnes formées depuis 2022' },
+  { value: '6',    label: 'démos sectorielles déployées' },
+  { value: '100%', label: 'européen — souverain par défaut' },
+  { value: '48h',  label: 'pour vous répondre' },
+];
+
+const temoignages = [
+  {
+    secteur: 'Promotion foncière',
+    quote: 'On a passé deux jours à expliquer comment on travaille. Trois mois plus tard, je ne reviendrai pas à mon Excel.',
+    result: 'Suivi multi-opérations consolidé',
+  },
+  {
+    secteur: 'Syndic de copropriété',
+    quote: 'Cinq cents mails par jour. Avant, je rentrais chez moi à 21 h. Aujourd\'hui à 18 h 30, et mieux fait.',
+    result: '2,5 h gagnées par jour',
+  },
+  {
+    secteur: 'Gestion de patrimoine',
+    quote: 'Les analyses sont devenues des supports clients à la charte du cabinet. En un clic, je présente.',
+    result: 'Présentations en 1 clic',
+  },
+];
+---
+
+<V2bLayout
+  title="L'IA souveraine du bâtiment et de l'immobilier"
+  description="L'IA pour ceux qui font, pas pour ceux qui parlent. 9·58 construit votre outil sur-mesure pour artisans, architectes, promoteurs, agences et syndics. Souveraineté européenne. Vannes & Paris."
+>
+  <!-- =========================================
+       HEADER (mini, intégré v2b)
+       ========================================= -->
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a href="/" class="brand" aria-label="9·58, retour à l'accueil">
+        <span class="brand-mark">9·58</span>
+        <span class="brand-tag">Neuf Cinquante Huit</span>
+      </a>
+      <nav class="nav nav-desktop" aria-label="Navigation principale">
+        <ul>
+          <li><a href="#pourquoi">Pourquoi</a></li>
+          <li><a href="#comment">Méthode</a></li>
+          <li><a href="#qui">Pour qui</a></li>
+          <li><a href="#preuve">Réalisations</a></li>
+          <li><a href="/formation/">Formation</a></li>
+        </ul>
+      </nav>
+      <a href="#contact" class="btn btn--primary btn--sm header-cta">
+        Diagnostic
+        <Icon name="arrow-right" size={14} class="arrow" />
+      </a>
+    </div>
+  </header>
+
+  <!-- =========================================
+       HERO — MANIFESTE / WHY EN PREMIER
+       ========================================= -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="container is-default">
+      <p class="eyebrow reveal">
+        9·58 — L'IA souveraine du bâtiment &amp; de l'immobilier — Bretagne, depuis 2022
+      </p>
+
+      <h1 id="hero-title" class="manifesto reveal">
+        Vos confrères ont essayé l'IA.<br>
+        Vous avez vu les démos LinkedIn.<br>
+        Et dans votre boîte,<br>
+        <em>rien n'a bougé.</em>
+      </h1>
+
+      <p class="killer-line reveal">
+        C'est pour ça que 9·58 existe.
+      </p>
+
+      <p class="lead reveal">
+        L'IA souveraine du bâtiment et de l'immobilier 360°.
+        Construite pour <strong>votre métier</strong> — pas pour le voisin.
+      </p>
+
+      <div class="hero-ctas reveal">
+        <a href="#contact" class="btn btn--primary btn--lg">
+          Demander un diagnostic
+          <Icon name="arrow-right" size={18} class="arrow" />
+        </a>
+        <a href="https://demo.958.fr" class="btn btn--ghost btn--lg">
+          Voir une démo sectorielle
+          <Icon name="arrow-up-right" size={18} class="arrow" />
+        </a>
+      </div>
+
+      <ul class="hero-assurances reveal">
+        <li>Réponse sous 48 h</li>
+        <li>Accord de confidentialité</li>
+        <li>Premier échange offert</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- =========================================
+       SECTION 1 — LE POURQUOI (WHY)
+       ========================================= -->
+  <section id="pourquoi" class="section section--soft" aria-labelledby="pourquoi-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow reveal">Le pourquoi</p>
+        <h2 id="pourquoi-title" class="reveal section-h2">
+          On ne fait pas <em>de l'IA</em>.<br>
+          On fait <em>votre métier</em>, mieux.
+        </h2>
+      </div>
+
+      <ol class="pourquoi-list">
+        {pourquoi.map((p) => (
+          <li class="pourquoi-item reveal">
+            <span class="pourquoi-n">{p.n}</span>
+            <div>
+              <h3 class="pourquoi-h">{p.titre}</h3>
+              <p class="pourquoi-body">{p.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- =========================================
+       SECTION 2 — LE COMMENT (méthode SPARI)
+       ========================================= -->
+  <section id="comment" class="section" aria-labelledby="comment-title">
+    <div class="container is-default">
+      <p class="eyebrow reveal">La méthode</p>
+      <h2 id="comment-title" class="reveal section-h2">
+        Quatre temps. Sans bruit. Sans dépendance.
+      </h2>
+
+      <ol class="steps">
+        <li class="step reveal">
+          <span class="step-n">01</span>
+          <div>
+            <h3 class="step-h">Audit <span class="step-duree">1 à 2 jours</span></h3>
+            <p>Immersion sous NDA. On regarde comment vous travaillez <em>vraiment</em> — pas une moyenne sectorielle. Vous repartez avec un rapport actionnable. Vous pouvez vous arrêter là.</p>
+          </div>
+        </li>
+        <li class="step reveal">
+          <span class="step-n">02</span>
+          <div>
+            <h3 class="step-h">Structuration <span class="step-duree">1 à 3 semaines</span></h3>
+            <p>On identifie les trois à cinq points où l'IA change tout. Plan chiffré, daté, validable.</p>
+          </div>
+        </li>
+        <li class="step reveal">
+          <span class="step-n">03</span>
+          <div>
+            <h3 class="step-h">Construction <span class="step-duree">3 à 12 semaines</span></h3>
+            <p>On connecte <em>vos</em> sources, on construit <em>votre</em> écran avec <em>vos</em> indicateurs. Pas de boîte noire, pas de SaaS qu'on vous loue.</p>
+          </div>
+        </li>
+        <li class="step reveal">
+          <span class="step-n">04</span>
+          <div>
+            <h3 class="step-h">Mise en route &amp; suivi <span class="step-duree">3 mois à l'infini</span></h3>
+            <p>Formation des équipes sur site. Support réactif. Évolutions au rythme de l'IA. Vous devenez autonomes, pas dépendants.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- =========================================
+       SECTION 3 — LE QUOI (WHAT) — 3 piliers
+       ========================================= -->
+  <section class="section section--accent" aria-labelledby="quoi-title">
+    <div class="container">
+      <p class="eyebrow reveal">Concrètement</p>
+      <h2 id="quoi-title" class="reveal section-h2">
+        Toute votre boîte. Sur un écran.
+      </h2>
+
+      <div class="piliers-grid">
+        <div class="pilier reveal">
+          <div class="pilier-icon"><Icon name="monitor" size={28} strokeWidth={1.5} /></div>
+          <h3 class="pilier-h">L'écran</h3>
+          <p class="pilier-sub">Trésorerie, équipes, clients, projets, communication.</p>
+          <p class="pilier-body">Vos données métier en temps réel, à un endroit. Vous regardez. Vous savez. Vous décidez. C'est aussi simple que de regarder l'heure.</p>
+        </div>
+        <div class="pilier reveal">
+          <div class="pilier-icon"><Icon name="shield" size={28} strokeWidth={1.5} /></div>
+          <h3 class="pilier-h">La souveraineté</h3>
+          <p class="pilier-sub">Mistral, Scaleway, n8n. Européen, traçable, rapatriable.</p>
+          <p class="pilier-body">Vos données ne partent pas aux États-Unis. Vos outils ne sont pas verrouillés. Vos prix ne tripleront pas en une nuit. Vous gardez la main.</p>
+        </div>
+        <div class="pilier reveal">
+          <div class="pilier-icon"><Icon name="graduation-cap" size={28} strokeWidth={1.5} /></div>
+          <h3 class="pilier-h">La formation</h3>
+          <p class="pilier-sub">Qualiopi <em>juin 2026</em>. Finançable OPCO.</p>
+          <p class="pilier-body">Vos équipes deviennent autonomes. Pas dépendantes d'un consultant. C'est le moment où ça fait tilt — et ça reste.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       SECTION 4 — POUR QUI
+       ========================================= -->
+  <section id="qui" class="section" aria-labelledby="qui-title">
+    <div class="container">
+      <p class="eyebrow reveal">À qui ça parle</p>
+      <h2 id="qui-title" class="reveal section-h2">
+        À <em>vous</em>, pas aux entreprises.
+      </h2>
+
+      <div class="cibles-grid">
+        {cibles.map((c) => (
+          <article class="cible reveal">
+            <div class="cible-icon"><Icon name={c.icon} size={22} strokeWidth={1.6} /></div>
+            <div>
+              <h3 class="cible-h">{c.metier}</h3>
+              <p class="cible-p">{c.pitch}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       SECTION 5 — PREUVE (chiffres + témoignages)
+       ========================================= -->
+  <section id="preuve" class="section section--soft" aria-labelledby="preuve-title">
+    <div class="container">
+      <p class="eyebrow reveal">Ce qu'on fait depuis 2022</p>
+      <h2 id="preuve-title" class="reveal section-h2">
+        Pas une démo dingue. Le quotidien qui change.
+      </h2>
+
+      <div class="proofs-grid">
+        {proofs.map((p) => (
+          <div class="proof reveal">
+            <span class="proof-v">{p.value}</span>
+            <span class="proof-l">{p.label}</span>
+          </div>
+        ))}
+      </div>
+
+      <hr class="rule" style="margin-block: var(--s-9);" />
+
+      <div class="temoignages-grid">
+        {temoignages.map((t) => (
+          <figure class="temoignage reveal">
+            <span class="chip">{t.secteur}</span>
+            <blockquote>« {t.quote} »</blockquote>
+            <figcaption>{t.result}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       SECTION 6 — CTA FINAL (manifeste cuivre)
+       ========================================= -->
+  <section id="contact" class="section section--accent" aria-labelledby="cta-title">
+    <div class="container is-default cta-inner">
+      <p class="eyebrow reveal">Commencer</p>
+      <h2 id="cta-title" class="reveal cta-title">
+        Un audit. Un à deux jours. <em>Sous accord de confidentialité.</em>
+      </h2>
+      <p class="reveal cta-lead">
+        Je regarde votre contexte. Je vous dis honnêtement ce que 9·58 peut faire pour vous —
+        et ce qu'il ne peut pas. Sans engagement pour la suite.
+      </p>
+      <div class="cta-ctas reveal">
+        <a href="mailto:jmg@958.fr?subject=Demande%20de%20diagnostic%209%C2%B758" class="btn btn--lg btn-on-accent">
+          Demander un diagnostic
+          <Icon name="arrow-right" size={18} class="arrow" />
+        </a>
+        <a href="https://demo.958.fr" class="btn btn--ghost btn--lg btn--on-accent-ghost">
+          Voir une démo
+          <Icon name="arrow-up-right" size={18} class="arrow" />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       FOOTER mini v2b
+       ========================================= -->
+  <footer class="footer-mini section--dark" role="contentinfo">
+    <div class="container footer-mini-inner">
+      <div>
+        <span class="brand-mark">9·58</span>
+        <span class="brand-tag">Neuf Cinquante Huit · Vannes &amp; Paris</span>
+      </div>
+      <ul class="footer-meta">
+        <li><a href="mailto:jmg@958.fr">jmg@958.fr</a></li>
+        <li><a href="https://www.linkedin.com/in/jean-marc-geuring/" rel="me noopener" target="_blank">LinkedIn</a></li>
+        <li><a href="/mentions-legales/">Mentions légales</a></li>
+      </ul>
+      <span class="footer-year">© 2026</span>
+    </div>
+  </footer>
+</V2bLayout>
+
+<style>
+  /* ============ HEADER v2b ============ */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(11, 11, 10, 0.78);
+    backdrop-filter: saturate(180%) blur(12px);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--header-h);
+    gap: var(--s-5);
+  }
+  .brand {
+    display: inline-flex;
+    flex-direction: column;
+    line-height: 1;
+    color: var(--ivoire);
+    text-decoration: none;
+    gap: 3px;
+  }
+  .brand-mark {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+    color: var(--cuivre);
+  }
+  .brand-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .nav-desktop ul {
+    display: flex;
+    gap: var(--s-5);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .nav-desktop a {
+    font-size: var(--step-0);
+    font-weight: 500;
+    color: var(--ink-2);
+    padding: 6px 2px;
+    border-bottom: 1px solid transparent;
+    transition: color var(--dur-1) var(--ease),
+                border-color var(--dur-1) var(--ease);
+  }
+  .nav-desktop a:hover {
+    color: var(--cuivre);
+    border-bottom-color: var(--cuivre);
+  }
+
+  @media (max-width: 900px) {
+    .nav-desktop, .header-cta { display: none; }
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    padding-block: var(--s-11) var(--s-9);
+    position: relative;
+  }
+  .hero .eyebrow { margin-bottom: var(--s-6); }
+  .hero .manifesto {
+    margin-bottom: var(--s-6);
+    max-width: 18ch;
+  }
+  .hero .killer-line {
+    margin-bottom: var(--s-5);
+  }
+  .hero .lead {
+    margin-bottom: var(--s-7);
+    max-width: 52ch;
+  }
+  .hero-ctas {
+    display: flex;
+    gap: var(--s-3);
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .hero-assurances {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-5);
+    margin-top: var(--s-7);
+    list-style: none;
+    padding: 0;
+  }
+  .hero-assurances li {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    color: var(--ink-3);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    position: relative;
+    padding-left: 14px;
+  }
+  .hero-assurances li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background: var(--cuivre);
+    border-radius: 50%;
+  }
+
+  @media (max-width: 720px) {
+    .hero {
+      padding-block: var(--s-8) var(--s-7);
+    }
+    .hero .manifesto { max-width: 100%; }
+  }
+
+  /* ============ SECTION HEAD ============ */
+  .section-head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    margin-bottom: var(--s-8);
+    max-width: 720px;
+  }
+  .section-h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw + 0.5rem, 3.25rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: var(--tr-tighter);
+    color: var(--ink);
+    max-width: 22ch;
+    text-wrap: balance;
+    margin: 0;
+  }
+  .section-h2 em { font-style: italic; color: var(--cuivre); }
+
+  /* ============ POURQUOI (liste numérotée éditoriale) ============ */
+  .pourquoi-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-7);
+    max-width: 760px;
+  }
+  .pourquoi-item {
+    display: grid;
+    grid-template-columns: 88px 1fr;
+    gap: var(--s-5);
+    align-items: start;
+    padding-bottom: var(--s-7);
+    border-bottom: 1px solid var(--line);
+  }
+  .pourquoi-item:last-child { border-bottom: 0; padding-bottom: 0; }
+  .pourquoi-n {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2.5rem, 4vw + 0.5rem, 3.75rem);
+    line-height: 1;
+    color: var(--cuivre);
+    letter-spacing: -0.04em;
+  }
+  .pourquoi-h {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(1.25rem, 1.5vw + 0.5rem, 1.75rem);
+    line-height: 1.2;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    margin: 0 0 var(--s-3) 0;
+  }
+  .pourquoi-body {
+    color: var(--ink-2);
+    font-size: var(--step-1);
+    line-height: var(--lh-loose);
+    margin: 0;
+    max-width: 56ch;
+  }
+
+  @media (max-width: 640px) {
+    .pourquoi-item { grid-template-columns: 1fr; gap: var(--s-3); }
+  }
+
+  /* ============ STEPS (méthode) ============ */
+  .steps {
+    list-style: none;
+    padding: 0;
+    margin: var(--s-7) 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+  }
+  .step {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: var(--s-5);
+    padding: var(--s-5);
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: var(--r-3);
+    transition: border-color var(--dur-2) var(--ease);
+  }
+  .step:hover { border-color: var(--cuivre); }
+  .step-n {
+    font-family: var(--font-mono);
+    font-size: var(--step-1);
+    color: var(--cuivre);
+    letter-spacing: 0.04em;
+    font-weight: 500;
+  }
+  .step-h {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--step-3);
+    color: var(--ink);
+    margin: 0 0 var(--s-2) 0;
+    letter-spacing: -0.02em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+    align-items: baseline;
+  }
+  .step-duree {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    color: var(--ink-3);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .step p { margin: 0; max-width: 64ch; }
+
+  @media (max-width: 640px) {
+    .step { grid-template-columns: 1fr; gap: var(--s-3); padding: var(--s-4); }
+  }
+
+  /* ============ PILIERS (section accent cuivre) ============ */
+  .piliers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-5);
+    margin-top: var(--s-7);
+  }
+  .pilier {
+    padding: var(--s-6);
+    background: rgba(11, 11, 10, 0.25);
+    border: 1px solid rgba(244, 236, 220, 0.18);
+    border-radius: var(--r-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+  .pilier-icon {
+    width: 48px;
+    height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    color: var(--cuivre);
+    border-radius: var(--r-3);
+    margin-bottom: var(--s-2);
+  }
+  .pilier-h {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--step-3);
+    color: var(--ivoire);
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+  .pilier-sub {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--ivoire);
+    margin: 0;
+    max-width: none;
+    font-size: var(--step-1);
+  }
+  .pilier-sub em { color: var(--ivoire); font-style: normal; font-weight: 600; }
+  .pilier-body {
+    color: var(--ivoire-2);
+    font-size: var(--step-1);
+    line-height: var(--lh-normal);
+    margin: 0;
+    max-width: none;
+  }
+
+  @media (max-width: 900px) {
+    .piliers-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ============ CIBLES (Pour qui) ============ */
+  .cibles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-4);
+    margin-top: var(--s-7);
+  }
+  .cible {
+    display: flex;
+    gap: var(--s-4);
+    padding: var(--s-5);
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: var(--r-3);
+    align-items: flex-start;
+    transition: border-color var(--dur-2) var(--ease),
+                transform var(--dur-2) var(--ease);
+  }
+  .cible:hover {
+    border-color: var(--cuivre);
+    transform: translateY(-2px);
+  }
+  .cible-icon {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--cuivre-soft);
+    color: var(--cuivre);
+    border-radius: var(--r-2);
+    flex-shrink: 0;
+  }
+  .cible-h {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--step-2);
+    color: var(--ink);
+    margin: 0 0 var(--s-1) 0;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+  }
+  .cible-p {
+    font-size: var(--step-0);
+    color: var(--ink-2);
+    line-height: var(--lh-normal);
+    margin: 0;
+    max-width: none;
+  }
+
+  @media (max-width: 900px) { .cibles-grid { grid-template-columns: 1fr; } }
+
+  /* ============ PROOFS (chiffres) ============ */
+  .proofs-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--s-6);
+    margin-top: var(--s-7);
+  }
+  .proof {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+  }
+  .proof-v {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw + 0.5rem, 4.25rem);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--cuivre);
+  }
+  .proof-l {
+    font-size: var(--step-0);
+    color: var(--ink-2);
+    line-height: var(--lh-normal);
+    max-width: 22ch;
+  }
+
+  @media (max-width: 720px) {
+    .proofs-grid { grid-template-columns: repeat(2, 1fr); gap: var(--s-5); }
+  }
+
+  /* ============ TÉMOIGNAGES ============ */
+  .temoignages-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-5);
+  }
+  .temoignage {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+    padding: var(--s-5);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--r-3);
+    margin: 0;
+  }
+  .temoignage blockquote {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--step-2);
+    line-height: 1.4;
+    color: var(--ink);
+    font-weight: 400;
+    margin: 0;
+    max-width: none;
+  }
+  .temoignage figcaption {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    color: var(--cuivre);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 900px) { .temoignages-grid { grid-template-columns: 1fr; } }
+
+  /* ============ CTA FINAL ============ */
+  .cta-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+    align-items: flex-start;
+  }
+  .cta-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw + 1rem, 3.5rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: var(--tr-tighter);
+    color: var(--ivoire);
+    max-width: 22ch;
+    text-wrap: balance;
+    margin: 0;
+  }
+  .cta-title em { font-style: italic; }
+  .cta-lead {
+    font-size: var(--step-2);
+    line-height: var(--lh-normal);
+    color: var(--ivoire-2);
+    max-width: 56ch;
+    margin: 0;
+  }
+  .cta-ctas {
+    display: flex;
+    gap: var(--s-3);
+    flex-wrap: wrap;
+    margin-top: var(--s-3);
+  }
+  /* CTA primary sur fond cuivre = inverse (dark/ivoire) */
+  .btn-on-accent {
+    background: var(--bg);
+    color: var(--ivoire);
+    border: 1px solid var(--bg);
+  }
+  .btn-on-accent:hover {
+    background: var(--ivoire);
+    color: var(--bg);
+    border-color: var(--ivoire);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lg);
+  }
+  .btn--on-accent-ghost {
+    color: var(--ivoire);
+    border-color: var(--ivoire);
+  }
+  .btn--on-accent-ghost:hover {
+    background: var(--ivoire);
+    color: var(--cuivre);
+    border-color: var(--ivoire);
+  }
+
+  /* ============ FOOTER mini ============ */
+  .footer-mini {
+    padding-block: var(--s-6);
+    border-top: 1px solid var(--line);
+    background: var(--bg-2);
+  }
+  .footer-mini-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-5);
+    flex-wrap: wrap;
+  }
+  .footer-mini-inner > div:first-child {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 3px;
+    line-height: 1;
+  }
+  .footer-meta {
+    display: flex;
+    gap: var(--s-5);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    letter-spacing: 0.04em;
+  }
+  .footer-meta a {
+    color: var(--ink-2);
+    text-transform: uppercase;
+  }
+  .footer-meta a:hover { color: var(--cuivre); }
+  .footer-year {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    color: var(--ink-3);
+    letter-spacing: 0.06em;
+  }
+</style>
