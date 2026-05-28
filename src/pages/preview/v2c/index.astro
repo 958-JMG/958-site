@@ -2,13 +2,43 @@
 import V2bLayout from '../../../layouts/V2bLayout.astro';
 import Icon from '../../../components/v2/Icon.astro';
 
-const cibles = [
-  { icon: 'hard-hat',    metier: 'Artisans BTP',                pitch: 'Vos chantiers, vos devis, votre tréso — sur un seul écran.' },
-  { icon: 'building',    metier: 'Architectes',                 pitch: 'Vos affaires pilotées, votre focus création préservé.' },
-  { icon: 'building-2',  metier: 'Promoteurs immobiliers',      pitch: 'Du foncier à la livraison, vos opérations en temps réel.' },
-  { icon: 'home',        metier: 'Agences immobilières',        pitch: 'Mandats, prospects, commercialisations — un seul flux.' },
-  { icon: 'mail',        metier: 'Syndics & gestion locative',  pitch: 'Cinq cents mails triés, courriers générés, AG suivies.' },
-  { icon: 'sparkles',    metier: 'Un autre métier ?',           pitch: '9·58 répond à toute TPE qui a perdu la vue d\'ensemble.' },
+const terrain = [
+  {
+    icon: 'hard-hat',
+    secteur: 'Bâtiment',
+    titre: 'Un chantier qui glisse de 3 semaines.',
+    body: 'Ce n\'est pas du retard. C\'est un client qui décide de ne plus jamais vous rappeler.',
+  },
+  {
+    icon: 'home',
+    secteur: 'Agence immo',
+    titre: 'Un compromis qui traîne 3 semaines.',
+    body: 'Ce n\'est pas un délai. C\'est un acquéreur qui doute — et qui ira voir la concurrence dans 8 jours.',
+  },
+  {
+    icon: 'building-2',
+    secteur: 'Promotion',
+    titre: 'Une tréso à −3 200 € en semaine 34.',
+    body: 'Ce n\'est pas un trou. C\'est 14 nuits sans dormir et un appel à votre banquier qui vous démange.',
+  },
+  {
+    icon: 'users',
+    secteur: 'Équipe',
+    titre: 'Votre commercial qui part en mars.',
+    body: 'Ce n\'est pas une démission. C\'est 40 % de votre CA à reconstruire en 6 mois, avec deux fournisseurs qu\'il était le seul à connaître.',
+  },
+  {
+    icon: 'mail',
+    secteur: 'Syndic',
+    titre: 'Une copro de 30 lots.',
+    body: 'Ce n\'est pas 30 copropriétaires. C\'est 28 normaux et 2 qui prennent 80 % de votre temps — et qui le savent.',
+  },
+  {
+    icon: 'briefcase',
+    secteur: 'TPE / PME',
+    titre: 'Un Excel à 28 onglets.',
+    body: 'Ce n\'est pas un fichier. C\'est l\'âme de votre boîte. Si Marie l\'emporte avec elle, vous êtes mort.',
+  },
 ];
 
 const proofs = [
@@ -53,9 +83,9 @@ const temoignages = [
       <nav class="nav nav-desktop" aria-label="Navigation principale">
         <ul>
           <li><a href="#pourquoi-maintenant">Pourquoi maintenant</a></li>
-          <li><a href="#vos-donnees">Vos données</a></li>
           <li><a href="#construit">Ce qu'on construit</a></li>
           <li><a href="#methode">Méthode</a></li>
+          <li><a href="#terrain">Notre terrain</a></li>
           <li><a href="#preuve">Réalisations</a></li>
         </ul>
       </nav>
@@ -538,27 +568,35 @@ const temoignages = [
   </section>
 
   <!-- =========================================
-       SECTION 5 — POUR QUI
+       SECTION — ENFONCER LE CLOU (terrain terrain terrain)
        ========================================= -->
-  <section id="pour-qui" class="section section--soft" aria-labelledby="qui-title">
+  <section id="terrain" class="section section--soft" aria-labelledby="terrain-title">
     <div class="container">
-      <p class="eyebrow reveal">Pour qui</p>
-      <h2 id="qui-title" class="reveal section-h2">
-        Construit pour <em>votre</em> métier,<br>
-        pas pour « les entreprises ».
-      </h2>
+      <div class="section-head">
+        <p class="eyebrow reveal">Ce qu'on connaît du métier</p>
+        <h2 id="terrain-title" class="reveal section-h2">
+          Ils vous parlent d'IA.<br>
+          <em>Nous, on vous parle de ce qui vous empêche de dormir.</em>
+        </h2>
+      </div>
 
-      <div class="cibles-grid">
-        {cibles.map((c) => (
-          <article class="cible reveal">
-            <div class="cible-icon"><Icon name={c.icon} size={22} strokeWidth={1.6} /></div>
-            <div>
-              <h3 class="cible-h">{c.metier}</h3>
-              <p class="cible-p">{c.pitch}</p>
+      <div class="terrain-grid">
+        {terrain.map((t) => (
+          <article class="terrain-card reveal">
+            <div class="terrain-head">
+              <span class="terrain-icon"><Icon name={t.icon} size={20} strokeWidth={1.6} /></span>
+              <span class="terrain-secteur">{t.secteur}</span>
             </div>
+            <h3 class="terrain-titre">{t.titre}</h3>
+            <p class="terrain-body">{t.body}</p>
           </article>
         ))}
       </div>
+
+      <p class="reveal terrain-outro">
+        Voilà ce qu'on connaît. Voilà pourquoi on installe l'IA <em>chez vous</em>,
+        pas dans un datacenter à Boston.
+      </p>
     </div>
   </section>
 
@@ -1691,7 +1729,86 @@ const temoignages = [
     .piliers-grid { grid-template-columns: 1fr; }
   }
 
-  /* ============ CIBLES (Pour qui) ============ */
+  /* ============ ENFONCER LE CLOU (Terrain) ============ */
+  .terrain-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-4);
+    margin-top: var(--s-7);
+  }
+  .terrain-card {
+    padding: var(--s-5);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--r-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    transition: border-color var(--dur-2) var(--ease),
+                transform var(--dur-2) var(--ease);
+  }
+  .terrain-card:hover {
+    border-color: var(--cuivre);
+    transform: translateY(-3px);
+  }
+  .terrain-head {
+    display: flex;
+    align-items: center;
+    gap: var(--s-2);
+  }
+  .terrain-icon {
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--cuivre-soft);
+    color: var(--cuivre);
+    border-radius: var(--r-2);
+  }
+  .terrain-secteur {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cuivre);
+    font-weight: 600;
+  }
+  .terrain-titre {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--step-3);
+    color: var(--ivoire);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin: 0;
+    max-width: none;
+  }
+  .terrain-body {
+    color: var(--ink-2);
+    font-size: var(--step-1);
+    line-height: var(--lh-loose);
+    margin: 0;
+    max-width: none;
+  }
+  .terrain-outro {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--step-2);
+    color: var(--ivoire-2);
+    margin-top: var(--s-7);
+    text-align: center;
+    max-width: 60ch;
+    margin-inline: auto;
+    text-wrap: balance;
+  }
+  .terrain-outro em { color: var(--cuivre); font-style: italic; font-weight: 500; }
+
+  @media (max-width: 900px) {
+    .terrain-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ============ CIBLES (legacy, conservé) ============ */
   .cibles-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
