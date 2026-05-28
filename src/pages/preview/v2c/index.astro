@@ -1,0 +1,1094 @@
+---
+import V2bLayout from '../../../layouts/V2bLayout.astro';
+import Icon from '../../../components/v2/Icon.astro';
+
+const cibles = [
+  { icon: 'hard-hat',    metier: 'Artisans BTP',                pitch: 'Vos chantiers, vos devis, votre tréso — sur un seul écran.' },
+  { icon: 'building',    metier: 'Architectes',                 pitch: 'Vos affaires pilotées, votre focus création préservé.' },
+  { icon: 'building-2',  metier: 'Promoteurs immobiliers',      pitch: 'Du foncier à la livraison, vos opérations en temps réel.' },
+  { icon: 'home',        metier: 'Agences immobilières',        pitch: 'Mandats, prospects, commercialisations — un seul flux.' },
+  { icon: 'mail',        metier: 'Syndics & gestion locative',  pitch: 'Cinq cents mails triés, courriers générés, AG suivies.' },
+  { icon: 'sparkles',    metier: 'Un autre métier ?',           pitch: '9·58 répond à toute TPE qui a perdu la vue d\'ensemble.' },
+];
+
+const proofs = [
+  { value: '+500', label: 'personnes formées depuis 2022' },
+  { value: '6',    label: 'démos sectorielles déployées' },
+  { value: '100%', label: 'européen — souverain par défaut' },
+  { value: '48h',  label: 'pour vous répondre' },
+];
+
+const temoignages = [
+  {
+    secteur: 'Promotion foncière',
+    quote: 'On a passé deux jours à expliquer comment on travaille. Trois mois plus tard, je ne reviendrai pas à mon Excel.',
+    result: 'Suivi multi-opérations consolidé',
+  },
+  {
+    secteur: 'Syndic de copropriété',
+    quote: 'Cinq cents mails par jour. Avant, je rentrais chez moi à 21 h. Aujourd\'hui à 18 h 30, et mieux fait.',
+    result: '2,5 h gagnées par jour',
+  },
+  {
+    secteur: 'Gestion de patrimoine',
+    quote: 'Les analyses sont devenues des supports clients à la charte du cabinet. En un clic, je présente.',
+    result: 'Présentations en 1 clic',
+  },
+];
+---
+
+<V2bLayout
+  title="On installe l'IA dans votre entreprise"
+  description="60 % de votre croissance dort déjà dans vos données. 9·58 construit l'outil sur-mesure qui les fait parler. Pour artisans, architectes, promoteurs, agences et syndics. Vannes & Paris."
+>
+  <!-- =========================================
+       HEADER
+       ========================================= -->
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a href="/" class="brand" aria-label="9·58, retour à l'accueil">
+        <span class="brand-mark">9·58</span>
+        <span class="brand-tag">Neuf Cinquante Huit</span>
+      </a>
+      <nav class="nav nav-desktop" aria-label="Navigation principale">
+        <ul>
+          <li><a href="#pourquoi-maintenant">Pourquoi maintenant</a></li>
+          <li><a href="#vos-donnees">Vos données</a></li>
+          <li><a href="#construit">Ce qu'on construit</a></li>
+          <li><a href="#methode">Méthode</a></li>
+          <li><a href="#preuve">Réalisations</a></li>
+        </ul>
+      </nav>
+      <a href="#contact" class="btn btn--primary btn--sm header-cta">
+        Diagnostic
+        <Icon name="arrow-right" size={14} class="arrow" />
+      </a>
+    </div>
+  </header>
+
+  <!-- =========================================
+       HERO — "On installe l'IA" + WHY Sinek
+       ========================================= -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="container is-default">
+      <p class="eyebrow reveal">
+        9·58 — L'IA installée chez les artisans, promoteurs, agences immo &amp; syndics — Bretagne, depuis 2022
+      </p>
+
+      <h1 id="hero-title" class="manifesto reveal">
+        On installe l'IA<br>
+        dans votre entreprise.
+      </h1>
+
+      <p class="killer-line reveal">
+        Parce qu'aucun SaaS générique<br>
+        ne connaîtra jamais votre métier<br>
+        comme vous.
+      </p>
+
+      <p class="lead reveal">
+        <strong>60 % de votre croissance dort déjà dans vos données.</strong>
+        On construit l'outil sur-mesure qui les fait parler —
+        à votre nom, à votre métier, à votre cabinet.
+      </p>
+
+      <div class="hero-ctas reveal">
+        <a href="#contact" class="btn btn--primary btn--lg">
+          Demander un diagnostic
+          <Icon name="arrow-right" size={18} class="arrow" />
+        </a>
+        <a href="https://demo.958.fr" class="btn btn--ghost btn--lg">
+          Voir une démo sectorielle
+          <Icon name="arrow-up-right" size={18} class="arrow" />
+        </a>
+      </div>
+
+      <ul class="hero-assurances reveal">
+        <li>Réponse sous 48 h</li>
+        <li>Accord de confidentialité</li>
+        <li>Premier échange offert</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- =========================================
+       SECTION 1 — POURQUOI MAINTENANT (schéma adoption)
+       ========================================= -->
+  <section id="pourquoi-maintenant" class="section section--soft" aria-labelledby="adoption-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow reveal">Pourquoi maintenant</p>
+        <h2 id="adoption-title" class="reveal section-h2">
+          L'IA n'est pas une mode.<br>
+          C'est <em>un virage</em>. Et la fenêtre se ferme.
+        </h2>
+        <p class="reveal section-sub">
+          Ceux qui s'y mettent maintenant prennent une avance durable.
+          Ceux qui attendent 2027 paieront le rattrapage. Vous êtes ici.
+        </p>
+      </div>
+
+      <!-- Schéma adoption -->
+      <div class="adoption-schema reveal">
+        <div class="adoption-line" aria-hidden="true"></div>
+
+        <div class="adoption-points">
+          <article class="adoption-point ap-pioneer">
+            <span class="ap-dot" aria-hidden="true"></span>
+            <span class="ap-year">2024</span>
+            <h3 class="ap-state">Pionniers en action</h3>
+            <p class="ap-desc">Avantage concurrentiel pris.</p>
+          </article>
+
+          <article class="adoption-point ap-now">
+            <span class="ap-here">Vous êtes ici</span>
+            <span class="ap-dot ap-dot-pulse" aria-hidden="true"></span>
+            <span class="ap-year">2025–2026</span>
+            <h3 class="ap-state">Différenciation possible</h3>
+            <p class="ap-desc">Le marché est encore ouvert.</p>
+          </article>
+
+          <article class="adoption-point ap-standard">
+            <span class="ap-dot" aria-hidden="true"></span>
+            <span class="ap-year">2027</span>
+            <h3 class="ap-state">Standard de l'industrie</h3>
+            <p class="ap-desc">Le coût d'entrée devient élevé.</p>
+          </article>
+
+          <article class="adoption-point ap-late">
+            <span class="ap-dot" aria-hidden="true"></span>
+            <span class="ap-year">Après</span>
+            <h3 class="ap-state">Retardataires</h3>
+            <p class="ap-desc">Prix de l'attente — rattrapage.</p>
+          </article>
+        </div>
+      </div>
+
+      <p class="reveal adoption-cta">
+        <a href="#contact" class="link-arrow">
+          Pendant que la fenêtre est ouverte <Icon name="arrow-right" size={16} class="arrow" />
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- =========================================
+       SECTION 2 — VOS DONNÉES DORMENT
+       ========================================= -->
+  <section id="vos-donnees" class="section" aria-labelledby="dorment-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow reveal">Le vrai sujet</p>
+        <h2 id="dorment-title" class="reveal section-h2">
+          Vos données sont déjà là.<br>
+          <em>Vos logiciels ne les regardent pas.</em>
+        </h2>
+      </div>
+
+      <div class="dorment-grid">
+        <article class="dorment-item reveal">
+          <span class="dorment-n">01</span>
+          <h3 class="dorment-h">Ils stockent. Ils n'analysent pas.</h3>
+          <p>Vos logiciels métier — quels qu'ils soient — enregistrent vos devis, vos mails, vos heures, vos relevés bancaires. Mais aucun ne croise ces données pour vous dire ce qu'elles signifient pour <em>votre</em> boîte, à <em>votre</em> moment, dans <em>votre</em> secteur.</p>
+        </article>
+
+        <article class="dorment-item reveal">
+          <span class="dorment-n">02</span>
+          <h3 class="dorment-h">Ils décrivent. Ils n'anticipent pas.</h3>
+          <p>Votre tableau de bord vous montre votre tréso au 30 mai. 9·58 vous dit : <em>« attention, le client X tarde sur 3 factures, le chantier Y accélère ses appels — vous avez un trou tréso programmé pour le 18 août. Voici les 3 leviers. »</em></p>
+        </article>
+
+        <article class="dorment-item reveal">
+          <span class="dorment-n">03</span>
+          <h3 class="dorment-h">Ils servent tout le monde. Ils ne vous servent pas <em>vous</em>.</h3>
+          <p>Un SaaS américain pense pour 50 000 entreprises à la fois. Forcément, il vous parle à 25 %. Les 75 % restants — vos process, votre secteur, votre clientèle — il n'en sait rien. C'est ce 75 % qu'on récupère.</p>
+        </article>
+      </div>
+
+      <div class="reveal dorment-chiffre">
+        <p class="display-quote">
+          « 60 % de votre croissance dort déjà dans vos données. »
+        </p>
+        <p class="dorment-source">— Constat partagé par les dirigeants qu'on accompagne.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       SECTION 3 — CE QU'ON CONSTRUIT (3 piliers)
+       ========================================= -->
+  <section id="construit" class="section section--accent" aria-labelledby="quoi-title">
+    <div class="container">
+      <p class="eyebrow reveal">Ce qu'on construit</p>
+      <h2 id="quoi-title" class="reveal section-h2">
+        Un écran. Le vôtre.
+      </h2>
+
+      <div class="piliers-grid">
+        <div class="pilier reveal">
+          <div class="pilier-icon"><Icon name="monitor" size={28} strokeWidth={1.5} /></div>
+          <h3 class="pilier-h">L'écran</h3>
+          <p class="pilier-sub">Trésorerie, équipes, clients, projets, communication.</p>
+          <p class="pilier-body">Toutes vos données métier au même endroit, en temps réel. Vous regardez. Vous savez. Vous décidez. Le matin, en 2 minutes.</p>
+        </div>
+        <div class="pilier reveal">
+          <div class="pilier-icon"><Icon name="sparkles" size={28} strokeWidth={1.5} /></div>
+          <h3 class="pilier-h">La couche IA</h3>
+          <p class="pilier-sub">Ce qu'aucun SaaS générique ne sait faire.</p>
+          <p class="pilier-body">L'IA croise vos données, anticipe les frictions, rédige vos brouillons, trie vos mails. Sur <em>votre</em> métier, à <em>votre</em> ton, dans <em>votre</em> contexte.</p>
+        </div>
+        <div class="pilier reveal">
+          <div class="pilier-icon"><Icon name="shield" size={28} strokeWidth={1.5} /></div>
+          <h3 class="pilier-h">La souveraineté</h3>
+          <p class="pilier-sub">À <em>votre</em> nom. En Europe. Pas en location.</p>
+          <p class="pilier-body">Mistral, Scaleway, n8n auto-hébergé. Vos données restent à vous, votre outil reste à vous. Rien ne se loue, rien ne triple ses tarifs du jour au lendemain.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       SECTION 4 — LA MÉTHODE
+       ========================================= -->
+  <section id="methode" class="section" aria-labelledby="methode-title">
+    <div class="container is-default">
+      <p class="eyebrow reveal">La méthode</p>
+      <h2 id="methode-title" class="reveal section-h2">
+        Quatre temps. Sans bruit. Sans dépendance.
+      </h2>
+
+      <ol class="steps">
+        <li class="step reveal">
+          <span class="step-n">01</span>
+          <div>
+            <h3 class="step-h">Audit <span class="step-duree">1 à 2 jours</span></h3>
+            <p>Immersion sous NDA. On regarde comment vous travaillez <em>vraiment</em> — pas une moyenne sectorielle. Vous repartez avec un rapport actionnable. Vous pouvez vous arrêter là.</p>
+          </div>
+        </li>
+        <li class="step reveal">
+          <span class="step-n">02</span>
+          <div>
+            <h3 class="step-h">Structuration <span class="step-duree">1 à 3 semaines</span></h3>
+            <p>On identifie les trois à cinq points où l'IA change tout dans votre boîte. Plan chiffré, daté, validable.</p>
+          </div>
+        </li>
+        <li class="step reveal">
+          <span class="step-n">03</span>
+          <div>
+            <h3 class="step-h">Construction <span class="step-duree">3 à 12 semaines</span></h3>
+            <p>On connecte <em>vos</em> sources, on construit <em>votre</em> écran avec <em>vos</em> indicateurs. Pas de boîte noire. Pas de SaaS qu'on vous loue.</p>
+          </div>
+        </li>
+        <li class="step reveal">
+          <span class="step-n">04</span>
+          <div>
+            <h3 class="step-h">Mise en route &amp; suivi <span class="step-duree">3 mois à l'infini</span></h3>
+            <p>Formation des équipes sur site. Support réactif. Évolutions au rythme de l'IA. Vous devenez autonomes, pas dépendants.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- =========================================
+       SECTION 5 — POUR QUI
+       ========================================= -->
+  <section id="pour-qui" class="section section--soft" aria-labelledby="qui-title">
+    <div class="container">
+      <p class="eyebrow reveal">Pour qui</p>
+      <h2 id="qui-title" class="reveal section-h2">
+        Construit pour <em>votre</em> métier,<br>
+        pas pour « les entreprises ».
+      </h2>
+
+      <div class="cibles-grid">
+        {cibles.map((c) => (
+          <article class="cible reveal">
+            <div class="cible-icon"><Icon name={c.icon} size={22} strokeWidth={1.6} /></div>
+            <div>
+              <h3 class="cible-h">{c.metier}</h3>
+              <p class="cible-p">{c.pitch}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       SECTION 6 — PREUVE
+       ========================================= -->
+  <section id="preuve" class="section" aria-labelledby="preuve-title">
+    <div class="container">
+      <p class="eyebrow reveal">Ce qu'on fait depuis 2022</p>
+      <h2 id="preuve-title" class="reveal section-h2">
+        Pas une démo dingue. Le quotidien qui change.
+      </h2>
+
+      <div class="proofs-grid">
+        {proofs.map((p) => (
+          <div class="proof reveal">
+            <span class="proof-v">{p.value}</span>
+            <span class="proof-l">{p.label}</span>
+          </div>
+        ))}
+      </div>
+
+      <hr class="rule" style="margin-block: var(--s-9);" />
+
+      <div class="temoignages-grid">
+        {temoignages.map((t) => (
+          <figure class="temoignage reveal">
+            <span class="chip">{t.secteur}</span>
+            <blockquote>« {t.quote} »</blockquote>
+            <figcaption>{t.result}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       SECTION 7 — CTA FINAL
+       ========================================= -->
+  <section id="contact" class="section section--accent" aria-labelledby="cta-title">
+    <div class="container is-default cta-inner">
+      <p class="eyebrow reveal">Commencer</p>
+      <h2 id="cta-title" class="reveal cta-title">
+        Un audit. Un à deux jours. <em>Sous accord de confidentialité.</em>
+      </h2>
+      <p class="reveal cta-lead">
+        Je regarde votre contexte. Je vous dis honnêtement ce que 9·58 peut faire pour vous —
+        et ce qu'il ne peut pas. Sans engagement pour la suite.
+      </p>
+      <div class="cta-ctas reveal">
+        <a href="mailto:jmg@958.fr?subject=Demande%20de%20diagnostic%209%C2%B758" class="btn btn--lg btn-on-accent">
+          Demander un diagnostic
+          <Icon name="arrow-right" size={18} class="arrow" />
+        </a>
+        <a href="https://demo.958.fr" class="btn btn--ghost btn--lg btn--on-accent-ghost">
+          Voir une démo
+          <Icon name="arrow-up-right" size={18} class="arrow" />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       FOOTER mini
+       ========================================= -->
+  <footer class="footer-mini section--dark" role="contentinfo">
+    <div class="container footer-mini-inner">
+      <div>
+        <span class="brand-mark">9·58</span>
+        <span class="brand-tag">Neuf Cinquante Huit · Vannes &amp; Paris</span>
+      </div>
+      <ul class="footer-meta">
+        <li><a href="mailto:jmg@958.fr">jmg@958.fr</a></li>
+        <li><a href="https://www.linkedin.com/in/jean-marc-geuring/" rel="me noopener" target="_blank">LinkedIn</a></li>
+        <li><a href="/mentions-legales/">Mentions légales</a></li>
+      </ul>
+      <span class="footer-year">© 2026</span>
+    </div>
+  </footer>
+</V2bLayout>
+
+<style>
+  /* ============ HEADER ============ */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(11, 11, 10, 0.78);
+    backdrop-filter: saturate(180%) blur(12px);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--header-h);
+    gap: var(--s-5);
+  }
+  .brand {
+    display: inline-flex;
+    flex-direction: column;
+    line-height: 1;
+    color: var(--ivoire);
+    text-decoration: none;
+    gap: 3px;
+  }
+  .brand-mark {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+    color: var(--cuivre);
+  }
+  .brand-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .nav-desktop ul {
+    display: flex;
+    gap: var(--s-5);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .nav-desktop a {
+    font-size: var(--step-0);
+    font-weight: 500;
+    color: var(--ink-2);
+    padding: 6px 2px;
+    border-bottom: 1px solid transparent;
+    transition: color var(--dur-1) var(--ease),
+                border-color var(--dur-1) var(--ease);
+  }
+  .nav-desktop a:hover {
+    color: var(--cuivre);
+    border-bottom-color: var(--cuivre);
+  }
+
+  @media (max-width: 900px) {
+    .nav-desktop, .header-cta { display: none; }
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    padding-block: var(--s-11) var(--s-9);
+  }
+  .hero .eyebrow { margin-bottom: var(--s-6); }
+  .hero .manifesto {
+    margin-bottom: var(--s-6);
+    max-width: 18ch;
+  }
+  .hero .killer-line {
+    margin-bottom: var(--s-5);
+  }
+  .hero .lead {
+    margin-bottom: var(--s-7);
+    max-width: 56ch;
+  }
+  .hero-ctas {
+    display: flex;
+    gap: var(--s-3);
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .hero-assurances {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-5);
+    margin-top: var(--s-7);
+    list-style: none;
+    padding: 0;
+  }
+  .hero-assurances li {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    color: var(--ink-3);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    position: relative;
+    padding-left: 14px;
+  }
+  .hero-assurances li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background: var(--cuivre);
+    border-radius: 50%;
+  }
+
+  @media (max-width: 720px) {
+    .hero { padding-block: var(--s-8) var(--s-7); }
+    .hero .manifesto { max-width: 100%; }
+  }
+
+  /* ============ SECTION HEAD ============ */
+  .section-head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    margin-bottom: var(--s-8);
+    max-width: 720px;
+  }
+  .section-h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw + 0.5rem, 3.25rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: var(--tr-tighter);
+    color: var(--ink);
+    max-width: 22ch;
+    text-wrap: balance;
+    margin: 0;
+  }
+  .section-h2 em { font-style: italic; color: var(--cuivre); }
+  .section-sub {
+    font-size: var(--step-2);
+    line-height: var(--lh-normal);
+    color: var(--ink-2);
+    max-width: 60ch;
+    margin: 0;
+  }
+
+  /* ============ SCHÉMA ADOPTION ============ */
+  .adoption-schema {
+    position: relative;
+    margin-top: var(--s-7);
+    padding-block: var(--s-7) var(--s-5);
+  }
+  .adoption-line {
+    position: absolute;
+    top: 90px;
+    left: 6%;
+    right: 6%;
+    height: 2px;
+    background: linear-gradient(90deg,
+      var(--cuivre) 0%,
+      var(--cuivre) 30%,
+      var(--mimosa) 38%,
+      var(--mimosa) 52%,
+      var(--ink-3) 70%,
+      var(--ink-3) 100%);
+    opacity: 0.55;
+  }
+  .adoption-points {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--s-4);
+    position: relative;
+  }
+  .adoption-point {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--s-2);
+    padding-top: 50px;
+    position: relative;
+  }
+  .ap-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--cuivre);
+    position: absolute;
+    top: 82px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 0 4px var(--bg-2);
+  }
+  .ap-pioneer .ap-dot { background: var(--vert-mousse); }
+  .ap-now .ap-dot-pulse {
+    background: var(--mimosa);
+    width: 22px;
+    height: 22px;
+    top: 80px;
+    animation: ap-pulse 2.4s var(--ease) infinite;
+  }
+  .ap-standard .ap-dot { background: var(--ink-3); }
+  .ap-late .ap-dot { background: var(--ink-3); opacity: 0.55; }
+
+  @keyframes ap-pulse {
+    0%, 100% { box-shadow: 0 0 0 4px var(--bg-2), 0 0 0 0 var(--mimosa-soft, rgba(254,248,108,0.45)); }
+    50%      { box-shadow: 0 0 0 4px var(--bg-2), 0 0 0 12px transparent; }
+  }
+
+  .ap-here {
+    position: absolute;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mimosa);
+    white-space: nowrap;
+    padding: 4px 10px;
+    background: var(--bg);
+    border: 1px solid var(--mimosa);
+    border-radius: var(--r-pill);
+    font-weight: 500;
+  }
+  .ap-here::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: var(--mimosa);
+    margin-top: 1px;
+  }
+
+  .ap-year {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.06em;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    margin-top: var(--s-4);
+  }
+  .ap-now .ap-year { color: var(--mimosa); }
+
+  .ap-state {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--step-2);
+    color: var(--ink);
+    letter-spacing: -0.015em;
+    margin: 0;
+    line-height: 1.2;
+    max-width: 18ch;
+  }
+  .ap-pioneer .ap-state { color: var(--ivoire); }
+  .ap-now .ap-state { color: var(--ivoire); }
+  .ap-late .ap-state { color: var(--ink-2); }
+
+  .ap-desc {
+    font-size: var(--step-0);
+    color: var(--ink-2);
+    margin: 0;
+    max-width: 22ch;
+    line-height: var(--lh-normal);
+  }
+  .ap-pioneer .ap-desc { color: var(--vert-mousse); }
+  .ap-now .ap-desc { color: var(--mimosa); }
+  .ap-late .ap-desc { color: var(--ink-3); }
+
+  .adoption-cta {
+    margin-top: var(--s-6);
+  }
+
+  @media (max-width: 720px) {
+    .adoption-points { grid-template-columns: 1fr; gap: var(--s-6); }
+    .adoption-line {
+      top: 0;
+      bottom: 0;
+      left: 30px;
+      right: auto;
+      width: 2px;
+      height: auto;
+      background: linear-gradient(180deg,
+        var(--vert-mousse) 0%,
+        var(--cuivre) 20%,
+        var(--mimosa) 35%,
+        var(--mimosa) 52%,
+        var(--ink-3) 70%,
+        var(--ink-3) 100%);
+    }
+    .adoption-point {
+      align-items: flex-start;
+      text-align: left;
+      padding-top: 0;
+      padding-left: 60px;
+      min-height: 80px;
+    }
+    .ap-dot {
+      top: 8px;
+      left: 30px;
+      transform: translateX(-50%);
+    }
+    .ap-now .ap-dot-pulse { top: 6px; }
+    .ap-here {
+      position: static;
+      transform: none;
+      margin-bottom: var(--s-2);
+      display: inline-block;
+    }
+    .ap-here::after { display: none; }
+    .ap-year { margin-top: 0; }
+    .ap-state, .ap-desc { max-width: 100%; }
+  }
+
+  /* ============ DORMENT (Vos données dorment) ============ */
+  .dorment-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-6);
+    margin-top: var(--s-5);
+  }
+  .dorment-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+  .dorment-n {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2rem, 3vw + 0.5rem, 2.75rem);
+    line-height: 1;
+    color: var(--cuivre);
+    letter-spacing: -0.04em;
+  }
+  .dorment-h {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--step-3);
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    margin: 0;
+    line-height: 1.2;
+  }
+  .dorment-h em { color: var(--cuivre); font-style: italic; }
+  .dorment-item p { margin: 0; max-width: none; font-size: var(--step-1); }
+
+  .dorment-chiffre {
+    margin-top: var(--s-10);
+    padding-top: var(--s-8);
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+  .dorment-source {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    color: var(--ink-3);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin: 0;
+    max-width: none;
+  }
+
+  @media (max-width: 900px) {
+    .dorment-grid { grid-template-columns: 1fr; gap: var(--s-7); }
+  }
+
+  /* ============ STEPS (méthode) ============ */
+  .steps {
+    list-style: none;
+    padding: 0;
+    margin: var(--s-7) 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+  }
+  .step {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: var(--s-5);
+    padding: var(--s-5);
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: var(--r-3);
+    transition: border-color var(--dur-2) var(--ease);
+  }
+  .step:hover { border-color: var(--cuivre); }
+  .step-n {
+    font-family: var(--font-mono);
+    font-size: var(--step-1);
+    color: var(--cuivre);
+    letter-spacing: 0.04em;
+    font-weight: 500;
+  }
+  .step-h {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--step-3);
+    color: var(--ink);
+    margin: 0 0 var(--s-2) 0;
+    letter-spacing: -0.02em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+    align-items: baseline;
+  }
+  .step-duree {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    color: var(--ink-3);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .step p { margin: 0; max-width: 64ch; }
+
+  @media (max-width: 640px) {
+    .step { grid-template-columns: 1fr; gap: var(--s-3); padding: var(--s-4); }
+  }
+
+  /* ============ PILIERS (accent cuivre) ============ */
+  .piliers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-5);
+    margin-top: var(--s-7);
+  }
+  .pilier {
+    padding: var(--s-6);
+    background: rgba(11, 11, 10, 0.28);
+    border: 1px solid rgba(244, 236, 220, 0.2);
+    border-radius: var(--r-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+  .pilier-icon {
+    width: 48px;
+    height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    color: var(--cuivre);
+    border-radius: var(--r-3);
+    margin-bottom: var(--s-2);
+  }
+  .pilier-h {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--step-3);
+    color: var(--ivoire);
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+  .pilier-sub {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--ivoire);
+    margin: 0;
+    max-width: none;
+    font-size: var(--step-1);
+  }
+  .pilier-sub em { color: var(--ivoire); font-style: normal; font-weight: 600; }
+  .pilier-body {
+    color: var(--ivoire-2);
+    font-size: var(--step-1);
+    line-height: var(--lh-normal);
+    margin: 0;
+    max-width: none;
+  }
+  .pilier-body em { color: var(--ivoire); font-style: italic; }
+
+  @media (max-width: 900px) {
+    .piliers-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ============ CIBLES (Pour qui) ============ */
+  .cibles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-4);
+    margin-top: var(--s-7);
+  }
+  .cible {
+    display: flex;
+    gap: var(--s-4);
+    padding: var(--s-5);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--r-3);
+    align-items: flex-start;
+    transition: border-color var(--dur-2) var(--ease),
+                transform var(--dur-2) var(--ease);
+  }
+  .cible:hover {
+    border-color: var(--cuivre);
+    transform: translateY(-2px);
+  }
+  .cible-icon {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--cuivre-soft);
+    color: var(--cuivre);
+    border-radius: var(--r-2);
+    flex-shrink: 0;
+  }
+  .cible-h {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--step-2);
+    color: var(--ink);
+    margin: 0 0 var(--s-1) 0;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+  }
+  .cible-p {
+    font-size: var(--step-0);
+    color: var(--ink-2);
+    line-height: var(--lh-normal);
+    margin: 0;
+    max-width: none;
+  }
+
+  @media (max-width: 900px) { .cibles-grid { grid-template-columns: 1fr; } }
+
+  /* ============ PROOFS ============ */
+  .proofs-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--s-6);
+    margin-top: var(--s-7);
+  }
+  .proof {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+  }
+  .proof-v {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw + 0.5rem, 4.25rem);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--cuivre);
+  }
+  .proof-l {
+    font-size: var(--step-0);
+    color: var(--ink-2);
+    line-height: var(--lh-normal);
+    max-width: 22ch;
+  }
+
+  @media (max-width: 720px) {
+    .proofs-grid { grid-template-columns: repeat(2, 1fr); gap: var(--s-5); }
+  }
+
+  /* ============ TÉMOIGNAGES ============ */
+  .temoignages-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-5);
+  }
+  .temoignage {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+    padding: var(--s-5);
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: var(--r-3);
+    margin: 0;
+  }
+  .temoignage blockquote {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--step-2);
+    line-height: 1.4;
+    color: var(--ink);
+    font-weight: 400;
+    margin: 0;
+    max-width: none;
+  }
+  .temoignage figcaption {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    color: var(--cuivre);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 900px) { .temoignages-grid { grid-template-columns: 1fr; } }
+
+  /* ============ CTA FINAL ============ */
+  .cta-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+    align-items: flex-start;
+  }
+  .cta-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw + 1rem, 3.5rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: var(--tr-tighter);
+    color: var(--ivoire);
+    max-width: 22ch;
+    text-wrap: balance;
+    margin: 0;
+  }
+  .cta-title em { font-style: italic; }
+  .cta-lead {
+    font-size: var(--step-2);
+    line-height: var(--lh-normal);
+    color: var(--ivoire-2);
+    max-width: 56ch;
+    margin: 0;
+  }
+  .cta-ctas {
+    display: flex;
+    gap: var(--s-3);
+    flex-wrap: wrap;
+    margin-top: var(--s-3);
+  }
+  .btn-on-accent {
+    background: var(--bg);
+    color: var(--ivoire);
+    border: 1px solid var(--bg);
+  }
+  .btn-on-accent:hover {
+    background: var(--ivoire);
+    color: var(--bg);
+    border-color: var(--ivoire);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lg);
+  }
+  .btn--on-accent-ghost {
+    color: var(--ivoire);
+    border-color: var(--ivoire);
+  }
+  .btn--on-accent-ghost:hover {
+    background: var(--ivoire);
+    color: var(--cuivre);
+    border-color: var(--ivoire);
+  }
+
+  /* ============ FOOTER ============ */
+  .footer-mini {
+    padding-block: var(--s-6);
+    border-top: 1px solid var(--line);
+    background: var(--bg-2);
+  }
+  .footer-mini-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-5);
+    flex-wrap: wrap;
+  }
+  .footer-mini-inner > div:first-child {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 3px;
+    line-height: 1;
+  }
+  .footer-meta {
+    display: flex;
+    gap: var(--s-5);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    letter-spacing: 0.04em;
+  }
+  .footer-meta a {
+    color: var(--ink-2);
+    text-transform: uppercase;
+  }
+  .footer-meta a:hover { color: var(--cuivre); }
+  .footer-year {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    color: var(--ink-3);
+    letter-spacing: 0.06em;
+  }
+</style>
