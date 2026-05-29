@@ -65,7 +65,7 @@ const programmes = [
   { code: 'F-INTRO', cat: 'decouverte', icon: 'sparkles', niveau: 'Découverte', titre: 'Découverte intégrée digitale — Niveau 1', duree: '1 jour · inter ou intra',
     pour: 'Tous publics · première marche',
     livre: "Comprendre l'IA générative concrètement. Premiers prompts utiles, premiers outils, premiers réflexes. Le point de départ — pour celles et ceux qui veulent décoller propre.",
-    url: 'https://formation.958.fr/f/decouverte-integree-digitale-niveau-1' },
+    url: '/preview/v2c/formation/decouverte/' },
   { code: 'F-00', cat: 'accompagnement', icon: 'users', niveau: 'Accompagnement', titre: 'Accompagnement IA du dirigeant', duree: '6 mois · bi-mensuel',
     pour: 'DG seul ou avec son équipe rapprochée',
     livre: "Conception de votre assistant IA autonome. Refonte des process clés où l'IA change tout. Présent derrière vos sessions, je connais vos équipes — j'ajuste avec vous." },
@@ -345,7 +345,7 @@ const versus = [
             <div class="prog-footer">
               <span class="prog-code">{p.code}</span>
               {p.url
-                ? <a href={p.url} target="_blank" rel="noopener" class="prog-link">S'inscrire <Icon name="arrow-up-right" size={14} /></a>
+                ? <a href={p.url} class="prog-link">Voir la fiche <Icon name="arrow-right" size={14} /></a>
                 : <a href="/preview/v2c/formation/brief/" class="prog-link">Demander un devis <Icon name="arrow-right" size={14} /></a>}
             </div>
           </li>
