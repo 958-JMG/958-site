@@ -2,27 +2,6 @@
 import V2bLayout from '../../../layouts/V2bLayout.astro';
 import Icon from '../../../components/v2/Icon.astro';
 
-const terrain = [
-  {
-    icon: 'hard-hat',
-    secteur: 'Bâtiment',
-    titre: 'Le pointage des heures de fin de semaine.',
-    gain: 'Le vendredi après-midi vous est rendu',
-  },
-  {
-    icon: 'building-2',
-    secteur: 'Immobilier',
-    titre: 'La modification d\'un PLU pour un foncier.',
-    gain: 'Vous lisez la note. Vous ne l\'écrivez plus.',
-  },
-  {
-    icon: 'briefcase',
-    secteur: 'TPE / PME',
-    titre: 'La proposition commerciale personnalisée.',
-    gain: 'Vous appelez le prospect. La proposition est partie.',
-  },
-];
-
 const proofs = [
   { value: '+500', label: 'personnes formées depuis 2022' },
   { value: '6',    label: 'démos sectorielles déployées' },
@@ -97,8 +76,8 @@ const realisations = [
       </a>
       <nav class="nav nav-desktop" aria-label="Navigation principale">
         <ul>
-          <li><a href="#terrain">On vous comprend</a></li>
           <li><a href="#construit">Le produit</a></li>
+          <li><a href="#methode">Méthode</a></li>
           <li><a href="#preuve">Réalisations</a></li>
         </ul>
       </nav>
@@ -330,6 +309,21 @@ const realisations = [
       }, 4200);
     }
 
+    // Animation kanban one-shot (R5 du design-critique) :
+    // déclenchée une seule fois quand le mockup entre dans le viewport.
+    const movingCard = document.querySelector('.cc-kcard--moving');
+    if (movingCard) {
+      const kanbanObs = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-playing');
+            kanbanObs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.4 });
+      kanbanObs.observe(movingCard);
+    }
+
     // Compteurs animés sur les chiffres preuve (au scroll-in)
     function parseProofValue(str) {
       const match = str.match(/^([+\-]?)(\d+)(.*)$/);
@@ -388,9 +382,8 @@ const realisations = [
   <!-- =========================================
        SECTION 3 — CE QU'ON CONSTRUIT (3 piliers)
        ========================================= -->
-  <section id="construit" class="section section--accent" aria-labelledby="quoi-title">
+  <section id="construit" class="section" aria-labelledby="quoi-title">
     <div class="container">
-      <p class="eyebrow reveal">Ce qu'on construit</p>
       <h2 id="quoi-title" class="reveal section-h2">
         Un écran. Le vôtre.
       </h2>
@@ -413,7 +406,7 @@ const realisations = [
         </div>
       </div>
       <p class="reveal piliers-link">
-        <a href="/produit/" class="link-arrow-on-accent">Voir le produit en détail <Icon name="arrow-right" size={16} class="arrow" /></a>
+        <a href="/produit/" class="link-arrow">Voir le produit en détail <Icon name="arrow-right" size={16} class="arrow" /></a>
       </p>
     </div>
   </section>
@@ -423,7 +416,6 @@ const realisations = [
        ========================================= -->
   <section id="methode" class="section section--soft" aria-labelledby="methode-title">
     <div class="container is-default">
-      <p class="eyebrow reveal">La méthode</p>
       <h2 id="methode-title" class="reveal section-h2">
         Quatre temps. Sans bruit. Sans dépendance.
       </h2>
@@ -441,128 +433,11 @@ const realisations = [
   </section>
 
   <!-- =========================================
-       SECTION — ENFONCER LE CLOU (terrain terrain terrain)
-       ========================================= -->
-  <section id="terrain" class="section section--soft" aria-labelledby="terrain-title">
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow reveal">On vous facilite la tâche</p>
-        <h2 id="terrain-title" class="reveal section-h2">
-          Diriger une TPE-PME,<br>
-          <em>ce n'est pas chose facile.</em>
-        </h2>
-        <p class="reveal section-sub">
-          Entre la paperasse, les chantiers, les clients, l'équipe et les imprévus —
-          vos journées partent en dix directions. <strong>9·58 vous facilite la tâche.</strong>
-        </p>
-      </div>
-
-      <div class="terrain-grid">
-        {terrain.map((t) => (
-          <article class="terrain-card reveal">
-            <div class="terrain-head">
-              <span class="terrain-icon"><Icon name={t.icon} size={26} strokeWidth={1.6} /></span>
-              <span class="terrain-secteur">{t.secteur}</span>
-            </div>
-            <h3 class="terrain-titre">{t.titre}</h3>
-            <div class="terrain-gain">
-              <span class="terrain-gain-arrow"><Icon name="arrow-right" size={14} strokeWidth={2} /></span>
-              <span class="terrain-gain-label">{t.gain}</span>
-            </div>
-          </article>
-        ))}
-
-        <!-- Card "IA proactive" — Anniversaire client (full-width avec mini-mockup) -->
-        <article class="terrain-card terrain-card--proactive reveal">
-          <div class="proactive-grid">
-            <div class="proactive-copy">
-              <div class="terrain-head">
-                <span class="terrain-icon terrain-icon--vert"><Icon name="gift" size={26} strokeWidth={1.6} /></span>
-                <span class="terrain-secteur terrain-secteur--vert">Commercial — IA proactive</span>
-              </div>
-              <h3 class="terrain-titre">
-                L'anniversaire de votre meilleur client,<br>
-                <em>dans 7 jours</em>.
-              </h3>
-              <p class="terrain-body">
-                9·58 le repère, croise son historique avec vous
-                et rédige le message personnalisé avec une <strong>offre adaptée à son cycle</strong>.
-                Vous relisez. Vous validez. Vous lui faites signe — au lieu de rater la date.
-              </p>
-              <div class="terrain-gain">
-                <span class="terrain-gain-arrow"><Icon name="arrow-right" size={14} strokeWidth={2} /></span>
-                <span class="terrain-gain-label">Un geste juste, au bon moment</span>
-              </div>
-            </div>
-
-            <!-- Mini-mockup du mail anniversaire -->
-            <div class="proactive-mock" aria-hidden="true">
-              <div class="pmock-bar">
-                <span class="pmock-from"><Icon name="calendar" size={12} strokeWidth={1.8} /> J-7 · anniversaire détecté</span>
-              </div>
-              <div class="pmock-body">
-                <div class="pmock-to">→ Sophie Lefort · cliente depuis 2021</div>
-                <div class="pmock-subject">Sophie, un petit mot pour vos 42 ans</div>
-                <p class="pmock-text">
-                  Bonjour Sophie,<br>
-                  Vos rénovations du printemps dernier ont 18 mois — c'est souvent le moment où l'on pense aux finitions extérieures…
-                </p>
-                <div class="pmock-offer">
-                  <span class="pmock-offer-tag">Offre suggérée par l'IA</span>
-                  <span class="pmock-offer-val">Adaptée à son cycle d'achat</span>
-                </div>
-                <div class="pmock-actions">
-                  <span class="pmock-btn pmock-btn--primary">Envoyer J-3</span>
-                  <span class="pmock-btn">Modifier</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- Card 8 : manifeste plein largeur — Interroger ≠ Interpréter -->
-        <article class="terrain-card terrain-card--manifest reveal">
-          <div class="terrain-manifest-grid">
-            <div>
-              <div class="terrain-head">
-                <span class="terrain-icon terrain-icon--manifest"><Icon name="sparkles" size={22} strokeWidth={1.6} /></span>
-                <span class="terrain-secteur">Document &amp; analyse — Le vrai sujet</span>
-              </div>
-              <h3 class="terrain-manifest-titre">
-                Interroger un PLU,<br>
-                <em>n'importe quel script le fait.</em>
-              </h3>
-              <p class="terrain-manifest-sub">
-                L'<strong>interpréter</strong> pour votre projet, votre commune, votre acquéreur —
-                générer la note de synthèse à votre charte, le brouillon de proposition au maire,
-                le compromis adapté à la situation — <strong>c'est nous</strong>.
-              </p>
-            </div>
-            <ul class="terrain-manifest-list">
-              <li><span class="tm-bullet">·</span> PLU, DVF, cadastre interprétés</li>
-              <li><span class="tm-bullet">·</span> Devis, contrats, courriers générés</li>
-              <li><span class="tm-bullet">·</span> Rapports PDF à votre charte</li>
-              <li><span class="tm-bullet">·</span> Notes de synthèse pour vos clients</li>
-              <li><span class="tm-bullet tm-bullet--ai">●</span> Avec votre ton, votre vocabulaire métier</li>
-            </ul>
-          </div>
-        </article>
-      </div>
-
-      <p class="reveal terrain-outro">
-        Ces heures-là, vous ne les retrouverez pas en attendant.
-        On vous les rend — pour que vous fassiez <em>ce que personne d'autre que vous ne peut faire</em>.
-      </p>
-    </div>
-  </section>
-
-  <!-- =========================================
        SECTION 6 — RÉALISATIONS (6 cas — Avant / Après)
        ========================================= -->
   <section id="preuve" class="section" aria-labelledby="preuve-title">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow reveal">Réalisations</p>
         <h2 id="preuve-title" class="reveal section-h2">
           Vos données.<br>
           <em>Votre destin.</em>
@@ -620,9 +495,8 @@ const realisations = [
        ========================================= -->
   <section id="contact" class="section section--accent" aria-labelledby="cta-title">
     <div class="container is-default cta-inner">
-      <p class="eyebrow reveal">Commencer</p>
       <h2 id="cta-title" class="reveal cta-title">
-        Un audit. Un à deux jours. <em>Sous accord de confidentialité.</em>
+        Un audit. Un jour. <em>Sous accord de confidentialité.</em>
       </h2>
       <p class="reveal cta-lead">
         Je regarde votre contexte. Je vous dis honnêtement ce que 9·58 peut faire pour vous —
@@ -1076,8 +950,10 @@ const realisations = [
   .cc-kcard--moving {
     position: relative;
     z-index: 5;
-    animation: kanban-move 7s var(--ease-out) infinite;
     border-color: var(--cuivre);
+  }
+  .cc-kcard--moving.is-playing {
+    animation: kanban-move 6s var(--ease-out) 1 forwards;
   }
   @keyframes kanban-move {
     /* Repos en Devis */

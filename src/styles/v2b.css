@@ -22,7 +22,7 @@
   --ivoire-deep: #D6C6A5;
   --ink: var(--ivoire);
   --ink-2: #BFB39A;
-  --ink-3: #8A8068;
+  --ink-3: #A39977;
 
   /* ---------- Lignes ---------- */
   --line: rgba(244, 236, 220, 0.10);
@@ -85,7 +85,7 @@
   --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
 
   /* ---------- Type scale ---------- */
-  --step--2: 0.75rem;
+  --step--2: 0.8125rem;
   --step--1: 0.875rem;
   --step-0:  0.9375rem;
   --step-1:  1.0625rem;
