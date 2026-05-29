@@ -8,6 +8,7 @@ export default defineConfig({
   output: 'static',
   integrations: [
     sitemap({
+      // Exclure les anciens protos legacy
       filter: (page) => !page.includes('/preview/'),
     }),
   ],

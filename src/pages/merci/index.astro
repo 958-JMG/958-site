@@ -1,9 +1,9 @@
 ---
-import V2bLayout from '../../../../layouts/V2bLayout.astro';
-import Icon from '../../../../components/v2/Icon.astro';
-import LogoMark from '../../../../components/v2/LogoMark.astro';
-import V2cHeader from '../../../../components/v2/V2cHeader.astro';
-import V2cFooter from '../../../../components/v2/V2cFooter.astro';
+import V2bLayout from '../../layouts/V2bLayout.astro';
+import Icon from '../../components/v2/Icon.astro';
+import LogoMark from '../../components/v2/LogoMark.astro';
+import V2cHeader from '../../components/v2/V2cHeader.astro';
+import V2cFooter from '../../components/v2/V2cFooter.astro';
 ---
 
 <V2bLayout
@@ -31,7 +31,7 @@ import V2cFooter from '../../../../components/v2/V2cFooter.astro';
       </p>
 
       <div class="merci-ctas">
-        <a href="/preview/v2c/" class="btn btn--primary btn--lg">
+        <a href="/" class="btn btn--primary btn--lg">
           Retour à l'accueil
           <Icon name="arrow-right" size={18} class="arrow" />
         </a>
@@ -51,34 +51,7 @@ import V2cFooter from '../../../../components/v2/V2cFooter.astro';
 </V2bLayout>
 
 <style>
-  .site-header {
-    position: sticky; top: 0; z-index: 50;
-    background: rgba(11, 11, 10, 0.78);
-    backdrop-filter: saturate(180%) blur(12px);
-    -webkit-backdrop-filter: saturate(180%) blur(12px);
-    border-bottom: 1px solid var(--line);
-  }
-  .header-inner {
-    display: flex; align-items: center; justify-content: flex-start;
-    height: var(--header-h);
-  }
-  .brand {
-    display: inline-flex; flex-direction: column; line-height: 1;
-    color: var(--ivoire); text-decoration: none; gap: 3px;
-  }
-  .brand { display: inline-flex; align-items: center; gap: 12px; }
-  .footer-brand {
-    display: inline-flex !important; flex-direction: row !important;
-    align-items: center; gap: 12px;
-  }
-  .brand-mark {
-    font-family: var(--font-display); font-weight: 500; font-size: 1.5rem;
-    letter-spacing: -0.02em; color: var(--cuivre);
-  }
-  .brand-tag {
-    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--ink-3);
-  }
+  /* Header/Footer/Brand styles : voir V2cHeader.astro + V2cFooter.astro */
 
   .merci-section {
     padding-block: var(--s-11) var(--s-10);
@@ -128,28 +101,5 @@ import V2cFooter from '../../../../components/v2/V2cFooter.astro';
     margin: var(--s-5) 0 0 0;
   }
 
-  .footer-mini {
-    padding-block: var(--s-6);
-    border-top: 1px solid var(--line); background: var(--bg-2);
-  }
-  .footer-mini-inner {
-    display: flex; align-items: center; justify-content: space-between;
-    gap: var(--s-5); flex-wrap: wrap;
-  }
-  .footer-mini-inner > div:first-child {
-    display: inline-flex; flex-direction: column; gap: 3px; line-height: 1;
-  }
-  .footer-meta {
-    display: flex; gap: var(--s-5); list-style: none; padding: 0; margin: 0;
-    font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: 0.04em;
-  }
-  .footer-meta a {
-    color: var(--ink-2); text-transform: uppercase;
-    padding: 8px 4px; display: inline-block; min-height: 44px; line-height: 28px;
-  }
-  .footer-meta a:hover { color: var(--cuivre); }
-  .footer-year {
-    font-family: var(--font-mono); font-size: var(--step--2);
-    color: var(--ink-3); letter-spacing: 0.06em;
-  }
+  /* Footer styles : voir V2cFooter.astro */
 </style>

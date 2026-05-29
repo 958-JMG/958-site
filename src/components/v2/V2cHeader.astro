@@ -1,6 +1,6 @@
 ---
 /**
- * V2cHeader — header partagé sur les 5 pages /preview/v2c/.
+ * V2cHeader — header partagé sur toutes les pages du site.
  * Inclut : logo + nav desktop avec sous-menu Formation + burger mobile + drawer.
  *
  * Props :
@@ -22,25 +22,25 @@ const isFormation = currentSection === 'formation' || currentSection === 'accomp
 
 // Liens primaires (peuvent pointer vers ancre home ou page externe)
 const navItems = [
-  { id: 'produit', label: 'Le produit', href: '/preview/v2c/#construit' },
+  { id: 'produit', label: 'Le produit', href: '/#construit' },
   {
     id: 'formation',
     label: 'Formation',
-    href: '/preview/v2c/formation/',
+    href: '/formation/',
     submenu: [
-      { label: "Présentation",                       href: '/preview/v2c/formation/' },
-      { label: "Accompagnement du dirigeant",        href: '/preview/v2c/formation/#accompagnement', highlight: true },
-      { label: "Programmes",                         href: '/preview/v2c/formation/#programmes' },
-      { label: "Demander un devis",                  href: '/preview/v2c/formation/brief/', cta: true },
+      { label: "Présentation",                       href: '/formation/' },
+      { label: "Accompagnement du dirigeant",        href: '/formation/#accompagnement', highlight: true },
+      { label: "Programmes",                         href: '/formation/#programmes' },
+      { label: "Demander un devis",                  href: '/formation/brief/', cta: true },
     ],
   },
-  { id: 'realisations', label: 'Réalisations', href: '/preview/v2c/#preuve' },
+  { id: 'realisations', label: 'Réalisations', href: '/#preuve' },
 ];
 ---
 
 <header class="site-header" role="banner">
   <div class="container header-inner">
-    <a href="/preview/v2c/" class="brand" aria-label="9·58, retour à l'accueil">
+    <a href="/" class="brand" aria-label="9·58, retour à l'accueil">
       <LogoMark height={38} />
       <span class="brand-tag">Neuf Cinquante Huit</span>
     </a>
@@ -82,7 +82,7 @@ const navItems = [
     )}
 
     <a
-      href="/preview/v2c/diagnostic/"
+      href="/diagnostic/"
       class="btn btn--primary btn--sm header-cta"
       aria-current={currentSection === 'diagnostic' ? 'page' : undefined}
     >
@@ -140,7 +140,7 @@ const navItems = [
             </li>
           ))}
         </ul>
-        <a href="/preview/v2c/diagnostic/" class="btn btn--primary btn--lg drawer-cta">
+        <a href="/diagnostic/" class="btn btn--primary btn--lg drawer-cta">
           Demander un diagnostic
           <Icon name="arrow-right" size={18} class="arrow" />
         </a>

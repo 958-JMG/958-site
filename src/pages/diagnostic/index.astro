@@ -1,9 +1,9 @@
 ---
-import V2bLayout from '../../../../layouts/V2bLayout.astro';
-import Icon from '../../../../components/v2/Icon.astro';
-import LogoMark from '../../../../components/v2/LogoMark.astro';
-import V2cHeader from '../../../../components/v2/V2cHeader.astro';
-import V2cFooter from '../../../../components/v2/V2cFooter.astro';
+import V2bLayout from '../../layouts/V2bLayout.astro';
+import Icon from '../../components/v2/Icon.astro';
+import LogoMark from '../../components/v2/LogoMark.astro';
+import V2cHeader from '../../components/v2/V2cHeader.astro';
+import V2cFooter from '../../components/v2/V2cFooter.astro';
 ---
 
 <V2bLayout
@@ -171,7 +171,7 @@ import V2cFooter from '../../../../components/v2/V2cFooter.astro';
           const body = await r.text().catch(() => '');
           throw new Error(`HTTP ${r.status}${body ? ' · ' + body.slice(0, 80) : ''}`);
         }
-        window.location.href = '/preview/v2c/merci/';
+        window.location.href = '/merci/';
       } catch (err: any) {
         status.textContent = `Erreur d'envoi (${err?.message || 'réseau'}). Écrivez-nous à jmg@958.fr.`;
         status.classList.add('is-error');
@@ -185,47 +185,7 @@ import V2cFooter from '../../../../components/v2/V2cFooter.astro';
 </script>
 
 <style>
-  /* ============ HEADER ============ */
-  .site-header {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background: rgba(11, 11, 10, 0.78);
-    backdrop-filter: saturate(180%) blur(12px);
-    -webkit-backdrop-filter: saturate(180%) blur(12px);
-    border-bottom: 1px solid var(--line);
-  }
-  .header-inner {
-    display: flex; align-items: center; justify-content: space-between;
-    height: var(--header-h); gap: var(--s-5);
-  }
-  .brand {
-    display: inline-flex; flex-direction: column; line-height: 1;
-    color: var(--ivoire); text-decoration: none; gap: 3px;
-  }
-  .brand { display: inline-flex; align-items: center; gap: 12px; }
-  .footer-brand {
-    display: inline-flex !important; flex-direction: row !important;
-    align-items: center; gap: 12px;
-  }
-  .brand-mark {
-    font-family: var(--font-display); font-weight: 500; font-size: 1.5rem;
-    letter-spacing: -0.02em; color: var(--cuivre);
-  }
-  .brand-tag {
-    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--ink-3);
-  }
-  .nav-desktop ul {
-    display: flex; gap: var(--s-5); list-style: none; padding: 0; margin: 0;
-  }
-  .nav-desktop a {
-    font-size: var(--step-0); font-weight: 500; color: var(--ink-2);
-    padding: 6px 2px; border-bottom: 1px solid transparent;
-    transition: color var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease);
-  }
-  .nav-desktop a:hover { color: var(--cuivre); border-bottom-color: var(--cuivre); }
-  @media (max-width: 900px) { .nav-desktop, .header-cta { display: none; } }
+  /* Header/Footer/Brand styles : voir V2cHeader.astro + V2cFooter.astro */
 
   /* ============ DIAGNOSTIC ============ */
   .diag-section { padding-block: var(--s-10) var(--s-9); }
@@ -367,30 +327,5 @@ import V2cFooter from '../../../../components/v2/V2cFooter.astro';
     color: #f49685;
   }
 
-  /* ============ FOOTER ============ */
-  .footer-mini {
-    padding-block: var(--s-6);
-    border-top: 1px solid var(--line);
-    background: var(--bg-2);
-  }
-  .footer-mini-inner {
-    display: flex; align-items: center; justify-content: space-between;
-    gap: var(--s-5); flex-wrap: wrap;
-  }
-  .footer-mini-inner > div:first-child {
-    display: inline-flex; flex-direction: column; gap: 3px; line-height: 1;
-  }
-  .footer-meta {
-    display: flex; gap: var(--s-5); list-style: none; padding: 0; margin: 0;
-    font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: 0.04em;
-  }
-  .footer-meta a {
-    color: var(--ink-2); text-transform: uppercase;
-    padding: 8px 4px; display: inline-block; min-height: 44px; line-height: 28px;
-  }
-  .footer-meta a:hover { color: var(--cuivre); }
-  .footer-year {
-    font-family: var(--font-mono); font-size: var(--step--2);
-    color: var(--ink-3); letter-spacing: 0.06em;
-  }
+  /* Footer styles : voir V2cFooter.astro */
 </style>

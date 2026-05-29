@@ -1,8 +1,8 @@
 ---
-import V2bLayout from '../../../../../layouts/V2bLayout.astro';
-import Icon from '../../../../../components/v2/Icon.astro';
-import V2cHeader from '../../../../../components/v2/V2cHeader.astro';
-import V2cFooter from '../../../../../components/v2/V2cFooter.astro';
+import V2bLayout from '../../../layouts/V2bLayout.astro';
+import Icon from '../../../components/v2/Icon.astro';
+import V2cHeader from '../../../components/v2/V2cHeader.astro';
+import V2cFooter from '../../../components/v2/V2cFooter.astro';
 
 const programme = [
   {
@@ -69,7 +69,7 @@ const programme = [
           S'inscrire à une session
           <Icon name="arrow-right" size={18} class="arrow" />
         </a>
-        <a href="/preview/v2c/formation/brief/" class="btn btn--ghost btn--lg">
+        <a href="/formation/brief/" class="btn btn--ghost btn--lg">
           Brief sur-mesure
           <Icon name="arrow-right" size={18} class="arrow" />
         </a>
@@ -332,7 +332,7 @@ const programme = [
           const body = await r.text().catch(() => '');
           throw new Error(`HTTP ${r.status}${body ? ' · ' + body.slice(0, 80) : ''}`);
         }
-        window.location.href = '/preview/v2c/merci/';
+        window.location.href = '/merci/';
       } catch (err: any) {
         status.textContent = `Erreur d'envoi (${err?.message || 'réseau'}). Écrivez-nous à jmg@958.fr.`;
         status.classList.add('is-error');

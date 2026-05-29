@@ -19,4 +19,4 @@ User-agent: Google-Extended
 Allow: /
 Disallow: /preview/
 
-Sitemap: https://958.fr/sitemap-index.xml
+Sitemap: https://www.958.fr/sitemap-index.xml

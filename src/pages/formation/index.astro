@@ -1,9 +1,9 @@
 ---
-import V2bLayout from '../../../../layouts/V2bLayout.astro';
-import Icon from '../../../../components/v2/Icon.astro';
-import LogoMark from '../../../../components/v2/LogoMark.astro';
-import V2cHeader from '../../../../components/v2/V2cHeader.astro';
-import V2cFooter from '../../../../components/v2/V2cFooter.astro';
+import V2bLayout from '../../layouts/V2bLayout.astro';
+import Icon from '../../components/v2/Icon.astro';
+import LogoMark from '../../components/v2/LogoMark.astro';
+import V2cHeader from '../../components/v2/V2cHeader.astro';
+import V2cFooter from '../../components/v2/V2cFooter.astro';
 
 // Publics — accompagnement dirigeant placé en premier
 const publics = [
@@ -65,7 +65,7 @@ const programmes = [
   { code: 'F-INTRO', cat: 'decouverte', icon: 'sparkles', niveau: 'Découverte', titre: 'Découverte intégrée digitale — Niveau 1', duree: '1 jour · inter ou intra',
     pour: 'Tous publics · première marche',
     livre: "Comprendre l'IA générative concrètement. Premiers prompts utiles, premiers outils, premiers réflexes. Le point de départ — pour celles et ceux qui veulent décoller propre.",
-    url: '/preview/v2c/formation/decouverte/' },
+    url: '/formation/decouverte/' },
   { code: 'F-00', cat: 'accompagnement', icon: 'users', niveau: 'Accompagnement', titre: 'Accompagnement IA du dirigeant', duree: '6 mois · bi-mensuel',
     pour: 'DG seul ou avec son équipe rapprochée',
     livre: "Conception de votre assistant IA autonome. Refonte des process clés où l'IA change tout. Présent derrière vos sessions, je connais vos équipes — j'ajuste avec vous." },
@@ -147,7 +147,7 @@ const versus = [
         Sur vos cas réels. Avec suivi 30 · 60 · 90 jours.
       </p>
       <div class="hero-ctas reveal">
-        <a href="/preview/v2c/formation/brief/" class="btn btn--primary btn--lg">
+        <a href="/formation/brief/" class="btn btn--primary btn--lg">
           Brief formation
           <Icon name="arrow-right" size={18} class="arrow" />
         </a>
@@ -346,7 +346,7 @@ const versus = [
               <span class="prog-code">{p.code}</span>
               {p.url
                 ? <a href={p.url} class="prog-link">Voir la fiche <Icon name="arrow-right" size={14} /></a>
-                : <a href="/preview/v2c/formation/brief/" class="prog-link">Demander un devis <Icon name="arrow-right" size={14} /></a>}
+                : <a href="/formation/brief/" class="prog-link">Demander un devis <Icon name="arrow-right" size={14} /></a>}
             </div>
           </li>
         ))}
@@ -396,11 +396,11 @@ const versus = [
         On vous envoie une proposition écrite sous 48 h. Sans engagement.
       </p>
       <div class="cta-ctas reveal">
-        <a href="/preview/v2c/formation/brief/" class="btn btn--lg btn-on-accent">
+        <a href="/formation/brief/" class="btn btn--lg btn-on-accent">
           Brief formation
           <Icon name="arrow-right" size={18} class="arrow" />
         </a>
-        <a href="/preview/v2c/" class="btn btn--ghost btn--lg btn--on-accent-ghost">
+        <a href="/" class="btn btn--ghost btn--lg btn--on-accent-ghost">
           Voir le cockpit 9·58
           <Icon name="arrow-up-right" size={18} class="arrow" />
         </a>
@@ -412,73 +412,7 @@ const versus = [
 </V2bLayout>
 
 <style>
-  /* ============ HEADER ============ */
-  .site-header {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background: rgba(11, 11, 10, 0.78);
-    backdrop-filter: saturate(180%) blur(12px);
-    -webkit-backdrop-filter: saturate(180%) blur(12px);
-    border-bottom: 1px solid var(--line);
-  }
-  .header-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: var(--header-h);
-    gap: var(--s-5);
-  }
-  .brand {
-    display: inline-flex;
-    flex-direction: column;
-    line-height: 1;
-    color: var(--ivoire);
-    text-decoration: none;
-    gap: 3px;
-  }
-  .brand { display: inline-flex; align-items: center; gap: 12px; }
-  .footer-brand {
-    display: inline-flex !important;
-    flex-direction: row !important;
-    align-items: center;
-    gap: 12px;
-  }
-  .brand-mark {
-    font-family: var(--font-display);
-    font-weight: 500;
-    font-size: 1.5rem;
-    letter-spacing: -0.02em;
-    color: var(--cuivre);
-  }
-  .brand-tag {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink-3);
-  }
-  .nav-desktop ul {
-    display: flex;
-    gap: var(--s-5);
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .nav-desktop a {
-    font-size: var(--step-0);
-    font-weight: 500;
-    color: var(--ink-2);
-    padding: 6px 2px;
-    border-bottom: 1px solid transparent;
-    transition: color var(--dur-1) var(--ease),
-                border-color var(--dur-1) var(--ease);
-  }
-  .nav-desktop a:hover, .nav-desktop a[aria-current="page"] {
-    color: var(--cuivre);
-    border-bottom-color: var(--cuivre);
-  }
-  @media (max-width: 900px) { .nav-desktop, .header-cta { display: none; } }
+  /* Header/Footer/Brand styles : voir V2cHeader.astro + V2cFooter.astro */
 
   /* ============ HERO ============ */
   .hero {
@@ -1078,48 +1012,5 @@ const versus = [
     color: var(--cuivre);
   }
 
-  /* ============ FOOTER ============ */
-  .footer-mini {
-    padding-block: var(--s-6);
-    border-top: 1px solid var(--line);
-    background: var(--bg-2);
-  }
-  .footer-mini-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--s-5);
-    flex-wrap: wrap;
-  }
-  .footer-mini-inner > div:first-child {
-    display: inline-flex;
-    flex-direction: column;
-    gap: 3px;
-    line-height: 1;
-  }
-  .footer-meta {
-    display: flex;
-    gap: var(--s-5);
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    font-family: var(--font-mono);
-    font-size: var(--step--2);
-    letter-spacing: 0.04em;
-  }
-  .footer-meta a {
-    color: var(--ink-2);
-    text-transform: uppercase;
-    padding: 8px 4px;
-    display: inline-block;
-    min-height: 44px;
-    line-height: 28px;
-  }
-  .footer-meta a:hover { color: var(--cuivre); }
-  .footer-year {
-    font-family: var(--font-mono);
-    font-size: var(--step--2);
-    color: var(--ink-3);
-    letter-spacing: 0.06em;
-  }
+  /* Footer styles : voir V2cFooter.astro */
 </style>

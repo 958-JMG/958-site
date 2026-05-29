@@ -1,9 +1,9 @@
 /**
  * Cloudflare Worker — entrypoint unifié pour 958.fr.
  *
- * Route dynamique :
- *   POST /api/lead → proxy vers le webhook n8n (évite les blocages
- *   cross-origin des extensions navigateur type Brave Shields).
+ * Routes dynamiques :
+ *   - 301 /preview/v2c/* → / (rétrocompat liens externes après cutover)
+ *   - POST /api/lead → proxy vers le webhook n8n
  *
  * Tout le reste → binding ASSETS (fichiers statiques dans ./dist).
  */
@@ -14,15 +14,38 @@ export interface Env {
   PUBLIC_N8N_WEBHOOK_DIAGNOSTIC?: string;
 }
 
+// Redirections 301 post-cutover (anciens chemins proto v2c → racine)
+const REDIRECTS_301: Record<string, string> = {
+  '/preview/v2c': '/',
+  '/preview/v2c/': '/',
+  '/preview/v2c/formation': '/formation/',
+  '/preview/v2c/formation/': '/formation/',
+  '/preview/v2c/formation/decouverte': '/formation/decouverte/',
+  '/preview/v2c/formation/decouverte/': '/formation/decouverte/',
+  '/preview/v2c/formation/brief': '/formation/brief/',
+  '/preview/v2c/formation/brief/': '/formation/brief/',
+  '/preview/v2c/diagnostic': '/diagnostic/',
+  '/preview/v2c/diagnostic/': '/diagnostic/',
+  '/preview/v2c/merci': '/merci/',
+  '/preview/v2c/merci/': '/merci/',
+};
+
 export default {
   async fetch(request: Request, env: Env, _ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
 
+    // 1. Redirections 301 (avant tout traitement)
+    const redirectTo = REDIRECTS_301[url.pathname];
+    if (redirectTo) {
+      return Response.redirect(new URL(redirectTo, url.origin).toString(), 301);
+    }
+
+    // 2. Proxy form n8n
     if (url.pathname === '/api/lead') {
       return handleLead(request, env);
     }
 
-    // Tous les autres chemins → static assets (dist/)
+    // 3. Tous les autres chemins → static assets (dist/)
     return env.ASSETS.fetch(request);
   },
 };
