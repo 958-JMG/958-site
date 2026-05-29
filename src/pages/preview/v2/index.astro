@@ -1,0 +1,305 @@
+---
+import V2Layout from '../../../layouts/V2Layout.astro';
+import Header from '../../../components/v2/Header.astro';
+import Footer from '../../../components/v2/Footer.astro';
+import Hero from '../../../components/v2/Hero.astro';
+import Pillar from '../../../components/v2/Pillar.astro';
+import MetierCard from '../../../components/v2/MetierCard.astro';
+import Testimonial from '../../../components/v2/Testimonial.astro';
+import ProofStat from '../../../components/v2/ProofStat.astro';
+import CTA from '../../../components/v2/CTA.astro';
+import Icon from '../../../components/v2/Icon.astro';
+
+const metiers = [
+  { icon: 'hard-hat', metier: 'Artisans BTP',                   pitch: 'Vos chantiers, vos devis, votre tréso, en temps réel.',                  href: '/produit/batiment/' },
+  { icon: 'building', metier: 'Architectes',                    pitch: 'Pilotage de vos affaires sans perdre le focus création.',                href: '/produit/batiment/' },
+  { icon: 'building-2', metier: 'Promoteurs immobiliers',       pitch: 'Suivi multi-opérations, du foncier à la livraison.',                    href: '/produit/immobilier/' },
+  { icon: 'home', metier: 'Agences immobilières',               pitch: 'Mandats, prospects, commercialisations, tout au même endroit.',         href: '/produit/immobilier/' },
+  { icon: 'mail', metier: 'Syndics & gestion locative',         pitch: '200 mails/jour triés, courriers types générés.',                        href: '/produit/immobilier/' },
+  { icon: 'sparkles', metier: 'Vous n\'êtes pas dans cette liste ?', pitch: '9·58 fonctionne pour toute TPE qui a perdu la vue d\'ensemble. Parlons-en.', href: '/contact/' },
+];
+
+const proofs = [
+  { value: '+500', label: 'Personnes formées depuis 2022' },
+  { value: '6',    label: 'Démos sectorielles déjà déployées' },
+  { value: '100%', label: 'Européen · souverain par défaut' },
+  { value: '48h',  label: 'Pour vous répondre' },
+];
+
+const testimonials = [
+  { secteur: 'Immobilier',             quote: 'Les commerciaux dictent sur le terrain. Le support client est prêt en minutes.',                 resultat: '6h gagnées par semaine' },
+  { secteur: 'Syndic de copropriété',  quote: '200 mails/jour triés, brouillons rédigés, courriers types générés.',                              resultat: 'Inbox sous contrôle en 30 min/jour' },
+  { secteur: 'Gestion de patrimoine',  quote: 'Analyses patrimoniales transformées en supports client à la charte du cabinet.',                  resultat: 'Présentations en 1 clic' },
+];
+---
+
+<V2Layout
+  title="L'IA souveraine du bâtiment et de l'immobilier 360°"
+  description="Toute votre boîte sur un écran, en 9 secondes. 9·58 construit votre outil IA sur-mesure pour artisans BTP, architectes, promoteurs, agences et syndics. Souveraineté européenne. Vannes & Paris."
+>
+  <Header currentPath="/" />
+
+  <!-- =========================================
+       HERO
+       ========================================= -->
+  <Hero
+    eyebrow="9·58 · Bâtiment &amp; immobilier · Bretagne · Depuis 2022"
+    title="Toute votre boîte.<br>Sur un écran.<br>En 9 secondes."
+    lead="Trésorerie, équipes, clients, projets, communication. Vous ouvrez le matin, vous savez où vous en êtes. Vous refermez, vous retournez à votre métier. <strong>C'est ça 9·58.</strong>"
+    ctaPrimary={{ label: 'Demander un diagnostic', href: '/contact/' }}
+    ctaSecondary={{ label: 'Voir une démo', href: 'https://demo.958.fr' }}
+    assurances={[
+      'Réponse sous 48 h',
+      'Accord de confidentialité',
+      'Premier échange offert',
+    ]}
+    variant="xl"
+  />
+
+  <!-- =========================================
+       SECTION 1 — LE CONSTAT
+       ========================================= -->
+  <section class="section section--soft" aria-labelledby="constat-title">
+    <div class="container is-default">
+      <p class="eyebrow reveal">01 · Le constat</p>
+      <h2 id="constat-title" class="reveal section-h2">
+        L'IA est partout.<br>Dans votre entreprise, nulle part.
+      </h2>
+      <div class="prose reveal">
+        <p>
+          Vous lisez des articles. Vous voyez passer sur LinkedIn ces consultants qui font
+          des démos spectaculaires — <em>« Regardez, j'ai cassé DVF en 3 prompts ! »</em>.
+          Vous testez ChatGPT le soir. Et dans votre entreprise, rien n'a changé.
+        </p>
+        <p>
+          Récupérer la data, n'importe quel script Python le fait. <strong>Le vrai sujet,
+          c'est l'interprétation : qu'est-ce que ces chiffres veulent dire pour
+          VOTRE secteur, VOTRE positionnement, VOTRE boîte — pas pour celle du voisin.</strong>
+        </p>
+        <p>
+          Ce n'est pas un problème d'outil générique. C'est un problème de précision.
+          Vous payez déjà 200 € par mois pour un SaaS métier dont vous utilisez 25 %.
+          Pour le même budget, on peut construire votre propre outil — qui fait 100 % de
+          votre métier, et qui évolue avec l'IA.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       SECTION 2 — 3 PILIERS
+       ========================================= -->
+  <section class="section" aria-labelledby="piliers-title">
+    <div class="container">
+      <p class="eyebrow reveal">02 · Comment ça marche</p>
+      <h2 id="piliers-title" class="reveal section-h2">Trois piliers, un seul écran.</h2>
+
+      <div class="piliers-grid">
+        <Pillar
+          icon="monitor"
+          title="Le produit"
+          subtitle="Toute votre boîte sur un écran."
+          description="L'écran 9·58 vous montre votre tréso, vos équipes, vos clients et vos projets en temps réel."
+          href="/produit/"
+          cta="Voir le produit"
+        />
+        <Pillar
+          icon="shield"
+          title="La souveraineté"
+          subtitle="Vos données restent en Europe."
+          description="Mistral, Scaleway, n8n auto-hébergé. Vous gardez le contrôle, vous gardez vos données."
+          href="/souverainete/"
+          cta="Comprendre la souveraineté"
+          variant="dark"
+        />
+        <Pillar
+          icon="graduation-cap"
+          title="La formation"
+          subtitle="Le moment où ça fait tilt."
+          description="Formations Qualiopi (obtention juin 2026), finançables OPCO. Vos équipes deviennent autonomes."
+          href="/formation/"
+          cta="Voir le catalogue"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       SECTION 2bis — SUR-MESURE vs SaaS
+       ========================================= -->
+  <section class="section section--mimosa" aria-labelledby="surmesure-title">
+    <div class="container is-default">
+      <p class="eyebrow reveal">03 · Le vrai sur-mesure</p>
+      <h2 id="surmesure-title" class="reveal section-h2">
+        Récupérer la data, n'importe qui.<br>
+        L'interpréter pour <em>vous</em>, c'est nous.
+      </h2>
+      <div class="prose reveal">
+        <p>
+          Vous payez déjà un logiciel métier 200, 300, 500 € par mois. Vous l'utilisez
+          à 25 %. Les 75 % restants sont pensés pour le voisin.
+        </p>
+        <p>
+          <strong>Pour le même budget, on peut construire votre outil :</strong>
+          100 % adapté à votre métier, à votre boîte, à votre territoire.
+          Qui évolue au rythme de l'IA, sans surcoût.
+        </p>
+        <p>
+          Ce n'est pas une démo dingue sur LinkedIn. C'est votre quotidien qui change.
+        </p>
+      </div>
+      <p class="reveal" style="margin-top: var(--s-6);">
+        <a href="/produit/" class="link-arrow">
+          Voir comment ça marche <Icon name="arrow-right" size={16} class="arrow" />
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- =========================================
+       SECTION 3 — POUR QUI
+       ========================================= -->
+  <section class="section" aria-labelledby="pourqui-title">
+    <div class="container">
+      <p class="eyebrow reveal">04 · Pour qui</p>
+      <h2 id="pourqui-title" class="reveal section-h2">
+        L'écran 9·58 est pensé pour vous,<br>pas pour « les entreprises ».
+      </h2>
+
+      <div class="metiers-grid">
+        {metiers.map((m) => (
+          <MetierCard
+            icon={m.icon}
+            metier={m.metier}
+            pitch={m.pitch}
+            href={m.href}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       SECTION 4 — PREUVE (DARK)
+       ========================================= -->
+  <section class="section section--dark" aria-labelledby="preuve-title">
+    <div class="container">
+      <p class="eyebrow reveal">05 · Preuve</p>
+      <h2 id="preuve-title" class="reveal section-h2">Ce qu'on a fait depuis 2022.</h2>
+
+      <div class="proofs-grid">
+        {proofs.map((p) => <ProofStat value={p.value} label={p.label} dark />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       SECTION 5 — TÉMOIGNAGES
+       ========================================= -->
+  <section class="section" aria-labelledby="temoignages-title">
+    <div class="container">
+      <p class="eyebrow reveal">06 · Ils en parlent</p>
+      <h2 id="temoignages-title" class="reveal section-h2">
+        Pas une démo dingue.<br>Le quotidien qui change.
+      </h2>
+
+      <div class="testimonials-grid">
+        {testimonials.map((t) => (
+          <Testimonial
+            secteur={t.secteur}
+            quote={t.quote}
+            resultat={t.resultat}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       SECTION 6 — CTA FINAL
+       ========================================= -->
+  <CTA
+    eyebrow="07 · Pour commencer"
+    title="Commencez par un diagnostic."
+    description="1 à 2 jours. Sous accord de confidentialité. Sans engagement pour la suite. Je regarde votre contexte et vous dis honnêtement si 9·58 peut vous aider."
+    primary={{ label: 'Demander un diagnostic', href: '/contact/' }}
+    secondary={{ label: 'Voir une démo', href: 'https://demo.958.fr' }}
+    variant="dark"
+  />
+
+  <Footer />
+</V2Layout>
+
+<style>
+  .section-h2 {
+    margin-top: var(--s-3);
+    margin-bottom: var(--s-6);
+    text-wrap: balance;
+    max-width: 24ch;
+  }
+  .prose {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+  }
+  .prose p {
+    font-size: var(--step-2);
+    line-height: var(--lh-loose);
+    color: var(--ink);
+    max-width: 64ch;
+  }
+  .prose em {
+    font-style: italic;
+    color: var(--ink-2);
+  }
+
+  .piliers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-5);
+    margin-top: var(--s-5);
+  }
+
+  .metiers-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-4);
+    margin-top: var(--s-5);
+  }
+
+  .proofs-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--s-6);
+    margin-top: var(--s-6);
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-5);
+    margin-top: var(--s-5);
+  }
+
+  @media (max-width: 1024px) {
+    .piliers-grid,
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+    }
+    .proofs-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .metiers-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .section-h2 {
+      max-width: 100%;
+    }
+    .prose p {
+      font-size: var(--step-1);
+    }
+  }
+</style>

@@ -1,0 +1,58 @@
+---
+interface Props {
+  /** Secteur / chip eyebrow */
+  secteur: string;
+  /** Verbatim brut */
+  quote: string;
+  /** Résultat chiffré ou phrase courte */
+  resultat?: string;
+}
+
+const { secteur, quote, resultat } = Astro.props;
+---
+
+<article class="testimonial card reveal">
+  <span class="chip">{secteur}</span>
+  <blockquote class="testimonial-quote">
+    {quote}
+  </blockquote>
+  {resultat && <p class="testimonial-result">{resultat}</p>}
+</article>
+
+<style>
+  .testimonial {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+  }
+  .testimonial-quote {
+    font-size: var(--step-2);
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    font-weight: 500;
+    quotes: "« " " »";
+    max-width: none;
+    margin: 0;
+  }
+  .testimonial-quote::before {
+    content: open-quote;
+    color: var(--bleu);
+    font-weight: 700;
+  }
+  .testimonial-quote::after {
+    content: close-quote;
+    color: var(--bleu);
+    font-weight: 700;
+  }
+  .testimonial-result {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--vert);
+    font-weight: 600;
+    margin: 0;
+    max-width: none;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+</style>

@@ -1,0 +1,93 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  icon?: string;
+  /** Nom du métier / cible */
+  metier: string;
+  /** Phrase courte (max 2 lignes) */
+  pitch: string;
+  /** Lien (optionnel) */
+  href?: string;
+}
+
+const { icon, metier, pitch, href } = Astro.props;
+const Tag = href ? 'a' : 'div';
+---
+
+<Tag class="metier-card reveal" href={href}>
+  {icon && (
+    <div class="metier-icon" aria-hidden="true">
+      <Icon name={icon} size={24} strokeWidth={1.75} />
+    </div>
+  )}
+  <div class="metier-body">
+    <h3 class="metier-title">{metier}</h3>
+    <p class="metier-pitch">{pitch}</p>
+  </div>
+  {href && (
+    <span class="metier-arrow" aria-hidden="true">
+      <Icon name="arrow-right" size={18} />
+    </span>
+  )}
+</Tag>
+
+<style>
+  .metier-card {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--s-4);
+    padding: var(--s-5);
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: var(--r-3);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color var(--dur-2) var(--ease),
+                transform var(--dur-2) var(--ease),
+                box-shadow var(--dur-2) var(--ease);
+  }
+  a.metier-card:hover {
+    border-color: var(--bleu);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  .metier-icon {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bleu-clair-2);
+    color: var(--bleu);
+    border-radius: var(--r-2);
+  }
+  .metier-body {
+    flex: 1;
+    min-width: 0;
+  }
+  .metier-title {
+    font-size: var(--step-2);
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0 0 var(--s-1) 0;
+    letter-spacing: -0.015em;
+  }
+  .metier-pitch {
+    font-size: var(--step-0);
+    color: var(--ink-2);
+    line-height: var(--lh-normal);
+    margin: 0;
+    max-width: none;
+  }
+  .metier-arrow {
+    flex-shrink: 0;
+    color: var(--bleu);
+    margin-top: 8px;
+    transition: transform var(--dur-1) var(--ease);
+  }
+  a.metier-card:hover .metier-arrow {
+    transform: translateX(3px);
+  }
+</style>

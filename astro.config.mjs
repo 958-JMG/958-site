@@ -8,7 +8,9 @@ export default defineConfig({
   output: 'static',
   integrations: [
     sitemap({
-      filter: (page) => !/\/(merci|404)\/?$/.test(page),
+      // Exclure : anciens protos /preview/, pages de confirmation et 404
+      filter: (page) =>
+        !page.includes('/preview/') && !/\/(merci|404)\/?$/.test(page),
     }),
   ],
   vite: {

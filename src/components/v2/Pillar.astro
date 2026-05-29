@@ -1,0 +1,126 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  /** Nom Lucide (cf Icon.astro) */
+  icon?: string;
+  /** Titre du pilier */
+  title: string;
+  /** Sous-titre / italique */
+  subtitle?: string;
+  /** Description */
+  description: string;
+  /** Lien CTA */
+  href: string;
+  /** Label CTA */
+  cta?: string;
+  /** Variante visuelle */
+  variant?: 'default' | 'mimosa' | 'vert' | 'dark';
+}
+
+const {
+  icon,
+  title,
+  subtitle,
+  description,
+  href,
+  cta = 'En savoir plus',
+  variant = 'default',
+} = Astro.props;
+
+const cardClass =
+  variant === 'mimosa' ? 'card card--mimosa' :
+  variant === 'dark' ? 'card card--dark' :
+  'card';
+---
+
+<a href={href} class={`pillar ${cardClass} reveal`}>
+  {icon && (
+    <div class="pillar-icon" aria-hidden="true">
+      <Icon name={icon} size={28} strokeWidth={1.5} />
+    </div>
+  )}
+  <h3 class="pillar-title">{title}</h3>
+  {subtitle && <p class="pillar-subtitle">{subtitle}</p>}
+  <p class="pillar-desc">{description}</p>
+  <span class="pillar-cta">
+    {cta}
+    <Icon name="arrow-right" size={16} class="arrow" />
+  </span>
+</a>
+
+<style>
+  .pillar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    text-decoration: none;
+    color: inherit;
+  }
+  .pillar-icon {
+    width: 48px;
+    height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bleu-clair-2);
+    color: var(--bleu);
+    border-radius: var(--r-2);
+    margin-bottom: var(--s-2);
+  }
+  .card--mimosa .pillar-icon {
+    background: var(--mimosa);
+    color: var(--bleu);
+  }
+  .card--dark .pillar-icon {
+    background: var(--bleu-deep);
+    color: var(--mimosa);
+  }
+  .pillar-title {
+    font-size: var(--step-3);
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: var(--tr-tight);
+    margin: 0;
+  }
+  .card--dark .pillar-title {
+    color: var(--ivoire);
+  }
+  .pillar-subtitle {
+    font-style: italic;
+    color: var(--ink-2);
+    margin: 0;
+    max-width: none;
+  }
+  .card--dark .pillar-subtitle {
+    color: var(--bleu-clair);
+  }
+  .pillar-desc {
+    color: var(--ink-2);
+    font-size: var(--step-1);
+    line-height: var(--lh-loose);
+    margin: 0;
+    max-width: none;
+  }
+  .card--dark .pillar-desc {
+    color: var(--bleu-clair);
+  }
+  .pillar-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 600;
+    color: var(--bleu);
+    margin-top: auto;
+    padding-top: var(--s-3);
+  }
+  .card--dark .pillar-cta {
+    color: var(--mimosa);
+  }
+  .pillar:hover .pillar-cta .arrow {
+    transform: translateX(3px);
+  }
+  .arrow {
+    transition: transform var(--dur-1) var(--ease);
+  }
+</style>
