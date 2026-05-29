@@ -6,8 +6,8 @@ import Icon from '../../../../components/v2/Icon.astro';
 const publics = [
   {
     tag: 'Dirigeants',
-    titre: 'Le sparring-partner qui vous fait gagner 3 ans.',
-    corps: "L'accompagnement individuel du dirigeant. Stratégie IA, arbitrages, modèles d'usage, choix de souveraineté. Vous repartez avec une feuille de route — et un binôme.",
+    titre: 'Votre assistant IA. Vos process réinventés.',
+    corps: "L'accompagnement IA du dirigeant. On conçoit ensemble votre assistant IA autonome — et on refond les process clés pour qu'ils tirent vraiment parti de l'IA. Pas du coaching business.",
     proactive: true,
   },
   {
@@ -61,8 +61,8 @@ const temps = [
 const programmes = [
   { code: 'F-01', titre: 'IA pour dirigeants', duree: '1 jour', pour: 'DG, COMEX, fondateurs',
     livre: "Cadre de décision, grille de souveraineté, cartographie des outils pertinents pour votre secteur." },
-  { code: 'F-00', titre: 'Accompagnement dirigeant', duree: '6 mois · mensuel', pour: 'DG seul ou avec son équipe rapprochée',
-    livre: "Sparring IA sur vos sujets réels. Préparation des décisions clés, revues d'outils, prompts stratégiques.", featured: true },
+  { code: 'F-00', titre: 'Accompagnement IA du dirigeant', duree: '6 mois · bi-mensuel', pour: 'DG seul ou avec son équipe rapprochée',
+    livre: "Conception de votre assistant IA autonome. Refonte des process clés où l'IA change tout. Pas du coaching business — du concret IA appliqué à votre boîte.", featured: true },
   { code: 'F-02', titre: 'IA commerciale appliquée', duree: '2 jours', pour: 'Équipes sales · ADV',
     livre: "Workflow complet prospection → proposition → relance. 12 prompts métier validés et signés." },
   { code: 'F-03', titre: 'Automatisation back-office', duree: '3 jours', pour: 'Ops · assistants',
@@ -167,37 +167,43 @@ const versus = [
     <div class="container">
       <div class="section-head">
         <h2 id="accomp-title" class="reveal section-h2">
-          L'accompagnement du dirigeant.<br>
-          <em>Le sparring qui change la donne.</em>
+          L'accompagnement <em>IA</em> du dirigeant.<br>
+          Pas du coaching business.
         </h2>
         <p class="reveal section-sub">
-          Vos confrères ont leur coach business, leur expert-comptable, leur avocat.
+          Vos confrères ont leur coach, leur expert-comptable, leur avocat.
           Personne ne leur parle d'IA <strong>sur leur cas, à leur rythme, avec leurs données</strong>.
-          C'est ce trou qu'on remplit.
+          C'est ce trou qu'on remplit — sur deux fronts précis.
         </p>
       </div>
 
-      <div class="accomp-grid">
-        <article class="accomp-card reveal">
-          <div class="accomp-icon"><Icon name="users" size={26} strokeWidth={1.6} /></div>
-          <h3>Préparer les décisions</h3>
-          <p>Avant le COMEX, avant le CA, avant la décision lourde — on instruit ensemble. Outils, coûts, alternatives, garde-fous. Vous tranchez en connaissance.</p>
-        </article>
+      <div class="accomp-grid accomp-grid--two">
         <article class="accomp-card reveal">
           <div class="accomp-icon"><Icon name="sparkles" size={26} strokeWidth={1.6} /></div>
-          <h3>Activer les bons leviers</h3>
-          <p>3 à 5 cas par semestre où l'IA change tout dans votre boîte. On les identifie, on les chiffre, on les installe avec votre équipe.</p>
+          <span class="accomp-tag">Pilier 1</span>
+          <h3>Concevoir <em>votre</em> assistant IA autonome.</h3>
+          <p>
+            Un assistant qui connaît votre agenda, vos dossiers, vos contacts, vos enjeux.
+            Qui prépare vos décisions, synthétise vos lectures, rédige vos brouillons.
+            <strong>À votre nom. À votre métier. À votre charte.</strong>
+          </p>
         </article>
         <article class="accomp-card reveal">
-          <div class="accomp-icon"><Icon name="shield" size={26} strokeWidth={1.6} /></div>
-          <h3>Tenir la souveraineté</h3>
-          <p>Vous gardez la main sur vos données, vos modèles, vos fournisseurs. Pas de SaaS US imposé. Vous décidez chaque étape.</p>
+          <div class="accomp-icon"><Icon name="monitor" size={26} strokeWidth={1.6} /></div>
+          <span class="accomp-tag">Pilier 2</span>
+          <h3>Refondre <em>les process</em>, pas les automatiser.</h3>
+          <p>
+            <strong>Coller de l'IA sur un process ancien, c'est garder un mauvais process.</strong>
+            On identifie ensemble les 3 à 5 process clés où l'IA change la nature du travail —
+            et on les réinvente. Vous gagnez une avance que vos concurrents ne rattraperont pas.
+          </p>
         </article>
       </div>
 
       <p class="reveal accomp-note">
         <strong>Format type</strong> : 6 mois renouvelables. 1 demi-journée tous les 15 jours.
-        Sur site ou visio. Sujets apportés par vous.
+        Sur site ou visio. Sujets apportés par vous, livrables construits ensemble.
+        Souveraineté européenne par défaut — le choix vous appartient.
       </p>
     </div>
   </section>
@@ -545,6 +551,17 @@ const versus = [
     gap: var(--s-5);
     margin-top: var(--s-7);
   }
+  .accomp-grid--two { grid-template-columns: 1fr 1fr; gap: var(--s-6); }
+  .accomp-tag {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cuivre);
+    font-weight: 600;
+  }
+  .accomp-card h3 em { color: var(--cuivre); font-style: italic; }
+  .accomp-card p strong { color: var(--ivoire); font-weight: 600; }
   .accomp-card {
     padding: var(--s-5);
     background: var(--bg);
