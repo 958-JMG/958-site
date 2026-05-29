@@ -412,7 +412,9 @@ const versus = [
         On vous envoie une proposition écrite sous 48 h. Sans engagement.
       </p>
       <div class="cta-ctas reveal">
-        <a href="mailto:jmg@958.fr?subject=Brief%20formation%20Ça%20fait%20Tilt" class="btn btn--lg btn-on-accent">
+        <a href="mailto:jmg@958.fr?subject=Brief%20formation%20Ça%20fait%20Tilt"
+           class="btn btn--lg btn-on-accent"
+           aria-label="Envoyer un mail pour briefer une formation Ça fait Tilt">
           Brief formation
           <Icon name="arrow-right" size={18} class="arrow" />
         </a>
@@ -850,12 +852,13 @@ const versus = [
     padding: 0;
   }
   .prog-card {
-    --cat: var(--cuivre);
+    --cat: var(--cuivre);            /* couleur TEXTE (≥4.5:1 AA) */
+    --cat-bord: var(--cuivre);       /* couleur DÉCO bord/picto (3:1 OK non-text) */
     --cat-soft: var(--cuivre-soft);
     padding: var(--s-5);
     background: var(--bg);
     border: 1px solid var(--line);
-    border-left: 3px solid var(--cat);
+    border-left: 3px solid var(--cat-bord);
     border-radius: var(--r-3);
     display: flex;
     flex-direction: column;
@@ -863,15 +866,15 @@ const versus = [
     transition: border-color var(--dur-2) var(--ease),
                 transform var(--dur-2) var(--ease);
   }
-  .prog-card[data-cat="decouverte"]      { --cat: var(--cat-decouverte);      --cat-soft: var(--cat-decouverte-soft); }
-  .prog-card[data-cat="accompagnement"]  { --cat: var(--cat-accompagnement);  --cat-soft: var(--cat-accompagnement-soft); }
-  .prog-card[data-cat="strategique"]     { --cat: var(--cat-strategique);     --cat-soft: var(--cat-strategique-soft); }
-  .prog-card[data-cat="metier"]          { --cat: var(--cat-metier);          --cat-soft: var(--cat-metier-soft); }
-  .prog-card[data-cat="reglemente"]      { --cat: var(--cat-reglemente);      --cat-soft: var(--cat-reglemente-soft); }
-  .prog-card[data-cat="sur-mesure"]      { --cat: var(--cat-sur-mesure);      --cat-soft: var(--cat-sur-mesure-soft); }
+  .prog-card[data-cat="decouverte"]      { --cat: var(--cat-decouverte);      --cat-bord: var(--cat-decouverte-bord);      --cat-soft: var(--cat-decouverte-soft); }
+  .prog-card[data-cat="accompagnement"]  { --cat: var(--cat-accompagnement);  --cat-bord: var(--cat-accompagnement-bord);  --cat-soft: var(--cat-accompagnement-soft); }
+  .prog-card[data-cat="strategique"]     { --cat: var(--cat-strategique);     --cat-bord: var(--cat-strategique-bord);     --cat-soft: var(--cat-strategique-soft); }
+  .prog-card[data-cat="metier"]          { --cat: var(--cat-metier);          --cat-bord: var(--cat-metier-bord);          --cat-soft: var(--cat-metier-soft); }
+  .prog-card[data-cat="reglemente"]      { --cat: var(--cat-reglemente);      --cat-bord: var(--cat-reglemente-bord);      --cat-soft: var(--cat-reglemente-soft); }
+  .prog-card[data-cat="sur-mesure"]      { --cat: var(--cat-sur-mesure);      --cat-bord: var(--cat-sur-mesure-bord);      --cat-soft: var(--cat-sur-mesure-soft); }
   .prog-card:hover {
-    border-color: var(--cat);
-    border-left-color: var(--cat);
+    border-color: var(--cat-bord);
+    border-left-color: var(--cat-bord);
     transform: translateY(-2px);
   }
   .prog-head {
@@ -949,13 +952,20 @@ const versus = [
   .prog-link {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
     font-family: var(--font-sans);
     font-size: var(--step-0);
     font-weight: 600;
     color: var(--cuivre);
+    padding: 8px 12px;
+    margin: -8px -12px;
+    border-radius: var(--r-2);
+    min-height: 44px;
   }
-  .prog-link:hover { color: var(--cuivre-hover); }
+  .prog-link:hover {
+    color: var(--cuivre-hover);
+    background: var(--cuivre-soft);
+  }
   .prog-note {
     margin-top: var(--s-7);
     text-align: center;
@@ -1125,6 +1135,10 @@ const versus = [
   .footer-meta a {
     color: var(--ink-2);
     text-transform: uppercase;
+    padding: 8px 4px;
+    display: inline-block;
+    min-height: 44px;
+    line-height: 28px;
   }
   .footer-meta a:hover { color: var(--cuivre); }
   .footer-year {

@@ -48,13 +48,27 @@
 
   /* ---------- Couleurs catégorielles (programmes formation) ----------
      Palette terreuse + minérale, sobre, sans diluer le cuivre signal.
-     Le cuivre reste pour les CTAs ; les catégories signalent le NIVEAU. */
-  --cat-decouverte:      #C75F2D;  /* cuivre brand — initiation */
-  --cat-accompagnement:  #6B8E54;  /* vert mousse — durée, suivi */
-  --cat-strategique:     #5A7286;  /* bleu pierre — décision, hauteur */
-  --cat-metier:          #B8743A;  /* ocre brûlé — savoir-faire pratique */
-  --cat-reglemente:      #7A6E5C;  /* taupe ardoise — rigueur, conformité */
-  --cat-sur-mesure:      #8B5A6B;  /* prune sombre — haut de gamme */
+     Le cuivre reste pour les CTAs ; les catégories signalent le NIVEAU.
+
+     Deux niveaux par catégorie :
+     - Variante TEXTE (--cat-*) : ≥ 4.5:1 WCAG AA texte normal sur bg dark
+     - Variante DÉCO (--cat-*-bord) : couleur primaire brand, utilisée
+       pour les border-left et background-icon (3:1 suffit non-text)
+   */
+  --cat-decouverte:      #E07C42;  /* cuivre-hover — 5.6:1 (init) */
+  --cat-accompagnement:  #85AC6B;  /* vert mousse clair — 5.2:1 */
+  --cat-strategique:     #7C95A8;  /* bleu pierre clair — 6.0:1 */
+  --cat-metier:          #B8743A;  /* ocre brûlé — 4.85:1 (inchangé) */
+  --cat-reglemente:      #9A8E78;  /* taupe clair — 6.0:1 */
+  --cat-sur-mesure:      #B07B8C;  /* prune clair — 6.5:1 */
+
+  /* Variantes "bord/picto" pour borders et icon backgrounds (3:1 OK) */
+  --cat-decouverte-bord:     #C75F2D;
+  --cat-accompagnement-bord: #6B8E54;
+  --cat-strategique-bord:    #5A7286;
+  --cat-metier-bord:         #B8743A;
+  --cat-reglemente-bord:     #7A6E5C;
+  --cat-sur-mesure-bord:     #8B5A6B;
 
   --cat-decouverte-soft:     rgba(199, 95, 45, 0.12);
   --cat-accompagnement-soft: rgba(107, 142, 84, 0.14);
@@ -415,7 +429,7 @@ small { font-size: var(--step--1); }
 }
 
 .btn--lg { padding: 1.1rem 1.75rem; font-size: var(--step-2); min-height: 56px; }
-.btn--sm { padding: 0.625rem 1rem; font-size: var(--step-0); min-height: 40px; }
+.btn--sm { padding: 0.625rem 1rem; font-size: var(--step-0); min-height: 44px; }
 
 .btn .arrow { transition: transform var(--dur-1) var(--ease); }
 .btn:hover .arrow { transform: translateX(3px); }
