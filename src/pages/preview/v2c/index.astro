@@ -30,11 +30,54 @@ const proofs = [
   { value: '48h',  label: 'pour vous répondre' },
 ];
 
-const temoignages = [
+const realisations = [
   {
-    secteur: 'Syndic de copropriété',
-    quote: 'Avant, je rentrais chez moi tard, la tête pleine. Aujourd\'hui je rentre plus tôt, et mieux fait.',
-    result: 'Le soir est rendu à la famille',
+    n: '01',
+    secteur: 'Immobilier',
+    sousTitre: 'Groupe immobilier breton',
+    avant: 'Les commerciaux passent des heures à produire des supports depuis leurs visites terrain. Le back-office croule.',
+    apres: 'Le commercial dicte sur le terrain. L\'IA structure, rédige, met en forme. Le support est prêt en minutes. L\'équipe vend.',
+    phase: 'Audit → Structuration → Implémentation → Accompagnement en cours',
+  },
+  {
+    n: '02',
+    secteur: 'Cuisiniste',
+    sousTitre: 'PME cuisiniste — 40 collaborateurs',
+    avant: 'Prospection, devis, SAV, recommandations — chaque domaine a son outil. Rien ne communique. Double saisie permanente.',
+    apres: 'Un cockpit unifié. Une base, des tableaux de bord temps réel, des relances automatisées. Fin des doubles saisies.',
+    phase: 'Audit → Structuration → Implémentation (en cours)',
+  },
+  {
+    n: '03',
+    secteur: 'Syndic',
+    sousTitre: 'Acteur régional du syndic',
+    avant: '200 mails par jour. Courriers à rédiger. Comptes rendus d\'AG. Une équipe au bord de la saturation.',
+    apres: 'L\'IA trie les mails, rédige les brouillons, génère les courriers types. L\'équipe absorbe la croissance sans recruter.',
+    phase: 'Audit → Structuration → Implémentation',
+  },
+  {
+    n: '04',
+    secteur: 'Gestion de fortune',
+    sousTitre: 'Cabinet de gestion de fortune',
+    avant: 'Transformer les analyses patrimoniales en supports client prend plusieurs heures par dossier.',
+    apres: 'Une chaîne automatisée : l\'outil métier sort l\'analyse, le support client se génère à la charte du cabinet.',
+    phase: 'Structuration → Implémentation',
+  },
+  {
+    n: '05',
+    secteur: 'Construction & Courtage',
+    sousTitre: 'Deux acteurs régionaux',
+    avant: 'Des budgets d\'acquisition sur plusieurs canaux. Le reporting est manuel. Les arbitrages sont à l\'intuition.',
+    apres: 'Pilotage unifié multi-canal. Coût d\'acquisition par canal en temps réel. Arbitrages budgétaires objectivés.',
+    phase: 'Structuration → Implémentation → Accompagnement mensuel',
+  },
+  {
+    n: '06',
+    secteur: 'Aménagement foncier',
+    sousTitre: 'Groupe d\'aménageurs',
+    avant: '9 développeurs fonciers qui veulent utiliser l\'IA mais ne savent pas par où commencer.',
+    apres: '1 journée de formation sur site. 9 développeurs opérationnels dès le lendemain. Une bibliothèque de prompts métier qui grandit.',
+    phase: 'Audit express → Formation → Accompagnement sur demande',
   },
 ];
 ---
@@ -514,14 +557,18 @@ const temoignages = [
   </section>
 
   <!-- =========================================
-       SECTION 6 — PREUVE
+       SECTION 6 — RÉALISATIONS (6 cas — Avant / Après)
        ========================================= -->
   <section id="preuve" class="section" aria-labelledby="preuve-title">
     <div class="container">
-      <p class="eyebrow reveal">Ce qu'on fait depuis 2022</p>
-      <h2 id="preuve-title" class="reveal section-h2">
-        Pas une démo dingue. Le quotidien qui change.
-      </h2>
+      <div class="section-head">
+        <p class="eyebrow reveal">Réalisations</p>
+        <h2 id="preuve-title" class="reveal section-h2">
+          Vos données.<br>
+          <em>Votre destin.</em>
+        </h2>
+        <p class="reveal section-sub">6 projets. 6 transformations.</p>
+      </div>
 
       <div class="proofs-grid">
         {proofs.map((p) => (
@@ -532,17 +579,39 @@ const temoignages = [
         ))}
       </div>
 
-      <hr class="rule" style="margin-block: var(--s-9);" />
+      <div class="reals-grid">
+        {realisations.map((r) => (
+          <article class="real-card reveal">
+            <header class="real-head">
+              <span class="real-n">{r.n}</span>
+              <div>
+                <span class="real-secteur">{r.secteur}</span>
+                <p class="real-sous">{r.sousTitre}</p>
+              </div>
+            </header>
 
-      <div class="temoignages-grid">
-        {temoignages.map((t) => (
-          <figure class="temoignage reveal">
-            <span class="chip">{t.secteur}</span>
-            <blockquote>« {t.quote} »</blockquote>
-            <figcaption>{t.result}</figcaption>
-          </figure>
+            <div class="real-flow">
+              <div class="real-state real-state--avant">
+                <span class="real-state-tag">Avant</span>
+                <p>{r.avant}</p>
+              </div>
+              <span class="real-arrow" aria-hidden="true">
+                <Icon name="arrow-right" size={22} strokeWidth={2} />
+              </span>
+              <div class="real-state real-state--apres">
+                <span class="real-state-tag real-state-tag--apres">Après</span>
+                <p>{r.apres}</p>
+              </div>
+            </div>
+
+            <p class="real-phase">{r.phase}</p>
+          </article>
         ))}
       </div>
+
+      <p class="reveal real-outro">
+        Une formation IA ne vaut rien si elle se finit le vendredi soir.
+      </p>
     </div>
   </section>
 
@@ -2118,7 +2187,136 @@ const temoignages = [
     .proofs-grid { grid-template-columns: repeat(2, 1fr); gap: var(--s-5); }
   }
 
-  /* ============ TÉMOIGNAGES ============ */
+  /* ============ RÉALISATIONS (Avant / Après) ============ */
+  .reals-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-5);
+    margin-top: var(--s-8);
+  }
+  .real-card {
+    padding: var(--s-6);
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: var(--r-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+    transition: border-color var(--dur-2) var(--ease);
+  }
+  .real-card:hover { border-color: var(--cuivre); }
+  .real-head {
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    gap: var(--s-3);
+    align-items: center;
+  }
+  .real-n {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(1.75rem, 2vw + 0.5rem, 2.5rem);
+    line-height: 1;
+    color: var(--cuivre);
+    letter-spacing: -0.04em;
+  }
+  .real-secteur {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cuivre);
+    font-weight: 600;
+    display: block;
+  }
+  .real-sous {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    color: var(--ivoire);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    margin: 2px 0 0 0;
+    max-width: none;
+    line-height: 1.2;
+  }
+  .real-flow {
+    display: grid;
+    grid-template-columns: 1fr 24px 1fr;
+    gap: var(--s-3);
+    align-items: stretch;
+  }
+  .real-state {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--r-2);
+    padding: var(--s-3);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .real-state--apres {
+    border-color: var(--cuivre);
+    background: var(--cuivre-soft);
+  }
+  .real-state-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    font-weight: 600;
+  }
+  .real-state-tag--apres { color: var(--cuivre); }
+  .real-state p {
+    margin: 0;
+    max-width: none;
+    font-size: var(--step-0);
+    line-height: var(--lh-normal);
+    color: var(--ink-2);
+  }
+  .real-state--apres p { color: var(--ivoire); }
+  .real-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cuivre);
+    align-self: center;
+  }
+  .real-phase {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: 0;
+    max-width: none;
+    padding-top: var(--s-3);
+    border-top: 1px dashed var(--line-2);
+  }
+  .real-outro {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(1.25rem, 2vw + 0.5rem, 1.75rem);
+    color: var(--ivoire);
+    text-align: center;
+    max-width: 56ch;
+    margin: var(--s-9) auto 0 auto;
+    text-wrap: balance;
+    line-height: 1.3;
+  }
+
+  @media (max-width: 900px) {
+    .reals-grid { grid-template-columns: 1fr; }
+    .real-flow {
+      grid-template-columns: 1fr;
+      gap: var(--s-2);
+    }
+    .real-arrow {
+      transform: rotate(90deg);
+      padding: var(--s-2) 0;
+    }
+  }
+
+  /* ============ TÉMOIGNAGES (legacy, conservé) ============ */
   .temoignages-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
