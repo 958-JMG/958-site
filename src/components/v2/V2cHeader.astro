@@ -25,13 +25,13 @@ const navItems = [
   { id: 'produit', label: 'Le produit', href: '/preview/v2c/#construit' },
   {
     id: 'formation',
-    label: 'Formation & Accompagnement',
+    label: 'Formation',
     href: '/preview/v2c/formation/',
     submenu: [
-      { label: "Vue d'ensemble formation",          href: '/preview/v2c/formation/' },
-      { label: "Accompagnement IA du dirigeant",    href: '/preview/v2c/formation/#accompagnement', highlight: true },
-      { label: "Programmes — Ça fait Tilt®",         href: '/preview/v2c/formation/#programmes' },
-      { label: "Brief formation",                    href: '/preview/v2c/formation/brief/', cta: true },
+      { label: "Présentation",                       href: '/preview/v2c/formation/' },
+      { label: "Accompagnement du dirigeant",        href: '/preview/v2c/formation/#accompagnement', highlight: true },
+      { label: "Programmes",                         href: '/preview/v2c/formation/#programmes' },
+      { label: "Demander un devis",                  href: '/preview/v2c/formation/brief/', cta: true },
     ],
   },
   { id: 'realisations', label: 'Réalisations', href: '/preview/v2c/#preuve' },
@@ -274,10 +274,11 @@ const navItems = [
     left: 50%;
     transform: translateX(-50%) translateY(-8px);
     min-width: 280px;
+    max-width: 300px;
     background: var(--bg-2);
     border: 1px solid var(--line-2);
     border-radius: var(--r-3);
-    padding: 8px;
+    padding: 6px;
     list-style: none;
     margin: 0;
     box-shadow: var(--shadow-lg);
@@ -294,8 +295,11 @@ const navItems = [
     transform: translateX(-50%) translateY(0);
   }
   .submenu a {
-    display: block;
-    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 10px 12px;
     border-radius: var(--r-2);
     border-bottom: 0;
     font-size: var(--step-0);
@@ -307,24 +311,35 @@ const navItems = [
     color: var(--cuivre);
     border-bottom-color: transparent;
   }
+  /* Highlight item — fond cuivre soft pour mettre en avant le différenciateur */
   .submenu a.is-highlight {
+    background: var(--cuivre-soft);
     color: var(--ivoire);
     font-weight: 600;
   }
-  .submenu a.is-highlight::before {
-    content: "●";
+  .submenu a.is-highlight:hover {
+    background: var(--cuivre-soft);
     color: var(--cuivre);
-    margin-right: 6px;
+  }
+  /* CTA secondary — divider top + lien cuivre simple (pas de fond plein) */
+  .submenu li:last-child {
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px solid var(--line);
   }
   .submenu a.is-cta {
-    background: var(--cuivre);
-    color: var(--bg);
+    color: var(--cuivre);
     font-weight: 600;
-    margin-top: 4px;
   }
   .submenu a.is-cta:hover {
-    background: var(--cuivre-hover);
-    color: var(--bg);
+    background: var(--cuivre-soft);
+    color: var(--cuivre);
+  }
+  .submenu a.is-cta .arrow {
+    transition: transform var(--dur-1) var(--ease);
+  }
+  .submenu a.is-cta:hover .arrow {
+    transform: translateX(3px);
   }
 
   /* ============ BURGER (mobile only) ============ */
