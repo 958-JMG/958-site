@@ -1,0 +1,159 @@
+---
+/**
+ * PortesEntree — bloc "Trois manières de commencer"
+ *
+ * Composant V2c réutilisable sur toutes les pages publiques.
+ * 3 portes équivalentes : Audit IA / Formation Tilt® / Échange initial.
+ *
+ * Props :
+ *   variant : 'soft' (fond bg-2, default) | 'plain' (fond bg)
+ *   eyebrow : libellé eyebrow (default "Portes d'entrée")
+ *   title : H2 (default "Trois manières de commencer.")
+ *   subtitle : phrase d'intro (default texte standard)
+ *   sectionId : id ancre (default "portes")
+ */
+import Icon from './Icon.astro';
+
+interface Props {
+  variant?: 'soft' | 'plain';
+  eyebrow?: string;
+  title?: string;
+  subtitle?: string;
+  sectionId?: string;
+}
+
+const {
+  variant = 'soft',
+  eyebrow = "Portes d'entrée",
+  title = "Trois manières <em>de commencer.</em>",
+  subtitle = "Selon votre maturité IA et votre urgence, l'entrée se fait par l'audit, la formation ou un échange initial.",
+  sectionId = 'portes',
+} = Astro.props;
+
+const sectionClass = variant === 'soft' ? 'section section--soft' : 'section';
+---
+
+<section class={sectionClass} aria-labelledby={`${sectionId}-title`} id={sectionId}>
+  <div class="container is-default">
+    <div class="portes-head">
+      <p class="eyebrow reveal">{eyebrow}</p>
+      <h2 id={`${sectionId}-title`} class="reveal portes-h2" set:html={title} />
+      <p class="reveal portes-sub">{subtitle}</p>
+    </div>
+
+    <ul class="portes-list reveal">
+      <li>
+        <a href="/diagnostic/" class="porte">
+          <Icon name="shield" size={22} strokeWidth={1.7} />
+          <div>
+            <strong>Audit IA</strong>
+            <span>Un jour sur site, sous NDA, rapport à la clé.</span>
+          </div>
+          <Icon name="arrow-right" size={16} class="arrow" />
+        </a>
+      </li>
+      <li>
+        <a href="/formation/" class="porte">
+          <Icon name="graduation-cap" size={22} strokeWidth={1.7} />
+          <div>
+            <strong>Formation Ça fait Tilt®</strong>
+            <span>Programmes inter ou intra, du Niveau 1 au sur-mesure.</span>
+          </div>
+          <Icon name="arrow-right" size={16} class="arrow" />
+        </a>
+      </li>
+      <li>
+        <a href="/diagnostic/?type=echange" class="porte">
+          <Icon name="phone" size={22} strokeWidth={1.7} />
+          <div>
+            <strong>Échange initial</strong>
+            <span>30 minutes pour cadrer votre besoin, sans engagement.</span>
+          </div>
+          <Icon name="arrow-right" size={16} class="arrow" />
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .portes-head {
+    max-width: 62ch;
+    margin-bottom: var(--s-8);
+  }
+  .portes-h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3.5vw + 0.5rem, 3rem);
+    line-height: 1.1;
+    letter-spacing: var(--tr-tighter);
+    color: var(--ivoire);
+    font-weight: 400;
+    margin: var(--s-3) 0 var(--s-3) 0;
+  }
+  .portes-h2 :global(em) {
+    color: var(--cuivre);
+    font-style: italic;
+  }
+  .portes-sub {
+    font-size: var(--step-1);
+    line-height: var(--lh-loose);
+    color: var(--ink-2);
+    margin: 0;
+    max-width: 56ch;
+  }
+
+  .portes-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+  .porte {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+    padding: var(--s-4) var(--s-5);
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    color: var(--ivoire);
+    text-decoration: none;
+    transition: border-color var(--dur-1) var(--ease),
+                background var(--dur-1) var(--ease);
+    min-height: 64px;
+  }
+  .porte:hover {
+    border-color: var(--cuivre);
+    background: var(--bg-3);
+  }
+  .porte > svg:first-of-type {
+    color: var(--cuivre);
+    flex-shrink: 0;
+  }
+  .porte > div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .porte strong {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: var(--step-1);
+    color: var(--ivoire);
+  }
+  .porte span {
+    font-size: var(--step--1);
+    color: var(--ink-3);
+  }
+  .porte .arrow {
+    color: var(--cuivre);
+    flex-shrink: 0;
+    transition: transform var(--dur-1) var(--ease);
+  }
+  .porte:hover .arrow {
+    transform: translateX(3px);
+  }
+</style>

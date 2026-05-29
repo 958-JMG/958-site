@@ -3,6 +3,7 @@ import V2bLayout from '../../layouts/V2bLayout.astro';
 import Icon from '../../components/v2/Icon.astro';
 import V2cHeader from '../../components/v2/V2cHeader.astro';
 import V2cFooter from '../../components/v2/V2cFooter.astro';
+import PortesEntree from '../../components/v2/PortesEntree.astro';
 
 const etapes = [
   {
@@ -180,52 +181,7 @@ const serviceSchema = {
   </section>
 
   <!-- 3 PORTES D'ENTRÉE -->
-  <section class="section section--soft" aria-labelledby="portes-title">
-    <div class="container is-default">
-      <div class="section-head">
-        <p class="eyebrow reveal">Portes d'entrée</p>
-        <h2 id="portes-title" class="reveal section-h2">
-          Trois manières <em>de commencer.</em>
-        </h2>
-        <p class="reveal section-sub">
-          Selon votre maturité IA et votre urgence, l'entrée se fait
-          par l'audit, la formation ou un échange initial.
-        </p>
-      </div>
-      <ul class="portes-list reveal">
-        <li>
-          <a href="/diagnostic/" class="porte">
-            <Icon name="shield" size={22} strokeWidth={1.7} />
-            <div>
-              <strong>Audit IA</strong>
-              <span>Un jour sur site, sous NDA, rapport à la clé.</span>
-            </div>
-            <Icon name="arrow-right" size={16} class="arrow" />
-          </a>
-        </li>
-        <li>
-          <a href="/formation/" class="porte">
-            <Icon name="graduation-cap" size={22} strokeWidth={1.7} />
-            <div>
-              <strong>Formation Ça fait Tilt®</strong>
-              <span>Programmes inter ou intra, du Niveau 1 au sur-mesure.</span>
-            </div>
-            <Icon name="arrow-right" size={16} class="arrow" />
-          </a>
-        </li>
-        <li>
-          <a href="/diagnostic/?type=echange" class="porte">
-            <Icon name="phone" size={22} strokeWidth={1.7} />
-            <div>
-              <strong>Échange initial</strong>
-              <span>30 minutes pour cadrer votre besoin, sans engagement.</span>
-            </div>
-            <Icon name="arrow-right" size={16} class="arrow" />
-          </a>
-        </li>
-      </ul>
-    </div>
-  </section>
+  <PortesEntree variant="soft" />
 
   <!-- CTA FINAL -->
   <section class="section section--accent" aria-labelledby="cta-title">
