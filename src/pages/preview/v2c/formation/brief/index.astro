@@ -2,32 +2,15 @@
 import V2bLayout from '../../../../../layouts/V2bLayout.astro';
 import Icon from '../../../../../components/v2/Icon.astro';
 import LogoMark from '../../../../../components/v2/LogoMark.astro';
+import V2cHeader from '../../../../../components/v2/V2cHeader.astro';
+import V2cFooter from '../../../../../components/v2/V2cFooter.astro';
 ---
 
 <V2bLayout
   title="Brief formation Ça fait Tilt® — 9·58"
   description="Briefer une formation IA intra-entreprise ou un accompagnement IA du dirigeant. Réponse sous 48 h, proposition écrite après entretien. NDA 11757585175, Qualiopi en cours obtention juin 2026."
 >
-  <!-- HEADER -->
-  <header class="site-header" role="banner">
-    <div class="container header-inner">
-      <a href="/preview/v2c/" class="brand" aria-label="9·58, retour à l'accueil">
-        <LogoMark height={38} />
-        <span class="brand-tag">Neuf Cinquante Huit</span>
-      </a>
-      <nav class="nav nav-desktop" aria-label="Navigation principale">
-        <ul>
-          <li><a href="/preview/v2c/#construit">Le produit</a></li>
-          <li><a href="/preview/v2c/formation/" aria-current="page">Formation</a></li>
-          <li><a href="/preview/v2c/#preuve">Réalisations</a></li>
-        </ul>
-      </nav>
-      <a href="#form" class="btn btn--primary btn--sm header-cta">
-        Le formulaire
-        <Icon name="arrow-right" size={14} class="arrow" />
-      </a>
-    </div>
-  </header>
+  <V2cHeader currentSection="formation" />
 
   <section class="brief-section">
     <div class="container brief-grid">
@@ -152,21 +135,7 @@ import LogoMark from '../../../../../components/v2/LogoMark.astro';
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="footer-mini section--dark" role="contentinfo">
-    <div class="container footer-mini-inner">
-      <div class="footer-brand">
-        <LogoMark height={32} />
-        <span class="brand-tag">Neuf Cinquante Huit · Vannes &amp; Paris</span>
-      </div>
-      <ul class="footer-meta">
-        <li><a href="mailto:jmg@958.fr">jmg@958.fr</a></li>
-        <li><a href="https://www.linkedin.com/in/jean-marc-geuring/" rel="me noopener" target="_blank">LinkedIn</a></li>
-        <li><a href="/mentions-legales/">Mentions légales</a></li>
-      </ul>
-      <span class="footer-year">© 2026</span>
-    </div>
-  </footer>
+  <V2cFooter />
 </V2bLayout>
 
 <script>

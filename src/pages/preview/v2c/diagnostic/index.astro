@@ -2,32 +2,15 @@
 import V2bLayout from '../../../../layouts/V2bLayout.astro';
 import Icon from '../../../../components/v2/Icon.astro';
 import LogoMark from '../../../../components/v2/LogoMark.astro';
+import V2cHeader from '../../../../components/v2/V2cHeader.astro';
+import V2cFooter from '../../../../components/v2/V2cFooter.astro';
 ---
 
 <V2bLayout
   title="Demander un diagnostic — 9·58"
   description="Un audit IA d'un jour, sous accord de confidentialité, sans engagement. Pour artisans, promoteurs, agences immobilières, syndics et TPE/PME qui veulent installer l'IA dans leur entreprise."
 >
-  <!-- HEADER -->
-  <header class="site-header" role="banner">
-    <div class="container header-inner">
-      <a href="/preview/v2c/" class="brand" aria-label="9·58, retour à l'accueil">
-        <LogoMark height={38} />
-        <span class="brand-tag">Neuf Cinquante Huit</span>
-      </a>
-      <nav class="nav nav-desktop" aria-label="Navigation principale">
-        <ul>
-          <li><a href="/preview/v2c/#construit">Le produit</a></li>
-          <li><a href="/preview/v2c/formation/">Formation</a></li>
-          <li><a href="/preview/v2c/#preuve">Réalisations</a></li>
-        </ul>
-      </nav>
-      <a href="#form" class="btn btn--primary btn--sm header-cta">
-        Le formulaire
-        <Icon name="arrow-right" size={14} class="arrow" />
-      </a>
-    </div>
-  </header>
+  <V2cHeader currentSection="diagnostic" />
 
   <section class="diag-section">
     <div class="container diag-grid">
@@ -144,21 +127,7 @@ import LogoMark from '../../../../components/v2/LogoMark.astro';
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="footer-mini section--dark" role="contentinfo">
-    <div class="container footer-mini-inner">
-      <div class="footer-brand">
-        <LogoMark height={32} />
-        <span class="brand-tag">Neuf Cinquante Huit · Vannes &amp; Paris</span>
-      </div>
-      <ul class="footer-meta">
-        <li><a href="mailto:jmg@958.fr">jmg@958.fr</a></li>
-        <li><a href="https://www.linkedin.com/in/jean-marc-geuring/" rel="me noopener" target="_blank">LinkedIn</a></li>
-        <li><a href="/mentions-legales/">Mentions légales</a></li>
-      </ul>
-      <span class="footer-year">© 2026</span>
-    </div>
-  </footer>
+  <V2cFooter />
 </V2bLayout>
 
 <script>

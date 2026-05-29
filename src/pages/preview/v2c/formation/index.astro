@@ -2,6 +2,8 @@
 import V2bLayout from '../../../../layouts/V2bLayout.astro';
 import Icon from '../../../../components/v2/Icon.astro';
 import LogoMark from '../../../../components/v2/LogoMark.astro';
+import V2cHeader from '../../../../components/v2/V2cHeader.astro';
+import V2cFooter from '../../../../components/v2/V2cFooter.astro';
 
 // Publics — accompagnement dirigeant placé en premier
 const publics = [
@@ -123,26 +125,7 @@ const versus = [
   title="Formation Ça fait Tilt® — Accompagnement IA du dirigeant"
   description="Formations IA sur-mesure intra-entreprise + accompagnement du dirigeant. Ateliers terrain, cas réels, suivi 30·60·90 jours. Une formation IA ne vaut rien si elle se finit le vendredi soir. Organisme de formation enregistré, Qualiopi prévu."
 >
-  <!-- HEADER -->
-  <header class="site-header" role="banner">
-    <div class="container header-inner">
-      <a href="/preview/v2c/" class="brand" aria-label="9·58, retour à l'accueil">
-        <LogoMark height={38} />
-        <span class="brand-tag">Neuf Cinquante Huit</span>
-      </a>
-      <nav class="nav nav-desktop" aria-label="Navigation principale">
-        <ul>
-          <li><a href="/preview/v2c/#construit">Le produit</a></li>
-          <li><a href="#" aria-current="page">Formation</a></li>
-          <li><a href="/preview/v2c/#preuve">Réalisations</a></li>
-        </ul>
-      </nav>
-      <a href="/preview/v2c/formation/brief/" class="btn btn--primary btn--sm header-cta">
-        Brief formation
-        <Icon name="arrow-right" size={14} class="arrow" />
-      </a>
-    </div>
-  </header>
+  <V2cHeader currentSection="formation" />
 
   <!-- HERO -->
   <section class="hero" aria-labelledby="hero-title">
@@ -425,21 +408,7 @@ const versus = [
     </div>
   </section>
 
-  <!-- FOOTER mini -->
-  <footer class="footer-mini section--dark" role="contentinfo">
-    <div class="container footer-mini-inner">
-      <div class="footer-brand">
-        <LogoMark height={32} />
-        <span class="brand-tag">Neuf Cinquante Huit · Vannes &amp; Paris</span>
-      </div>
-      <ul class="footer-meta">
-        <li><a href="mailto:jmg@958.fr">jmg@958.fr</a></li>
-        <li><a href="https://www.linkedin.com/in/jean-marc-geuring/" rel="me noopener" target="_blank">LinkedIn</a></li>
-        <li><a href="/mentions-legales/">Mentions légales</a></li>
-      </ul>
-      <span class="footer-year">© 2026</span>
-    </div>
-  </footer>
+  <V2cFooter />
 </V2bLayout>
 
 <style>

@@ -1,0 +1,77 @@
+---
+/**
+ * V2cFooter — footer partagé sur les 5 pages /preview/v2c/.
+ */
+import LogoMark from './LogoMark.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="footer-mini section--dark" role="contentinfo">
+  <div class="container footer-mini-inner">
+    <div class="footer-brand">
+      <LogoMark height={32} />
+      <span class="brand-tag">Neuf Cinquante Huit · Vannes &amp; Paris</span>
+    </div>
+    <ul class="footer-meta">
+      <li><a href="mailto:jmg@958.fr">jmg@958.fr</a></li>
+      <li><a href="https://www.linkedin.com/in/jean-marc-geuring/" rel="me noopener" target="_blank">LinkedIn</a></li>
+      <li><a href="/mentions-legales/">Mentions légales</a></li>
+    </ul>
+    <span class="footer-year">© {year}</span>
+  </div>
+</footer>
+
+<style>
+  .footer-mini {
+    padding-block: var(--s-6);
+    border-top: 1px solid var(--line);
+    background: var(--bg-2);
+  }
+  .footer-mini-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-5);
+    flex-wrap: wrap;
+  }
+  .footer-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .brand-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    line-height: 1.2;
+  }
+  .footer-meta {
+    display: flex;
+    gap: var(--s-5);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    letter-spacing: 0.04em;
+    flex-wrap: wrap;
+  }
+  .footer-meta a {
+    color: var(--ink-2);
+    text-transform: uppercase;
+    padding: 8px 4px;
+    display: inline-block;
+    min-height: 44px;
+    line-height: 28px;
+  }
+  .footer-meta a:hover { color: var(--cuivre); }
+  .footer-year {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    color: var(--ink-3);
+    letter-spacing: 0.06em;
+  }
+</style>

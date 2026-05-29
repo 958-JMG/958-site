@@ -2,20 +2,15 @@
 import V2bLayout from '../../../../layouts/V2bLayout.astro';
 import Icon from '../../../../components/v2/Icon.astro';
 import LogoMark from '../../../../components/v2/LogoMark.astro';
+import V2cHeader from '../../../../components/v2/V2cHeader.astro';
+import V2cFooter from '../../../../components/v2/V2cFooter.astro';
 ---
 
 <V2bLayout
   title="Merci — votre demande est arrivée"
   description="Votre demande a bien été reçue. Je reviens vers vous sous 48 heures."
 >
-  <header class="site-header" role="banner">
-    <div class="container header-inner">
-      <a href="/preview/v2c/" class="brand" aria-label="9·58, retour à l'accueil">
-        <LogoMark height={38} />
-        <span class="brand-tag">Neuf Cinquante Huit</span>
-      </a>
-    </div>
-  </header>
+  <V2cHeader compact={true} />
 
   <section class="merci-section">
     <div class="container is-default merci-inner">
@@ -52,20 +47,7 @@ import LogoMark from '../../../../components/v2/LogoMark.astro';
     </div>
   </section>
 
-  <footer class="footer-mini section--dark" role="contentinfo">
-    <div class="container footer-mini-inner">
-      <div class="footer-brand">
-        <LogoMark height={32} />
-        <span class="brand-tag">Neuf Cinquante Huit · Vannes &amp; Paris</span>
-      </div>
-      <ul class="footer-meta">
-        <li><a href="mailto:jmg@958.fr">jmg@958.fr</a></li>
-        <li><a href="https://www.linkedin.com/in/jean-marc-geuring/" rel="me noopener" target="_blank">LinkedIn</a></li>
-        <li><a href="/mentions-legales/">Mentions légales</a></li>
-      </ul>
-      <span class="footer-year">© 2026</span>
-    </div>
-  </footer>
+  <V2cFooter />
 </V2bLayout>
 
 <style>

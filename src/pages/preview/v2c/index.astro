@@ -2,6 +2,8 @@
 import V2bLayout from '../../../layouts/V2bLayout.astro';
 import Icon from '../../../components/v2/Icon.astro';
 import LogoMark from '../../../components/v2/LogoMark.astro';
+import V2cHeader from '../../../components/v2/V2cHeader.astro';
+import V2cFooter from '../../../components/v2/V2cFooter.astro';
 
 const proofs = [
   { value: '+500', label: 'personnes formées depuis 2022' },
@@ -69,25 +71,7 @@ const realisations = [
   <!-- =========================================
        HEADER
        ========================================= -->
-  <header class="site-header" role="banner">
-    <div class="container header-inner">
-      <a href="/" class="brand" aria-label="9·58, retour à l'accueil">
-        <LogoMark height={38} />
-        <span class="brand-tag">Neuf Cinquante Huit</span>
-      </a>
-      <nav class="nav nav-desktop" aria-label="Navigation principale">
-        <ul>
-          <li><a href="#construit">Le produit</a></li>
-          <li><a href="#methode">Méthode</a></li>
-          <li><a href="#preuve">Réalisations</a></li>
-        </ul>
-      </nav>
-      <a href="/preview/v2c/diagnostic/" class="btn btn--primary btn--sm header-cta">
-        Diagnostic
-        <Icon name="arrow-right" size={14} class="arrow" />
-      </a>
-    </div>
-  </header>
+  <V2cHeader currentSection="produit" />
 
   <!-- =========================================
        HERO — Pivot B : texte court + démo cockpit live
@@ -525,23 +509,7 @@ const realisations = [
     </div>
   </section>
 
-  <!-- =========================================
-       FOOTER mini
-       ========================================= -->
-  <footer class="footer-mini section--dark" role="contentinfo">
-    <div class="container footer-mini-inner">
-      <div class="footer-brand">
-        <LogoMark height={32} />
-        <span class="brand-tag">Neuf Cinquante Huit · Vannes &amp; Paris</span>
-      </div>
-      <ul class="footer-meta">
-        <li><a href="mailto:jmg@958.fr">jmg@958.fr</a></li>
-        <li><a href="https://www.linkedin.com/in/jean-marc-geuring/" rel="me noopener" target="_blank">LinkedIn</a></li>
-        <li><a href="/mentions-legales/">Mentions légales</a></li>
-      </ul>
-      <span class="footer-year">© 2026</span>
-    </div>
-  </footer>
+  <V2cFooter />
 </V2bLayout>
 
 <style>
