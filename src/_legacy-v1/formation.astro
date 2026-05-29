@@ -47,7 +47,7 @@ const temps = [
     n: '01',
     titre: 'Avant — le cadrage',
     duree: '30 à 60 min · visio',
-    corps: "Entretien avec vous ou votre équipe. On repère les irritants, les cas concrets, le niveau de départ. Le programme se bâtit sur vos données, pas sur un PDF d'éditeur.",
+    corps: "Entretien avec vous ou votre équipe. Je repère les irritants, les cas concrets, le niveau de départ. Le programme se bâtit sur vos données, pas sur un PDF d'éditeur.",
   },
   {
     n: '02',
@@ -59,7 +59,7 @@ const temps = [
     n: '03',
     titre: 'Après — la traction',
     duree: '30 · 60 · 90 jours',
-    corps: "Trois points de contrôle. On mesure ce qui a tenu, on corrige ce qui a glissé. Une bibliothèque interne de prompts métier se constitue.",
+    corps: "Trois points de contrôle. Je mesure ce qui a tenu, je corrige ce qui a glissé. Une bibliothèque interne de prompts métier se constitue.",
   },
 ];
 
@@ -106,11 +106,36 @@ const programmes = [
     titre: 'Parcours sur mesure',
     duree: 'à définir',
     pour: 'Autre métier, autre besoin',
-    livre: "On construit ensemble à partir de votre audit. Tous les précédents ont commencé ainsi.",
+    livre: "Construit ensemble à partir de votre audit. Tous les précédents ont commencé ainsi.",
   },
 ];
 
-// Comparatif frontal — ligne à ligne, eux vs nous.
+const formationService = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': 'https://www.958.fr/formation/#service',
+  serviceType: 'Formation IA intra-entreprise',
+  name: 'Formation IA sur-mesure pour dirigeants et équipes métier',
+  description: "Formations IA intra-entreprise, de 1 à 10 jours, sur les cas réels du client. Ateliers terrain, livrables opérationnels, suivi 30/60/90 jours. Souveraineté européenne. Organisme de formation enregistré, Qualiopi en cours d'obtention.",
+  provider: { '@id': 'https://www.958.fr/#organization' },
+  areaServed: [
+    { '@type': 'Country', name: 'France' },
+    { '@type': 'AdministrativeArea', name: 'Bretagne' },
+  ],
+  audience: { '@type': 'BusinessAudience', audienceType: 'Dirigeants, commerciaux, ops, métiers réglementés, tech, RH' },
+  category: 'Formation professionnelle continue',
+  identifier: 'NDA 11757585175',
+  hasCredential: [
+    {
+      '@type': 'EducationalOccupationalCredential',
+      name: "Déclaration d'activité d'organisme de formation",
+      identifier: '11757585175',
+      recognizedBy: { '@type': 'Organization', name: "Préfet de région d'Île-de-France" },
+    },
+  ],
+};
+
+// Comparatif frontal — ligne à ligne, eux vs moi.
 const versus = [
   { eux: "1 semaine en groupe, à distance",       nous: "1 à 10 jours chez vous, avec votre équipe" },
   { eux: "Catalogue standardisé, promis à tous",  nous: "Programme construit sur vos cas réels" },
@@ -123,8 +148,9 @@ const versus = [
 ---
 
 <Base
-  title="Formation — L'IA installée dans vos équipes"
-  description="Formations IA sur-mesure, intra-entreprise, pour dirigeants et équipes métier. Ateliers de terrain, cas réels, suivi post-formation. Souveraineté européenne. Organisme de formation enregistré (NDA 11757585175), Qualiopi prévu."
+  title="Formation IA en entreprise — Intra, sur-mesure"
+  description="Formations IA intra-entreprise pour dirigeants et équipes métier. 1 à 10 jours sur vos cas réels. Ateliers terrain, livrables opérationnels. Organisme de formation enregistré (NDA 11757585175), Qualiopi en cours."
+  jsonLd={formationService}
 >
   <!-- =========================================
        HERO
@@ -147,7 +173,7 @@ const versus = [
       </div>
       <ul class="hero-assurances reveal" aria-label="Engagements formation">
         <li><span class="dot"></span>Organisme de formation enregistré</li>
-        <li><span class="dot"></span>Qualiopi prévu</li>
+        <li><span class="dot"></span>Qualiopi en cours d'obtention</li>
         <li><span class="dot"></span>Accord de confidentialité</li>
         <li><span class="dot"></span>+500 personnes formées</li>
       </ul>
@@ -164,9 +190,9 @@ const versus = [
         Une formation IA ne vaut rien si elle se finit le vendredi soir.
       </h2>
       <div class="prose reveal">
-        <p>Ce qui compte, ce n'est pas ce qu'on dit en formation. C'est ce que vos équipes emportent le lundi matin.</p>
+        <p>Ce qui compte, ce n'est pas ce qui se dit en formation. C'est ce que vos équipes emportent le lundi matin.</p>
         <p>Un prompt trouvé ensemble, un workflow testé sur un vrai dossier, un outil branché sur vos données, un cadre qui se transmet : voilà ce qui reste.</p>
-        <p><strong>Le reste — slides, théorie, catalogues — n'est pas notre métier.</strong></p>
+        <p><strong>Le reste — slides, théorie, catalogues — n'est pas mon métier.</strong></p>
       </div>
       <TiltSignature />
     </div>
@@ -282,7 +308,7 @@ const versus = [
         <p class="eyebrow reveal">05 · Programmes types</p>
         <h2 class="reveal" id="h-prog">Des parcours inspirés du terrain.</h2>
         <p class="lead reveal">
-          Tous nos programmes sont adaptés au contexte du client. Voici six points de départ
+          Tous mes programmes sont adaptés au contexte du client. Voici six points de départ
           pour que la conversation aille vite.
         </p>
       </div>
@@ -302,7 +328,10 @@ const versus = [
       </ul>
 
       <p class="section-note reveal" style="margin-top: var(--s-6); text-align: center;">
-        Devis en 48&nbsp;h · Prise en charge OPCO à étudier avec votre organisme
+        Devis en 48&nbsp;h · Prise en charge OPCO à étudier dès Qualiopi obtenu
+      </p>
+      <p class="section-note reveal" style="margin-top: var(--s-3); text-align: center;">
+        Vous êtes en Bretagne ? <a href="/formation-ia-bretagne" class="link-arrow" style="display: inline;">Voir ma page dédiée Formation IA en Bretagne <span aria-hidden="true">→</span></a>
       </p>
     </div>
   </section>
@@ -350,7 +379,7 @@ const versus = [
           <p class="eyebrow">06 · Cadre</p>
           <h2 id="h-certif" style="margin-top: var(--s-3);">Un cadre qui avance.</h2>
           <p class="lead" style="margin-top: var(--s-4);">
-            Parce que votre service achats ou votre OPCO va nous demander les pièces.
+            Parce que votre service achats ou votre OPCO va me demander les pièces.
           </p>
         </div>
 
@@ -361,9 +390,9 @@ const versus = [
             <p>Enregistré sous le numéro 11757585175 auprès du préfet de région d'Île-de-France. Cet enregistrement ne vaut pas agrément de l'État.</p>
           </li>
           <li class="certif reveal">
-            <p class="certif-statut is-progress">En cours</p>
+            <p class="certif-statut is-progress">En cours d'obtention</p>
             <h3>Certification Qualiopi</h3>
-            <p>Engagée maintenant que le NDA est obtenu. Condition préalable à une prise en charge OPCO pleine et entière.</p>
+            <p>Engagée maintenant que le NDA est obtenu. Conditionnera la prise en charge OPCO pleine et entière. Audit blanc passé, audit officiel programmé.</p>
           </li>
           <li class="certif reveal">
             <p class="certif-statut is-done">Acquis</p>
@@ -413,10 +442,10 @@ const versus = [
   <section class="section is-loose" aria-labelledby="h-cta">
     <div class="container is-narrow" style="text-align: center;">
       <h2 class="reveal" id="h-cta">
-        Racontez-nous votre équipe.<br>On vous propose un parcours.
+        Racontez-moi votre équipe.<br>Je vous propose un parcours.
       </h2>
       <p class="lead reveal" style="margin-top: var(--s-4);">
-        15 minutes au téléphone. On comprend vos cas, vos contraintes, votre calendrier.
+        15 minutes au téléphone. Je comprends vos cas, vos contraintes, votre calendrier.
         Vous recevez une proposition écrite sous 48&nbsp;heures.
       </p>
       <div class="reveal" style="margin-top: var(--s-7);">

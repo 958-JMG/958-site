@@ -1,0 +1,561 @@
+---
+import Base from '../layouts/Base.astro';
+import CTAButton from '../components/CTAButton.astro';
+import TiltSignature from '../components/TiltSignature.astro';
+import QuoteDisplay from '../components/QuoteDisplay.astro';
+
+const services = [
+  {
+    n: '01',
+    titre: 'Audit IA PME',
+    duree: '1 à 2 jours',
+    body: "Cartographie des cas d'usage, priorisation, fourchette budgétaire. Rapport actionnable de 15 à 25 pages.",
+    href: '/audit-ia-pme',
+    cta: "Voir l'audit IA",
+  },
+  {
+    n: '02',
+    titre: 'Implémentation IA',
+    duree: '3 à 12 semaines',
+    body: "Construction du cockpit, automatisations n8n, intégrations métier. Tests en conditions réelles.",
+    href: '/methode',
+    cta: 'Voir la méthode',
+  },
+  {
+    n: '03',
+    titre: 'Formation IA intra-entreprise',
+    duree: '1 à 10 jours',
+    body: "Formations sur-mesure pour dirigeants et équipes métier. Sur vos cas, avec suivi 30/60/90 jours.",
+    href: '/formation-ia-bretagne',
+    cta: 'Voir la formation',
+  },
+  {
+    n: '04',
+    titre: 'Accompagnement',
+    duree: '3 mois et plus',
+    body: "Support réactif, ajustements, nouveaux chantiers. Vos équipes deviennent autonomes.",
+    href: '/methode',
+    cta: 'Voir la méthode',
+  },
+];
+
+const secteurs = [
+  'Immobilier & promotion foncière',
+  'Syndic de copropriété',
+  'Gestion de patrimoine & CGP',
+  'BTP & construction',
+  'Expertise-comptable',
+  'Cabinet de conseil',
+  'Industrie & PME bretonnes',
+  'Services & professions libérales',
+];
+
+const localFaq = [
+  {
+    q: "Où se trouve le bureau de 958 à Vannes ?",
+    a: "Au 1 bis rue Thiers, 56000 Vannes. À 5 minutes à pied de la gare, à 7 minutes du centre-ville historique et du port. Un second bureau à Paris (60 rue François 1er, 75008) pour les déplacements sur la capitale.",
+  },
+  {
+    q: "Vous intervenez à Auray, Lorient, Quiberon, Pontivy ?",
+    a: "Oui. Tout le Morbihan est en zone d'intervention directe depuis Vannes. Pas de frais kilométriques jusqu'à Quiberon, Lorient, Auray, Pontivy, Sarzeau, La Trinité-sur-Mer.",
+  },
+  {
+    q: "Et hors Morbihan ?",
+    a: "Rennes, Saint-Brieuc, Saint-Malo, Brest, Quimper, Nantes : intervention régulière, frais de déplacement intégrés au devis. Au-delà : Paris (TGV), reste de la France (selon mission).",
+  },
+  {
+    q: "Combien coûte un consultant IA à Vannes ?",
+    a: "L'audit IA est à 1 200 € HT — 900 € HT en tarif de lancement jusqu'au 31 juillet 2026. Une journée de formation intra-entreprise : 1 800 € HT. Un cockpit IA complet : devis après audit, généralement entre 8 000 et 35 000 € HT selon le périmètre.",
+  },
+  {
+    q: "Qui réalise les missions ?",
+    a: "Jean Marc Geuring, fondateur de 958, basé à Vannes depuis 2022. 28 ans d'entrepreneuriat. Pour certains chantiers techniques, des freelances partenaires sous contrat. Aucune sous-traitance offshore, aucune équipe junior.",
+  },
+  {
+    q: "Quel délai pour démarrer une mission depuis Vannes ?",
+    a: "Diagnostic sous 48 heures. Audit programmable sous 2 à 4 semaines selon la période. Pour une formation intra-entreprise, comptez 3 à 6 semaines entre le brief et le premier atelier.",
+  },
+];
+
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': 'https://www.958.fr/consultant-ia-vannes/#localbusiness',
+  name: 'Neuf Cinquante Huit — Consultant IA Vannes',
+  description: "Consultant IA pour TPE et PME basé à Vannes (Morbihan). Audit, formation, implémentation IA. Intervention en Bretagne et en France.",
+  url: 'https://www.958.fr/consultant-ia-vannes/',
+  telephone: undefined,
+  email: 'jmg@958.fr',
+  image: 'https://www.958.fr/og-image.png',
+  logo: 'https://www.958.fr/logo-958-mark.svg',
+  priceRange: '€€',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '1 bis rue Thiers',
+    addressLocality: 'Vannes',
+    postalCode: '56000',
+    addressRegion: 'Morbihan',
+    addressCountry: 'FR',
+  },
+  geo: { '@type': 'GeoCoordinates', latitude: 47.6587, longitude: -2.7603 },
+  areaServed: [
+    { '@type': 'City', name: 'Vannes' },
+    { '@type': 'City', name: 'Lorient' },
+    { '@type': 'City', name: 'Rennes' },
+    { '@type': 'City', name: 'Brest' },
+    { '@type': 'City', name: 'Saint-Brieuc' },
+    { '@type': 'City', name: 'Nantes' },
+    { '@type': 'AdministrativeArea', name: 'Morbihan' },
+    { '@type': 'AdministrativeArea', name: 'Bretagne' },
+  ],
+  sameAs: ['https://www.linkedin.com/in/jean-marc-geuring/'],
+  parentOrganization: { '@id': 'https://www.958.fr/#organization' },
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: localFaq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<Base
+  title="Consultant IA à Vannes (Morbihan) — Bretagne, France"
+  description="Consultant IA pour PME basé à Vannes. Audit, formation et implémentation IA en Bretagne (Vannes, Lorient, Rennes, Brest, Saint-Brieuc) et partout en France. Méthode SPARI, souveraineté européenne."
+  jsonLd={[localBusinessSchema, faqSchema]}
+>
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="h-hero">
+    <div class="container">
+      <p class="eyebrow reveal">Consultant IA · Vannes (56) · Bretagne · Depuis 2022</p>
+      <h1 id="h-hero" class="hero-title reveal">
+        Un consultant IA.
+        <br>Pas une agence.
+        <span class="hero-title-soft">Vous appelez, je décroche. Je vous écoute, je propose, je livre. Et ça fait tilt<sup>®</sup>.</span>
+      </h1>
+      <p class="lead reveal">
+        Audit, formation, implémentation et accompagnement IA pour dirigeants de PME bretonnes.
+        Bureau à Vannes (1 bis rue Thiers, à 5 min de la gare). Intervention sans frais de
+        déplacement dans tout le Morbihan, présence régulière à Rennes, Lorient, Brest,
+        Saint-Brieuc, Saint-Malo, Nantes et Paris.
+      </p>
+      <div class="hero-ctas reveal">
+        <CTAButton label="Demander un diagnostic" href="/diagnostic" size="lg" />
+        <a href="#services" class="link-arrow">Voir les services <span aria-hidden="true">→</span></a>
+      </div>
+      <ul class="hero-assurances reveal" aria-label="Cadre">
+        <li><span class="dot"></span>+500 personnes formées</li>
+        <li><span class="dot"></span>6 cockpits livrés</li>
+        <li><span class="dot"></span>Organisme de formation enregistré</li>
+        <li><span class="dot"></span>Modèles européens</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- POSITIONNEMENT -->
+  <section class="section" aria-labelledby="h-positionnement">
+    <div class="container is-default">
+      <p class="eyebrow reveal">01 · Positionnement</p>
+      <h2 id="h-positionnement" class="reveal" style="margin-top: var(--s-3);">
+        Le même qui vend.<br>Le même qui livre.
+      </h2>
+      <div class="prose reveal">
+        <p>Quand vous appelez 958, c'est <strong>Jean Marc Geuring</strong> qui répond. Le même qui anime
+        les ateliers, qui rédige l'audit, qui supervise l'implémentation. 28 ans d'entrepreneuriat avant de fonder 958 en 2022, à Vannes.</p>
+        <p>La grande différence avec les agences IA parisiennes : ici, le dirigeant qui vend la mission est le même qui la livre. Aucune équipe junior, aucune sous-traitance offshore.</p>
+        <p>La grande différence avec les freelances IA : un cadre méthodologique propriétaire (SPARI), une déclaration d'activité d'organisme de formation, un ancrage local et un suivi 30/60/90 jours après chaque intervention.</p>
+      </div>
+      <TiltSignature />
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="section surface-elevated" aria-labelledby="h-services">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow reveal">02 · Services</p>
+        <h2 class="reveal" id="h-services">Quatre portes d'entrée.<br>Une seule méthode.</h2>
+        <p class="lead reveal">Audit, implémentation, formation, accompagnement : à vous de choisir où vous accrochez. SPARI fait le reste.</p>
+      </div>
+      <ul class="services reveal-stagger" role="list">
+        {services.map((s) => (
+          <li class="service reveal">
+            <div class="service-head">
+              <span class="service-n">{s.n}</span>
+              <span class="service-duree">{s.duree}</span>
+            </div>
+            <h3 class="service-titre">{s.titre}</h3>
+            <p class="service-body">{s.body}</p>
+            <a href={s.href} class="link-arrow service-link">
+              {s.cta} <span aria-hidden="true">→</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- SECTEURS -->
+  <section class="section" aria-labelledby="h-secteurs">
+    <div class="container is-default">
+      <p class="eyebrow reveal">03 · Secteurs servis en Bretagne</p>
+      <h2 id="h-secteurs" class="reveal" style="margin-top: var(--s-3);">
+        Huit secteurs où j'ai déjà installé l'IA.
+      </h2>
+      <ul class="secteurs reveal-stagger" role="list">
+        {secteurs.map((s) => (
+          <li class="secteur reveal"><span class="secteur-dot" aria-hidden="true"></span>{s}</li>
+        ))}
+      </ul>
+      <p class="section-note reveal" style="margin-top: var(--s-6);">
+        <a href="/realisations" class="link-arrow">Voir les 6 réalisations <span aria-hidden="true">→</span></a>
+      </p>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <QuoteDisplay
+    text="Ils ont fait en 3 semaines ce que notre SI n'arrivait pas à faire depuis deux ans."
+    role="Directeur général"
+    context="groupe immobilier breton · 80 collaborateurs"
+  />
+
+  <!-- ADRESSE LOCALE -->
+  <section class="section surface-elevated" aria-labelledby="h-adresse">
+    <div class="container">
+      <div class="adresse-grid">
+        <div class="reveal">
+          <p class="eyebrow">04 · Adresse</p>
+          <h2 id="h-adresse" style="margin-top: var(--s-3);">
+            Le bureau de Vannes.
+          </h2>
+          <p class="lead" style="margin-top: var(--s-4);">
+            1 bis rue Thiers · 56000 Vannes · Morbihan · Bretagne.
+          </p>
+          <p style="margin-top: var(--s-4); color: var(--ink-2);">
+            À 5 minutes à pied de la gare SNCF de Vannes. À 7 minutes du port et du centre-ville historique.
+            Accès TGV direct Paris-Vannes en 2 h 30. La plupart des réunions clients ont lieu sur site ; mes locaux servent pour les ateliers en petit comité.
+          </p>
+        </div>
+        <div class="reveal contact-card">
+          <h3>Contact direct</h3>
+          <ul class="contact-list">
+            <li>
+              <span class="contact-label">Email</span>
+              <a href="mailto:jmg@958.fr">jmg@958.fr</a>
+            </li>
+            <li>
+              <span class="contact-label">LinkedIn</span>
+              <a href="https://www.linkedin.com/in/jean-marc-geuring/" target="_blank" rel="noopener noreferrer">Jean Marc Geuring ↗</a>
+            </li>
+            <li>
+              <span class="contact-label">SIREN</span>
+              <span>912 884 228</span>
+            </li>
+            <li>
+              <span class="contact-label">Formation</span>
+              <span>NDA 11757585175 · Qualiopi en cours</span>
+            </li>
+          </ul>
+          <CTAButton label="Demander un diagnostic" href="/diagnostic" size="md" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ LOCALE -->
+  <section class="section" aria-labelledby="h-faq">
+    <div class="container is-default">
+      <div class="section-head">
+        <p class="eyebrow reveal">05 · Questions locales</p>
+        <h2 id="h-faq" class="reveal">Consultant IA à Vannes — FAQ.</h2>
+      </div>
+      <div class="faq-list">
+        {localFaq.map((f) => (
+          <details class="faq-item reveal">
+            <summary>
+              <span>{f.q}</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="section is-loose" aria-labelledby="h-cta">
+    <div class="container is-narrow" style="text-align: center;">
+      <h2 class="reveal" id="h-cta">Un café à Vannes.<br>Ou un appel.</h2>
+      <p class="lead reveal" style="margin-top: var(--s-4);">
+        Trente minutes. Vous racontez. J'écoute. Je vous dis si l'IA fait tilt<sup>®</sup>
+        chez vous — ou si elle peut attendre.
+      </p>
+      <div class="reveal" style="margin-top: var(--s-7);">
+        <CTAButton label="Demander un diagnostic" href="/diagnostic" size="lg" />
+      </div>
+      <p class="section-note reveal" style="margin-top: var(--s-4);">
+        Réponse sous 48&nbsp;h · Accord de confidentialité · Sans engagement
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    padding-top: var(--s-9);
+    padding-bottom: var(--s-7);
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--step-7);
+    line-height: var(--lh-tight);
+    letter-spacing: var(--tr-tight);
+    color: var(--ink);
+    margin-top: var(--s-4);
+    max-width: 24ch;
+  }
+  .hero-title-soft {
+    display: block;
+    margin-top: var(--s-4);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--ink-2);
+    font-size: 0.5em;
+    letter-spacing: -0.01em;
+    line-height: var(--lh-snug);
+  }
+  .hero-title sup,
+  .hero-title-soft sup {
+    font-size: 0.42em;
+    color: var(--accent);
+    top: -0.7em;
+    position: relative;
+    font-style: normal;
+    font-weight: 400;
+  }
+  .lead { margin-top: var(--s-5); }
+  .hero-ctas {
+    display: flex;
+    align-items: center;
+    gap: var(--s-5);
+    flex-wrap: wrap;
+    margin-top: var(--s-6);
+  }
+  .hero-assurances {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-4) var(--s-5);
+    margin-top: var(--s-6);
+    padding-top: var(--s-5);
+    border-top: 1px solid var(--line);
+  }
+  .hero-assurances li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--ink-3);
+    letter-spacing: var(--tr-wide);
+    text-transform: uppercase;
+  }
+  .hero-assurances .dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--accent);
+  }
+  @media (max-width: 720px) {
+    .hero { padding-top: var(--s-6); }
+    .hero-title { max-width: none; margin-top: var(--s-3); }
+  }
+
+  .section-head { max-width: 48rem; margin-bottom: var(--s-8); }
+  .section-head h2 { margin-top: var(--s-3); }
+  .section-head .lead { margin-top: var(--s-4); }
+  .section-note {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--ink-3);
+    letter-spacing: var(--tr-wide);
+  }
+  .prose { margin-top: var(--s-6); display: flex; flex-direction: column; gap: var(--s-4); }
+  .prose p { font-size: var(--step-2); color: var(--ink-2); }
+
+  /* SERVICES */
+  .services {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-4);
+  }
+  .service {
+    padding: var(--s-6) var(--s-5);
+    border: 1px solid var(--line);
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    transition: border-color var(--dur-2) var(--ease);
+  }
+  .service:hover { border-color: var(--accent-2); }
+  .service-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: var(--s-3);
+    border-bottom: 1px solid var(--line);
+  }
+  .service-n {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--accent);
+    letter-spacing: var(--tr-wide);
+  }
+  .service-duree {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--ink-3);
+    letter-spacing: var(--tr-wide);
+  }
+  .service-titre {
+    font-size: var(--step-3);
+    color: var(--ink);
+    line-height: var(--lh-snug);
+    margin-top: var(--s-2);
+  }
+  .service-body {
+    font-size: var(--step-0);
+    color: var(--ink-2);
+    line-height: var(--lh-normal);
+  }
+  .service-link {
+    margin-top: auto;
+    color: var(--accent);
+    font-size: var(--step-0);
+  }
+  @media (max-width: 760px) {
+    .services { grid-template-columns: 1fr; }
+  }
+
+  /* SECTEURS */
+  .secteurs {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-3) var(--s-5);
+    margin-top: var(--s-6);
+  }
+  .secteur {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+    font-size: var(--step-1);
+    color: var(--ink);
+    padding: var(--s-3) 0;
+    border-top: 1px solid var(--line);
+  }
+  .secteur-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+  @media (max-width: 720px) {
+    .secteurs { grid-template-columns: 1fr; }
+  }
+
+  /* ADRESSE */
+  .adresse-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-7);
+  }
+  @media (min-width: 900px) {
+    .adresse-grid { grid-template-columns: 1.2fr 0.8fr; gap: var(--s-8); }
+  }
+  .contact-card {
+    padding: var(--s-6);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+  }
+  .contact-card h3 {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    text-transform: uppercase;
+    letter-spacing: var(--tr-mono);
+    color: var(--ink-3);
+  }
+  .contact-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+  }
+  .contact-list li {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-1);
+    padding-bottom: var(--s-3);
+    border-bottom: 1px solid var(--line);
+  }
+  .contact-label {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: var(--tr-wide);
+  }
+  .contact-list a {
+    font-size: var(--step-1);
+    color: var(--ink);
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--dur-1) var(--ease);
+  }
+  .contact-list a:hover { border-bottom-color: var(--accent); }
+
+  /* FAQ */
+  .faq-list { display: flex; flex-direction: column; }
+  .faq-item { border-bottom: 1px solid var(--line); }
+  .faq-item:first-child { border-top: 1px solid var(--line); }
+  .faq-item summary {
+    padding: var(--s-5) 0;
+    font-family: var(--font-sans);
+    font-size: var(--step-2);
+    font-weight: 500;
+    color: var(--ink);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-4);
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-icon { width: 14px; height: 14px; position: relative; flex-shrink: 0; }
+  .faq-icon::before, .faq-icon::after {
+    content: ""; position: absolute; background: var(--ink-2);
+    transition: transform var(--dur-2) var(--ease);
+  }
+  .faq-icon::before { left: 0; right: 0; top: calc(50% - 0.75px); height: 1.5px; }
+  .faq-icon::after { top: 0; bottom: 0; left: calc(50% - 0.75px); width: 1.5px; }
+  .faq-item[open] .faq-icon::after { transform: scaleY(0); }
+  .faq-item[open] .faq-icon::before { background: var(--accent); }
+  .faq-item p {
+    padding: 0 0 var(--s-5);
+    font-size: var(--step-1);
+    color: var(--ink-2);
+    line-height: var(--lh-loose);
+    max-width: 70ch;
+  }
+</style>

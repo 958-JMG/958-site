@@ -80,7 +80,20 @@
 /index.html           /                     301
 /index.php            /                     301
 /home                 /                     301
+/home/                /                     301
 /accueil              /                     301
+/accueil/             /                     301
+
+# Sitemap convention — outils SEO interrogent /sitemap.xml
+/sitemap.xml          /sitemap-index.xml    301
+
+# Pages SEO — nouvelles URLs piliers, alias commerciaux
+/audit-ia             /audit-ia-pme         301
+/audit-ia-entreprise  /audit-ia-pme         301
+/consultant-ia        /consultant-ia-vannes 301
+/agence-ia-vannes     /consultant-ia-vannes 301
+/formation-ia        /formation-ia-bretagne 301
+/formation-chatgpt   /formation-ia-bretagne 301
 
 # Mentions / RGPD / CGV
 /mentions             /mentions-legales     301
