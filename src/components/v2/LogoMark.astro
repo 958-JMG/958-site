@@ -1,83 +1,68 @@
 ---
 /**
- * LogoMark — Le vrai logo 9·58 reproduit en SVG inline depuis LOGO958.jpg
- * (référence : /Users/jmg/Desktop/Cockpit 958/LOGO958.jpg)
+ * LogoMark — Le vrai logo 9·58 (PNG transparent généré depuis LOGO958.jpg)
  *
- * Structure :
- *   - Conteneur rounded rect (par défaut cuivre via currentColor)
- *   - 9 stylisé : donut + tige
- *   - Interpunct (carré horizontal)
- *   - 8 stylisé : cercle avec œil central + ouverture latérale gauche
- *     (l'effet "G inversé" caractéristique du logo)
+ * Le PNG public/logo-958-official.png a été préparé via scripts/make-logo-transparent
+ * (sharp + threshold blanc → alpha 0). Il contient :
+ * - Le rounded rect noir comme zone OPAQUE
+ * - Les chiffres "9" et "8" en creux (transparent)
+ * - Le fond extérieur transparent
  *
- * Couleurs paramétrables :
- *   --mark-bg : fond du rounded rect (par défaut noir #0A0A0A)
- *   --mark-fg : chiffres "9·8" (par défaut ivoire #F4ECDC)
- *   border (via color CSS) : couleur du conteneur (par défaut cuivre)
+ * On l'utilise comme MASK CSS + background-color paramétrable, ce qui
+ * permet de recoloriser dynamiquement le badge selon la palette brand.
+ * Effet : silhouette du logo officielle + couleur custom + chiffres en
+ * "découpe" qui révèlent le fond du parent (effet incrusté).
  *
  * Usage :
- *   <LogoMark />                                      (défaut : container cuivre, intérieur noir, chiffres ivoire)
+ *   <LogoMark />                       (cuivre par défaut sur palette v2c)
  *   <LogoMark height={48} />
- *   <LogoMark bg="var(--bg)" fg="var(--ivoire)" />    (fond canvas dark + chiffres ivoire)
- *   <LogoMark bg="var(--cuivre)" fg="var(--ivoire)" border="var(--cuivre)" />
+ *   <LogoMark color="var(--ivoire)" /> (variante ivoire)
  */
 interface Props {
   height?: number;
-  bg?: string;       /* fond du rect intérieur */
-  fg?: string;       /* couleur des chiffres */
-  border?: string;   /* couleur du rounded rect conteneur */
+  /** Couleur du badge (par défaut cuivre brand) */
+  color?: string;
   class?: string;
   title?: string;
 }
 
 const {
   height = 36,
-  bg = '#0A0A0A',
-  fg = 'var(--ivoire)',
-  border = 'var(--cuivre)',
+  color = 'var(--cuivre)',
   class: className = '',
   title = '9·58 — Neuf Cinquante Huit',
 } = Astro.props;
 
-// Ratio viewBox 200×250 (~5:6 vertical, fidèle au logo officiel)
-const width = Math.round((height * 200) / 250);
+// Ratio du PNG : 986 × 1355 (~ 0.728)
+const width = Math.round((height * 986) / 1355);
 ---
 
-<svg
-  xmlns="http://www.w3.org/2000/svg"
-  viewBox="0 0 200 250"
-  width={width}
-  height={height}
+<span
   class={`logo-mark ${className}`}
-  style={`color: ${border}; --mark-bg: ${bg}; --mark-fg: ${fg};`}
   role="img"
   aria-label={title}
+  style={`--logo-w: ${width}px; --logo-h: ${height}px; --logo-color: ${color};`}
 >
-  <title>{title}</title>
+  <span class="visually-hidden">{title}</span>
+</span>
 
-  {/* Conteneur rounded rect (utilise currentColor depuis style.color) */}
-  <rect width="200" height="250" rx="32" ry="32" fill="currentColor"/>
-
-  {/* Intérieur noir (le badge) */}
-  <rect x="6" y="6" width="188" height="238" rx="28" ry="28" fill="var(--mark-bg)"/>
-
-  {/* ============ 9 (haut) — donut + tige ============ */}
-  {/* Cercle extérieur blanc */}
-  <circle cx="100" cy="78" r="46" fill="var(--mark-fg)"/>
-  {/* Œil noir central */}
-  <circle cx="100" cy="78" r="20" fill="var(--mark-bg)"/>
-  {/* Tige descendante */}
-  <rect x="78" y="82" width="44" height="50" fill="var(--mark-fg)"/>
-
-  {/* ============ · Interpunct (carré horizontal à gauche du centre) ============ */}
-  <rect x="36" y="120" width="32" height="12" rx="2" fill="var(--mark-fg)"/>
-
-  {/* ============ 8 (bas) — cercle avec œil + ouverture latérale gauche ============ */}
-  {/* Cercle extérieur blanc */}
-  <circle cx="100" cy="172" r="46" fill="var(--mark-fg)"/>
-  {/* Œil noir central */}
-  <circle cx="100" cy="172" r="20" fill="var(--mark-bg)"/>
-  {/* Fente latérale gauche : un rectangle noir qui relie le bord gauche
-       du cercle au trou central, créant l'effet "G inversé" du logo */}
-  <rect x="54" y="166" width="46" height="12" fill="var(--mark-bg)"/>
-</svg>
+<style>
+  .logo-mark {
+    display: inline-block;
+    width: var(--logo-w);
+    height: var(--logo-h);
+    background-color: var(--logo-color);
+    -webkit-mask: url('/logo-958-official.png') no-repeat center / contain;
+            mask: url('/logo-958-official.png') no-repeat center / contain;
+    flex-shrink: 0;
+  }
+  .visually-hidden {
+    position: absolute !important;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>
