@@ -7,42 +7,18 @@ const terrain = [
     icon: 'hard-hat',
     secteur: 'Bâtiment',
     titre: 'Le pointage des heures de fin de semaine.',
-    body: 'Reporter Pierre, Sophie, Marc dans l\'Excel des heures, croiser avec les chantiers, préparer la paie. 9·58 le fait en continu, à partir des saisies terrain.',
     gain: 'Le vendredi après-midi vous est rendu',
   },
   {
-    icon: 'home',
-    secteur: 'Agence immo',
-    titre: 'La diffusion d\'un mandat sur plusieurs portails.',
-    body: 'Reformuler l\'annonce, recadrer les photos, dupliquer sur chaque plateforme. 9·58 publie depuis votre fiche mandat, en cohérence avec votre charte.',
-    gain: 'Vos après-midis ne sont plus dans les portails',
-  },
-  {
     icon: 'building-2',
-    secteur: 'Promotion',
+    secteur: 'Immobilier',
     titre: 'La modification d\'un PLU pour un foncier.',
-    body: 'Éplucher 80 pages, recouper les zonages, refaire la fiche de faisabilité avec la mise en page maison. 9·58 lit le PLU, l\'interprète pour votre projet et sort la note à votre charte.',
     gain: 'Vous lisez la note. Vous ne l\'écrivez plus.',
-  },
-  {
-    icon: 'users',
-    secteur: 'Équipe',
-    titre: 'Le compte-rendu de la réunion du lundi.',
-    body: 'Rédiger, mettre en forme, envoyer à tous. 9·58 transcrit, structure à votre ton, envoie. Vous sortez de la réunion, le CR est déjà dans la boîte de l\'équipe.',
-    gain: 'La réunion finit. Le CR est envoyé.',
-  },
-  {
-    icon: 'mail',
-    secteur: 'Syndic',
-    titre: 'Les centaines de mails de copropriétaires chaque jour.',
-    body: '9·58 trie, repère les urgents, rédige les brouillons à votre charte — courriers types, accusés, relances. Vous tranchez les vraies décisions.',
-    gain: 'Vous tranchez. L\'IA fait le reste.',
   },
   {
     icon: 'briefcase',
     secteur: 'TPE / PME',
     titre: 'La proposition commerciale personnalisée.',
-    body: 'Adapter le Word, intégrer les photos, ajuster le tarif, exporter en PDF propre. 9·58 sort le doc à votre charte. Vous appelez le prospect au lieu de mettre en page.',
     gain: 'Vous appelez le prospect. La proposition est partie.',
   },
 ];
@@ -56,19 +32,9 @@ const proofs = [
 
 const temoignages = [
   {
-    secteur: 'Promotion foncière',
-    quote: 'On a passé deux jours à expliquer comment on travaille. Quelques mois plus tard, je ne reviendrai pas à mon Excel.',
-    result: 'Suivi multi-opérations consolidé',
-  },
-  {
     secteur: 'Syndic de copropriété',
     quote: 'Avant, je rentrais chez moi tard, la tête pleine. Aujourd\'hui je rentre plus tôt, et mieux fait.',
     result: 'Le soir est rendu à la famille',
-  },
-  {
-    secteur: 'Gestion de patrimoine',
-    quote: 'Les analyses sont devenues des supports clients à la charte du cabinet. En un clic, je présente.',
-    result: 'La présentation est prête quand le client arrive',
   },
 ];
 ---
@@ -88,10 +54,8 @@ const temoignages = [
       </a>
       <nav class="nav nav-desktop" aria-label="Navigation principale">
         <ul>
-          <li><a href="#pourquoi-maintenant">Pourquoi maintenant</a></li>
-          <li><a href="#construit">Ce qu'on construit</a></li>
-          <li><a href="#methode">Méthode</a></li>
-          <li><a href="#terrain">Notre terrain</a></li>
+          <li><a href="#terrain">On vous comprend</a></li>
+          <li><a href="#construit">Le produit</a></li>
           <li><a href="#preuve">Réalisations</a></li>
         </ul>
       </nav>
@@ -376,125 +340,6 @@ const temoignages = [
     </div>
   </section>
 
-  <!-- =========================================
-       SECTION 1 — POURQUOI MAINTENANT (courbe d'adoption)
-       ========================================= -->
-  <section id="pourquoi-maintenant" class="section section--soft" aria-labelledby="adoption-title">
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow reveal">Pourquoi maintenant</p>
-        <h2 id="adoption-title" class="reveal section-h2">
-          Tout le monde parle d'IA.<br>
-          <em>Très peu l'installent vraiment.</em>
-        </h2>
-        <p class="reveal section-sub">
-          La courbe d'adoption est lancée. Pas en panique. À votre rythme.
-          Mais sachez où vous êtes — et où sont les autres.
-        </p>
-      </div>
-
-      <!-- Courbe d'adoption SVG (S-curve Rogers) -->
-      <div class="adoption-curve reveal">
-        <svg viewBox="0 0 1000 380" preserveAspectRatio="xMidYMid meet" class="adoption-svg" role="img" aria-label="Courbe d'adoption de l'IA dans les TPE-PME 2024-2027">
-
-          <!-- Grille discrète -->
-          <line x1="60" y1="320" x2="960" y2="320" stroke="currentColor" stroke-opacity="0.12" stroke-dasharray="2 4"/>
-          <line x1="60" y1="200" x2="960" y2="200" stroke="currentColor" stroke-opacity="0.06" stroke-dasharray="2 4"/>
-          <line x1="60" y1="80"  x2="960" y2="80"  stroke="currentColor" stroke-opacity="0.06" stroke-dasharray="2 4"/>
-
-          <!-- Aire sous la courbe (subtile) -->
-          <path d="M 60,320 C 220,318 320,310 420,240 C 520,170 640,90 800,70 C 880,62 940,60 960,60 L 960,320 Z"
-                fill="url(#curveGradient)" opacity="0.18"/>
-          <defs>
-            <linearGradient id="curveGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#C75F2D" stop-opacity="0.5"/>
-              <stop offset="100%" stop-color="#C75F2D" stop-opacity="0"/>
-            </linearGradient>
-          </defs>
-
-          <!-- Courbe en S -->
-          <path class="adoption-path"
-                d="M 60,320 C 220,318 320,310 420,240 C 520,170 640,90 800,70 C 880,62 940,60 960,60"
-                fill="none" stroke="#C75F2D" stroke-width="3"
-                stroke-linecap="round"/>
-
-          <!-- Dot 1 — 2024 Pionniers -->
-          <g transform="translate(160, 316)" class="ap-svg-g">
-            <circle r="9" fill="#6B8E54"/>
-            <circle r="13" fill="none" stroke="#6B8E54" stroke-opacity="0.3" stroke-width="2"/>
-          </g>
-
-          <!-- Dot 2 — 2025-2026 Vous êtes ici (mimosa pulse) -->
-          <g transform="translate(420, 240)" class="ap-svg-g ap-svg-here">
-            <circle r="11" fill="#FEF86C"/>
-            <circle r="11" fill="#FEF86C" opacity="0.5">
-              <animate attributeName="r" from="11" to="26" dur="2s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" from="0.5" to="0" dur="2s" repeatCount="indefinite"/>
-            </circle>
-          </g>
-
-          <!-- Dot 3 — 2027 Standard -->
-          <g transform="translate(700, 90)" class="ap-svg-g">
-            <circle r="9" fill="#8A8068"/>
-          </g>
-
-          <!-- Dot 4 — Retardataires -->
-          <g transform="translate(900, 65)" class="ap-svg-g">
-            <circle r="9" fill="#8A8068" opacity="0.55"/>
-          </g>
-
-          <!-- Labels -->
-          <g class="ap-label">
-            <text x="160" y="350" text-anchor="middle" class="ap-year-txt">2024</text>
-            <text x="160" y="370" text-anchor="middle" class="ap-state-txt">Pionniers</text>
-          </g>
-          <g class="ap-label ap-label--here">
-            <text x="420" y="220" text-anchor="middle" class="ap-year-txt ap-year-here">2025–2026</text>
-            <text x="420" y="205" text-anchor="middle" class="ap-state-txt ap-state-here">Différenciation</text>
-            <text x="420" y="270" text-anchor="middle" class="ap-here-txt">↑ Vous êtes ici</text>
-          </g>
-          <g class="ap-label">
-            <text x="700" y="55" text-anchor="middle" class="ap-year-txt">2027</text>
-            <text x="700" y="40" text-anchor="middle" class="ap-state-txt">Standard</text>
-          </g>
-          <g class="ap-label">
-            <text x="900" y="40" text-anchor="middle" class="ap-year-txt">Après</text>
-            <text x="900" y="25" text-anchor="middle" class="ap-state-txt">Retardataires</text>
-          </g>
-
-          <!-- Axe X : adoption en % -->
-          <text x="60"  y="345" class="ap-axis">2 %</text>
-          <text x="960" y="345" text-anchor="end" class="ap-axis">~ 100 %</text>
-        </svg>
-
-        <!-- Bénéfices/coûts sous la courbe -->
-        <div class="adoption-meta">
-          <div class="adoption-cell adoption-cell--pioneer">
-            <span class="ac-tag">2024</span>
-            <p>Avantage concurrentiel pris.</p>
-          </div>
-          <div class="adoption-cell adoption-cell--here">
-            <span class="ac-tag ac-tag--here">2025–2026 · ici</span>
-            <p>Le marché est encore ouvert.</p>
-          </div>
-          <div class="adoption-cell adoption-cell--std">
-            <span class="ac-tag">2027</span>
-            <p>Le coût d'entrée devient élevé.</p>
-          </div>
-          <div class="adoption-cell adoption-cell--late">
-            <span class="ac-tag">Après</span>
-            <p>Prix de l'attente.</p>
-          </div>
-        </div>
-      </div>
-
-      <p class="reveal adoption-cta">
-        <a href="#contact" class="link-arrow">
-          Bouger pendant que la courbe monte <Icon name="arrow-right" size={16} class="arrow" />
-        </a>
-      </p>
-    </div>
-  </section>
 
 
   <!-- =========================================
@@ -511,65 +356,44 @@ const temoignages = [
         <div class="pilier reveal">
           <div class="pilier-icon"><Icon name="monitor" size={28} strokeWidth={1.5} /></div>
           <h3 class="pilier-h">L'écran</h3>
-          <p class="pilier-sub">Trésorerie, équipes, clients, projets, communication.</p>
-          <p class="pilier-body">Toutes vos données métier au même endroit, en temps réel. Vous regardez. Vous savez. Vous décidez. Le matin, en 2 minutes.</p>
+          <p class="pilier-sub">Tout votre métier, au même endroit, en temps réel.</p>
         </div>
         <div class="pilier reveal">
           <div class="pilier-icon"><Icon name="sparkles" size={28} strokeWidth={1.5} /></div>
           <h3 class="pilier-h">La couche IA</h3>
-          <p class="pilier-sub">Ce qu'aucun logiciel acheté ne sait faire.</p>
-          <p class="pilier-body">L'IA croise vos données, anticipe les frictions, rédige vos brouillons, trie vos mails. Sur <em>votre</em> métier, à <em>votre</em> ton, dans <em>votre</em> contexte.</p>
+          <p class="pilier-sub">Elle trie, rédige, anticipe — à votre ton.</p>
         </div>
         <div class="pilier reveal">
           <div class="pilier-icon"><Icon name="shield" size={28} strokeWidth={1.5} /></div>
           <h3 class="pilier-h">La souveraineté</h3>
-          <p class="pilier-sub">À <em>votre</em> nom. <em>Vous</em> décidez.</p>
-          <p class="pilier-body">Souverain européen par défaut (Mistral, Scaleway, n8n auto-hébergé) — ou un autre modèle si vous préférez. Vos données restent à vous, votre outil reste à vous. Rien ne se loue, rien ne triple ses tarifs du jour au lendemain.</p>
+          <p class="pilier-sub">À votre nom. Vous décidez de tout.</p>
         </div>
       </div>
+      <p class="reveal piliers-link">
+        <a href="/produit/" class="link-arrow-on-accent">Voir le produit en détail <Icon name="arrow-right" size={16} class="arrow" /></a>
+      </p>
     </div>
   </section>
 
   <!-- =========================================
-       SECTION 4 — LA MÉTHODE
+       SECTION 4 — LA MÉTHODE (mini-timeline ultra-compressée)
        ========================================= -->
-  <section id="methode" class="section" aria-labelledby="methode-title">
+  <section id="methode" class="section section--soft" aria-labelledby="methode-title">
     <div class="container is-default">
       <p class="eyebrow reveal">La méthode</p>
       <h2 id="methode-title" class="reveal section-h2">
         Quatre temps. Sans bruit. Sans dépendance.
       </h2>
 
-      <ol class="steps">
-        <li class="step reveal">
-          <span class="step-n">01</span>
-          <div>
-            <h3 class="step-h">Audit <span class="step-duree">1 à 2 jours</span></h3>
-            <p>Immersion sous NDA. On regarde comment vous travaillez <em>vraiment</em> — pas une moyenne sectorielle. Vous repartez avec un rapport actionnable. Vous pouvez vous arrêter là.</p>
-          </div>
-        </li>
-        <li class="step reveal">
-          <span class="step-n">02</span>
-          <div>
-            <h3 class="step-h">Structuration <span class="step-duree">1 à 3 semaines</span></h3>
-            <p>On identifie les trois à cinq points où l'IA change tout dans votre boîte. Plan chiffré, daté, validable.</p>
-          </div>
-        </li>
-        <li class="step reveal">
-          <span class="step-n">03</span>
-          <div>
-            <h3 class="step-h">Construction <span class="step-duree">3 à 12 semaines</span></h3>
-            <p>On connecte <em>vos</em> sources, on construit <em>votre</em> écran avec <em>vos</em> indicateurs. Pas de boîte noire. Pas un outil qu'on vous loue.</p>
-          </div>
-        </li>
-        <li class="step reveal">
-          <span class="step-n">04</span>
-          <div>
-            <h3 class="step-h">Mise en route &amp; suivi <span class="step-duree">3 mois à l'infini</span></h3>
-            <p>Formation des équipes sur site. Support réactif. Évolutions au rythme de l'IA. Vous devenez autonomes, pas dépendants.</p>
-          </div>
-        </li>
+      <ol class="steps-mini reveal">
+        <li><span class="sm-n">01</span> <span class="sm-h">Audit</span> <span class="sm-d">1–2 j · sous NDA</span></li>
+        <li><span class="sm-n">02</span> <span class="sm-h">Structuration</span> <span class="sm-d">1–3 sem · plan chiffré</span></li>
+        <li><span class="sm-n">03</span> <span class="sm-h">Construction</span> <span class="sm-d">3–12 sem · votre écran, vos sources</span></li>
+        <li><span class="sm-n">04</span> <span class="sm-h">Suivi</span> <span class="sm-d">3 mois → ∞ · vous gardez la main</span></li>
       </ol>
+      <p class="reveal methode-link">
+        <a href="/methode/" class="link-arrow">Voir la méthode en détail <Icon name="arrow-right" size={16} class="arrow" /></a>
+      </p>
     </div>
   </section>
 
@@ -579,16 +403,14 @@ const temoignages = [
   <section id="terrain" class="section section--soft" aria-labelledby="terrain-title">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow reveal">Les heures qu'on vous rend</p>
+        <p class="eyebrow reveal">On vous facilite la tâche</p>
         <h2 id="terrain-title" class="reveal section-h2">
-          Les heures que vous passez<br>
-          dans la paperasse, <em>vous ne les passez pas</em><br>
-          avec vos clients.
+          Diriger une TPE-PME,<br>
+          <em>ce n'est pas chose facile.</em>
         </h2>
         <p class="reveal section-sub">
-          Voici les tâches qui prennent du temps, qui n'apportent rien,
-          et que 9·58 prend en charge. Le temps que vous récupérez,
-          vous le rendez à votre métier — votre commercial, votre équipe, votre vraie vie.
+          Entre la paperasse, les chantiers, les clients, l'équipe et les imprévus —
+          vos journées partent en dix directions. <strong>9·58 vous facilite la tâche.</strong>
         </p>
       </div>
 
@@ -600,7 +422,6 @@ const temoignages = [
               <span class="terrain-secteur">{t.secteur}</span>
             </div>
             <h3 class="terrain-titre">{t.titre}</h3>
-            <p class="terrain-body">{t.body}</p>
             <div class="terrain-gain">
               <span class="terrain-gain-arrow"><Icon name="arrow-right" size={14} strokeWidth={2} /></span>
               <span class="terrain-gain-label">{t.gain}</span>
@@ -1711,7 +1532,82 @@ const temoignages = [
     .dorment-grid { grid-template-columns: 1fr; gap: var(--s-7); }
   }
 
-  /* ============ STEPS (méthode) ============ */
+  /* ============ STEPS MINI (méthode compressée) ============ */
+  .steps-mini {
+    list-style: none;
+    padding: 0;
+    margin: var(--s-6) 0 var(--s-5) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    max-width: 720px;
+  }
+  .steps-mini li {
+    display: grid;
+    grid-template-columns: 36px 1fr auto;
+    gap: var(--s-4);
+    align-items: baseline;
+    padding: var(--s-3) 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .steps-mini li:last-child { border-bottom: 0; }
+  .sm-n {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--cuivre);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .sm-h {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--step-2);
+    color: var(--ivoire);
+    letter-spacing: -0.015em;
+  }
+  .sm-d {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    color: var(--ink-3);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-align: right;
+  }
+  .methode-link {
+    margin-top: var(--s-3);
+  }
+  .piliers-link {
+    margin-top: var(--s-6);
+    text-align: center;
+  }
+  .link-arrow-on-accent {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    color: var(--ivoire);
+    font-weight: 600;
+    border-bottom: 1px solid var(--ivoire);
+  }
+  .link-arrow-on-accent:hover {
+    color: var(--bg);
+    background: var(--ivoire);
+    border-bottom-color: var(--ivoire);
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+  .link-arrow-on-accent .arrow { transition: transform var(--dur-1) var(--ease); }
+  .link-arrow-on-accent:hover .arrow { transform: translateX(3px); }
+
+  @media (max-width: 640px) {
+    .steps-mini li {
+      grid-template-columns: 30px 1fr;
+      grid-template-rows: auto auto;
+    }
+    .sm-d {
+      grid-column: 2;
+      text-align: left;
+    }
+  }
+
+  /* ============ STEPS (méthode — legacy, conservé) ============ */
   .steps {
     list-style: none;
     padding: 0;
