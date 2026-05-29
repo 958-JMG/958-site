@@ -1,43 +1,51 @@
 ---
 /**
- * LogoMark — Le vrai logo 9·58 (inline SVG, recoloré via CSS vars).
+ * LogoMark — Le vrai logo 9·58 reproduit en SVG inline depuis LOGO958.jpg
+ * (référence : /Users/jmg/Desktop/Cockpit 958/LOGO958.jpg)
+ *
+ * Structure :
+ *   - Conteneur rounded rect (par défaut cuivre via currentColor)
+ *   - 9 stylisé : donut + tige
+ *   - Interpunct (carré horizontal)
+ *   - 8 stylisé : cercle avec œil central + ouverture latérale gauche
+ *     (l'effet "G inversé" caractéristique du logo)
+ *
+ * Couleurs paramétrables :
+ *   --mark-bg : fond du rounded rect (par défaut noir #0A0A0A)
+ *   --mark-fg : chiffres "9·8" (par défaut ivoire #F4ECDC)
+ *   border (via color CSS) : couleur du conteneur (par défaut cuivre)
  *
  * Usage :
- *   <LogoMark />                              (cuivre / ivoire par défaut)
- *   <LogoMark height={48} />                  (taille custom)
- *   <LogoMark bg="var(--bg)" fg="var(--cuivre)" /> (couleurs custom)
- *
- * Le SVG existant utilise --mark-bg (rect fond) et --mark-fg (chiffres).
- * On les override via inline style ou via class CSS.
+ *   <LogoMark />                                      (défaut : container cuivre, intérieur noir, chiffres ivoire)
+ *   <LogoMark height={48} />
+ *   <LogoMark bg="var(--bg)" fg="var(--ivoire)" />    (fond canvas dark + chiffres ivoire)
+ *   <LogoMark bg="var(--cuivre)" fg="var(--ivoire)" border="var(--cuivre)" />
  */
 interface Props {
   height?: number;
-  /** Fond du badge (intérieur du rounded rect) */
-  bg?: string;
-  /** Couleur des chiffres "9·8" */
-  fg?: string;
-  /** Couleur du conteneur extérieur (rect arrondi) — currentColor par défaut */
-  border?: string;
+  bg?: string;       /* fond du rect intérieur */
+  fg?: string;       /* couleur des chiffres */
+  border?: string;   /* couleur du rounded rect conteneur */
   class?: string;
   title?: string;
 }
 
 const {
   height = 36,
-  bg = 'var(--bg)',
-  fg = 'var(--cuivre)',
+  bg = '#0A0A0A',
+  fg = 'var(--ivoire)',
   border = 'var(--cuivre)',
   class: className = '',
   title = '9·58 — Neuf Cinquante Huit',
 } = Astro.props;
 
-// Ratio viewBox 200×300 → 2:3
-const width = Math.round((height * 200) / 300);
+// Ratio viewBox 200×250 (~5:6 vertical, fidèle au logo officiel)
+const width = Math.round((height * 200) / 250);
 ---
 
 <svg
   xmlns="http://www.w3.org/2000/svg"
-  viewBox="0 0 200 300"
+  viewBox="0 0 200 250"
   width={width}
   height={height}
   class={`logo-mark ${className}`}
@@ -46,21 +54,30 @@ const width = Math.round((height * 200) / 300);
   aria-label={title}
 >
   <title>{title}</title>
-  {/* Container rounded rect — utilise currentColor (héritage style.color) */}
-  <rect width="200" height="300" rx="32" fill="currentColor"/>
 
-  {/* 9 (haut) : cercle + stem */}
-  <circle cx="110" cy="82" r="56" fill="var(--mark-bg)"/>
-  <circle cx="110" cy="82" r="56" fill="none" stroke="var(--mark-fg)" stroke-width="28"/>
-  <circle cx="110" cy="82" r="28" fill="var(--mark-bg)"/>
-  <rect x="88" y="110" width="44" height="60" fill="var(--mark-fg)"/>
+  {/* Conteneur rounded rect (utilise currentColor depuis style.color) */}
+  <rect width="200" height="250" rx="32" ry="32" fill="currentColor"/>
 
-  {/* · (interpunct) */}
-  <rect x="40" y="136" width="24" height="24" fill="var(--mark-fg)"/>
+  {/* Intérieur noir (le badge) */}
+  <rect x="6" y="6" width="188" height="238" rx="28" ry="28" fill="var(--mark-bg)"/>
 
-  {/* 8 (bas) : cercle ouvert */}
-  <circle cx="110" cy="222" r="56" fill="var(--mark-fg)"/>
-  <circle cx="110" cy="222" r="28" fill="var(--mark-bg)"/>
-  <rect x="138" y="200" width="62" height="44" fill="var(--mark-bg)"/>
-  <circle cx="145" cy="250" r="20" fill="var(--mark-bg)"/>
+  {/* ============ 9 (haut) — donut + tige ============ */}
+  {/* Cercle extérieur blanc */}
+  <circle cx="100" cy="78" r="46" fill="var(--mark-fg)"/>
+  {/* Œil noir central */}
+  <circle cx="100" cy="78" r="20" fill="var(--mark-bg)"/>
+  {/* Tige descendante */}
+  <rect x="78" y="82" width="44" height="50" fill="var(--mark-fg)"/>
+
+  {/* ============ · Interpunct (carré horizontal à gauche du centre) ============ */}
+  <rect x="36" y="120" width="32" height="12" rx="2" fill="var(--mark-fg)"/>
+
+  {/* ============ 8 (bas) — cercle avec œil + ouverture latérale gauche ============ */}
+  {/* Cercle extérieur blanc */}
+  <circle cx="100" cy="172" r="46" fill="var(--mark-fg)"/>
+  {/* Œil noir central */}
+  <circle cx="100" cy="172" r="20" fill="var(--mark-bg)"/>
+  {/* Fente latérale gauche : un rectangle noir qui relie le bord gauche
+       du cercle au trou central, créant l'effet "G inversé" du logo */}
+  <rect x="54" y="166" width="46" height="12" fill="var(--mark-bg)"/>
 </svg>
