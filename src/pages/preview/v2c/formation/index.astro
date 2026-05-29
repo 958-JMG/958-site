@@ -59,18 +59,52 @@ const temps = [
 ];
 
 const programmes = [
-  { code: 'F-01', titre: 'IA pour dirigeants', duree: '1 jour', pour: 'DG, COMEX, fondateurs',
+  { code: 'F-INTRO', icon: 'sparkles', niveau: 'Découverte', titre: 'Découverte intégrée digitale — Niveau 1', duree: '1 jour · inter ou intra',
+    pour: 'Tous publics · première marche',
+    livre: "Comprendre l'IA générative concrètement. Premiers prompts utiles, premiers outils, premiers réflexes. Le point de départ — pour celles et ceux qui veulent décoller propre.",
+    url: 'https://formation.958.fr/f/decouverte-integree-digitale-niveau-1' },
+  { code: 'F-00', icon: 'users', niveau: 'Accompagnement', titre: 'Accompagnement IA du dirigeant', duree: '6 mois · bi-mensuel',
+    pour: 'DG seul ou avec son équipe rapprochée',
+    livre: "Conception de votre assistant IA autonome. Refonte des process clés où l'IA change tout. Présent derrière vos sessions, je connais vos équipes — j'ajuste avec vous." },
+  { code: 'F-01', icon: 'briefcase', niveau: 'Stratégique', titre: 'IA pour dirigeants', duree: '1 jour',
+    pour: 'DG, COMEX, fondateurs',
     livre: "Cadre de décision, grille de souveraineté, cartographie des outils pertinents pour votre secteur." },
-  { code: 'F-00', titre: 'Accompagnement IA du dirigeant', duree: '6 mois · bi-mensuel', pour: 'DG seul ou avec son équipe rapprochée',
-    livre: "Conception de votre assistant IA autonome. Refonte des process clés où l'IA change tout. Pas du coaching business — du concret IA appliqué à votre boîte.", featured: true },
-  { code: 'F-02', titre: 'IA commerciale appliquée', duree: '2 jours', pour: 'Équipes sales · ADV',
+  { code: 'F-02', icon: 'phone', niveau: 'Métier', titre: 'IA commerciale appliquée', duree: '2 jours',
+    pour: 'Équipes sales · ADV',
     livre: "Workflow complet prospection → proposition → relance. 12 prompts métier validés et signés." },
-  { code: 'F-03', titre: 'Automatisation back-office', duree: '3 jours', pour: 'Ops · assistants',
+  { code: 'F-03', icon: 'mail', niveau: 'Métier', titre: 'Automatisation back-office', duree: '3 jours',
+    pour: 'Ops · assistants',
     livre: "Chaîne de traitement mails, documents, extractions. n8n auto-hébergé. Zéro dépendance US." },
-  { code: 'F-04', titre: 'IA en métier réglementé', duree: '2 jours', pour: 'CGP · notaires · juristes',
+  { code: 'F-04', icon: 'shield', niveau: 'Réglementé', titre: 'IA en métier réglementé', duree: '2 jours',
+    pour: 'CGP · notaires · juristes',
     livre: "Cadre RGPD, modèles EU, traçabilité, validation humaine. Ce qui sort est défendable." },
-  { code: 'F-05', titre: 'Cockpit en équipe', duree: '5 jours', pour: 'Équipes produit · dev · ops',
+  { code: 'F-05', icon: 'monitor', niveau: 'Sur-mesure', titre: 'Cockpit en équipe', duree: '5 jours',
+    pour: 'Équipes produit · dev · ops',
     livre: "Conception et livraison d'un cockpit interne sur votre cas. L'équipe le maintient ensuite." },
+];
+
+// Témoignages — depuis les 6 réalisations de la home v2c
+const temoignages = [
+  {
+    quote: "Nos 9 développeurs sont opérationnels dès le lendemain. Le cadre prompt que nous avons écrit ensemble, on l'utilise encore chaque semaine.",
+    role: 'DSI',
+    context: 'éditeur SaaS B2B · 120 collaborateurs',
+  },
+  {
+    quote: "Nos commerciaux dictent leurs visites sur le terrain. Le support de présentation est prêt en minutes, plus en jours. L'équipe vend.",
+    role: 'Directeur commercial',
+    context: 'groupe immobilier breton',
+  },
+  {
+    quote: "200 mails par jour, c'était impossible. Aujourd'hui l'IA trie, rédige les brouillons. On absorbe la croissance sans recruter.",
+    role: 'Gérant',
+    context: 'acteur régional du syndic',
+  },
+  {
+    quote: "On voulait l'IA mais on ne savait pas par où commencer. 1 journée chez nous, 9 développeurs autonomes le lendemain. La bibliothèque de prompts grandit chaque semaine.",
+    role: 'Directeur du développement',
+    context: "groupe d'aménageurs fonciers",
+  },
 ];
 
 const versus = [
@@ -139,9 +173,9 @@ const versus = [
         </a>
       </div>
       <ul class="hero-assurances reveal">
-        <li>Organisme de formation enregistré (NDA 11757585175)</li>
-        <li>Qualiopi prévu juin 2026</li>
-        <li>Accord de confidentialité</li>
+        <li>Centre de formation enregistré · NDA 11757585175</li>
+        <li>Qualiopi en cours · obtention juin 2026</li>
+        <li>Accord de confidentialité systématique</li>
       </ul>
     </div>
   </section>
@@ -177,7 +211,7 @@ const versus = [
         </p>
       </div>
 
-      <div class="accomp-grid accomp-grid--two">
+      <div class="accomp-grid">
         <article class="accomp-card reveal">
           <div class="accomp-icon"><Icon name="sparkles" size={26} strokeWidth={1.6} /></div>
           <span class="accomp-tag">Pilier 1</span>
@@ -195,7 +229,17 @@ const versus = [
           <p>
             <strong>Coller de l'IA sur un process ancien, c'est garder un mauvais process.</strong>
             On identifie ensemble les 3 à 5 process clés où l'IA change la nature du travail —
-            et on les réinvente. Vous gagnez une avance que vos concurrents ne rattraperont pas.
+            et on les réinvente.
+          </p>
+        </article>
+        <article class="accomp-card reveal">
+          <div class="accomp-icon"><Icon name="users" size={26} strokeWidth={1.6} /></div>
+          <span class="accomp-tag">Pilier 3</span>
+          <h3>Être <em>là</em> quand ça se joue.</h3>
+          <p>
+            Derrière votre caméra pendant que vous formez votre équipe. Présent en réunion.
+            Je connais chaque salarié, je sais ce qui passe, ce qui bof, ce qui non.
+            <strong>J'adapte la formation et le suivi à <em>chaque</em> personne.</strong>
           </p>
         </article>
       </div>
@@ -305,38 +349,54 @@ const versus = [
 
       <ul class="programmes-grid">
         {programmes.map((p) => (
-          <li class={`prog-card reveal ${p.featured ? 'prog-card--feat' : ''}`}>
+          <li class="prog-card reveal">
             <div class="prog-head">
-              <span class="prog-code">{p.code}</span>
+              <span class="prog-icon"><Icon name={p.icon} size={20} strokeWidth={1.7} /></span>
+              <span class="prog-niveau">{p.niveau}</span>
               <span class="prog-duree">{p.duree}</span>
             </div>
             <h3 class="prog-titre">{p.titre}</h3>
             <p class="prog-pour">{p.pour}</p>
             <p class="prog-livre">{p.livre}</p>
+            <div class="prog-footer">
+              <span class="prog-code">{p.code}</span>
+              {p.url
+                ? <a href={p.url} target="_blank" rel="noopener" class="prog-link">S'inscrire <Icon name="arrow-up-right" size={14} /></a>
+                : <a href="#contact" class="prog-link">Demander un devis <Icon name="arrow-right" size={14} /></a>}
+            </div>
           </li>
         ))}
       </ul>
 
       <p class="reveal prog-note">
-        Devis en 48 h · Prise en charge OPCO à étudier avec votre organisme
+        <strong>Devis en 48 h</strong> · NDA 11757585175 · Qualiopi obtention juin 2026 (la prise en charge OPCO sera possible après certification)
       </p>
     </div>
   </section>
 
-  <!-- QUOTE -->
-  <section class="section">
-    <div class="container is-default">
-      <figure class="quote-big reveal">
-        <blockquote>
-          « Nos 9 développeurs sont opérationnels dès le lendemain.
-          Le cadre prompt que nous avons écrit ensemble,
-          on l'utilise encore chaque semaine. »
-        </blockquote>
-        <figcaption>
-          <span class="quote-role">DSI</span>
-          <span class="quote-context">éditeur SaaS B2B · 120 collaborateurs</span>
-        </figcaption>
-      </figure>
+  <!-- TÉMOIGNAGES -->
+  <section class="section" aria-labelledby="temo-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="temo-title" class="reveal section-h2">
+          Ce qu'ils en disent.
+        </h2>
+        <p class="reveal section-sub">
+          Quatre voix, quatre secteurs, une même chose qui change : le quotidien.
+        </p>
+      </div>
+
+      <div class="temoignages-grid">
+        {temoignages.map((t) => (
+          <figure class="temoignage reveal">
+            <blockquote>« {t.quote} »</blockquote>
+            <figcaption>
+              <span class="quote-role">{t.role}</span>
+              <span class="quote-context">{t.context}</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -797,25 +857,37 @@ const versus = [
     display: flex;
     flex-direction: column;
     gap: var(--s-3);
-    transition: border-color var(--dur-2) var(--ease);
+    transition: border-color var(--dur-2) var(--ease),
+                transform var(--dur-2) var(--ease);
   }
-  .prog-card:hover { border-color: var(--cuivre); }
-  .prog-card--feat {
-    background: var(--cuivre-soft);
+  .prog-card:hover {
     border-color: var(--cuivre);
+    transform: translateY(-2px);
   }
   .prog-head {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: var(--s-3);
   }
-  .prog-code {
+  .prog-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--cuivre-soft);
+    color: var(--cuivre);
+    border-radius: var(--r-2);
+    flex-shrink: 0;
+  }
+  .prog-niveau {
     font-family: var(--font-mono);
     font-size: var(--step--2);
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     color: var(--cuivre);
     font-weight: 600;
+    flex: 1;
   }
   .prog-duree {
     font-family: var(--font-mono);
@@ -847,7 +919,33 @@ const versus = [
     max-width: none;
     padding-top: var(--s-3);
     border-top: 1px dashed var(--line);
+    flex: 1;
   }
+  .prog-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-3);
+    padding-top: var(--s-3);
+    border-top: 1px solid var(--line);
+  }
+  .prog-code {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    letter-spacing: 0.08em;
+    color: var(--ink-3);
+    font-weight: 600;
+  }
+  .prog-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--font-sans);
+    font-size: var(--step-0);
+    font-weight: 600;
+    color: var(--cuivre);
+  }
+  .prog-link:hover { color: var(--cuivre-hover); }
   .prog-note {
     margin-top: var(--s-7);
     text-align: center;
@@ -856,8 +954,54 @@ const versus = [
     color: var(--ink-3);
     letter-spacing: 0.04em;
     text-transform: uppercase;
+    max-width: 720px;
+    margin-inline: auto;
   }
+  .prog-note strong { color: var(--ivoire); }
   @media (max-width: 900px) { .programmes-grid { grid-template-columns: 1fr; } }
+
+  /* ============ TÉMOIGNAGES (multi) ============ */
+  .temoignages-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-5);
+    margin-top: var(--s-7);
+  }
+  .temoignage {
+    margin: 0;
+    padding: var(--s-6);
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: var(--r-3);
+    border-top: 2px solid var(--cuivre);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+  }
+  .temoignage blockquote {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--step-2);
+    line-height: 1.4;
+    color: var(--ivoire);
+    margin: 0;
+    max-width: none;
+    text-wrap: balance;
+  }
+  .temoignage figcaption {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding-top: var(--s-3);
+    border-top: 1px dashed var(--line);
+  }
+  .quote-role { color: var(--cuivre); font-weight: 600; }
+  .quote-context { color: var(--ink-3); }
+  @media (max-width: 720px) { .temoignages-grid { grid-template-columns: 1fr; } }
 
   /* ============ QUOTE BIG ============ */
   .quote-big {
