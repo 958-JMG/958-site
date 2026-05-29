@@ -445,15 +445,6 @@ const realisations = [
         <p class="reveal section-sub">6 projets. 6 transformations.</p>
       </div>
 
-      <div class="proofs-grid">
-        {proofs.map((p) => (
-          <div class="proof reveal">
-            <span class="proof-v" data-target={p.value} data-final={p.value}>{p.value}</span>
-            <span class="proof-l">{p.label}</span>
-          </div>
-        ))}
-      </div>
-
       <div class="reals-grid">
         {realisations.map((r) => (
           <article class="real-card reveal">
