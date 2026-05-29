@@ -1,6 +1,7 @@
 ---
 import V2bLayout from '../../../../layouts/V2bLayout.astro';
 import Icon from '../../../../components/v2/Icon.astro';
+import LogoMark from '../../../../components/v2/LogoMark.astro';
 
 // Publics — accompagnement dirigeant placé en premier
 const publics = [
@@ -126,7 +127,7 @@ const versus = [
   <header class="site-header" role="banner">
     <div class="container header-inner">
       <a href="/preview/v2c/" class="brand" aria-label="9·58, retour à l'accueil">
-        <span class="brand-mark">9·58</span>
+        <LogoMark height={38} />
         <span class="brand-tag">Neuf Cinquante Huit</span>
       </a>
       <nav class="nav nav-desktop" aria-label="Navigation principale">
@@ -427,8 +428,8 @@ const versus = [
   <!-- FOOTER mini -->
   <footer class="footer-mini section--dark" role="contentinfo">
     <div class="container footer-mini-inner">
-      <div>
-        <span class="brand-mark">9·58</span>
+      <div class="footer-brand">
+        <LogoMark height={32} />
         <span class="brand-tag">Neuf Cinquante Huit · Vannes &amp; Paris</span>
       </div>
       <ul class="footer-meta">
@@ -466,6 +467,13 @@ const versus = [
     color: var(--ivoire);
     text-decoration: none;
     gap: 3px;
+  }
+  .brand { display: inline-flex; align-items: center; gap: 12px; }
+  .footer-brand {
+    display: inline-flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    gap: 12px;
   }
   .brand-mark {
     font-family: var(--font-display);
