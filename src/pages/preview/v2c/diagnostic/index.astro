@@ -1,0 +1,421 @@
+---
+import V2bLayout from '../../../../layouts/V2bLayout.astro';
+import Icon from '../../../../components/v2/Icon.astro';
+---
+
+<V2bLayout
+  title="Demander un diagnostic — 9·58"
+  description="Un audit IA d'un jour, sous accord de confidentialité, sans engagement. Pour artisans, promoteurs, agences immobilières, syndics et TPE/PME qui veulent installer l'IA dans leur entreprise."
+>
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a href="/preview/v2c/" class="brand" aria-label="9·58, retour à l'accueil">
+        <span class="brand-mark">9·58</span>
+        <span class="brand-tag">Neuf Cinquante Huit</span>
+      </a>
+      <nav class="nav nav-desktop" aria-label="Navigation principale">
+        <ul>
+          <li><a href="/preview/v2c/#construit">Le produit</a></li>
+          <li><a href="/preview/v2c/formation/">Formation</a></li>
+          <li><a href="/preview/v2c/#preuve">Réalisations</a></li>
+        </ul>
+      </nav>
+      <a href="#form" class="btn btn--primary btn--sm header-cta">
+        Le formulaire
+        <Icon name="arrow-right" size={14} class="arrow" />
+      </a>
+    </div>
+  </header>
+
+  <section class="diag-section">
+    <div class="container diag-grid">
+      <!-- Colonne gauche : pitch -->
+      <div class="diag-pitch">
+        <p class="eyebrow reveal">Demander un diagnostic</p>
+        <h1 class="diag-h1 reveal">
+          Un audit.<br>
+          <em>Un jour.</em><br>
+          Sous accord<br>
+          de confidentialité.
+        </h1>
+        <p class="diag-lead reveal">
+          Je regarde votre contexte. Je vous dis honnêtement
+          ce que 9·58 peut faire pour vous — et ce qu'il ne peut pas.
+          <strong>Sans engagement pour la suite.</strong>
+        </p>
+
+        <ul class="diag-promesses reveal">
+          <li><Icon name="check" size={18} strokeWidth={2.5} /> Réponse sous 48 h</li>
+          <li><Icon name="check" size={18} strokeWidth={2.5} /> NDA signé avant tout échange détaillé</li>
+          <li><Icon name="check" size={18} strokeWidth={2.5} /> Rapport actionnable remis sous 5 j</li>
+          <li><Icon name="check" size={18} strokeWidth={2.5} /> Vous pouvez vous arrêter là</li>
+        </ul>
+
+        <blockquote class="diag-quote reveal">
+          « Un dirigeant formateur, 28 ans d'entrepreneuriat,
+          qui fait le travail lui-même. »
+        </blockquote>
+      </div>
+
+      <!-- Colonne droite : formulaire -->
+      <div id="form" class="diag-form-wrap reveal">
+        <form id="diagnostic-form" class="diag-form" novalidate aria-label="Formulaire de diagnostic">
+          <!-- Honeypot anti-bot -->
+          <div class="sr-only" aria-hidden="true">
+            <label for="website">Ne pas remplir</label>
+            <input type="text" name="website" id="website" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <div class="field">
+            <label for="nom">Prénom et nom <span aria-hidden="true">*</span></label>
+            <input type="text" id="nom" name="nom" required autocomplete="name" />
+          </div>
+
+          <div class="field">
+            <label for="entreprise">Entreprise <span aria-hidden="true">*</span></label>
+            <input type="text" id="entreprise" name="entreprise" required autocomplete="organization" />
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="email">Email pro <span aria-hidden="true">*</span></label>
+              <input type="email" id="email" name="email" required autocomplete="email" />
+            </div>
+            <div class="field">
+              <label for="telephone">Téléphone <span class="optional">(optionnel)</span></label>
+              <input type="tel" id="telephone" name="telephone" autocomplete="tel" />
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="secteur">Secteur <span aria-hidden="true">*</span></label>
+              <select id="secteur" name="secteur" required>
+                <option value="">Choisir…</option>
+                <option>Artisan BTP</option>
+                <option>Architecte</option>
+                <option>Promoteur immobilier</option>
+                <option>Agence immobilière</option>
+                <option>Syndic / gestion locative</option>
+                <option>Expertise-comptable</option>
+                <option>Gestion de patrimoine</option>
+                <option>Conseil</option>
+                <option>Services</option>
+                <option>Industrie</option>
+                <option>Autre</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="taille">Taille <span aria-hidden="true">*</span></label>
+              <select id="taille" name="taille" required>
+                <option value="">Choisir…</option>
+                <option>1 à 5</option>
+                <option>6 à 20</option>
+                <option>21 à 50</option>
+                <option>51 à 200</option>
+                <option>200+</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="contexte">En une phrase : où en êtes-vous avec l'IA ? <span aria-hidden="true">*</span></label>
+            <textarea id="contexte" name="contexte" rows="4" required placeholder="Ex : on a essayé ChatGPT en perso, mais rien d'installé. On voudrait commencer par notre tréso et nos mails."></textarea>
+          </div>
+
+          <input type="hidden" name="source_page" value="preview/v2c/diagnostic" />
+          <input type="hidden" name="type" value="diagnostic" />
+
+          <button type="submit" class="btn btn--primary btn--lg submit" id="submit-btn">
+            <span>Envoyer ma demande</span>
+            <Icon name="arrow-right" size={18} class="arrow" />
+          </button>
+
+          <p class="form-legal">
+            Données hébergées en Europe. Utilisées uniquement pour vous recontacter.
+            Aucun partage. <a href="/mentions-legales/">Mentions légales</a>.
+          </p>
+
+          <div id="form-status" role="alert" aria-live="polite" class="form-status"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer-mini section--dark" role="contentinfo">
+    <div class="container footer-mini-inner">
+      <div>
+        <span class="brand-mark">9·58</span>
+        <span class="brand-tag">Neuf Cinquante Huit · Vannes &amp; Paris</span>
+      </div>
+      <ul class="footer-meta">
+        <li><a href="mailto:jmg@958.fr">jmg@958.fr</a></li>
+        <li><a href="https://www.linkedin.com/in/jean-marc-geuring/" rel="me noopener" target="_blank">LinkedIn</a></li>
+        <li><a href="/mentions-legales/">Mentions légales</a></li>
+      </ul>
+      <span class="footer-year">© 2026</span>
+    </div>
+  </footer>
+</V2bLayout>
+
+<script>
+  function bindForm() {
+    const form = document.getElementById('diagnostic-form') as HTMLFormElement | null;
+    if (!form || (form as any).dataset.bound === '1') return;
+    (form as any).dataset.bound = '1';
+
+    const btn = document.getElementById('submit-btn') as HTMLButtonElement | null;
+    const status = document.getElementById('form-status');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!btn || !status) return;
+
+      const fd = new FormData(form);
+      const data = Object.fromEntries(fd) as Record<string, string>;
+      if (data.website) return; // honeypot
+
+      btn.disabled = true;
+      const original = btn.innerHTML;
+      btn.innerHTML = '<span>Envoi en cours…</span>';
+      status.textContent = '';
+      status.classList.remove('is-error');
+
+      const payload = {
+        ...data,
+        timestamp: new Date().toISOString(),
+        source: 'site-958-v2c',
+        userAgent: navigator.userAgent,
+        referrer: document.referrer || null,
+      };
+
+      try {
+        const r = await fetch('/api/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        if (!r.ok) {
+          const body = await r.text().catch(() => '');
+          throw new Error(`HTTP ${r.status}${body ? ' · ' + body.slice(0, 80) : ''}`);
+        }
+        window.location.href = '/preview/v2c/merci/';
+      } catch (err: any) {
+        status.textContent = `Erreur d'envoi (${err?.message || 'réseau'}). Écrivez-nous à jmg@958.fr.`;
+        status.classList.add('is-error');
+        btn.disabled = false;
+        btn.innerHTML = original;
+      }
+    });
+  }
+  bindForm();
+  document.addEventListener('astro:page-load', bindForm);
+</script>
+
+<style>
+  /* ============ HEADER ============ */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(11, 11, 10, 0.78);
+    backdrop-filter: saturate(180%) blur(12px);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .header-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    height: var(--header-h); gap: var(--s-5);
+  }
+  .brand {
+    display: inline-flex; flex-direction: column; line-height: 1;
+    color: var(--ivoire); text-decoration: none; gap: 3px;
+  }
+  .brand-mark {
+    font-family: var(--font-display); font-weight: 500; font-size: 1.5rem;
+    letter-spacing: -0.02em; color: var(--cuivre);
+  }
+  .brand-tag {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-3);
+  }
+  .nav-desktop ul {
+    display: flex; gap: var(--s-5); list-style: none; padding: 0; margin: 0;
+  }
+  .nav-desktop a {
+    font-size: var(--step-0); font-weight: 500; color: var(--ink-2);
+    padding: 6px 2px; border-bottom: 1px solid transparent;
+    transition: color var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease);
+  }
+  .nav-desktop a:hover { color: var(--cuivre); border-bottom-color: var(--cuivre); }
+  @media (max-width: 900px) { .nav-desktop, .header-cta { display: none; } }
+
+  /* ============ DIAGNOSTIC ============ */
+  .diag-section { padding-block: var(--s-10) var(--s-9); }
+  .diag-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-9);
+    align-items: start;
+  }
+  @media (max-width: 900px) { .diag-grid { grid-template-columns: 1fr; gap: var(--s-7); } }
+
+  .diag-pitch { display: flex; flex-direction: column; gap: var(--s-5); }
+  .diag-h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 4vw + 0.5rem, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: var(--tr-tighter);
+    color: var(--ivoire);
+    font-weight: 400;
+    margin: 0;
+    max-width: 18ch;
+  }
+  .diag-h1 em { color: var(--cuivre); font-style: italic; }
+  .diag-lead {
+    font-size: var(--step-2); line-height: var(--lh-loose);
+    color: var(--ink-2); margin: 0; max-width: 48ch;
+  }
+  .diag-lead strong { color: var(--ivoire); font-weight: 600; }
+
+  .diag-promesses {
+    list-style: none; padding: 0; margin: var(--s-4) 0 0 0;
+    display: flex; flex-direction: column; gap: var(--s-3);
+  }
+  .diag-promesses li {
+    display: flex; align-items: center; gap: 10px;
+    font-size: var(--step-1); color: var(--ivoire-2);
+  }
+  .diag-promesses li svg { color: var(--cuivre); flex-shrink: 0; }
+
+  .diag-quote {
+    font-family: var(--font-display); font-style: italic;
+    font-size: var(--step-2); line-height: 1.4;
+    color: var(--ivoire); margin: var(--s-5) 0 0 0;
+    padding-left: var(--s-4); border-left: 2px solid var(--cuivre);
+    max-width: 40ch;
+  }
+
+  /* ============ FORM ============ */
+  .diag-form-wrap {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: var(--r-3);
+    padding: var(--s-6);
+    position: sticky;
+    top: calc(var(--header-h) + var(--s-4));
+  }
+  @media (max-width: 900px) { .diag-form-wrap { position: static; padding: var(--s-5); } }
+
+  .diag-form { display: flex; flex-direction: column; gap: var(--s-4); }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field-row {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: var(--s-4);
+  }
+  @media (max-width: 540px) { .field-row { grid-template-columns: 1fr; } }
+
+  .field label {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .field label span[aria-hidden="true"] { color: var(--cuivre); }
+  .field .optional {
+    font-family: var(--font-sans);
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 400;
+    color: var(--ink-3);
+  }
+
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--line-2);
+    border-radius: var(--r-2);
+    color: var(--ivoire);
+    padding: 12px 14px;
+    font-family: var(--font-sans);
+    font-size: var(--step-1);
+    line-height: 1.4;
+    transition: border-color var(--dur-1) var(--ease),
+                box-shadow var(--dur-1) var(--ease);
+    min-height: 48px;
+  }
+  .field textarea {
+    resize: vertical;
+    min-height: 90px;
+    font-family: var(--font-sans);
+  }
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    outline: none;
+    border-color: var(--cuivre);
+    box-shadow: 0 0 0 3px var(--cuivre-soft);
+  }
+  .field input::placeholder,
+  .field textarea::placeholder { color: var(--ink-3); opacity: 0.7; }
+
+  .submit { margin-top: var(--s-2); justify-content: center; }
+  .submit:disabled { opacity: 0.65; cursor: wait; }
+
+  .form-legal {
+    font-size: var(--step--1);
+    color: var(--ink-3);
+    line-height: var(--lh-normal);
+    margin: 0;
+    max-width: none;
+  }
+  .form-legal a { color: var(--ink-2); text-decoration: underline; text-underline-offset: 3px; }
+  .form-legal a:hover { color: var(--cuivre); }
+
+  .form-status:not(:empty) {
+    padding: var(--s-3) var(--s-4);
+    background: var(--bg-3);
+    border: 1px solid var(--line-2);
+    border-radius: var(--r-2);
+    font-size: var(--step-0);
+    color: var(--ivoire-2);
+  }
+  .form-status.is-error {
+    background: rgba(208, 79, 60, 0.15);
+    border-color: rgba(244, 150, 133, 0.5);
+    color: #f49685;
+  }
+
+  /* ============ FOOTER ============ */
+  .footer-mini {
+    padding-block: var(--s-6);
+    border-top: 1px solid var(--line);
+    background: var(--bg-2);
+  }
+  .footer-mini-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: var(--s-5); flex-wrap: wrap;
+  }
+  .footer-mini-inner > div:first-child {
+    display: inline-flex; flex-direction: column; gap: 3px; line-height: 1;
+  }
+  .footer-meta {
+    display: flex; gap: var(--s-5); list-style: none; padding: 0; margin: 0;
+    font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: 0.04em;
+  }
+  .footer-meta a {
+    color: var(--ink-2); text-transform: uppercase;
+    padding: 8px 4px; display: inline-block; min-height: 44px; line-height: 28px;
+  }
+  .footer-meta a:hover { color: var(--cuivre); }
+  .footer-year {
+    font-family: var(--font-mono); font-size: var(--step--2);
+    color: var(--ink-3); letter-spacing: 0.06em;
+  }
+</style>

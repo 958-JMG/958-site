@@ -1,0 +1,167 @@
+---
+import V2bLayout from '../../../../layouts/V2bLayout.astro';
+import Icon from '../../../../components/v2/Icon.astro';
+---
+
+<V2bLayout
+  title="Merci — votre demande est arrivée"
+  description="Votre demande a bien été reçue. Je reviens vers vous sous 48 heures."
+>
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a href="/preview/v2c/" class="brand" aria-label="9·58, retour à l'accueil">
+        <span class="brand-mark">9·58</span>
+        <span class="brand-tag">Neuf Cinquante Huit</span>
+      </a>
+    </div>
+  </header>
+
+  <section class="merci-section">
+    <div class="container is-default merci-inner">
+      <span class="merci-check" aria-hidden="true">
+        <Icon name="check" size={48} strokeWidth={2.5} />
+      </span>
+
+      <p class="eyebrow">Demande reçue</p>
+      <h1 class="merci-h1">
+        C'est arrivé.<br>
+        <em>Je reviens vers vous sous 48 h.</em>
+      </h1>
+      <p class="merci-lead">
+        Pour les demandes urgentes ou un complément d'information,
+        écrivez-moi directement à
+        <a href="mailto:jmg@958.fr">jmg@958.fr</a>
+        ou par <a href="https://www.linkedin.com/in/jean-marc-geuring/" rel="me noopener" target="_blank">LinkedIn</a>.
+      </p>
+
+      <div class="merci-ctas">
+        <a href="/preview/v2c/" class="btn btn--primary btn--lg">
+          Retour à l'accueil
+          <Icon name="arrow-right" size={18} class="arrow" />
+        </a>
+        <a href="https://demo.958.fr" class="btn btn--ghost btn--lg">
+          Voir une démo sectorielle
+          <Icon name="arrow-up-right" size={18} class="arrow" />
+        </a>
+      </div>
+
+      <p class="merci-signature">
+        — Jean-Marc Geuring · Vannes &amp; Paris
+      </p>
+    </div>
+  </section>
+
+  <footer class="footer-mini section--dark" role="contentinfo">
+    <div class="container footer-mini-inner">
+      <div>
+        <span class="brand-mark">9·58</span>
+        <span class="brand-tag">Neuf Cinquante Huit · Vannes &amp; Paris</span>
+      </div>
+      <ul class="footer-meta">
+        <li><a href="mailto:jmg@958.fr">jmg@958.fr</a></li>
+        <li><a href="https://www.linkedin.com/in/jean-marc-geuring/" rel="me noopener" target="_blank">LinkedIn</a></li>
+        <li><a href="/mentions-legales/">Mentions légales</a></li>
+      </ul>
+      <span class="footer-year">© 2026</span>
+    </div>
+  </footer>
+</V2bLayout>
+
+<style>
+  .site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(11, 11, 10, 0.78);
+    backdrop-filter: saturate(180%) blur(12px);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .header-inner {
+    display: flex; align-items: center; justify-content: flex-start;
+    height: var(--header-h);
+  }
+  .brand {
+    display: inline-flex; flex-direction: column; line-height: 1;
+    color: var(--ivoire); text-decoration: none; gap: 3px;
+  }
+  .brand-mark {
+    font-family: var(--font-display); font-weight: 500; font-size: 1.5rem;
+    letter-spacing: -0.02em; color: var(--cuivre);
+  }
+  .brand-tag {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-3);
+  }
+
+  .merci-section {
+    padding-block: var(--s-11) var(--s-10);
+    min-height: 70vh;
+    display: flex; align-items: center;
+  }
+  .merci-inner {
+    display: flex; flex-direction: column; align-items: flex-start;
+    gap: var(--s-5);
+  }
+  .merci-check {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 80px; height: 80px;
+    background: var(--cuivre-soft);
+    color: var(--cuivre);
+    border-radius: 50%;
+    margin-bottom: var(--s-3);
+    border: 2px solid var(--cuivre);
+  }
+  .merci-h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw + 0.5rem, 4rem);
+    line-height: 1.05; letter-spacing: var(--tr-tighter);
+    color: var(--ivoire); font-weight: 400;
+    margin: 0; max-width: 20ch;
+  }
+  .merci-h1 em { color: var(--cuivre); font-style: italic; }
+  .merci-lead {
+    font-size: var(--step-2); line-height: var(--lh-loose);
+    color: var(--ink-2); margin: 0; max-width: 56ch;
+  }
+  .merci-lead a {
+    color: var(--cuivre); text-decoration: underline;
+    text-underline-offset: 3px; font-weight: 600;
+  }
+  .merci-lead a:hover { color: var(--cuivre-hover); }
+  .merci-ctas {
+    display: flex; gap: var(--s-3); flex-wrap: wrap;
+    margin-top: var(--s-3);
+  }
+  .merci-signature {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: var(--s-5) 0 0 0;
+  }
+
+  .footer-mini {
+    padding-block: var(--s-6);
+    border-top: 1px solid var(--line); background: var(--bg-2);
+  }
+  .footer-mini-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: var(--s-5); flex-wrap: wrap;
+  }
+  .footer-mini-inner > div:first-child {
+    display: inline-flex; flex-direction: column; gap: 3px; line-height: 1;
+  }
+  .footer-meta {
+    display: flex; gap: var(--s-5); list-style: none; padding: 0; margin: 0;
+    font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: 0.04em;
+  }
+  .footer-meta a {
+    color: var(--ink-2); text-transform: uppercase;
+    padding: 8px 4px; display: inline-block; min-height: 44px; line-height: 28px;
+  }
+  .footer-meta a:hover { color: var(--cuivre); }
+  .footer-year {
+    font-family: var(--font-mono); font-size: var(--step--2);
+    color: var(--ink-3); letter-spacing: 0.06em;
+  }
+</style>

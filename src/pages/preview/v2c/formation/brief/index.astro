@@ -1,0 +1,384 @@
+---
+import V2bLayout from '../../../../../layouts/V2bLayout.astro';
+import Icon from '../../../../../components/v2/Icon.astro';
+---
+
+<V2bLayout
+  title="Brief formation Ça fait Tilt® — 9·58"
+  description="Briefer une formation IA intra-entreprise ou un accompagnement IA du dirigeant. Réponse sous 48 h, proposition écrite après entretien. NDA 11757585175, Qualiopi en cours obtention juin 2026."
+>
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a href="/preview/v2c/" class="brand" aria-label="9·58, retour à l'accueil">
+        <span class="brand-mark">9·58</span>
+        <span class="brand-tag">Neuf Cinquante Huit</span>
+      </a>
+      <nav class="nav nav-desktop" aria-label="Navigation principale">
+        <ul>
+          <li><a href="/preview/v2c/#construit">Le produit</a></li>
+          <li><a href="/preview/v2c/formation/" aria-current="page">Formation</a></li>
+          <li><a href="/preview/v2c/#preuve">Réalisations</a></li>
+        </ul>
+      </nav>
+      <a href="#form" class="btn btn--primary btn--sm header-cta">
+        Le formulaire
+        <Icon name="arrow-right" size={14} class="arrow" />
+      </a>
+    </div>
+  </header>
+
+  <section class="brief-section">
+    <div class="container brief-grid">
+      <!-- Colonne gauche : pitch -->
+      <div class="brief-pitch">
+        <p class="eyebrow reveal">Brief formation · Ça fait Tilt<sup>®</sup></p>
+        <h1 class="brief-h1 reveal">
+          Une formation IA.<br>
+          Ou un <em>accompagnement</em><br>
+          du dirigeant.<br>
+          On en parle.
+        </h1>
+        <p class="brief-lead reveal">
+          Dites-nous où vous en êtes, qui vous voulez former,
+          et ce qui vous manque pour décoller.
+          <strong>Réponse sous 48 h. Proposition écrite après entretien.</strong>
+        </p>
+
+        <ul class="brief-promesses reveal">
+          <li><Icon name="check" size={18} strokeWidth={2.5} /> Centre de formation enregistré · NDA 11757585175</li>
+          <li><Icon name="check" size={18} strokeWidth={2.5} /> Qualiopi en cours · juin 2026</li>
+          <li><Icon name="check" size={18} strokeWidth={2.5} /> Programme construit sur vos cas réels</li>
+          <li><Icon name="check" size={18} strokeWidth={2.5} /> Suivi 30 · 60 · 90 jours inclus</li>
+        </ul>
+
+        <blockquote class="brief-quote reveal">
+          « Une formation IA ne vaut rien<br>
+          si elle se finit le vendredi soir. »
+        </blockquote>
+      </div>
+
+      <!-- Colonne droite : formulaire -->
+      <div id="form" class="brief-form-wrap reveal">
+        <form id="brief-form" class="brief-form" novalidate aria-label="Brief de formation">
+          <div class="sr-only" aria-hidden="true">
+            <label for="website">Ne pas remplir</label>
+            <input type="text" name="website" id="website" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <div class="field">
+            <label for="nom">Prénom et nom <span aria-hidden="true">*</span></label>
+            <input type="text" id="nom" name="nom" required autocomplete="name" />
+          </div>
+
+          <div class="field">
+            <label for="entreprise">Entreprise <span aria-hidden="true">*</span></label>
+            <input type="text" id="entreprise" name="entreprise" required autocomplete="organization" />
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="email">Email pro <span aria-hidden="true">*</span></label>
+              <input type="email" id="email" name="email" required autocomplete="email" />
+            </div>
+            <div class="field">
+              <label for="telephone">Téléphone <span class="optional">(optionnel)</span></label>
+              <input type="tel" id="telephone" name="telephone" autocomplete="tel" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="programme">Programme qui vous intéresse <span aria-hidden="true">*</span></label>
+            <select id="programme" name="programme" required>
+              <option value="">Choisir…</option>
+              <option>F-INTRO · Découverte intégrée digitale Niveau 1</option>
+              <option>F-00 · Accompagnement IA du dirigeant</option>
+              <option>F-01 · IA pour dirigeants</option>
+              <option>F-02 · IA commerciale appliquée</option>
+              <option>F-03 · Automatisation back-office</option>
+              <option>F-04 · IA en métier réglementé</option>
+              <option>F-05 · Cockpit en équipe</option>
+              <option>Parcours sur-mesure (à définir ensemble)</option>
+            </select>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="effectif">Effectif à former <span aria-hidden="true">*</span></label>
+              <select id="effectif" name="effectif" required>
+                <option value="">Choisir…</option>
+                <option>1 à 3</option>
+                <option>4 à 8</option>
+                <option>9 à 15</option>
+                <option>16 à 30</option>
+                <option>30+</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="delai">Délai souhaité <span aria-hidden="true">*</span></label>
+              <select id="delai" name="delai" required>
+                <option value="">Choisir…</option>
+                <option>Sous 1 mois</option>
+                <option>Sous 3 mois</option>
+                <option>Sous 6 mois</option>
+                <option>À planifier ensemble</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="contexte">Vos cas d'usage prioritaires <span aria-hidden="true">*</span></label>
+            <textarea id="contexte" name="contexte" rows="4" required placeholder="Ex : les commerciaux passent trop de temps en CR de visite ; les devis prennent 3 h ; le syndic est noyé sous les mails."></textarea>
+          </div>
+
+          <input type="hidden" name="source_page" value="preview/v2c/formation/brief" />
+          <input type="hidden" name="type" value="brief-formation" />
+
+          <button type="submit" class="btn btn--primary btn--lg submit" id="submit-btn"
+                  aria-label="Envoyer le brief formation pour recevoir une proposition sous 48 heures">
+            <span>Envoyer le brief</span>
+            <Icon name="arrow-right" size={18} class="arrow" />
+          </button>
+
+          <p class="form-legal">
+            Données hébergées en Europe. Utilisées uniquement pour vous recontacter.
+            Aucun partage. <a href="/mentions-legales/">Mentions légales</a>.
+          </p>
+
+          <div id="form-status" role="alert" aria-live="polite" class="form-status"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer-mini section--dark" role="contentinfo">
+    <div class="container footer-mini-inner">
+      <div>
+        <span class="brand-mark">9·58</span>
+        <span class="brand-tag">Neuf Cinquante Huit · Vannes &amp; Paris</span>
+      </div>
+      <ul class="footer-meta">
+        <li><a href="mailto:jmg@958.fr">jmg@958.fr</a></li>
+        <li><a href="https://www.linkedin.com/in/jean-marc-geuring/" rel="me noopener" target="_blank">LinkedIn</a></li>
+        <li><a href="/mentions-legales/">Mentions légales</a></li>
+      </ul>
+      <span class="footer-year">© 2026</span>
+    </div>
+  </footer>
+</V2bLayout>
+
+<script>
+  function bindForm() {
+    const form = document.getElementById('brief-form') as HTMLFormElement | null;
+    if (!form || (form as any).dataset.bound === '1') return;
+    (form as any).dataset.bound = '1';
+
+    const btn = document.getElementById('submit-btn') as HTMLButtonElement | null;
+    const status = document.getElementById('form-status');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!btn || !status) return;
+
+      const fd = new FormData(form);
+      const data = Object.fromEntries(fd) as Record<string, string>;
+      if (data.website) return; // honeypot
+
+      btn.disabled = true;
+      const original = btn.innerHTML;
+      btn.innerHTML = '<span>Envoi en cours…</span>';
+      status.textContent = '';
+      status.classList.remove('is-error');
+
+      const payload = {
+        ...data,
+        timestamp: new Date().toISOString(),
+        source: 'site-958-v2c',
+        userAgent: navigator.userAgent,
+        referrer: document.referrer || null,
+      };
+
+      try {
+        const r = await fetch('/api/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        if (!r.ok) {
+          const body = await r.text().catch(() => '');
+          throw new Error(`HTTP ${r.status}${body ? ' · ' + body.slice(0, 80) : ''}`);
+        }
+        window.location.href = '/preview/v2c/merci/';
+      } catch (err: any) {
+        status.textContent = `Erreur d'envoi (${err?.message || 'réseau'}). Écrivez-nous à jmg@958.fr.`;
+        status.classList.add('is-error');
+        btn.disabled = false;
+        btn.innerHTML = original;
+      }
+    });
+  }
+  bindForm();
+  document.addEventListener('astro:page-load', bindForm);
+</script>
+
+<style>
+  /* Reprend exactement le style de /preview/v2c/diagnostic/
+     mais avec préfixe .brief-* */
+
+  .site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(11, 11, 10, 0.78);
+    backdrop-filter: saturate(180%) blur(12px);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .header-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    height: var(--header-h); gap: var(--s-5);
+  }
+  .brand {
+    display: inline-flex; flex-direction: column; line-height: 1;
+    color: var(--ivoire); text-decoration: none; gap: 3px;
+  }
+  .brand-mark {
+    font-family: var(--font-display); font-weight: 500; font-size: 1.5rem;
+    letter-spacing: -0.02em; color: var(--cuivre);
+  }
+  .brand-tag {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-3);
+  }
+  .nav-desktop ul { display: flex; gap: var(--s-5); list-style: none; padding: 0; margin: 0; }
+  .nav-desktop a {
+    font-size: var(--step-0); font-weight: 500; color: var(--ink-2);
+    padding: 6px 2px; border-bottom: 1px solid transparent;
+    transition: color var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease);
+  }
+  .nav-desktop a:hover, .nav-desktop a[aria-current="page"] {
+    color: var(--cuivre); border-bottom-color: var(--cuivre);
+  }
+  @media (max-width: 900px) { .nav-desktop, .header-cta { display: none; } }
+
+  sup { font-size: 0.55em; vertical-align: super; }
+
+  .brief-section { padding-block: var(--s-10) var(--s-9); }
+  .brief-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: var(--s-9); align-items: start;
+  }
+  @media (max-width: 900px) { .brief-grid { grid-template-columns: 1fr; gap: var(--s-7); } }
+
+  .brief-pitch { display: flex; flex-direction: column; gap: var(--s-5); }
+  .brief-h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 4vw + 0.5rem, 3.5rem);
+    line-height: 1.05; letter-spacing: var(--tr-tighter);
+    color: var(--ivoire); font-weight: 400;
+    margin: 0; max-width: 18ch;
+  }
+  .brief-h1 em { color: var(--cuivre); font-style: italic; }
+  .brief-lead {
+    font-size: var(--step-2); line-height: var(--lh-loose);
+    color: var(--ink-2); margin: 0; max-width: 48ch;
+  }
+  .brief-lead strong { color: var(--ivoire); font-weight: 600; }
+  .brief-promesses {
+    list-style: none; padding: 0; margin: var(--s-4) 0 0 0;
+    display: flex; flex-direction: column; gap: var(--s-3);
+  }
+  .brief-promesses li {
+    display: flex; align-items: center; gap: 10px;
+    font-size: var(--step-1); color: var(--ivoire-2);
+  }
+  .brief-promesses li svg { color: var(--cuivre); flex-shrink: 0; }
+  .brief-quote {
+    font-family: var(--font-display); font-style: italic;
+    font-size: var(--step-2); line-height: 1.4;
+    color: var(--ivoire); margin: var(--s-5) 0 0 0;
+    padding-left: var(--s-4); border-left: 2px solid var(--cuivre);
+    max-width: 40ch;
+  }
+
+  .brief-form-wrap {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: var(--r-3);
+    padding: var(--s-6);
+    position: sticky;
+    top: calc(var(--header-h) + var(--s-4));
+  }
+  @media (max-width: 900px) { .brief-form-wrap { position: static; padding: var(--s-5); } }
+
+  .brief-form { display: flex; flex-direction: column; gap: var(--s-4); }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-4); }
+  @media (max-width: 540px) { .field-row { grid-template-columns: 1fr; } }
+  .field label {
+    font-family: var(--font-mono); font-size: var(--step--2);
+    color: var(--ink-2); letter-spacing: 0.04em;
+    text-transform: uppercase; font-weight: 600;
+  }
+  .field label span[aria-hidden="true"] { color: var(--cuivre); }
+  .field .optional {
+    font-family: var(--font-sans); text-transform: none;
+    letter-spacing: 0; font-weight: 400; color: var(--ink-3);
+  }
+  .field input, .field select, .field textarea {
+    width: 100%; background: var(--bg);
+    border: 1px solid var(--line-2); border-radius: var(--r-2);
+    color: var(--ivoire); padding: 12px 14px;
+    font-family: var(--font-sans); font-size: var(--step-1); line-height: 1.4;
+    transition: border-color var(--dur-1) var(--ease), box-shadow var(--dur-1) var(--ease);
+    min-height: 48px;
+  }
+  .field textarea { resize: vertical; min-height: 90px; font-family: var(--font-sans); }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline: none; border-color: var(--cuivre);
+    box-shadow: 0 0 0 3px var(--cuivre-soft);
+  }
+  .field input::placeholder, .field textarea::placeholder { color: var(--ink-3); opacity: 0.7; }
+  .submit { margin-top: var(--s-2); justify-content: center; }
+  .submit:disabled { opacity: 0.65; cursor: wait; }
+  .form-legal {
+    font-size: var(--step--1); color: var(--ink-3);
+    line-height: var(--lh-normal); margin: 0; max-width: none;
+  }
+  .form-legal a { color: var(--ink-2); text-decoration: underline; text-underline-offset: 3px; }
+  .form-legal a:hover { color: var(--cuivre); }
+  .form-status:not(:empty) {
+    padding: var(--s-3) var(--s-4); background: var(--bg-3);
+    border: 1px solid var(--line-2); border-radius: var(--r-2);
+    font-size: var(--step-0); color: var(--ivoire-2);
+  }
+  .form-status.is-error {
+    background: rgba(208, 79, 60, 0.15);
+    border-color: rgba(244, 150, 133, 0.5);
+    color: #f49685;
+  }
+
+  .footer-mini {
+    padding-block: var(--s-6);
+    border-top: 1px solid var(--line); background: var(--bg-2);
+  }
+  .footer-mini-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: var(--s-5); flex-wrap: wrap;
+  }
+  .footer-mini-inner > div:first-child {
+    display: inline-flex; flex-direction: column; gap: 3px; line-height: 1;
+  }
+  .footer-meta {
+    display: flex; gap: var(--s-5); list-style: none; padding: 0; margin: 0;
+    font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: 0.04em;
+  }
+  .footer-meta a {
+    color: var(--ink-2); text-transform: uppercase;
+    padding: 8px 4px; display: inline-block; min-height: 44px; line-height: 28px;
+  }
+  .footer-meta a:hover { color: var(--cuivre); }
+  .footer-year {
+    font-family: var(--font-mono); font-size: var(--step--2);
+    color: var(--ink-3); letter-spacing: 0.06em;
+  }
+</style>
