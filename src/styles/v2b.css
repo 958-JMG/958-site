@@ -46,6 +46,23 @@
   --warn: #E0A437;
   --warn-soft: rgba(224, 164, 55, 0.18);
 
+  /* ---------- Couleurs catégorielles (programmes formation) ----------
+     Palette terreuse + minérale, sobre, sans diluer le cuivre signal.
+     Le cuivre reste pour les CTAs ; les catégories signalent le NIVEAU. */
+  --cat-decouverte:      #C75F2D;  /* cuivre brand — initiation */
+  --cat-accompagnement:  #6B8E54;  /* vert mousse — durée, suivi */
+  --cat-strategique:     #5A7286;  /* bleu pierre — décision, hauteur */
+  --cat-metier:          #B8743A;  /* ocre brûlé — savoir-faire pratique */
+  --cat-reglemente:      #7A6E5C;  /* taupe ardoise — rigueur, conformité */
+  --cat-sur-mesure:      #8B5A6B;  /* prune sombre — haut de gamme */
+
+  --cat-decouverte-soft:     rgba(199, 95, 45, 0.12);
+  --cat-accompagnement-soft: rgba(107, 142, 84, 0.14);
+  --cat-strategique-soft:    rgba(90, 114, 134, 0.14);
+  --cat-metier-soft:         rgba(184, 116, 58, 0.12);
+  --cat-reglemente-soft:     rgba(122, 110, 92, 0.14);
+  --cat-sur-mesure-soft:     rgba(139, 90, 107, 0.14);
+
   /* ---------- Surfaces dérivées ---------- */
   --bg-card: var(--bg-2);
   --bg-card-elevated: var(--bg-3);

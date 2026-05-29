@@ -59,26 +59,26 @@ const temps = [
 ];
 
 const programmes = [
-  { code: 'F-INTRO', icon: 'sparkles', niveau: 'Découverte', titre: 'Découverte intégrée digitale — Niveau 1', duree: '1 jour · inter ou intra',
+  { code: 'F-INTRO', cat: 'decouverte', icon: 'sparkles', niveau: 'Découverte', titre: 'Découverte intégrée digitale — Niveau 1', duree: '1 jour · inter ou intra',
     pour: 'Tous publics · première marche',
     livre: "Comprendre l'IA générative concrètement. Premiers prompts utiles, premiers outils, premiers réflexes. Le point de départ — pour celles et ceux qui veulent décoller propre.",
     url: 'https://formation.958.fr/f/decouverte-integree-digitale-niveau-1' },
-  { code: 'F-00', icon: 'users', niveau: 'Accompagnement', titre: 'Accompagnement IA du dirigeant', duree: '6 mois · bi-mensuel',
+  { code: 'F-00', cat: 'accompagnement', icon: 'users', niveau: 'Accompagnement', titre: 'Accompagnement IA du dirigeant', duree: '6 mois · bi-mensuel',
     pour: 'DG seul ou avec son équipe rapprochée',
     livre: "Conception de votre assistant IA autonome. Refonte des process clés où l'IA change tout. Présent derrière vos sessions, je connais vos équipes — j'ajuste avec vous." },
-  { code: 'F-01', icon: 'briefcase', niveau: 'Stratégique', titre: 'IA pour dirigeants', duree: '1 jour',
+  { code: 'F-01', cat: 'strategique', icon: 'briefcase', niveau: 'Stratégique', titre: 'IA pour dirigeants', duree: '1 jour',
     pour: 'DG, COMEX, fondateurs',
     livre: "Cadre de décision, grille de souveraineté, cartographie des outils pertinents pour votre secteur." },
-  { code: 'F-02', icon: 'phone', niveau: 'Métier', titre: 'IA commerciale appliquée', duree: '2 jours',
+  { code: 'F-02', cat: 'metier', icon: 'phone', niveau: 'Métier', titre: 'IA commerciale appliquée', duree: '2 jours',
     pour: 'Équipes sales · ADV',
     livre: "Workflow complet prospection → proposition → relance. 12 prompts métier validés et signés." },
-  { code: 'F-03', icon: 'mail', niveau: 'Métier', titre: 'Automatisation back-office', duree: '3 jours',
+  { code: 'F-03', cat: 'metier', icon: 'mail', niveau: 'Métier', titre: 'Automatisation back-office', duree: '3 jours',
     pour: 'Ops · assistants',
     livre: "Chaîne de traitement mails, documents, extractions. n8n auto-hébergé. Zéro dépendance US." },
-  { code: 'F-04', icon: 'shield', niveau: 'Réglementé', titre: 'IA en métier réglementé', duree: '2 jours',
+  { code: 'F-04', cat: 'reglemente', icon: 'shield', niveau: 'Réglementé', titre: 'IA en métier réglementé', duree: '2 jours',
     pour: 'CGP · notaires · juristes',
     livre: "Cadre RGPD, modèles EU, traçabilité, validation humaine. Ce qui sort est défendable." },
-  { code: 'F-05', icon: 'monitor', niveau: 'Sur-mesure', titre: 'Cockpit en équipe', duree: '5 jours',
+  { code: 'F-05', cat: 'sur-mesure', icon: 'monitor', niveau: 'Sur-mesure', titre: 'Cockpit en équipe', duree: '5 jours',
     pour: 'Équipes produit · dev · ops',
     livre: "Conception et livraison d'un cockpit interne sur votre cas. L'équipe le maintient ensuite." },
 ];
@@ -349,7 +349,7 @@ const versus = [
 
       <ul class="programmes-grid">
         {programmes.map((p) => (
-          <li class="prog-card reveal">
+          <li class="prog-card reveal" data-cat={p.cat}>
             <div class="prog-head">
               <span class="prog-icon"><Icon name={p.icon} size={20} strokeWidth={1.7} /></span>
               <span class="prog-niveau">{p.niveau}</span>
@@ -850,9 +850,12 @@ const versus = [
     padding: 0;
   }
   .prog-card {
+    --cat: var(--cuivre);
+    --cat-soft: var(--cuivre-soft);
     padding: var(--s-5);
     background: var(--bg);
     border: 1px solid var(--line);
+    border-left: 3px solid var(--cat);
     border-radius: var(--r-3);
     display: flex;
     flex-direction: column;
@@ -860,8 +863,15 @@ const versus = [
     transition: border-color var(--dur-2) var(--ease),
                 transform var(--dur-2) var(--ease);
   }
+  .prog-card[data-cat="decouverte"]      { --cat: var(--cat-decouverte);      --cat-soft: var(--cat-decouverte-soft); }
+  .prog-card[data-cat="accompagnement"]  { --cat: var(--cat-accompagnement);  --cat-soft: var(--cat-accompagnement-soft); }
+  .prog-card[data-cat="strategique"]     { --cat: var(--cat-strategique);     --cat-soft: var(--cat-strategique-soft); }
+  .prog-card[data-cat="metier"]          { --cat: var(--cat-metier);          --cat-soft: var(--cat-metier-soft); }
+  .prog-card[data-cat="reglemente"]      { --cat: var(--cat-reglemente);      --cat-soft: var(--cat-reglemente-soft); }
+  .prog-card[data-cat="sur-mesure"]      { --cat: var(--cat-sur-mesure);      --cat-soft: var(--cat-sur-mesure-soft); }
   .prog-card:hover {
-    border-color: var(--cuivre);
+    border-color: var(--cat);
+    border-left-color: var(--cat);
     transform: translateY(-2px);
   }
   .prog-head {
@@ -875,8 +885,8 @@ const versus = [
     justify-content: center;
     width: 36px;
     height: 36px;
-    background: var(--cuivre-soft);
-    color: var(--cuivre);
+    background: var(--cat-soft);
+    color: var(--cat);
     border-radius: var(--r-2);
     flex-shrink: 0;
   }
@@ -885,7 +895,7 @@ const versus = [
     font-size: var(--step--2);
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--cuivre);
+    color: var(--cat);
     font-weight: 600;
     flex: 1;
   }
