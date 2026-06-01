@@ -48,16 +48,31 @@ const sectionClass = variant === 'soft' ? 'section section--soft' : 'section';
         </h2>
 
         <div class="reveal manifeste-recit">
-          <p class="recit-decouverte">
-            <span class="manifeste-kicker">Ça fait Tilt<sup aria-label="marque déposée">®</sup></span>
-            le jour où j'ai compris que l'IA pouvait être notre alliée —
-            <em>à condition qu'elle vive chez nous</em>.
+          <p class="recit-vu">
+            <strong class="recit-ancre">28 ans d'entrepreneuriat.</strong>
+            J'ai vu défiler trop de dirigeants noyés :
+            trop d'abonnements, des données éparpillées on ne sait plus où,
+            un logiciel métier qui plante un matin sans SAV qui répond,
+            la tête dans le guidon en permanence.
           </p>
-          <p class="recit-transmission">
-            Ce déclic, j'ai voulu le partager.<br>
-            <em>C'est devenu <strong>Ça fait Tilt<sup aria-label="marque déposée">®</sup></strong>, la formation.</em><br>
-            <em>Et <strong>9·58</strong>, le cockpit qui fait qu'il ne s'éteint pas le lundi suivant.</em>
+          <p class="recit-symptomes">
+            Pas le temps de travailler.<br>
+            Pas la visibilité.<br>
+            Pas la place de prendre une longueur d'avance.
           </p>
+          <p class="recit-declic">
+            Et un jour,
+            <span class="manifeste-kicker">Ça fait Tilt<sup aria-label="marque déposée">®</sup>.</span>
+            <em>Le moment où j'ai compris que l'IA pouvait me rendre du temps. De la lisibilité. De la sérénité.</em>
+            À condition qu'elle vive chez moi.
+          </p>
+          <p class="recit-pont">
+            Ce déclic, je le partage aujourd'hui en deux temps :
+          </p>
+          <ul class="recit-deux-temps" role="list">
+            <li><strong>Ça fait Tilt<sup aria-label="marque déposée">®</sup></strong>, la formation — pour le <em>déclencher</em> chez vous.</li>
+            <li><strong>9·58</strong>, le cockpit — pour qu'il <em>reste</em> après le vendredi soir.</li>
+          </ul>
         </div>
 
         <ul class="reveal manifeste-constat" role="list">
@@ -285,7 +300,7 @@ const sectionClass = variant === 'soft' ? 'section section--soft' : 'section';
     font-style: italic;
   }
 
-  /* 2. Récit narratif — découverte personnelle → transmission */
+  /* 2. Récit narratif fondateur — 4 actes en cascade */
   .manifeste-recit {
     display: flex;
     flex-direction: column;
@@ -306,21 +321,67 @@ const sectionClass = variant === 'soft' ? 'section section--soft' : 'section';
     color: var(--cuivre);
     font-style: italic;
   }
-  /* Pivot dramatique : "Ce déclic, j'ai voulu le partager" — légèrement
-     en retrait + couleur ivoire forte sur la 1re ligne, italique cuivre
-     sur les 2 suivantes (la transmission proprement dite) */
-  .recit-transmission {
+
+  /* Acte 1 — "28 ans" : ancre l'autorité */
+  .recit-ancre {
+    color: var(--cuivre) !important;
+    font-weight: 500;
+    display: inline;
+    margin-right: 0.3em;
+  }
+
+  /* Acte 2 — symptômes en triade anaphorique */
+  .recit-symptomes {
     padding-left: var(--s-4);
-    border-left: 1px solid var(--cuivre-soft);
+    border-left: 2px solid var(--ink-3);
+    color: var(--ink-1);
+    font-style: italic;
+    line-height: 1.5 !important;
   }
-  .recit-transmission em {
-    line-height: 1.5;
+
+  /* Acte 3 — le déclic Tilt® : marqué visuellement */
+  .recit-declic {
+    padding-left: var(--s-4);
+    border-left: 2px solid var(--cuivre);
   }
+
+  /* Acte 4 — pont vers les 2 temps */
+  .recit-pont {
+    font-size: var(--step-0) !important;
+    color: var(--ink-2) !important;
+    margin-bottom: calc(var(--s-2) * -1) !important;
+  }
+  .recit-deux-temps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+  .recit-deux-temps li {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    line-height: var(--lh-loose);
+    color: var(--ivoire);
+    padding-left: var(--s-4);
+    border-left: 3px solid var(--cuivre);
+    position: relative;
+  }
+  .recit-deux-temps strong {
+    color: var(--cuivre);
+    font-weight: 500;
+  }
+  .recit-deux-temps em {
+    color: var(--cuivre);
+    font-style: italic;
+  }
+
   .manifeste-kicker {
     display: inline;
     font-weight: 500;
     color: var(--cuivre);
-    margin-right: 0.2em;
+    margin-right: 0.1em;
   }
 
   /* 2. Constat 3 lignes — preuve concrète, serif droit */
