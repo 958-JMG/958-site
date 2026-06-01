@@ -374,14 +374,24 @@ const navItems = [
   }
 
   /* ============ MOBILE DRAWER ============ */
+  /* Fix iOS Safari : hidden attribute peut être surchargé par d'autres règles.
+     Force display:none explicite quand [hidden] est présent. */
+  .mobile-drawer[hidden] {
+    display: none !important;
+  }
   .mobile-drawer {
     position: fixed;
-    inset: 0;
     top: var(--header-h);
+    right: 0;
+    bottom: 0;
+    left: 0;
+    /* Hauteur explicite pour iOS Safari — 100dvh prend en compte les barres */
+    height: calc(100dvh - var(--header-h));
     background: var(--bg);
     z-index: 49;
     padding: var(--s-5) var(--gutter) var(--s-7);
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     animation: drawerFadeIn 0.25s var(--ease-out);
   }
   @keyframes drawerFadeIn {
