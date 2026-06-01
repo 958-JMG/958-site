@@ -5,6 +5,7 @@ import LogoMark from '../components/v2/LogoMark.astro';
 import V2cHeader from '../components/v2/V2cHeader.astro';
 import V2cFooter from '../components/v2/V2cFooter.astro';
 import PortesEntree from '../components/v2/PortesEntree.astro';
+import Manifeste958 from '../components/v2/Manifeste958.astro';
 
 const proofs = [
   { value: '+500', label: 'personnes formées depuis 2022' },
@@ -398,9 +399,14 @@ const realisations = [
   </section>
 
   <!-- =========================================
+       SECTION 3.5 — MANIFESTE WHY (Tilt® + 9·58)
+       ========================================= -->
+  <Manifeste958 variant="soft" />
+
+  <!-- =========================================
        SECTION 4 — LA MÉTHODE (mini-timeline ultra-compressée)
        ========================================= -->
-  <section id="methode" class="section section--soft" aria-labelledby="methode-title">
+  <section id="methode" class="section" aria-labelledby="methode-title">
     <div class="container is-default">
       <h2 id="methode-title" class="reveal section-h2">
         Quatre temps. Sans bruit. Sans dépendance.

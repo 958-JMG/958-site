@@ -1,0 +1,198 @@
+---
+/**
+ * Manifeste958 — bloc WHY Sinek "Ça fait Tilt® + 9·58"
+ *
+ * Composant V2c partagé qui explique le lien Tilt® ↔ 9·58 et porte
+ * la conviction profonde du brand. Pédagogique + dur sur le constat,
+ * bienveillant sur la posture (pas de combat, pas d'ennemi nommé).
+ *
+ * Props :
+ *   variant : 'soft' (fond bg-2, default) | 'plain' (fond bg)
+ *   sectionId : id ancre (default "manifeste")
+ *   showSignature : afficher la signature fondateur (default true)
+ */
+
+interface Props {
+  variant?: 'soft' | 'plain';
+  sectionId?: string;
+  showSignature?: boolean;
+}
+
+const {
+  variant = 'soft',
+  sectionId = 'manifeste',
+  showSignature = true,
+} = Astro.props;
+
+const sectionClass = variant === 'soft' ? 'section section--soft' : 'section';
+---
+
+<section class={sectionClass} aria-labelledby={`${sectionId}-title`} id={sectionId}>
+  <div class="container is-default">
+    <p class="eyebrow reveal manifeste-eyebrow">Pourquoi 9·58 &amp; Ça fait Tilt<sup>®</sup></p>
+
+    <div class="manifeste-block">
+      <p class="reveal manifeste-tilt" id={`${sectionId}-title`}>
+        <strong class="manifeste-kicker">Ça fait Tilt<sup>®</sup>.</strong>
+        Le moment où vous comprenez qu'une IA, ça ne s'achète pas.
+        <em>Ça s'installe. Ça s'apprend. Ça se transmet.</em>
+      </p>
+
+      <ul class="reveal manifeste-constat" role="list">
+        <li>Une formation IA qui finit le vendredi soir, ça ne tient pas trois mois.</li>
+        <li>Un cockpit IA livré sans formation, ça prend la poussière.</li>
+        <li>Une IA hébergée loin de chez vous, ça ne deviendra jamais vraiment la vôtre.</li>
+      </ul>
+
+      <p class="reveal manifeste-pont">
+        C'est pour ça que <strong>Ça fait Tilt<sup>®</sup></strong> et <strong>9·58</strong> vont ensemble.<br>
+        <em>Le déclic, et ce qui le rend irréversible.</em>
+      </p>
+
+      <p class="reveal manifeste-why">
+        Parce qu'à <strong>28 ans d'entrepreneuriat</strong>, j'ai appris une chose :
+      </p>
+
+      <blockquote class="reveal manifeste-punchline">
+        L'IA n'a pas été inventée pour vous remplacer.<br>
+        <em>Elle a été inventée pour vous rendre votre temps.</em>
+      </blockquote>
+
+      <p class="reveal manifeste-coda">
+        Encore faut-il qu'elle <em>vive chez vous</em>.
+      </p>
+
+      {showSignature && (
+        <p class="reveal manifeste-sig">
+          — Jean-Marc Geuring · Fondateur 9·58
+        </p>
+      )}
+    </div>
+  </div>
+</section>
+
+<style>
+  .manifeste-eyebrow {
+    margin-bottom: var(--s-7);
+  }
+
+  .manifeste-block {
+    max-width: 64ch;
+  }
+
+  /* Punchline d'ouverture — Tilt® kicker + texte serif */
+  .manifeste-tilt {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 2.4vw + 0.4rem, 2.1rem);
+    line-height: 1.3;
+    letter-spacing: var(--tr-tight);
+    color: var(--ivoire);
+    margin: 0 0 var(--s-6) 0;
+  }
+  .manifeste-tilt em {
+    color: var(--cuivre);
+    font-style: italic;
+  }
+  .manifeste-kicker {
+    display: inline-block;
+    font-weight: 500;
+    color: var(--cuivre);
+    margin-right: 0.3em;
+  }
+
+  /* Constat dur en 3 lignes */
+  .manifeste-constat {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--s-6) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    border-left: 2px solid var(--cuivre);
+    padding-left: var(--s-5);
+  }
+  .manifeste-constat li {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    line-height: var(--lh-loose);
+    color: var(--ink-1);
+    font-style: italic;
+  }
+
+  /* Pont entre constat et WHY */
+  .manifeste-pont {
+    font-size: var(--step-1);
+    line-height: var(--lh-loose);
+    color: var(--ivoire);
+    margin: 0 0 var(--s-7) 0;
+  }
+  .manifeste-pont strong {
+    color: var(--cuivre);
+    font-weight: 600;
+  }
+  .manifeste-pont em {
+    color: var(--ivoire);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  /* Intro WHY */
+  .manifeste-why {
+    font-size: var(--step-0);
+    line-height: var(--lh-loose);
+    color: var(--ink-2);
+    margin: 0 0 var(--s-4) 0;
+  }
+  .manifeste-why strong {
+    color: var(--ivoire);
+  }
+
+  /* Punchline WHY Sinek — le manifeste pur */
+  .manifeste-punchline {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 2.8vw + 0.4rem, 2.4rem);
+    line-height: 1.2;
+    letter-spacing: var(--tr-tighter);
+    color: var(--ivoire);
+    border-left: 3px solid var(--cuivre);
+    padding: var(--s-3) 0 var(--s-3) var(--s-5);
+    margin: 0 0 var(--s-6) 0;
+    font-weight: 400;
+  }
+  .manifeste-punchline em {
+    color: var(--cuivre);
+    font-style: italic;
+    display: inline-block;
+  }
+
+  /* Coda souverain */
+  .manifeste-coda {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    line-height: 1.3;
+    color: var(--ivoire);
+    margin: 0 0 var(--s-6) 0;
+    font-style: italic;
+  }
+  .manifeste-coda em {
+    color: var(--cuivre);
+    font-style: italic;
+  }
+
+  /* Signature fondateur */
+  .manifeste-sig {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: var(--s-6) 0 0 0;
+  }
+
+  /* Sup pour ® */
+  .manifeste-block sup {
+    font-size: 0.55em;
+    vertical-align: super;
+  }
+</style>
