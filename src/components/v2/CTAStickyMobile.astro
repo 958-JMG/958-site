@@ -152,11 +152,17 @@ const {
                 opacity 240ms ease-out;
     opacity: 0;
     pointer-events: none;
-    /* Pas de fond ni de blur : sur fond brand --bg #0B0B0A, le bouton
-       cuivre se suffit à lui-même grâce à son box-shadow glow.
-       (le linear-gradient + backdrop-filter créaient un halo blanchâtre
-       gênant la lecture du contenu juste au-dessus.) */
-    background: transparent;
+    /* Fond OPAQUE noir brand qui masque le contenu juste au-dessus
+       (séparateurs, border-top de sections, etc.) sans créer de halo flou.
+       Petit fade transparent SEULEMENT sur les 8 derniers pixels du haut
+       pour éviter une coupe nette qui paraîtrait artificielle.
+       Aucun backdrop-filter → aucun voile blanchâtre. */
+    background: linear-gradient(
+      to top,
+      var(--bg) 0%,
+      var(--bg) 88%,
+      rgba(11, 11, 10, 0) 100%
+    );
   }
 
   .cta-sticky-mobile.is-visible {
