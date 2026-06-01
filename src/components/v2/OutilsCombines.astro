@@ -1,0 +1,229 @@
+---
+/**
+ * OutilsCombines — bloc « Avec quels outils »
+ *
+ * Liste des écosystèmes (moteurs IA, hébergement, orchestration,
+ * productivité) que 9·58 sait combiner. Effet rassurant : pas de
+ * boîte noire, pas d'éditeur unique imposé.
+ *
+ * Wordmarks textuels en Fraunces serif monochrome ink-2 — pas de
+ * logos officiels (évite les problèmes de droit + reste sobre).
+ *
+ * Props :
+ *   variant : 'soft' (fond bg-2, default) | 'plain' (fond bg)
+ *   sectionId : id ancre (default "outils")
+ */
+
+interface Props {
+  variant?: 'soft' | 'plain';
+  sectionId?: string;
+}
+
+const {
+  variant = 'soft',
+  sectionId = 'outils',
+} = Astro.props;
+
+const sectionClass = variant === 'soft' ? 'section section--soft' : 'section';
+
+const categories = [
+  {
+    label: 'Moteurs IA',
+    outils: ['Mistral', 'Claude', 'OpenAI', 'Gemini'],
+  },
+  {
+    label: 'Hébergement',
+    outils: ['Scaleway', 'OVH', 'Cloudflare', 'Infomaniak'],
+  },
+  {
+    label: 'Orchestration & Data',
+    outils: ['n8n', 'Make', 'PostgreSQL', 'Supabase'],
+  },
+  {
+    label: 'Productivité',
+    outils: ['Notion', 'Airtable', 'Brevo', 'Google Workspace'],
+  },
+];
+---
+
+<section class={sectionClass} aria-labelledby={`${sectionId}-title`} id={sectionId}>
+  <div class="container">
+    <p class="eyebrow reveal outils-eyebrow">
+      <span class="eyebrow-dash" aria-hidden="true"></span>
+      Avec quels outils
+    </p>
+
+    <div class="outils-head">
+      <h2 class="reveal outils-h2" id={`${sectionId}-title`}>
+        Pas de boîte noire.<br>
+        <em>Pas d'éditeur unique.</em>
+      </h2>
+      <p class="reveal outils-sub">
+        On choisit, on combine, on adapte à votre métier.
+        Pas d'écosystème fermé, pas de fournisseur imposé.
+      </p>
+    </div>
+
+    <ul class="outils-grid reveal" role="list">
+      {categories.map((cat) => (
+        <li class="outils-cat">
+          <p class="cat-label">{cat.label}</p>
+          <ul class="cat-list" role="list">
+            {cat.outils.map((nom) => (
+              <li>
+                <span class="cat-dot" aria-hidden="true"></span>
+                <span class="cat-nom">{nom}</span>
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </ul>
+
+    <p class="reveal outils-coda">
+      <strong>Souverain par défaut.</strong>
+      <em>Mais c'est vous qui choisissez.</em>
+    </p>
+  </div>
+</section>
+
+<style>
+  /* Eyebrow avec dash */
+  .outils-eyebrow {
+    margin-bottom: var(--s-6);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-3);
+    font-size: 13px;
+  }
+  .eyebrow-dash {
+    display: inline-block;
+    width: 28px;
+    height: 2px;
+    background: var(--cuivre);
+    flex-shrink: 0;
+  }
+
+  /* Head */
+  .outils-head {
+    max-width: 62ch;
+    margin-bottom: var(--s-8);
+  }
+  .outils-h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 3vw + 0.4rem, 2.6rem);
+    line-height: 1.15;
+    letter-spacing: var(--tr-tighter);
+    color: var(--ivoire);
+    margin: 0 0 var(--s-4) 0;
+    font-weight: 400;
+  }
+  .outils-h2 em {
+    color: var(--cuivre);
+    font-style: italic;
+  }
+  .outils-sub {
+    font-size: var(--step-1);
+    line-height: var(--lh-loose);
+    color: var(--ink-2);
+    margin: 0;
+    max-width: 56ch;
+  }
+
+  /* Grid 4 catégories */
+  .outils-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--s-4);
+  }
+  @media (max-width: 960px) {
+    .outils-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 520px) {
+    .outils-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .outils-cat {
+    background: var(--bg-3);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: var(--s-5) var(--s-4);
+    transition: border-color var(--dur-1) var(--ease),
+                background var(--dur-1) var(--ease);
+  }
+  .outils-cat:hover {
+    border-color: var(--cuivre);
+    background: var(--bg-2);
+  }
+
+  .cat-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cuivre);
+    margin: 0 0 var(--s-4) 0;
+    padding-bottom: var(--s-3);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .cat-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .cat-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .cat-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--ink-3);
+    flex-shrink: 0;
+    transition: background var(--dur-1) var(--ease);
+  }
+  .outils-cat:hover .cat-dot { background: var(--cuivre); }
+
+  .cat-nom {
+    font-family: var(--font-display);
+    font-size: 16px;
+    line-height: 1;
+    color: var(--ivoire);
+    letter-spacing: -0.01em;
+  }
+
+  /* Coda */
+  .outils-coda {
+    margin: var(--s-8) auto 0;
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 1.6vw + 0.3rem, 1.4rem);
+    line-height: 1.4;
+    color: var(--ink-2);
+    max-width: 60ch;
+  }
+  .outils-coda strong {
+    color: var(--ivoire);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .outils-coda em {
+    color: var(--cuivre);
+    font-style: italic;
+  }
+</style>
