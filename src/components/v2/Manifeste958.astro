@@ -44,10 +44,23 @@ const sectionClass = variant === 'soft' ? 'section section--soft' : 'section';
     <div class="manifeste-grid">
       <div class="manifeste-text">
         <h2 class="reveal manifeste-h2" id={`${sectionId}-title`}>
-          <span class="manifeste-kicker">Ça fait Tilt<sup>®</sup></span>
-          le jour où vous comprenez que cet écran a une seule raison d'exister :
-          <em>vous rendre votre temps. Pas vous remplacer.</em>
+          Avant, <em>on était comme vous.</em>
         </h2>
+
+        <div class="reveal manifeste-recit">
+          <p>
+            <span class="manifeste-kicker">Ça fait Tilt<sup>®</sup></span>
+            le jour où on a compris.
+            Le jour où on a vu que l'IA pouvait être notre alliée —
+            <em>à condition qu'elle vive chez nous</em>.
+          </p>
+          <p>
+            Ce déclic-là, on a voulu le partager.<br>
+            C'est devenu <strong>Ça fait Tilt<sup>®</sup></strong>, la formation.
+            Et <strong>9·58</strong>, le cockpit qui fait que le déclic
+            <em>ne s'éteint pas le lundi suivant.</em>
+          </p>
+        </div>
 
         <ul class="reveal manifeste-constat" role="list">
           <li>Une formation IA qui finit le vendredi soir, ça ne tient pas trois mois.</li>
@@ -259,29 +272,47 @@ const sectionClass = variant === 'soft' ? 'section section--soft' : 'section';
     gap: var(--s-6);
   }
 
-  /* 1. H2 court — entrée + lien explicite */
+  /* 1. H2 — récit fondateur, court et mémorable */
   .manifeste-h2 {
     font-family: var(--font-display);
-    font-size: clamp(1.75rem, 3vw + 0.4rem, 2.6rem);
-    line-height: 1.2;
+    font-size: clamp(1.9rem, 3.4vw + 0.4rem, 2.9rem);
+    line-height: 1.15;
     letter-spacing: var(--tr-tighter);
     color: var(--ivoire);
     margin: 0;
     font-weight: 400;
+  }
+  .manifeste-h2 em {
+    color: var(--cuivre);
+    font-style: italic;
+  }
+
+  /* 2. Récit narratif — explication du déclic et du lien Tilt®↔9·58 */
+  .manifeste-recit {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+  }
+  .manifeste-recit p {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    line-height: var(--lh-loose);
+    color: var(--ivoire);
+    margin: 0;
+  }
+  .manifeste-recit strong {
+    color: var(--cuivre);
+    font-weight: 500;
+  }
+  .manifeste-recit em {
+    color: var(--cuivre);
+    font-style: italic;
   }
   .manifeste-kicker {
     display: inline;
     font-weight: 500;
     color: var(--cuivre);
     margin-right: 0.2em;
-  }
-  .manifeste-h2 strong {
-    color: var(--cuivre);
-    font-weight: 500;
-  }
-  .manifeste-h2 em {
-    font-style: italic;
-    color: var(--ivoire);
   }
 
   /* 2. Constat 3 lignes — preuve concrète, serif droit */
