@@ -14,6 +14,7 @@ import '@fontsource-variable/fraunces';
 import '@fontsource-variable/inter';
 import '@fontsource-variable/jetbrains-mono';
 import '../styles/v2b.css';
+import ConsentBanner from '../components/ConsentBanner.astro';
 
 interface Props {
   title: string;
@@ -91,6 +92,48 @@ const ogImageUrl = new URL(ogImage, siteUrl).toString();
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <meta name="theme-color" content="#0B0B0A" />
+
+    {/* ─────────────────────────────────────────────────────────────
+       Consent Mode v2 (Advanced) — initialisation
+       S'exécute AVANT le chargement de gtag.js pour respecter la spec
+       Google : developers.google.com/tag-platform/security/guides/consent
+       L'utilisateur EEE conserve un état "denied" par défaut tant
+       qu'il n'a pas interagi avec la bannière (ConsentBanner.astro).
+       ───────────────────────────────────────────────────────────── */}
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        functionality_storage: 'granted',
+        personalization_storage: 'denied',
+        security_storage: 'granted',
+        wait_for_update: 500
+      });
+      gtag('set', 'ads_data_redaction', true);
+      gtag('set', 'url_passthrough', true);
+    </script>
+
+    {/* Google tag (gtag.js) — chargé seulement en production (pas en preview) */}
+    {!noindex && (
+      <>
+        <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-V5X0XXQPWF"></script>
+        <script is:inline>
+          gtag('js', new Date());
+          gtag('config', 'G-V5X0XXQPWF');
+        </script>
+      </>
+    )}
+
+    {/* Plausible (EU, cookieless, sans consentement requis) */}
+    {!noindex && (
+      <script defer data-domain="958.fr" src="https://plausible.io/js/script.js"></script>
+    )}
   </head>
 
   <body>
@@ -107,6 +150,11 @@ const ogImageUrl = new URL(ogImage, siteUrl).toString();
     <main id="main" role="main" style="position: relative; z-index: 2;">
       <slot />
     </main>
+
+    {/* Bannière de consentement cookies — visible si l'utilisateur n'a
+       pas encore choisi. Window.openConsent permet de la rouvrir depuis
+       /mentions-legales/ */}
+    {!noindex && <ConsentBanner />}
 
     <script>
       const io = new IntersectionObserver(

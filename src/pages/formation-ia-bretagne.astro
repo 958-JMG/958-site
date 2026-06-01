@@ -1,5 +1,7 @@
 ---
-import Base from '../layouts/Base.astro';
+import V2bLayout from '../layouts/V2bLayout.astro';
+import V2cHeader from '../components/v2/V2cHeader.astro';
+import V2cFooter from '../components/v2/V2cFooter.astro';
 import CTAButton from '../components/CTAButton.astro';
 
 const departements = [
@@ -105,11 +107,13 @@ const faqSchema = {
 };
 ---
 
-<Base
+<V2bLayout
   title="Formation IA en Bretagne — Intra-entreprise"
   description="Formation IA pour PME bretonnes : Vannes, Rennes, Lorient, Brest, Saint-Brieuc, Nantes. Intra-entreprise, 1 à 10 jours, sur vos cas réels. Organisme de formation enregistré, Qualiopi en cours."
-  jsonLd={[courseSchema, faqSchema]}
 >
+  <V2cHeader />
+  <script type="application/ld+json" set:html={JSON.stringify(courseSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <!-- HERO -->
   <section class="hero" aria-labelledby="h-hero">
     <div class="container">
@@ -265,7 +269,8 @@ const faqSchema = {
       </p>
     </div>
   </section>
-</Base>
+  <V2cFooter />
+</V2bLayout>
 
 <style>
   .hero {
