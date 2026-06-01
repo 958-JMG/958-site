@@ -38,27 +38,25 @@ const sectionClass = variant === 'soft' ? 'section section--soft' : 'section';
   <div class="container">
     <p class="eyebrow reveal manifeste-eyebrow">
       <span class="eyebrow-dash" aria-hidden="true"></span>
-      Pourquoi 9·58 &amp; Ça fait Tilt<sup>®</sup>
+      Pourquoi 9·58 <span aria-hidden="true">&amp;</span><span class="sr-only">et</span> Ça fait Tilt<sup aria-label="marque déposée">®</sup>
     </p>
 
     <div class="manifeste-grid">
       <div class="manifeste-text">
         <h2 class="reveal manifeste-h2" id={`${sectionId}-title`}>
-          Avant, <em>on était comme vous.</em>
+          Avant, <em>j'étais comme vous.</em>
         </h2>
 
         <div class="reveal manifeste-recit">
-          <p>
-            <span class="manifeste-kicker">Ça fait Tilt<sup>®</sup></span>
-            le jour où on a compris.
-            Le jour où on a vu que l'IA pouvait être notre alliée —
+          <p class="recit-decouverte">
+            <span class="manifeste-kicker">Ça fait Tilt<sup aria-label="marque déposée">®</sup></span>
+            le jour où j'ai compris que l'IA pouvait être notre alliée —
             <em>à condition qu'elle vive chez nous</em>.
           </p>
-          <p>
-            Ce déclic-là, on a voulu le partager.<br>
-            C'est devenu <strong>Ça fait Tilt<sup>®</sup></strong>, la formation.
-            Et <strong>9·58</strong>, le cockpit qui fait que le déclic
-            <em>ne s'éteint pas le lundi suivant.</em>
+          <p class="recit-transmission">
+            Ce déclic, j'ai voulu le partager.<br>
+            <em>C'est devenu <strong>Ça fait Tilt<sup aria-label="marque déposée">®</sup></strong>, la formation.</em><br>
+            <em>Et <strong>9·58</strong>, le cockpit qui fait qu'il ne s'éteint pas le lundi suivant.</em>
           </p>
         </div>
 
@@ -287,11 +285,11 @@ const sectionClass = variant === 'soft' ? 'section section--soft' : 'section';
     font-style: italic;
   }
 
-  /* 2. Récit narratif — explication du déclic et du lien Tilt®↔9·58 */
+  /* 2. Récit narratif — découverte personnelle → transmission */
   .manifeste-recit {
     display: flex;
     flex-direction: column;
-    gap: var(--s-4);
+    gap: var(--s-5);
   }
   .manifeste-recit p {
     font-family: var(--font-display);
@@ -307,6 +305,16 @@ const sectionClass = variant === 'soft' ? 'section section--soft' : 'section';
   .manifeste-recit em {
     color: var(--cuivre);
     font-style: italic;
+  }
+  /* Pivot dramatique : "Ce déclic, j'ai voulu le partager" — légèrement
+     en retrait + couleur ivoire forte sur la 1re ligne, italique cuivre
+     sur les 2 suivantes (la transmission proprement dite) */
+  .recit-transmission {
+    padding-left: var(--s-4);
+    border-left: 1px solid var(--cuivre-soft);
+  }
+  .recit-transmission em {
+    line-height: 1.5;
   }
   .manifeste-kicker {
     display: inline;
