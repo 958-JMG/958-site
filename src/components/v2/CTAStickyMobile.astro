@@ -152,15 +152,11 @@ const {
                 opacity 240ms ease-out;
     opacity: 0;
     pointer-events: none;
-    /* Halo léger derrière pour éviter le clipping sur fond très clair (edge case) */
-    background: linear-gradient(
-      to top,
-      rgba(11, 11, 10, 0.96) 0%,
-      rgba(11, 11, 10, 0.78) 60%,
-      rgba(11, 11, 10, 0) 100%
-    );
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    /* Pas de fond ni de blur : sur fond brand --bg #0B0B0A, le bouton
+       cuivre se suffit à lui-même grâce à son box-shadow glow.
+       (le linear-gradient + backdrop-filter créaient un halo blanchâtre
+       gênant la lecture du contenu juste au-dessus.) */
+    background: transparent;
   }
 
   .cta-sticky-mobile.is-visible {
