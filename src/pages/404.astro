@@ -1,11 +1,14 @@
 ---
-import Base from '../layouts/Base.astro';
+import V2bLayout from '../layouts/V2bLayout.astro';
+import V2cHeader from '../components/v2/V2cHeader.astro';
+import V2cFooter from '../components/v2/V2cFooter.astro';
 ---
 
-<Base
+<V2bLayout
   title="Page introuvable"
   description="Cette page n'existe pas ou a été déplacée."
 >
+  <V2cHeader />
   <section class="section is-loose" aria-labelledby="h-404">
     <div class="container is-narrow not-found">
       <p class="not-found-num" aria-hidden="true">404</p>
@@ -20,7 +23,8 @@ import Base from '../layouts/Base.astro';
       </div>
     </div>
   </section>
-</Base>
+  <V2cFooter />
+</V2bLayout>
 
 <style>
   .not-found { text-align: center; }

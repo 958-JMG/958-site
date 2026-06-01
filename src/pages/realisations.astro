@@ -1,5 +1,7 @@
 ---
-import Base from '../layouts/Base.astro';
+import V2bLayout from '../layouts/V2bLayout.astro';
+import V2cHeader from '../components/v2/V2cHeader.astro';
+import V2cFooter from '../components/v2/V2cFooter.astro';
 import CTAButton from '../components/CTAButton.astro';
 import TiltSignature from '../components/TiltSignature.astro';
 import QuoteDisplay from '../components/QuoteDisplay.astro';
@@ -56,10 +58,11 @@ const cas = [
 ];
 ---
 
-<Base
+<V2bLayout
   title="Réalisations — 6 projets IA en PME"
   description="6 cas clients anonymisés. Immobilier, syndic, gestion de fortune, construction, aménagement foncier. Des résultats mesurables, pas des démos."
 >
+  <V2cHeader />
   <!-- ============ HERO ============ -->
   <section class="section is-tight" aria-labelledby="h-hero">
     <div class="container is-default" style="text-align: center;">
@@ -169,7 +172,8 @@ const cas = [
       </div>
     </div>
   </section>
-</Base>
+  <V2cFooter />
+</V2bLayout>
 
 <script>
   function bindMock() {

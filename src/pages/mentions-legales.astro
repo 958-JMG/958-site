@@ -1,11 +1,14 @@
 ---
-import Base from '../layouts/Base.astro';
+import V2bLayout from '../layouts/V2bLayout.astro';
+import V2cHeader from '../components/v2/V2cHeader.astro';
+import V2cFooter from '../components/v2/V2cFooter.astro';
 ---
 
-<Base
+<V2bLayout
   title="Mentions légales"
   description="Mentions légales du site 958.fr — NEUF CINQUANTE HUIT, SARL, SIREN 912 884 228."
 >
+  <V2cHeader />
   <section class="section" aria-labelledby="h-legal">
     <div class="container is-narrow legal">
       <p class="eyebrow reveal">Légal</p>
@@ -43,9 +46,16 @@ import Base from '../layouts/Base.astro';
 
         <h2>Hébergement</h2>
         <p>
-          <strong>Infomaniak Network SA</strong><br>
-          Rue Eugène-Marziano 25, 1227 Les Acacias — Genève, Suisse<br>
-          <a href="https://www.infomaniak.com" target="_blank" rel="noopener">infomaniak.com ↗</a>
+          <strong>Cloudflare, Inc.</strong> — Workers + Workers Assets, réseau edge couvrant l'Europe.<br>
+          101 Townsend Street, San Francisco, CA 94107, USA<br>
+          <a href="https://www.cloudflare.com" target="_blank" rel="noopener">cloudflare.com ↗</a><br>
+          Cloudflare adhère au cadre <em>EU-US Data Privacy Framework</em> (DPF) reconnu par
+          la Commission européenne par décision d'adéquation du 10 juillet 2023.
+        </p>
+        <p>
+          <strong>Traitement des leads</strong> : les formulaires sont traités par
+          <strong>n8n cloud</strong> (région UE) et l'envoi des emails de notification
+          passe par <strong>Brevo</strong> (anciennement Sendinblue, Paris, France).
         </p>
 
         <h2>Propriété intellectuelle</h2>
@@ -62,10 +72,17 @@ import Base from '../layouts/Base.astro';
 
         <h2>Données personnelles</h2>
         <p>
-          Les données collectées via le formulaire de contact sont utilisées uniquement
-          pour répondre aux demandes. Elles sont hébergées en Europe (Infomaniak, Suisse —
-          pays reconnu par la Commission européenne comme offrant un niveau de protection
-          adéquat) et ne sont transmises à aucun tiers.
+          Les données collectées via les formulaires de contact (audit, brief formation,
+          inscription Découverte) sont utilisées uniquement pour répondre à vos demandes.
+          Elles transitent par Cloudflare (cadre EU-US DPF), sont traitées par n8n cloud
+          en région UE, et stockées chez Brevo (Paris, France). Aucune donnée n'est
+          transmise à des tiers commerciaux.
+        </p>
+        <p>
+          Les champs collectés sont strictement ceux que vous saisissez (nom, email,
+          entreprise, contexte) plus quelques métadonnées techniques (date, origine,
+          identifiant de requête Cloudflare). Durée de conservation : 24 mois après
+          dernière interaction commerciale.
         </p>
         <p>
           Conformément au RGPD et à la loi Informatique et Libertés, vous disposez d'un
@@ -106,7 +123,8 @@ import Base from '../layouts/Base.astro';
       </div>
     </div>
   </section>
-</Base>
+  <V2cFooter />
+</V2bLayout>
 
 <style>
   .legal-body { margin-top: var(--s-7); }

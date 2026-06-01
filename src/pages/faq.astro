@@ -1,5 +1,7 @@
 ---
-import Base from '../layouts/Base.astro';
+import V2bLayout from '../layouts/V2bLayout.astro';
+import V2cHeader from '../components/v2/V2cHeader.astro';
+import V2cFooter from '../components/v2/V2cFooter.astro';
 import CTAButton from '../components/CTAButton.astro';
 
 const groups = [
@@ -59,10 +61,11 @@ const groups = [
 const allFaqs = groups.flatMap((g) => g.items);
 ---
 
-<Base
+<V2bLayout
   title="FAQ — Questions fréquentes"
   description="Réponses aux questions les plus fréquentes sur mes services d'audit, structuration et implémentation IA."
 >
+  <V2cHeader />
   <section class="section is-tight" aria-labelledby="h-faq">
     <div class="container is-default" style="text-align: center;">
       <p class="eyebrow reveal">FAQ</p>
@@ -113,7 +116,8 @@ const allFaqs = groups.flatMap((g) => g.items);
       })),
     })}
   />
-</Base>
+  <V2cFooter />
+</V2bLayout>
 
 <style>
   .faq-group + .faq-group { margin-top: var(--s-8); }

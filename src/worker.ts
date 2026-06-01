@@ -14,7 +14,7 @@ export interface Env {
   PUBLIC_N8N_WEBHOOK_DIAGNOSTIC?: string;
 }
 
-// Redirections 301 post-cutover (anciens chemins proto v2c → racine)
+// Redirections 301 post-cutover (anciens chemins proto v2c + v2 + v2b → racine)
 const REDIRECTS_301: Record<string, string> = {
   '/preview/v2c': '/',
   '/preview/v2c/': '/',
@@ -28,7 +28,22 @@ const REDIRECTS_301: Record<string, string> = {
   '/preview/v2c/diagnostic/': '/diagnostic/',
   '/preview/v2c/merci': '/merci/',
   '/preview/v2c/merci/': '/merci/',
+  '/preview/v2': '/',
+  '/preview/v2/': '/',
+  '/preview/v2b': '/',
+  '/preview/v2b/': '/',
 };
+
+// Origines autorisées pour POST /api/lead (anti open-relay vers n8n)
+const ALLOWED_ORIGINS = new Set([
+  'https://www.958.fr',
+  'https://958.fr',
+]);
+
+// Garde-fous payload
+const MAX_PAYLOAD_BYTES = 8 * 1024; // 8 KiB
+const REQUIRED_FIELDS = ['nom', 'email', 'type'] as const;
+const MAX_FIELD_LENGTH = 4000;
 
 export default {
   async fetch(request: Request, env: Env, _ctx: ExecutionContext): Promise<Response> {
@@ -58,25 +73,62 @@ async function handleLead(request: Request, env: Env): Promise<Response> {
     });
   }
 
+  // Garde-fou 1 — Origin allowlist (bloque l'open-relay vers n8n)
+  const origin = request.headers.get('origin') || '';
+  if (origin && !ALLOWED_ORIGINS.has(origin)) {
+    return json({ error: 'origin_not_allowed' }, 403);
+  }
+
+  // Garde-fou 2 — Taille payload max 8 KiB
+  const contentLength = parseInt(request.headers.get('content-length') || '0', 10);
+  if (contentLength > MAX_PAYLOAD_BYTES) {
+    return json({ error: 'payload_too_large', max_bytes: MAX_PAYLOAD_BYTES }, 413);
+  }
+
   const webhook = env.N8N_WEBHOOK_URL || env.PUBLIC_N8N_WEBHOOK_DIAGNOSTIC;
   if (!webhook) {
     return json({ error: 'webhook_not_configured', hint: 'Set N8N_WEBHOOK_URL in Cloudflare env.' }, 500);
   }
 
-  let payload: unknown;
+  let payload: Record<string, unknown>;
   try {
-    payload = await request.json();
+    const parsed = await request.json();
+    if (typeof parsed !== 'object' || parsed === null) {
+      return json({ error: 'invalid_payload_shape' }, 400);
+    }
+    payload = parsed as Record<string, unknown>;
   } catch {
     return json({ error: 'invalid_json' }, 400);
   }
 
+  // Garde-fou 3 — Honeypot anti-bot (côté serveur, en plus du front)
+  if (typeof payload.website === 'string' && payload.website.trim() !== '') {
+    // On simule un succès pour ne pas signaler au bot qu'il est détecté
+    return json({ ok: true, _honeypot: true }, 200);
+  }
+
+  // Garde-fou 4 — Champs requis présents et de bonne taille
+  for (const field of REQUIRED_FIELDS) {
+    const value = payload[field];
+    if (typeof value !== 'string' || value.trim() === '') {
+      return json({ error: 'missing_required_field', field }, 400);
+    }
+    if (value.length > MAX_FIELD_LENGTH) {
+      return json({ error: 'field_too_long', field, max: MAX_FIELD_LENGTH }, 413);
+    }
+  }
+
   // Traçabilité côté serveur
   const enriched = {
-    ...(typeof payload === 'object' && payload !== null ? payload : {}),
+    ...payload,
     _proxied_at: new Date().toISOString(),
-    _origin: request.headers.get('origin') || 'unknown',
+    _origin: origin || 'unknown',
     _cf_ray: request.headers.get('cf-ray') || undefined,
   };
+
+  // Garde-fou 5 — Timeout fetch upstream (n8n) à 15s
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 15_000);
 
   let upstream: Response;
   try {
@@ -84,10 +136,18 @@ async function handleLead(request: Request, env: Env): Promise<Response> {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(enriched),
+      signal: controller.signal,
     });
   } catch (e) {
-    return json({ error: 'upstream_fetch_failed', message: (e as Error).message }, 502);
+    clearTimeout(timeout);
+    const message = (e as Error).message;
+    const isTimeout = (e as Error).name === 'AbortError';
+    return json({
+      error: isTimeout ? 'upstream_timeout' : 'upstream_fetch_failed',
+      message,
+    }, isTimeout ? 504 : 502);
   }
+  clearTimeout(timeout);
 
   const text = await upstream.text();
   return new Response(text || '{"ok":true}', {

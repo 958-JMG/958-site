@@ -1,5 +1,7 @@
 ---
-import Base from '../layouts/Base.astro';
+import V2bLayout from '../layouts/V2bLayout.astro';
+import V2cHeader from '../components/v2/V2cHeader.astro';
+import V2cFooter from '../components/v2/V2cFooter.astro';
 import CTAButton from '../components/CTAButton.astro';
 import TiltSignature from '../components/TiltSignature.astro';
 
@@ -111,11 +113,13 @@ const faqSchema = {
 };
 ---
 
-<Base
+<V2bLayout
   title="Audit IA PME — Cartographie, livrables, ROI"
   description="Audit IA pour TPE et PME : cartographie des cas d'usage, priorisation, rapport actionnable de 15 à 25 pages. 1 200 € HT — 900 € HT en lancement jusqu'au 31/07. Basé à Vannes."
-  jsonLd={[auditServiceSchema, faqSchema]}
 >
+  <V2cHeader />
+  <script type="application/ld+json" set:html={JSON.stringify(auditServiceSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <!-- ============ HERO ============ -->
   <section class="hero" aria-labelledby="h-hero">
     <div class="container">
@@ -306,7 +310,8 @@ const faqSchema = {
       </p>
     </div>
   </section>
-</Base>
+  <V2cFooter />
+</V2bLayout>
 
 <style>
   /* ============ HERO ============ */

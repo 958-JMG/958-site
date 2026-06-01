@@ -8,7 +8,7 @@ import V2cFooter from '../../components/v2/V2cFooter.astro';
 
 <V2bLayout
   title="Demander un diagnostic"
-  description="Un audit IA d'un jour, sous accord de confidentialité, sans engagement. Pour artisans, promoteurs, agences immobilières, syndics et TPE/PME qui veulent installer l'IA dans leur entreprise."
+  description="Un audit IA d'un jour, sous accord de confidentialité, sans engagement. Pour artisans, promoteurs, agences immobilières, syndics et TPE-PME qui veulent installer l'IA dans leur entreprise."
 >
   <V2cHeader currentSection="diagnostic" />
 
@@ -108,7 +108,7 @@ import V2cFooter from '../../components/v2/V2cFooter.astro';
             <textarea id="contexte" name="contexte" rows="4" required placeholder="Ex : on a essayé ChatGPT en perso, mais rien d'installé. On voudrait commencer par notre tréso et nos mails."></textarea>
           </div>
 
-          <input type="hidden" name="source_page" value="preview/v2c/diagnostic" />
+          <input type="hidden" name="source_page" value="site/diagnostic" />
           <input type="hidden" name="type" value="diagnostic" />
 
           <button type="submit" class="btn btn--primary btn--lg submit" id="submit-btn">
