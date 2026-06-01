@@ -51,8 +51,8 @@ const sectionClass = variant === 'soft' ? 'section section--soft' : 'section';
         <a href="/diagnostic/" class="porte">
           <Icon name="shield" size={22} strokeWidth={1.7} />
           <div>
-            <strong>Audit IA</strong>
-            <span>Un jour sur site, sous accord de confidentialité, rapport à la clé.</span>
+            <strong>Audit IA <em class="porte-delai">— 1 jour</em></strong>
+            <span>Sur site, sous accord de confidentialité, rapport à la clé.</span>
           </div>
           <Icon name="arrow-right" size={16} class="arrow" />
         </a>
@@ -61,7 +61,7 @@ const sectionClass = variant === 'soft' ? 'section section--soft' : 'section';
         <a href="/formation/" class="porte">
           <Icon name="graduation-cap" size={22} strokeWidth={1.7} />
           <div>
-            <strong>Formation Ça fait Tilt®</strong>
+            <strong>Formation Ça fait Tilt® <em class="porte-delai">— 2 jours</em></strong>
             <span>Programmes inter ou intra, du Niveau 1 au sur-mesure.</span>
           </div>
           <Icon name="arrow-right" size={16} class="arrow" />
@@ -71,8 +71,8 @@ const sectionClass = variant === 'soft' ? 'section section--soft' : 'section';
         <a href="/diagnostic/?type=echange" class="porte">
           <Icon name="phone" size={22} strokeWidth={1.7} />
           <div>
-            <strong>Échange initial</strong>
-            <span>30 minutes pour cadrer votre besoin, sans engagement.</span>
+            <strong>Échange initial <em class="porte-delai">— 30 min</em></strong>
+            <span>Pour cadrer votre besoin, sans engagement.</span>
           </div>
           <Icon name="arrow-right" size={16} class="arrow" />
         </a>
@@ -199,6 +199,12 @@ const sectionClass = variant === 'soft' ? 'section section--soft' : 'section';
     font-weight: 400;
     font-size: var(--step-1);
     color: var(--ivoire);
+  }
+  .porte-delai {
+    font-style: italic;
+    color: var(--ink-3);
+    font-weight: 400;
+    margin-left: 2px;
   }
   .porte span {
     font-size: var(--step--1);
