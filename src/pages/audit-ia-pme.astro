@@ -334,7 +334,8 @@ const faqSchema = {
   .hero-title {
     font-family: var(--font-display);
     font-weight: 500;
-    font-size: var(--step-7);
+    /* clamp explicite : var(--step-7) n'est pas défini dans le design system */
+    font-size: clamp(2.5rem, 4.5vw + 0.75rem, 4rem);
     line-height: var(--lh-tight);
     letter-spacing: var(--tr-tight);
     color: var(--ink);
