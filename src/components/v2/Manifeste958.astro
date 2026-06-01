@@ -3,8 +3,14 @@
  * Manifeste958 — bloc WHY Sinek "Ça fait Tilt® + 9·58"
  *
  * Composant V2c partagé qui explique le lien Tilt® ↔ 9·58 et porte
- * la conviction profonde du brand. Pédagogique + dur sur le constat,
- * bienveillant sur la posture (pas de combat, pas d'ennemi nommé).
+ * la conviction profonde du brand.
+ *
+ * Layout : grid 2 colonnes desktop (texte gauche + visuel droite),
+ * stack vertical mobile (visuel haut + texte dessous).
+ *
+ * Visuel : ampoule cuivre qui s'allume (le déclic Tilt®) reliée à
+ * un cockpit miniature (l'installation 9·58). En-dessous, mini-timeline
+ * en 3 stops (Déclic / Installation / Autonomie).
  *
  * Props :
  *   variant : 'soft' (fond bg-2, default) | 'plain' (fond bg)
@@ -28,79 +34,246 @@ const sectionClass = variant === 'soft' ? 'section section--soft' : 'section';
 ---
 
 <section class={sectionClass} aria-labelledby={`${sectionId}-title`} id={sectionId}>
-  <div class="container is-default">
-    <p class="eyebrow reveal manifeste-eyebrow">Pourquoi 9·58 &amp; Ça fait Tilt<sup>®</sup></p>
+  <div class="container">
+    <p class="eyebrow reveal manifeste-eyebrow">
+      <span class="eyebrow-dash" aria-hidden="true"></span>
+      Pourquoi 9·58 &amp; Ça fait Tilt<sup>®</sup>
+    </p>
 
-    <div class="manifeste-block">
-      <p class="reveal manifeste-tilt" id={`${sectionId}-title`}>
-        <strong class="manifeste-kicker">Ça fait Tilt<sup>®</sup>.</strong>
-        Le moment où vous comprenez qu'une IA, ça ne s'achète pas.
-        <em>Ça s'installe. Ça s'apprend. Ça se transmet.</em>
-      </p>
+    <div class="manifeste-grid">
+      <div class="manifeste-text">
+        <h2 class="reveal manifeste-tilt" id={`${sectionId}-title`}>
+          <span class="manifeste-kicker">Ça fait Tilt<sup>®</sup>.</span>
+          Le moment où vous comprenez qu'une IA, ça ne s'achète pas.
+          <span class="manifeste-triade">Ça s'installe. Ça s'apprend. Ça se transmet.</span>
+        </h2>
 
-      <ul class="reveal manifeste-constat" role="list">
-        <li>Une formation IA qui finit le vendredi soir, ça ne tient pas trois mois.</li>
-        <li>Un cockpit IA livré sans formation, ça prend la poussière.</li>
-        <li>Une IA hébergée loin de chez vous, ça ne deviendra jamais vraiment la vôtre.</li>
-      </ul>
+        <ul class="reveal manifeste-constat" role="list">
+          <li>Une formation IA qui finit le vendredi soir, ça ne tient pas trois mois.</li>
+          <li>Un cockpit IA livré sans formation, ça prend la poussière.</li>
+          <li>Une IA hébergée loin de chez vous, ça ne deviendra jamais vraiment la vôtre.</li>
+        </ul>
 
-      <p class="reveal manifeste-pont">
-        C'est pour ça que <strong>Ça fait Tilt<sup>®</sup></strong> et <strong>9·58</strong> vont ensemble.<br>
-        <em>Le déclic, et ce qui le rend irréversible.</em>
-      </p>
-
-      <p class="reveal manifeste-why">
-        Parce qu'à <strong>28 ans d'entrepreneuriat</strong>, j'ai appris une chose :
-      </p>
-
-      <blockquote class="reveal manifeste-punchline">
-        L'IA n'a pas été inventée pour vous remplacer.<br>
-        <em>Elle a été inventée pour vous rendre votre temps.</em>
-      </blockquote>
-
-      <p class="reveal manifeste-coda">
-        Encore faut-il qu'elle <em>vive chez vous</em>.
-      </p>
-
-      {showSignature && (
-        <p class="reveal manifeste-sig">
-          — Jean-Marc Geuring · Fondateur 9·58
+        <p class="reveal manifeste-pont">
+          C'est pour ça que <strong>Ça fait Tilt<sup>®</sup></strong> et <strong>9·58</strong> vont ensemble.<br>
+          <em>Le déclic, et ce qui le rend irréversible.</em>
         </p>
-      )}
+
+        <p class="reveal manifeste-why">
+          Parce qu'à <strong>28 ans d'entrepreneuriat</strong>, j'ai appris une chose :
+        </p>
+
+        <blockquote class="reveal manifeste-punchline">
+          L'IA n'a pas été inventée pour vous remplacer.<br>
+          <em>Elle a été inventée pour vous rendre votre temps.</em>
+        </blockquote>
+
+        <p class="reveal manifeste-coda">
+          Encore faut-il qu'elle <em>vive chez vous</em>.
+        </p>
+
+        {showSignature && (
+          <p class="reveal manifeste-sig">
+            — Jean-Marc Geuring · Fondateur 9·58
+          </p>
+        )}
+      </div>
+
+      <aside class="manifeste-visual reveal" aria-hidden="true">
+        <!-- SVG : ampoule cuivre + rayons + cockpit miniature -->
+        <svg class="manifeste-svg" viewBox="0 0 280 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schéma : le déclic Tilt® allume le cockpit 9·58">
+          <!-- Rayons de l'ampoule (qui s'allument) -->
+          <g class="svg-rays">
+            <line x1="140" y1="20" x2="140" y2="6" />
+            <line x1="80" y1="55" x2="62" y2="38" />
+            <line x1="200" y1="55" x2="218" y2="38" />
+            <line x1="62" y1="105" x2="40" y2="105" />
+            <line x1="218" y1="105" x2="240" y2="105" />
+            <line x1="80" y1="155" x2="62" y2="172" />
+            <line x1="200" y1="155" x2="218" y2="172" />
+          </g>
+
+          <!-- Ampoule -->
+          <g class="svg-bulb">
+            <!-- Verre rond -->
+            <circle cx="140" cy="100" r="50" fill="#0B0B0A" stroke="#C75F2D" stroke-width="2" />
+            <!-- Filament intérieur stylisé (forme de cœur/U) -->
+            <path
+              class="svg-filament"
+              d="M 120 100 Q 120 80 140 80 Q 160 80 160 100 Q 160 115 140 110 Q 120 115 120 100 Z"
+              fill="none"
+              stroke="#C75F2D"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <!-- Tige filament -->
+            <line x1="135" y1="120" x2="135" y2="140" stroke="#C75F2D" stroke-width="1.5" />
+            <line x1="145" y1="120" x2="145" y2="140" stroke="#C75F2D" stroke-width="1.5" />
+            <!-- Culot -->
+            <rect x="125" y="145" width="30" height="14" fill="#C75F2D" rx="2" />
+            <rect x="127" y="161" width="26" height="2" fill="#0B0B0A" />
+            <rect x="127" y="166" width="26" height="2" fill="#0B0B0A" />
+            <rect x="127" y="171" width="26" height="2" fill="#0B0B0A" />
+            <!-- Pointe -->
+            <rect x="132" y="176" width="16" height="6" fill="#C75F2D" rx="1" />
+          </g>
+
+          <!-- Trait de connexion ampoule → cockpit -->
+          <line
+            class="svg-connect"
+            x1="140" y1="186"
+            x2="140" y2="208"
+            stroke="#C75F2D"
+            stroke-width="2"
+            stroke-dasharray="3,4"
+          />
+
+          <!-- Cockpit (3 panneaux + bandeau bas) -->
+          <g class="svg-cockpit">
+            <!-- Cadre principal -->
+            <rect x="50" y="210" width="180" height="100" fill="#131210" stroke="#C75F2D" stroke-width="2" rx="6" />
+
+            <!-- Panneau 1 (tréso) -->
+            <rect x="60" y="222" width="50" height="36" fill="#0B0B0A" stroke="#A39977" stroke-width="0.6" rx="3" />
+            <line x1="65" y1="230" x2="100" y2="230" stroke="#A39977" stroke-width="1" />
+            <line x1="65" y1="237" x2="92" y2="237" stroke="#A39977" stroke-width="0.7" />
+            <line x1="65" y1="248" x2="88" y2="248" stroke="#C75F2D" stroke-width="2" />
+
+            <!-- Panneau 2 (équipe) -->
+            <rect x="115" y="222" width="50" height="36" fill="#0B0B0A" stroke="#A39977" stroke-width="0.6" rx="3" />
+            <circle cx="128" cy="237" r="3.5" fill="#C75F2D" />
+            <circle cx="140" cy="237" r="3.5" fill="#A39977" />
+            <circle cx="152" cy="237" r="3.5" fill="#A39977" />
+            <line x1="122" y1="250" x2="158" y2="250" stroke="#A39977" stroke-width="0.7" />
+
+            <!-- Panneau 3 (timeline) -->
+            <rect x="170" y="222" width="50" height="36" fill="#0B0B0A" stroke="#A39977" stroke-width="0.6" rx="3" />
+            <line x1="175" y1="230" x2="215" y2="230" stroke="#A39977" stroke-width="0.7" />
+            <line x1="175" y1="237" x2="210" y2="237" stroke="#C75F2D" stroke-width="1.5" />
+            <line x1="175" y1="244" x2="207" y2="244" stroke="#A39977" stroke-width="0.7" />
+            <line x1="175" y1="251" x2="203" y2="251" stroke="#A39977" stroke-width="0.7" />
+
+            <!-- Bandeau bas (assistant IA) -->
+            <rect x="60" y="266" width="160" height="34" fill="#0B0B0A" stroke="#A39977" stroke-width="0.6" rx="3" />
+            <circle cx="72" cy="283" r="3" fill="#C75F2D" class="svg-pulse" />
+            <line x1="83" y1="278" x2="210" y2="278" stroke="#A39977" stroke-width="0.7" />
+            <line x1="83" y1="284" x2="195" y2="284" stroke="#A39977" stroke-width="0.7" />
+            <line x1="83" y1="290" x2="180" y2="290" stroke="#A39977" stroke-width="0.7" />
+          </g>
+        </svg>
+
+        <!-- Mini-timeline en 3 stops -->
+        <ol class="manifeste-timeline" role="list">
+          <li class="manifeste-step">
+            <span class="step-n">01</span>
+            <span class="step-eyebrow">Le déclic</span>
+            <span class="step-label">Ça fait Tilt<sup>®</sup></span>
+          </li>
+          <li class="step-sep" aria-hidden="true">→</li>
+          <li class="manifeste-step">
+            <span class="step-n">02</span>
+            <span class="step-eyebrow">L'installation</span>
+            <span class="step-label">9·58 installe</span>
+          </li>
+          <li class="step-sep" aria-hidden="true">→</li>
+          <li class="manifeste-step">
+            <span class="step-n">03</span>
+            <span class="step-eyebrow">L'autonomie</span>
+            <span class="step-label">Chez vous, à votre nom</span>
+          </li>
+        </ol>
+      </aside>
     </div>
   </div>
 </section>
 
+<script>
+  // IntersectionObserver pour déclencher l'animation de l'ampoule
+  function bindManifesteVisual() {
+    const svgs = document.querySelectorAll<HTMLElement>('.manifeste-svg');
+    if (!svgs.length) return;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-lit');
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+
+    svgs.forEach((svg) => io.observe(svg));
+  }
+
+  bindManifesteVisual();
+  document.addEventListener('astro:page-load', bindManifesteVisual);
+</script>
+
 <style>
+  /* ============ LAYOUT GRID ============ */
+  .manifeste-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    gap: var(--s-8);
+    align-items: start;
+  }
+  @media (max-width: 860px) {
+    .manifeste-grid {
+      grid-template-columns: 1fr;
+      gap: var(--s-6);
+    }
+    .manifeste-visual {
+      order: -1;
+      max-width: 320px;
+      margin-inline: auto;
+    }
+  }
+
+  /* ============ EYEBROW ============ */
   .manifeste-eyebrow {
     margin-bottom: var(--s-7);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-3);
+    font-size: 13px;
+  }
+  .eyebrow-dash {
+    display: inline-block;
+    width: 28px;
+    height: 2px;
+    background: var(--cuivre);
+    flex-shrink: 0;
   }
 
-  .manifeste-block {
-    max-width: 64ch;
-  }
+  /* ============ TEXTE GAUCHE ============ */
+  .manifeste-text { max-width: 56ch; }
 
-  /* Punchline d'ouverture — Tilt® kicker + texte serif */
+  /* H2 d'ouverture — Tilt® kicker + texte serif */
   .manifeste-tilt {
     font-family: var(--font-display);
-    font-size: clamp(1.5rem, 2.4vw + 0.4rem, 2.1rem);
-    line-height: 1.3;
+    font-size: clamp(1.4rem, 2.2vw + 0.4rem, 1.9rem);
+    line-height: 1.35;
     letter-spacing: var(--tr-tight);
     color: var(--ivoire);
     margin: 0 0 var(--s-6) 0;
-  }
-  .manifeste-tilt em {
-    color: var(--cuivre);
-    font-style: italic;
+    font-weight: 400;
   }
   .manifeste-kicker {
-    display: inline-block;
+    display: inline;
     font-weight: 500;
     color: var(--cuivre);
-    margin-right: 0.3em;
+    margin-right: 0.2em;
+  }
+  .manifeste-triade {
+    color: var(--cuivre);
+    font-weight: 500;
   }
 
-  /* Constat dur en 3 lignes */
+  /* Constat dur en 3 lignes — serif droit (pas italic) */
   .manifeste-constat {
     list-style: none;
     padding: 0;
@@ -108,15 +281,14 @@ const sectionClass = variant === 'soft' ? 'section section--soft' : 'section';
     display: flex;
     flex-direction: column;
     gap: var(--s-3);
-    border-left: 2px solid var(--cuivre);
+    border-left: 2px solid var(--ink-3);
     padding-left: var(--s-5);
   }
   .manifeste-constat li {
     font-family: var(--font-display);
     font-size: var(--step-1);
     line-height: var(--lh-loose);
-    color: var(--ink-1);
-    font-style: italic;
+    color: var(--ivoire);
   }
 
   /* Pont entre constat et WHY */
@@ -144,20 +316,18 @@ const sectionClass = variant === 'soft' ? 'section section--soft' : 'section';
     color: var(--ink-2);
     margin: 0 0 var(--s-4) 0;
   }
-  .manifeste-why strong {
-    color: var(--ivoire);
-  }
+  .manifeste-why strong { color: var(--ivoire); }
 
-  /* Punchline WHY Sinek — le manifeste pur */
+  /* Punchline WHY Sinek — bordure cuivre 3px */
   .manifeste-punchline {
     font-family: var(--font-display);
-    font-size: clamp(1.6rem, 2.8vw + 0.4rem, 2.4rem);
+    font-size: clamp(1.5rem, 2.6vw + 0.4rem, 2.2rem);
     line-height: 1.2;
     letter-spacing: var(--tr-tighter);
     color: var(--ivoire);
     border-left: 3px solid var(--cuivre);
     padding: var(--s-3) 0 var(--s-3) var(--s-5);
-    margin: 0 0 var(--s-6) 0;
+    margin: 0 0 var(--s-7) 0;
     font-weight: 400;
   }
   .manifeste-punchline em {
@@ -166,14 +336,14 @@ const sectionClass = variant === 'soft' ? 'section section--soft' : 'section';
     display: inline-block;
   }
 
-  /* Coda souverain */
+  /* Coda souverain — agrandie, italique */
   .manifeste-coda {
     font-family: var(--font-display);
-    font-size: var(--step-2);
-    line-height: 1.3;
+    font-size: clamp(1.6rem, 3vw + 0.4rem, 2.5rem);
+    line-height: 1.25;
     color: var(--ivoire);
     margin: 0 0 var(--s-6) 0;
-    font-style: italic;
+    font-weight: 400;
   }
   .manifeste-coda em {
     color: var(--cuivre);
@@ -187,12 +357,137 @@ const sectionClass = variant === 'soft' ? 'section section--soft' : 'section';
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--ink-3);
-    margin: var(--s-6) 0 0 0;
+    margin: var(--s-5) 0 0 0;
   }
 
   /* Sup pour ® */
-  .manifeste-block sup {
+  :where(.manifeste-text, .manifeste-step) sup {
     font-size: 0.55em;
     vertical-align: super;
+  }
+
+  /* ============ VISUEL DROITE ============ */
+  .manifeste-visual {
+    position: sticky;
+    top: calc(var(--header-h) + var(--s-5));
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+  }
+  @media (max-width: 860px) {
+    .manifeste-visual { position: static; }
+  }
+
+  .manifeste-svg {
+    width: 100%;
+    height: auto;
+    max-width: 280px;
+    margin-inline: auto;
+    display: block;
+  }
+
+  /* Animation : ampoule éteinte par défaut, s'allume quand visible */
+  .svg-bulb circle,
+  .svg-filament,
+  .svg-rays line,
+  .svg-bulb rect:not([fill="#0B0B0A"]),
+  .svg-cockpit rect:not([fill="#0B0B0A"]):not([fill="#131210"]),
+  .svg-cockpit circle,
+  .svg-cockpit line,
+  .svg-connect {
+    transition: opacity 0.6s var(--ease), filter 0.8s var(--ease);
+  }
+  .svg-rays line {
+    opacity: 0;
+    stroke: var(--cuivre);
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+  .svg-filament { opacity: 0.3; }
+  .svg-connect { opacity: 0.3; }
+
+  .manifeste-svg.is-lit .svg-rays line { opacity: 0.7; }
+  .manifeste-svg.is-lit .svg-filament {
+    opacity: 1;
+    filter: drop-shadow(0 0 4px rgba(199, 95, 45, 0.6));
+  }
+  .manifeste-svg.is-lit .svg-bulb circle:first-of-type {
+    filter: drop-shadow(0 0 8px rgba(199, 95, 45, 0.3));
+  }
+  .manifeste-svg.is-lit .svg-connect {
+    opacity: 1;
+    animation: dashFlow 1.2s linear infinite;
+  }
+  .manifeste-svg.is-lit .svg-pulse {
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes dashFlow {
+    to { stroke-dashoffset: -14; }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* Respect prefers-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    .manifeste-svg.is-lit .svg-connect { animation: none; }
+    .manifeste-svg.is-lit .svg-pulse { animation: none; }
+    .manifeste-svg.is-lit .svg-filament,
+    .manifeste-svg.is-lit .svg-bulb circle:first-of-type { filter: none; }
+  }
+
+  /* ============ MINI-TIMELINE ============ */
+  .manifeste-timeline {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+    justify-content: space-between;
+  }
+  .manifeste-step {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
+  }
+  .step-n {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--cuivre);
+    text-transform: uppercase;
+  }
+  .step-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .step-label {
+    font-family: var(--font-display);
+    font-size: 13px;
+    color: var(--ivoire);
+    line-height: 1.3;
+    font-weight: 500;
+  }
+  .step-sep {
+    color: var(--cuivre);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    flex-shrink: 0;
+    padding-bottom: 2px;
+  }
+  @media (max-width: 860px) {
+    .manifeste-timeline {
+      max-width: 320px;
+      margin-inline: auto;
+    }
+    .step-label { font-size: 12px; }
   }
 </style>
