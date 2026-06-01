@@ -137,10 +137,12 @@ const faqSchema = {
     <div class="container">
       <p class="eyebrow reveal">Consultant IA · Vannes (56) · Bretagne · Depuis 2022</p>
       <h1 id="h-hero" class="hero-title reveal">
-        Un consultant IA.
+        Un consultant IA à Vannes.
         <br>Pas une agence.
-        <span class="hero-title-soft">Vous appelez, je décroche. Je vous écoute, je propose, je livre. Et ça fait tilt<sup>®</sup>.</span>
       </h1>
+      <p class="hero-baseline reveal">
+        Vous appelez, je décroche. Je vous écoute, je propose, je livre. Et ça fait tilt<sup>®</sup>.
+      </p>
       <p class="lead reveal">
         Audit, formation, implémentation et accompagnement IA pour dirigeants de PME bretonnes.
         Bureau à Vannes (1 bis rue Thiers, à 5 min de la gare). Intervention sans frais de
@@ -153,7 +155,6 @@ const faqSchema = {
       </div>
       <ul class="hero-assurances reveal" aria-label="Cadre">
         <li><span class="dot"></span>+500 personnes formées</li>
-        <li><span class="dot"></span>6 cockpits livrés</li>
         <li><span class="dot"></span>Organisme de formation enregistré</li>
         <li><span class="dot"></span>Modèles européens</li>
       </ul>
@@ -326,21 +327,22 @@ const faqSchema = {
     margin-top: var(--s-4);
     max-width: 24ch;
   }
-  .hero-title-soft {
-    display: block;
-    margin-top: var(--s-4);
+  .hero-baseline {
+    margin-top: var(--s-5);
+    font-family: var(--font-display);
     font-style: italic;
     font-weight: 400;
     color: var(--ink-2);
-    font-size: 0.5em;
+    font-size: var(--step-2);
     letter-spacing: -0.01em;
     line-height: var(--lh-snug);
+    max-width: 36ch;
   }
   .hero-title sup,
-  .hero-title-soft sup {
-    font-size: 0.42em;
+  .hero-baseline sup {
+    font-size: 0.6em;
     color: var(--accent);
-    top: -0.7em;
+    top: -0.5em;
     position: relative;
     font-style: normal;
     font-weight: 400;
