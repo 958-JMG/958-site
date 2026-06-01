@@ -5,6 +5,7 @@ import LogoMark from '../../components/v2/LogoMark.astro';
 import V2cHeader from '../../components/v2/V2cHeader.astro';
 import V2cFooter from '../../components/v2/V2cFooter.astro';
 import PortesEntree from '../../components/v2/PortesEntree.astro';
+import Manifeste958 from '../../components/v2/Manifeste958.astro';
 
 // Publics — accompagnement dirigeant placé en premier
 const publics = [
@@ -165,21 +166,8 @@ const versus = [
     </div>
   </section>
 
-  <!-- MANIFESTE -->
-  <section class="section section--clarif is-tight">
-    <div class="container is-default">
-      <p class="reveal clarif-text">
-        <em>Une formation IA ne vaut rien<br>si elle se finit le vendredi soir.</em>
-      </p>
-      <p class="reveal manifeste-sub">
-        Ce qui compte, ce n'est pas ce qu'on dit en formation.
-        C'est ce que vos équipes emportent <strong>le lundi matin</strong>.
-        Un prompt trouvé ensemble, un workflow testé sur un vrai dossier, un outil branché sur vos données,
-        un cadre qui se transmet : voilà ce qui reste.<br>
-        Le reste — slides, théorie, catalogues — n'est pas notre métier.
-      </p>
-    </div>
-  </section>
+  <!-- MANIFESTE WHY — Pourquoi 9·58 & Ça fait Tilt® -->
+  <Manifeste958 variant="plain" />
 
   <!-- ACCOMPAGNEMENT DU DIRIGEANT — angle dédié -->
   <section id="accompagnement" class="section section--soft" aria-labelledby="accomp-title">
