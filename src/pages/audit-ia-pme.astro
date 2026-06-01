@@ -2,6 +2,9 @@
 import V2bLayout from '../layouts/V2bLayout.astro';
 import V2cHeader from '../components/v2/V2cHeader.astro';
 import V2cFooter from '../components/v2/V2cFooter.astro';
+import PortesEntree from '../components/v2/PortesEntree.astro';
+import Investissement from '../components/v2/Investissement.astro';
+import CTAStickyMobile from '../components/v2/CTAStickyMobile.astro';
 import CTAButton from '../components/CTAButton.astro';
 import TiltSignature from '../components/TiltSignature.astro';
 
@@ -114,8 +117,8 @@ const faqSchema = {
 ---
 
 <V2bLayout
-  title="Audit IA PME — Cartographie, livrables, ROI"
-  description="Audit IA pour TPE et PME : cartographie des cas d'usage, priorisation, rapport actionnable de 15 à 25 pages. 1 200 € HT — 900 € HT en lancement jusqu'au 31/07. Basé à Vannes."
+  title="Audit IA PME — 1 jour, sur site, rapport à la clé"
+  description="Audit IA PME en Bretagne et France : 1 jour sur site, rapport de 15-25 pages, fourchette budgétaire, plan d'action 30/60/90 jours. À partir de 900 € HT en tarif de lancement."
 >
   <V2cHeader />
   <script type="application/ld+json" set:html={JSON.stringify(auditServiceSchema)} />
@@ -123,12 +126,14 @@ const faqSchema = {
   <!-- ============ HERO ============ -->
   <section class="hero" aria-labelledby="h-hero">
     <div class="container">
-      <p class="eyebrow reveal">Audit IA · TPE & PME · France entière</p>
+      <p class="eyebrow reveal">Audit IA · 1 jour · Sur site · 900 € HT</p>
       <h1 id="h-hero" class="hero-title reveal">
-        Le tilt<sup>®</sup>
-        <br>avant l'investissement.
-        <span class="hero-title-soft">Pas après. Deux jours pour savoir où l'IA paie chez vous — et où elle ne paie pas.</span>
+        Audit IA PME
+        <br>— 1 jour, sur site.
       </h1>
+      <p class="hero-baseline reveal">
+        Cartographie, livrables actionables, fourchette budgétaire. Et ça fait tilt<sup>®</sup>.
+      </p>
       <p class="lead reveal">
         Audit IA en 4 étapes pour dirigeants de TPE et PME. Cartographie des cas d'usage,
         priorisation, fourchette budgétaire, analyse RGPD. Un rapport actionnable que vous pouvez
@@ -294,8 +299,14 @@ const faqSchema = {
     </div>
   </section>
 
+  <!-- ============ INVESTISSEMENT ============ -->
+  <Investissement variant="soft" />
+
+  <!-- ============ PORTES D'ENTRÉE ============ -->
+  <PortesEntree variant="plain" />
+
   <!-- ============ CTA FINAL ============ -->
-  <section class="section is-loose" aria-labelledby="h-cta">
+  <section id="contact" class="section is-loose" aria-labelledby="h-cta">
     <div class="container is-narrow" style="text-align: center;">
       <h2 class="reveal" id="h-cta">Trente minutes.<br>Puis le tilt<sup>®</sup>, ou rien du tout.</h2>
       <p class="lead reveal" style="margin-top: var(--s-4);">
@@ -311,6 +322,7 @@ const faqSchema = {
     </div>
   </section>
   <V2cFooter />
+  <CTAStickyMobile />
 </V2bLayout>
 
 <style>
@@ -327,23 +339,24 @@ const faqSchema = {
     letter-spacing: var(--tr-tight);
     color: var(--ink);
     margin-top: var(--s-4);
-    max-width: 26ch;
+    max-width: 24ch;
   }
-  .hero-title-soft {
-    display: block;
-    margin-top: var(--s-4);
+  .hero-baseline {
+    margin-top: var(--s-5);
+    font-family: var(--font-display);
     font-style: italic;
     font-weight: 400;
     color: var(--ink-2);
-    font-size: 0.5em;
+    font-size: var(--step-2);
     letter-spacing: -0.01em;
     line-height: var(--lh-snug);
+    max-width: 36ch;
   }
   .hero-title sup,
-  .hero-title-soft sup {
-    font-size: 0.42em;
+  .hero-baseline sup {
+    font-size: 0.6em;
     color: var(--accent);
-    top: -0.7em;
+    top: -0.5em;
     position: relative;
     font-style: normal;
     font-weight: 400;

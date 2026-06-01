@@ -2,6 +2,9 @@
 import V2bLayout from '../layouts/V2bLayout.astro';
 import V2cHeader from '../components/v2/V2cHeader.astro';
 import V2cFooter from '../components/v2/V2cFooter.astro';
+import PortesEntree from '../components/v2/PortesEntree.astro';
+import Investissement from '../components/v2/Investissement.astro';
+import CTAStickyMobile from '../components/v2/CTAStickyMobile.astro';
 import CTAButton from '../components/CTAButton.astro';
 import TiltSignature from '../components/TiltSignature.astro';
 import QuoteDisplay from '../components/QuoteDisplay.astro';
@@ -272,6 +275,9 @@ const faqSchema = {
     </div>
   </section>
 
+  <!-- INVESTISSEMENT -->
+  <Investissement variant="soft" />
+
   <!-- FAQ LOCALE -->
   <section class="section" aria-labelledby="h-faq">
     <div class="container is-default">
@@ -293,6 +299,9 @@ const faqSchema = {
     </div>
   </section>
 
+  <!-- PORTES D'ENTRÉE -->
+  <PortesEntree variant="plain" />
+
   <!-- CTA FINAL -->
   <section class="section is-loose" aria-labelledby="h-cta">
     <div class="container is-narrow" style="text-align: center;">
@@ -310,6 +319,7 @@ const faqSchema = {
     </div>
   </section>
   <V2cFooter />
+  <CTAStickyMobile />
 </V2bLayout>
 
 <style>
