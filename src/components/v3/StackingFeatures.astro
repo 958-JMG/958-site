@@ -1,0 +1,209 @@
+---
+/**
+ * StackingFeatures — défilé de panneaux qui se PINNENT et se CHEVAUCHENT au scroll
+ * (parti pris signature Tether « scroll-pinned / overlapping », réimplémenté from
+ * scratch en CSS `position: sticky` — zéro lib). Chaque panneau montre une carte
+ * du cockpit 9·58 → règle aussi le manque de visuel produit.
+ *
+ * Placeholders crédibles dans la charte, EN ATTENTE des vraies captures cockpit.
+ * Robuste : sans JS / sticky → les panneaux s'empilent normalement (jamais cassé).
+ * Mobile : sticky désactivé (empilement simple).
+ */
+import Icon from '../v2/Icon.astro';
+
+const panels = [
+  {
+    tone: 'paper',
+    kicker: 'Trésorerie',
+    title: 'Toute votre trésorerie, d’un coup d’œil.',
+    text: 'Soldes consolidés, encaissements à venir, tendance du mois. Fini les tableurs : l’information juste, au bon moment.',
+    visual: 'treso',
+  },
+  {
+    tone: 'ink',
+    kicker: 'Relances',
+    title: 'Les relances se font (presque) toutes seules.',
+    text: 'L’IA repère les retards, prépare la relance, vous gardez la main. Vos équipes arrêtent de courir après les impayés.',
+    visual: 'relances',
+  },
+  {
+    tone: 'sauge',
+    kicker: 'Pilotage',
+    title: 'Le pilotage, sans y penser.',
+    text: 'Tâches du jour, dossiers en cours, prochaines échéances. Chacun sait quoi faire — le travail qui compte avance.',
+    visual: 'taches',
+  },
+];
+
+const bars = [38, 52, 44, 66, 58, 80, 72];
+const relances = [
+  { client: 'SCI Le Hézo', montant: '4 200 €', statut: 'Relancé', tone: 'vert' },
+  { client: 'Atelier Kervoyal', montant: '1 850 €', statut: 'En attente', tone: 'sauge' },
+];
+const taches = [
+  { label: 'Compte rendu visite — Séné', done: true },
+  { label: 'Devis cuisine Arradon', done: true },
+  { label: 'Dossier financement à relancer', done: false },
+];
+---
+
+<div class="stack">
+  {panels.map((p, i) => (
+    <article class={`stack__panel stack__panel--${p.tone}`} style={`--i:${i}`}>
+      <div class="stack__inner">
+        <div class="stack__copy">
+          <span class="eyebrow eyebrow--cuivre">{p.kicker}</span>
+          <h3 class="stack__title">{p.title}</h3>
+          <p class="stack__text">{p.text}</p>
+          <a href="/v3/audit-ia" class="link-arrow stack__cta">
+            Voir le cockpit
+            <Icon name="arrow-right" size={16} class="arrow" />
+          </a>
+        </div>
+
+        <div class="stack__visual" aria-hidden="true">
+          {p.visual === 'treso' && (
+            <div class="ccx ccx--treso">
+              <header class="ccx__head">
+                <span class="ccx__label"><Icon name="building-2" size={14} /> Trésorerie</span>
+                <span class="ccx__pill">+12,4 %</span>
+              </header>
+              <div class="ccx__big">48 250 €</div>
+              <p class="ccx__sub">Solde consolidé · 3 comptes</p>
+              <div class="ccx__spark">{bars.map((h) => <span style={`height:${h}%`}></span>)}</div>
+            </div>
+          )}
+          {p.visual === 'relances' && (
+            <div class="ccx ccx--relances">
+              <header class="ccx__head">
+                <span class="ccx__label"><Icon name="mail" size={14} /> Relances</span>
+                <span class="ccx__count">2 actives</span>
+              </header>
+              <ul class="ccx__list">
+                {relances.map((r) => (
+                  <li class="ccx__row">
+                    <span class="ccx__rowmain">
+                      <span class="ccx__client">{r.client}</span>
+                      <span class="ccx__amount">{r.montant}</span>
+                    </span>
+                    <span class={`ccx__tag ccx__tag--${r.tone}`}>{r.statut}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {p.visual === 'taches' && (
+            <div class="ccx ccx--taches">
+              <header class="ccx__head">
+                <span class="ccx__label"><Icon name="check" size={14} /> Tâches du jour</span>
+                <span class="ccx__count">2/3</span>
+              </header>
+              <ul class="ccx__todo">
+                {taches.map((t) => (
+                  <li class={`ccx__todoitem ${t.done ? 'is-done' : ''}`}>
+                    <span class="ccx__box">{t.done && <Icon name="check" size={12} />}</span>
+                    {t.label}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </div>
+    </article>
+  ))}
+</div>
+
+<style>
+  .stack { position: relative; }
+
+  .stack__panel {
+    border-radius: var(--r-xl);
+    box-shadow: var(--shadow-float);
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  .stack__panel + .stack__panel { margin-top: var(--s-6); }
+
+  .stack__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-6);
+    align-items: center;
+    padding: clamp(1.75rem, 4vw, 3.5rem);
+    min-height: 360px;
+  }
+
+  /* Tons des panneaux (alternance façon Tether, dans la charte) */
+  .stack__panel--paper { background: var(--paper-2); }
+  .stack__panel--sauge { background: linear-gradient(135deg, var(--sauge-soft), var(--paper-2)); }
+  .stack__panel--ink {
+    background:
+      radial-gradient(120% 90% at 90% 0%, rgba(199,94,45,0.22), transparent 60%),
+      var(--ink);
+    border-color: rgba(244,236,220,0.10);
+  }
+  .stack__panel--ink .stack__title { color: var(--on-ink); }
+  .stack__panel--ink .stack__text { color: var(--on-ink-2); }
+  .stack__panel--ink .eyebrow--cuivre { color: var(--cuivre-hover); }
+
+  .stack__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 2.4vw + 0.6rem, 2.6rem);
+    line-height: 1.08;
+    letter-spacing: var(--tr-tight);
+    margin: var(--s-3) 0 var(--s-3);
+    text-wrap: balance;
+  }
+  .stack__text { max-width: 42ch; }
+  .stack__cta { margin-top: var(--s-5); }
+
+  /* Visuel cockpit */
+  .stack__visual { display: flex; justify-content: center; }
+  .ccx {
+    width: 100%; max-width: 380px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: var(--s-5);
+    box-shadow: var(--shadow-soft);
+  }
+  .stack__panel--ink .ccx { background: var(--paper-2); }
+  .ccx__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--s-3); }
+  .ccx__label { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: var(--tr-mono); text-transform: uppercase; color: var(--ink-3); }
+  .ccx__count, .ccx__pill { font-family: var(--font-mono); font-size: var(--step--2); color: var(--ink-3); }
+  .ccx__pill { color: var(--vert-deep); background: var(--vert-soft); padding: 0.18rem 0.5rem; border-radius: var(--r-pill); font-weight: 600; }
+  .ccx__big { font-family: var(--font-display); font-size: 2.6rem; line-height: 1; letter-spacing: var(--tr-tight); color: var(--ink); font-variant-numeric: tabular-nums; }
+  .ccx__sub { font-size: var(--step--1); color: var(--ink-3); margin-top: 0.3rem; }
+  .ccx__spark { display: flex; align-items: flex-end; gap: 5px; height: 52px; margin-top: var(--s-4); }
+  .ccx__spark span { flex: 1; background: linear-gradient(to top, var(--cuivre-soft), var(--cuivre)); border-radius: 3px 3px 0 0; min-height: 6px; opacity: 0.85; }
+  .ccx__spark span:last-child { opacity: 1; }
+  .ccx__list, .ccx__todo { list-style: none; display: flex; flex-direction: column; gap: var(--s-3); }
+  .ccx__row { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); }
+  .ccx__rowmain { display: flex; flex-direction: column; }
+  .ccx__client { font-size: var(--step-0); color: var(--ink); font-weight: 500; }
+  .ccx__amount { font-family: var(--font-mono); font-size: var(--step--2); color: var(--ink-3); }
+  .ccx__tag { font-family: var(--font-mono); font-size: 0.66rem; font-weight: 600; letter-spacing: var(--tr-wide); text-transform: uppercase; padding: 0.22rem 0.55rem; border-radius: var(--r-pill); white-space: nowrap; }
+  .ccx__tag--vert { color: var(--vert-deep); background: var(--vert-soft); }
+  .ccx__tag--sauge { color: var(--sauge-deep); background: var(--sauge-soft); }
+  .ccx__todoitem { display: flex; align-items: center; gap: 0.6rem; font-size: var(--step-0); color: var(--ink); }
+  .ccx__box { display: inline-grid; place-items: center; width: 18px; height: 18px; flex: none; border: 1.5px solid var(--line-3); border-radius: 6px; color: var(--paper); }
+  .ccx__todoitem.is-done .ccx__box { background: var(--vert); border-color: var(--vert); }
+  .ccx__todoitem.is-done { color: var(--ink-3); text-decoration: line-through; text-decoration-color: var(--line-3); }
+
+  /* ----- Desktop : PIN + CHEVAUCHEMENT au scroll (position: sticky) ----- */
+  @media (min-width: 880px) {
+    .stack__inner { grid-template-columns: 1fr 1fr; min-height: 420px; }
+    .stack__panel {
+      position: sticky;
+      top: calc(var(--header-h) + 2rem);
+    }
+    /* léger décalage progressif = effet d'empilement qui se chevauche */
+    .stack__panel + .stack__panel { margin-top: 8vh; }
+    .stack__panel--relances { } /* placeholder */
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stack__panel { position: static; }
+  }
+</style>

@@ -8,6 +8,7 @@ import V3Layout from '../../layouts/V3Layout.astro';
 import Header from '../../components/v3/Header.astro';
 import Footer from '../../components/v3/Footer.astro';
 import CockpitCards from '../../components/v3/CockpitCards.astro';
+import StackingFeatures from '../../components/v3/StackingFeatures.astro';
 import Icon from '../../components/v2/Icon.astro';
 
 const base = '/v3';
@@ -162,8 +163,23 @@ const orgJsonLd = {
       </div>
     </section>
 
+    <!-- ============== LE COCKPIT (défilé pinné/chevauché) ============== -->
+    <section class="section is-xl" id="cockpit">
+      <div class="container is-full">
+        <div class="section-head reveal" style="margin-bottom: var(--s-8)">
+          <span class="eyebrow eyebrow--cuivre">Le cockpit 9·58</span>
+          <h2>Votre boîte, sur un écran. Pas dix outils qui s’ignorent.</h2>
+          <p class="lead">
+            On construit l’outil qui réunit ce qui compte — et l’IA fait le travail
+            ingrat à votre place.
+          </p>
+        </div>
+        <StackingFeatures />
+      </div>
+    </section>
+
     <!-- ============== LES 4 PORTES ============== -->
-    <section class="section">
+    <section class="section band--paper-2">
       <div class="container is-full">
         <div class="section-head reveal">
           <span class="eyebrow eyebrow--cuivre">Par où commencer</span>
