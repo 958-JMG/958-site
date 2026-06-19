@@ -136,18 +136,19 @@ const taches = [
     min-height: 360px;
   }
 
-  /* Tons des panneaux — 100% OPAQUES (sinon chevauchement illisible) */
-  .stack__panel--paper { background: #FBF6EA; }
-  .stack__panel--sauge { background: linear-gradient(135deg, #DCE8E0 0%, #F4ECDC 92%); }
+  /* Tons des panneaux — sombres, 100% OPAQUES, accents lumineux */
+  .stack__panel--paper { background: linear-gradient(155deg, #1C1612 0%, #120E0B 100%); }
+  .stack__panel--sauge {
+    background:
+      radial-gradient(120% 100% at 8% 0%, rgba(161,193,182,0.18), rgba(20,16,13,0) 60%),
+      #14100D;
+  }
   .stack__panel--ink {
     background:
-      radial-gradient(120% 90% at 90% 0%, rgba(199,94,45,0.30), rgba(22,19,15,0) 60%),
-      #16130F;
-    border-color: rgba(244,236,220,0.10);
+      radial-gradient(120% 100% at 92% 0%, rgba(217,104,47,0.30), rgba(11,9,8,0) 60%),
+      #0A0807;
+    border-color: rgba(244,236,220,0.12);
   }
-  .stack__panel--ink .stack__title { color: var(--on-ink); }
-  .stack__panel--ink .stack__text { color: var(--on-ink-2); }
-  .stack__panel--ink .eyebrow--cuivre { color: var(--cuivre-hover); }
 
   .stack__title {
     font-family: var(--font-display);
@@ -164,13 +165,14 @@ const taches = [
   .stack__visual { display: flex; justify-content: center; }
   .ccx {
     width: 100%; max-width: 380px;
-    background: var(--paper);
-    border: 1px solid var(--line);
+    background: rgba(244, 236, 220, 0.06);
+    border: 1px solid var(--glass-line);
     border-radius: var(--r-lg);
     padding: var(--s-5);
     box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
   }
-  .stack__panel--ink .ccx { background: var(--paper-2); }
   .ccx__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--s-3); }
   .ccx__label { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: var(--tr-mono); text-transform: uppercase; color: var(--ink-3); }
   .ccx__count, .ccx__pill { font-family: var(--font-mono); font-size: var(--step--2); color: var(--ink-3); }
