@@ -1,0 +1,209 @@
+---
+/**
+ * CockpitCards — composition de cartes "cockpit 9·58" qui flottent,
+ * ombres douces, profondeur (parti pris Tether réimplémenté from scratch).
+ *
+ * ⚠ Placeholders crédibles dans la charte, EN ATTENTE des captures réelles
+ *   fournies par JMG. Aucune donnée client réelle ici.
+ */
+import Icon from '../v2/Icon.astro';
+
+const relances = [
+  { client: 'SCI Le Hézo', montant: '4 200 €', statut: 'Relancé', tone: 'vert' },
+  { client: 'Atelier Kervoyal', montant: '1 850 €', statut: 'En attente', tone: 'sauge' },
+];
+const taches = [
+  { label: 'Compte rendu visite — Séné', done: true },
+  { label: 'Devis cuisine Arradon', done: true },
+  { label: 'Dossier financement à relancer', done: false },
+];
+// hauteurs des barres de la mini-courbe pipeline (en %)
+const bars = [38, 52, 44, 66, 58, 80, 72];
+---
+
+<div class="cc" aria-hidden="true">
+  <!-- Carte 1 — Trésorerie -->
+  <article class="cc__card cc__card--treso">
+    <header class="cc__head">
+      <span class="cc__label"><Icon name="building-2" size={14} /> Trésorerie</span>
+      <span class="cc__pill cc__pill--vert">+12,4 %</span>
+    </header>
+    <div class="cc__big">48 250 €</div>
+    <p class="cc__sub">Solde consolidé · 3 comptes</p>
+    <div class="cc__spark">
+      {bars.map((h) => <span style={`height:${h}%`}></span>)}
+    </div>
+  </article>
+
+  <!-- Carte 2 — Relances -->
+  <article class="cc__card cc__card--relances">
+    <header class="cc__head">
+      <span class="cc__label"><Icon name="mail" size={14} /> Relances</span>
+      <span class="cc__count">2 actives</span>
+    </header>
+    <ul class="cc__list">
+      {relances.map((r) => (
+        <li class="cc__row">
+          <span class="cc__row-main">
+            <span class="cc__row-client">{r.client}</span>
+            <span class="cc__row-amount">{r.montant}</span>
+          </span>
+          <span class={`cc__tag cc__tag--${r.tone}`}>{r.statut}</span>
+        </li>
+      ))}
+    </ul>
+  </article>
+
+  <!-- Carte 3 — Tâches du jour -->
+  <article class="cc__card cc__card--taches">
+    <header class="cc__head">
+      <span class="cc__label"><Icon name="check" size={14} /> Tâches du jour</span>
+      <span class="cc__count">2/3</span>
+    </header>
+    <ul class="cc__todo">
+      {taches.map((t) => (
+        <li class={`cc__todo-item ${t.done ? 'is-done' : ''}`}>
+          <span class="cc__box">{t.done && <Icon name="check" size={12} />}</span>
+          {t.label}
+        </li>
+      ))}
+    </ul>
+  </article>
+</div>
+
+<style>
+  .cc {
+    position: relative;
+    width: 100%;
+  }
+
+  .cc__card {
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: var(--s-5);
+    box-shadow: var(--shadow-float);
+  }
+
+  .cc__head {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: var(--s-3);
+  }
+  .cc__label {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    letter-spacing: var(--tr-mono);
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .cc__count {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    color: var(--ink-3);
+  }
+  .cc__pill {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    font-weight: 600;
+    padding: 0.18rem 0.5rem;
+    border-radius: var(--r-pill);
+  }
+  .cc__pill--vert { color: var(--vert-deep); background: var(--vert-soft); }
+
+  .cc__big {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    font-weight: 460;
+    line-height: 1;
+    letter-spacing: var(--tr-tight);
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .cc__sub { font-size: var(--step--1); color: var(--ink-3); margin-top: 0.3rem; }
+
+  .cc__spark {
+    display: flex; align-items: flex-end; gap: 5px;
+    height: 44px; margin-top: var(--s-4);
+  }
+  .cc__spark span {
+    flex: 1;
+    background: linear-gradient(to top, var(--cuivre-soft), var(--cuivre));
+    border-radius: 3px 3px 0 0;
+    min-height: 6px;
+    opacity: 0.85;
+  }
+  .cc__spark span:last-child { background: var(--cuivre); opacity: 1; }
+
+  .cc__list { list-style: none; display: flex; flex-direction: column; gap: var(--s-3); }
+  .cc__row { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); }
+  .cc__row-main { display: flex; flex-direction: column; }
+  .cc__row-client { font-size: var(--step-0); color: var(--ink); font-weight: 500; }
+  .cc__row-amount { font-family: var(--font-mono); font-size: var(--step--2); color: var(--ink-3); }
+  .cc__tag {
+    font-family: var(--font-mono); font-size: 0.66rem; font-weight: 600;
+    letter-spacing: var(--tr-wide); text-transform: uppercase;
+    padding: 0.22rem 0.55rem; border-radius: var(--r-pill); white-space: nowrap;
+  }
+  .cc__tag--vert  { color: var(--vert-deep); background: var(--vert-soft); }
+  .cc__tag--sauge { color: var(--sauge-deep); background: var(--sauge-soft); }
+
+  .cc__todo { list-style: none; display: flex; flex-direction: column; gap: var(--s-3); }
+  .cc__todo-item {
+    display: flex; align-items: center; gap: 0.6rem;
+    font-size: var(--step-0); color: var(--ink);
+  }
+  .cc__box {
+    display: inline-grid; place-items: center;
+    width: 18px; height: 18px; flex: none;
+    border: 1.5px solid var(--line-3); border-radius: 6px;
+    color: var(--paper);
+  }
+  .cc__todo-item.is-done .cc__box { background: var(--vert); border-color: var(--vert); }
+  .cc__todo-item.is-done { color: var(--ink-3); text-decoration: line-through; text-decoration-color: var(--line-3); }
+
+  /* --- Mobile : pile lisible, pas de chevauchement --- */
+  .cc { display: flex; flex-direction: column; gap: var(--s-4); max-width: 380px; margin-inline: auto; }
+  .cc__card--treso    { transform: rotate(-1deg); }
+  .cc__card--relances { transform: rotate(1deg); }
+  .cc__card--taches   { transform: rotate(-0.5deg); }
+
+  /* --- Desktop : composition flottante avec profondeur --- */
+  @media (min-width: 980px) {
+    .cc {
+      display: block;
+      max-width: none;
+      height: 460px;
+    }
+    .cc__card { position: absolute; }
+    .cc__card--treso {
+      width: 300px; top: 0; left: 4%;
+      transform: rotate(-2.5deg); z-index: 3;
+    }
+    .cc__card--relances {
+      width: 320px; top: 120px; right: 0;
+      transform: rotate(2deg); z-index: 2;
+    }
+    .cc__card--taches {
+      width: 280px; bottom: 0; left: 16%;
+      transform: rotate(1.5deg); z-index: 4;
+    }
+    /* léger flottement continu, désactivé en reduced-motion */
+    .cc__card--treso    { animation: float-a 7s var(--ease) infinite; }
+    .cc__card--relances { animation: float-b 8s var(--ease) infinite; }
+    .cc__card--taches   { animation: float-a 6.5s var(--ease) infinite; }
+  }
+
+  @keyframes float-a {
+    0%, 100% { transform: rotate(-2.5deg) translateY(0); }
+    50%      { transform: rotate(-2.5deg) translateY(-10px); }
+  }
+  @keyframes float-b {
+    0%, 100% { transform: rotate(2deg) translateY(0); }
+    50%      { transform: rotate(2deg) translateY(-8px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cc__card { animation: none !important; }
+  }
+</style>

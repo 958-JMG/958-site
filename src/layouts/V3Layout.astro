@@ -1,0 +1,121 @@
+---
+/**
+ * V3Layout — direction "éditorial clair / papier" (refonte 958.fr)
+ *
+ * - Canvas ivoire chaud + encre profonde + cuivre RARE (charte prompt JMG)
+ * - Typo locale : Fraunces Variable + Inter Variable + JetBrains Mono
+ *   (aucun Google Fonts CDN — souveraineté + perf)
+ * - SEO/GEO : <title>/description uniques par page, canonical, OG,
+ *   Twitter card, JSON-LD injecté par page (slot "jsonld").
+ * - PROTO : noindex ON par défaut tant que le V3 n'est pas validé en prod.
+ * - Scroll reveal : IntersectionObserver maison, zéro dépendance externe.
+ */
+
+import '@fontsource-variable/fraunces';
+import '@fontsource-variable/inter';
+import '@fontsource-variable/jetbrains-mono';
+import '../styles/v3.css';
+
+interface Props {
+  title: string;
+  description: string;
+  /** noindex ON par défaut : le V3 est un proto isolé non indexé. */
+  noindex?: boolean;
+  showProtoBanner?: boolean;
+  ogImage?: string;
+  canonical?: string;
+}
+
+const {
+  title,
+  description,
+  noindex = true,
+  showProtoBanner = true,
+  ogImage = '/og-958.png',
+  canonical,
+} = Astro.props;
+
+const pageTitle = `${title} · 9·58`;
+const siteUrl = 'https://www.958.fr';
+const canonicalUrl = canonical || new URL(Astro.url.pathname, siteUrl).toString();
+const ogImageUrl = new URL(ogImage, siteUrl).toString();
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <link rel="canonical" href={canonicalUrl} />
+
+    {/* Open Graph */}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="9·58" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:locale" content="fr_FR" />
+
+    {/* Twitter Card */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    {/* JSON-LD spécifique à la page (Organization, LocalBusiness, Course, FAQPage…) */}
+    <slot name="jsonld" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <meta name="theme-color" content="#F4ECDC" />
+  </head>
+
+  <body>
+    <a href="#main" class="skip-link">Aller au contenu</a>
+
+    <div class="grain" aria-hidden="true"></div>
+
+    {showProtoBanner && (
+      <div class="proto-banner" aria-label="Proto interne, non indexé">
+        V3 · proto
+      </div>
+    )}
+
+    <slot />
+
+    <script>
+      // Scroll reveal — IntersectionObserver maison (aucune lib externe).
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const items = document.querySelectorAll('.reveal:not(.is-visible)');
+      // index pour le stagger
+      items.forEach((el) => {
+        if (el instanceof HTMLElement && el.parentElement?.classList.contains('reveal-stagger')) {
+          const siblings = Array.from(el.parentElement.children);
+          el.style.setProperty('--i', String(siblings.indexOf(el)));
+        }
+      });
+      if (reduce) {
+        items.forEach((el) => el.classList.add('is-visible'));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+        );
+        items.forEach((el) => io.observe(el));
+      }
+    </script>
+  </body>
+</html>

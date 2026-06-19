@@ -1,0 +1,307 @@
+---
+/**
+ * Accueil V3 — le « Why » (hub & spoke).
+ * Texte EXACT du prompt maître JMG (ne pas paraphraser).
+ * Proto isolé /v3/ — noindex tant que non validé en prod.
+ */
+import V3Layout from '../../layouts/V3Layout.astro';
+import Header from '../../components/v3/Header.astro';
+import Footer from '../../components/v3/Footer.astro';
+import CockpitCards from '../../components/v3/CockpitCards.astro';
+import Icon from '../../components/v2/Icon.astro';
+
+const base = '/v3';
+
+// Parcours « Ce que je fais »
+const parcours = [
+  { n: '01', label: 'Audit',        icon: 'eye-off',        glyph: 'ink',   note: 'On regarde où ça fatigue.' },
+  { n: '02', label: 'Cartographie', icon: 'map-pin',        glyph: 'ink',   note: 'Vos flux d’information.' },
+  { n: '03', label: 'Process',      icon: 'briefcase',      glyph: 'ink',   note: 'On repense, on simplifie.' },
+  { n: '04', label: 'Cockpit',      icon: 'monitor',        glyph: 'cuivre',note: 'Votre outil sur mesure.' },
+  { n: '05', label: 'Formation',    icon: 'graduation-cap', glyph: 'ink',   note: 'Vos équipes montent en autonomie.' },
+];
+
+// Les 4 portes — titres & textes EXACTS
+const portes = [
+  {
+    href: `${base}/audit-ia`,
+    glyph: 'cuivre', icon: 'eye-off',
+    kicker: 'Audit IA · par où commencer',
+    title: 'Avant de mettre de l’IA partout, regardons où votre entreprise se fatigue.',
+    text: 'L’audit 9·58 cartographie vos process, vos flux d’information, vos outils et vos points de friction. On ne part pas de la technologie. On part de votre réalité. Ensuite seulement, on décide quoi simplifier, quoi automatiser, quoi former et quoi reconstruire.',
+  },
+  {
+    href: `${base}/automatiser-administratif`,
+    glyph: 'ink', icon: 'briefcase',
+    kicker: 'Automatiser l’administratif',
+    title: 'La paperasse n’a jamais fait grandir une entreprise. Mais elle peut l’épuiser.',
+    text: 'Vos équipes ont mieux à faire que ressaisir, relancer et chercher des infos. 9·58 simplifie vos flux administratifs avec l’IA : devis, relances, dossiers, comptes rendus, suivi client, reporting. L’objectif n’est pas de remplacer les équipes. C’est de leur redonner de l’air pour faire le travail qui compte.',
+  },
+  {
+    href: `${base}/formation-ia-dirigeants-vannes`,
+    glyph: 'sauge', icon: 'graduation-cap',
+    kicker: 'Formation IA dirigeants · Vannes',
+    title: 'Vos équipes utilisent déjà l’IA. Il est temps d’en faire un vrai savoir-faire.',
+    text: 'Une formation concrète, ancrée dans votre métier, vos outils et vos situations réelles.',
+  },
+  {
+    href: `${base}/ia-souveraine-donnees`,
+    glyph: 'vert', icon: 'shield',
+    kicker: 'IA souveraine · vos données',
+    title: 'Votre IA ne devrait pas travailler pour quelqu’un d’autre. Vos données non plus.',
+    text: '9·58 vous aide à construire des usages IA plus maîtrisés : données sensibles identifiées, outils choisis avec prudence, hébergement européen quand c’est nécessaire, règles d’usage claires pour les équipes. La puissance de l’IA, sans abandonner le contrôle.',
+  },
+];
+
+const confiance = ['Qualiopi', 'Ancrage Morbihan', 'Souveraineté des données', 'Méthode SPARI'];
+
+const siteUrl = 'https://www.958.fr';
+const orgJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': ['Organization', 'LocalBusiness', 'ProfessionalService'],
+  '@id': `${siteUrl}/#organization`,
+  name: '9·58',
+  url: siteUrl,
+  logo: `${siteUrl}/logo-958-official.png`,
+  image: `${siteUrl}/og-958.png`,
+  description: "9·58 met l'IA au travail dans les TPE/PME : audit, automatisation de l'administratif, cockpit sur mesure, formation des équipes. Ancrage Vannes / Morbihan, souveraineté des données.",
+  email: 'jmg@958.fr',
+  founder: { '@type': 'Person', name: 'Jean-Marc Geuring' },
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Vannes',
+    addressRegion: 'Morbihan',
+    addressCountry: 'FR',
+  },
+  areaServed: [
+    { '@type': 'AdministrativeArea', name: 'Morbihan' },
+    { '@type': 'AdministrativeArea', name: 'Bretagne' },
+  ],
+  knowsAbout: ["Intelligence artificielle", "Automatisation", "Formation IA", "Souveraineté des données"],
+  sameAs: ['https://www.linkedin.com/in/jean-marc-geuring/'],
+};
+---
+
+<V3Layout
+  title="L’IA au travail dans votre TPE/PME — Vannes"
+  description="9·58 met l’IA au travail dans votre organisation : audit, automatisation de l’administratif, cockpit sur mesure, formation. Ancrage Vannes / Morbihan, souveraineté des données."
+>
+  <script type="application/ld+json" slot="jsonld" set:html={JSON.stringify(orgJsonLd)} />
+
+  <Header />
+
+  <main id="main">
+    <!-- ============== HERO ============== -->
+    <section class="hero">
+      <div class="container is-full hero__grid">
+        <div class="hero__copy">
+          <span class="eyebrow eyebrow--cuivre is-bare">9·58</span>
+          <h1 class="hero-title">
+            Vous n’avez pas créé votre entreprise pour la subir.
+            <span class="accent">Reprenez la main.</span>
+          </h1>
+          <p class="lead hero__sub">
+            9·58 met l’IA au travail dans votre organisation. Pas pour ajouter de la
+            technologie — pour vous rendre de la clarté, du calme, et le plaisir de
+            faire votre métier.
+          </p>
+          <div class="hero__cta">
+            <a href={base + '/audit-ia'} class="btn btn--primary btn--lg">
+              Par où on commence
+              <Icon name="arrow-right" size={18} class="arrow" />
+            </a>
+            <a href="#methode" class="btn btn--ghost btn--lg">Découvrir la méthode</a>
+          </div>
+        </div>
+
+        <div class="hero__visual reveal">
+          <CockpitCards />
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== CE QUE JE FAIS (parcours) ============== -->
+    <section class="section is-tight band--paper-2" id="methode">
+      <div class="container is-full">
+        <div class="section-head reveal">
+          <span class="eyebrow eyebrow--cuivre">Ce que je fais</span>
+          <h2>On part de votre réalité, pas de la technologie.</h2>
+          <p class="lead">
+            On audite votre organisation, on cartographie vos flux, on repense vos
+            process, on construit votre cockpit IA, on forme vos équipes.
+          </p>
+        </div>
+
+        <ol class="parcours reveal-stagger">
+          {parcours.map((p, i) => (
+            <li class="parcours__step reveal">
+              <span class={`glyph glyph--${p.glyph}`}><Icon name={p.icon} size={22} /></span>
+              <span class="parcours__n">{p.n}</span>
+              <span class="parcours__label">{p.label}</span>
+              <span class="parcours__note">{p.note}</span>
+              {i < parcours.length - 1 && <span class="parcours__arrow" aria-hidden="true"><Icon name="arrow-right" size={16} /></span>}
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============== LES 4 PORTES ============== -->
+    <section class="section">
+      <div class="container is-full">
+        <div class="section-head reveal">
+          <span class="eyebrow eyebrow--cuivre">Par où commencer</span>
+          <h2>Quatre portes d’entrée. Une seule intention&nbsp;: vous rendre du temps.</h2>
+        </div>
+
+        <div class="portes reveal-stagger">
+          {portes.map((p) => (
+            <a href={p.href} class="porte card reveal">
+              <span class={`glyph glyph--${p.glyph}`}><Icon name={p.icon} size={22} /></span>
+              <span class="porte__kicker">{p.kicker}</span>
+              <h3 class="porte__title q-title">{p.title}</h3>
+              <p class="porte__text">{p.text}</p>
+              <span class="link-arrow porte__more">
+                En savoir plus
+                <Icon name="arrow-right" size={16} class="arrow" />
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== BANDEAU CONFIANCE ============== -->
+    <section class="trust band--paper-3">
+      <div class="container is-full trust__inner">
+        {confiance.map((c, i) => (
+          <>
+            {i > 0 && <span class="trust__dot" aria-hidden="true">·</span>}
+            <span class="trust__item">{c}</span>
+          </>
+        ))}
+      </div>
+    </section>
+
+    <!-- ============== CTA FINAL ============== -->
+    <section class="section is-tight">
+      <div class="container is-default final reveal">
+        <p class="final__line">Et là, ça fait tilt.</p>
+        <h2 class="final__title">On regarde ensemble où votre entreprise se fatigue&nbsp;?</h2>
+        <a href={base + '/audit-ia'} class="btn btn--primary btn--lg">
+          Par où on commence
+          <Icon name="arrow-right" size={18} class="arrow" />
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</V3Layout>
+
+<style>
+  /* ---------- Hero ---------- */
+  .hero { padding-block: var(--s-9) var(--s-10); position: relative; }
+  .hero__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-9);
+    align-items: center;
+  }
+  .hero-title { margin-block: var(--s-4) var(--s-5); }
+  .hero__sub { max-width: 48ch; }
+  .hero__cta { display: flex; flex-wrap: wrap; gap: var(--s-3); margin-top: var(--s-6); }
+  .hero__visual { min-width: 0; }
+
+  @media (min-width: 980px) {
+    .hero { padding-block: var(--s-10) var(--s-12); }
+    .hero__grid { grid-template-columns: 1.05fr 0.95fr; gap: var(--s-7); }
+  }
+
+  /* ---------- Parcours ---------- */
+  .parcours {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-4);
+    margin-top: var(--s-8);
+  }
+  .parcours__step {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    align-items: center;
+    gap: 0.35rem 0.9rem;
+    padding: var(--s-4) var(--s-5);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+  }
+  .parcours__step .glyph { grid-row: span 2; width: 44px; height: 44px; }
+  .parcours__n {
+    font-family: var(--font-mono); font-size: var(--step--2);
+    color: var(--cuivre-ink); letter-spacing: var(--tr-mono);
+  }
+  .parcours__label {
+    font-family: var(--font-display); font-size: var(--step-2);
+    color: var(--ink); grid-column: 3; grid-row: 1;
+  }
+  .parcours__note { grid-column: 3; grid-row: 2; font-size: var(--step--1); color: var(--ink-3); }
+  .parcours__arrow { display: none; }
+
+  @media (min-width: 880px) {
+    .parcours { grid-template-columns: repeat(5, 1fr); gap: var(--s-3); }
+    .parcours__step {
+      grid-template-columns: 1fr;
+      justify-items: start;
+      gap: var(--s-2);
+      padding: var(--s-5);
+    }
+    .parcours__step .glyph { grid-row: auto; }
+    .parcours__label, .parcours__note, .parcours__n { grid-column: auto; grid-row: auto; }
+    .parcours__arrow {
+      display: grid; place-items: center;
+      position: absolute; right: -14px; top: 50%; transform: translateY(-50%);
+      color: var(--ink-4); z-index: 2;
+    }
+  }
+
+  /* ---------- Portes ---------- */
+  .portes {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-5);
+    margin-top: var(--s-8);
+  }
+  .porte { display: flex; flex-direction: column; align-items: flex-start; color: var(--ink); }
+  .porte__kicker {
+    font-family: var(--font-mono); font-size: var(--step--2);
+    letter-spacing: var(--tr-mono); text-transform: uppercase;
+    color: var(--ink-3); margin: var(--s-4) 0 var(--s-3);
+  }
+  .porte__title { margin-bottom: var(--s-3); }
+  .porte__text { color: var(--ink-2); margin-bottom: var(--s-5); }
+  .porte__more { margin-top: auto; }
+
+  @media (min-width: 760px) {
+    .portes { grid-template-columns: 1fr 1fr; gap: var(--s-6); }
+  }
+
+  /* ---------- Bandeau confiance ---------- */
+  .trust { padding-block: var(--s-5); border-block: 1px solid var(--line); }
+  .trust__inner {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+    gap: 0.4rem var(--s-4);
+    text-align: center;
+  }
+  .trust__item {
+    font-family: var(--font-mono); font-size: var(--step--2);
+    letter-spacing: var(--tr-mono); text-transform: uppercase; color: var(--ink-3);
+  }
+  .trust__dot { color: var(--ink-4); }
+
+  /* ---------- CTA final ---------- */
+  .final { text-align: center; display: flex; flex-direction: column; align-items: center; gap: var(--s-4); }
+  .final__line { font-family: var(--font-display); font-style: italic; font-size: var(--step-2); color: var(--cuivre-ink); }
+  .final__title { font-size: var(--step-5); max-width: 22ch; margin-bottom: var(--s-2); }
+</style>
