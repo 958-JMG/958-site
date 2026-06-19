@@ -58,11 +58,14 @@ const confiance = ['Qualiopi', 'Ancrage Morbihan', 'Souveraineté des données',
 
 // Chiffres-résultats (repris du site existant — À CONFIRMER par JMG)
 const stats = [
-  { num: '+500', label: 'personnes formées depuis 2022' },
-  { num: '6',    label: 'démos sectorielles déployées' },
-  { num: '100%', label: 'souverain par défaut — le choix vous appartient' },
-  { num: '48h',  label: 'pour vous répondre' },
+  { prefix: '+', value: 500, suffix: '', label: 'personnes formées depuis 2022' },
+  { prefix: '',  value: 6,   suffix: '', label: 'démos sectorielles déployées' },
+  { prefix: '',  value: 100, suffix: '%', label: 'souverain par défaut — le choix vous appartient' },
+  { prefix: '',  value: 48,  suffix: 'h', label: 'pour vous répondre' },
 ];
+
+// Secteurs servis — ruban défilant
+const secteurs = ['Immobilier', 'Cuisiniste', 'Syndic', 'BTP', 'Gestion de patrimoine', 'Formation', 'TPE · PME'];
 
 const accents = {
   cuivre: 'var(--cuivre)',
@@ -178,6 +181,20 @@ const orgJsonLd = {
       </div>
     </section>
 
+    <!-- ============== RUBAN SECTEURS (Encre, défilant) ============== -->
+    <section class="band--ink-rich marquee-band" aria-label="Secteurs accompagnés">
+      <div class="marquee">
+        <div class="marquee__track">
+          {[...secteurs, ...secteurs].map((s) => (
+            <>
+              <span class="marquee__item">{s}</span>
+              <span class="marquee__dot" aria-hidden="true">✦</span>
+            </>
+          ))}
+        </div>
+      </div>
+    </section>
+
     <!-- ============== LES 4 PORTES ============== -->
     <section class="section band--paper-2">
       <div class="container is-full">
@@ -188,7 +205,7 @@ const orgJsonLd = {
 
         <div class="portes reveal-stagger">
           {portes.map((p, i) => (
-            <a href={p.href} class="porte card reveal" style={`--accent:${accents[p.glyph]}`}>
+            <a href={p.href} class={`porte card reveal ${i === 0 ? 'is-feature' : ''}`} style={`--accent:${accents[p.glyph]}`}>
               <span class="porte__num">{String(i + 1).padStart(2, '0')}</span>
               <span class={`glyph glyph--${p.glyph}`}><Icon name={p.icon} size={22} /></span>
               <span class="porte__kicker">{p.kicker}</span>
@@ -214,7 +231,7 @@ const orgJsonLd = {
         <div class="stats reveal-stagger">
           {stats.map((s) => (
             <div class="stat reveal">
-              <div class="stat__num">{s.num}</div>
+              <div class="stat__num is-count" data-count={s.value} data-prefix={s.prefix} data-suffix={s.suffix}>{s.prefix}0{s.suffix}</div>
               <div class="stat__label">{s.label}</div>
             </div>
           ))}
@@ -248,6 +265,31 @@ const orgJsonLd = {
   </main>
 
   <Footer />
+
+  <script>
+    // Compteur animé sur les chiffres-résultats (au scroll, une seule fois)
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const nums = document.querySelectorAll('.stat__num.is-count');
+    const fmt = (n) => n.toLocaleString('fr-FR');
+    const run = (el) => {
+      const target = parseInt(el.dataset.count || '0', 10);
+      const pre = el.dataset.prefix || '';
+      const suf = el.dataset.suffix || '';
+      if (reduce) { el.textContent = pre + fmt(target) + suf; return; }
+      const dur = 1300; const t0 = performance.now();
+      const tick = (t) => {
+        const p = Math.min(1, (t - t0) / dur);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = pre + fmt(Math.round(target * eased)) + suf;
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { run(e.target); io.unobserve(e.target); } });
+    }, { threshold: 0.4 });
+    nums.forEach((n) => io.observe(n));
+  </script>
 </V3Layout>
 
 <style>
