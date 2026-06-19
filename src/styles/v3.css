@@ -503,6 +503,113 @@ small { font-size: var(--step--1); }
 }
 
 /* ============================================================
+   V3.1 — profondeur & rythme (rapprochement finition Tether)
+   ============================================================ */
+
+/* Padding de section ample, relatif au viewport (façon Tether 5–8vw) */
+.section.is-xl { padding-block: clamp(4.5rem, 8vw, 9rem); }
+
+/* Halo décoratif doux (donne la profondeur que Tether tire des photos) */
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 0;
+}
+.glow--cuivre { background: radial-gradient(circle, rgba(199,94,45,0.45), transparent 70%); }
+.glow--sauge  { background: radial-gradient(circle, rgba(161,193,182,0.55), transparent 70%); }
+
+/* Carte vitrée (badge/pill glassy façon Tether backdrop-blur) */
+.glass {
+  background: rgba(244, 236, 220, 0.10);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(244, 236, 220, 0.18);
+}
+
+/* Bande Encre — variante riche (dégradé + accents cuivre lisibles) */
+.band--ink-rich {
+  background:
+    radial-gradient(120% 80% at 80% 0%, rgba(199,94,45,0.18), transparent 60%),
+    radial-gradient(90% 70% at 0% 100%, rgba(161,193,182,0.10), transparent 55%),
+    var(--ink);
+  color: var(--on-ink);
+}
+.band--ink-rich h1, .band--ink-rich h2, .band--ink-rich h3, .band--ink-rich h4 { color: var(--on-ink); }
+.band--ink-rich p { color: var(--on-ink-2); }
+.band--ink-rich .eyebrow { color: var(--on-ink-3); }
+.band--ink-rich .eyebrow--cuivre { color: var(--cuivre-hover); }
+
+/* Bande cuivre pleine — moment d'accent fort (chiffres) */
+.band--cuivre {
+  background:
+    radial-gradient(100% 120% at 100% 0%, rgba(255,255,255,0.10), transparent 55%),
+    var(--cuivre);
+  color: var(--paper);
+}
+.band--cuivre h2, .band--cuivre h3 { color: var(--paper); }
+.band--cuivre p { color: rgba(244,236,220,0.85); }
+.band--cuivre .eyebrow { color: rgba(244,236,220,0.80); }
+
+/* Chiffres-résultats énormes */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--s-6) var(--s-5);
+}
+.stat__num {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  line-height: 0.95;
+  letter-spacing: var(--tr-tighter);
+  font-weight: 460;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.stat__label {
+  font-size: var(--step-0);
+  line-height: var(--lh-snug);
+  margin-top: var(--s-2);
+  max-width: 24ch;
+}
+@media (min-width: 880px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+
+/* Parcours sur fond sombre : steps en verre */
+.band--ink-rich .parcours__step,
+.band--ink .parcours__step {
+  background: rgba(244, 236, 220, 0.04);
+  border-color: var(--on-ink-line);
+}
+.band--ink-rich .parcours__note,
+.band--ink .parcours__note { color: var(--on-ink-3); }
+.band--ink-rich .parcours__label,
+.band--ink .parcours__label { color: var(--on-ink); }
+.band--ink-rich .parcours__arrow,
+.band--ink .parcours__arrow { color: var(--on-ink-3); }
+.band--ink-rich .glyph--ink {
+  background: rgba(244,236,220,0.06);
+  color: var(--on-ink);
+  border-color: var(--on-ink-line);
+}
+
+/* Porte — barre d'accent haute + plus de présence */
+.porte { position: relative; overflow: hidden; }
+.porte::before {
+  content: "";
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--accent, var(--cuivre));
+  opacity: 0; transition: opacity var(--dur-2) var(--ease);
+}
+.porte:hover::before { opacity: 1; }
+.porte__num {
+  position: absolute; top: var(--s-5); right: var(--s-6);
+  font-family: var(--font-display);
+  font-size: 2.4rem; line-height: 1;
+  color: var(--line-2);
+}
+
+/* ============================================================
    Reduced motion
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {

@@ -55,6 +55,21 @@ const portes = [
 
 const confiance = ['Qualiopi', 'Ancrage Morbihan', 'Souveraineté des données', 'Méthode SPARI'];
 
+// Chiffres-résultats (repris du site existant — À CONFIRMER par JMG)
+const stats = [
+  { num: '+500', label: 'personnes formées depuis 2022' },
+  { num: '6',    label: 'démos sectorielles déployées' },
+  { num: '100%', label: 'souverain par défaut — le choix vous appartient' },
+  { num: '48h',  label: 'pour vous répondre' },
+];
+
+const accents = {
+  cuivre: 'var(--cuivre)',
+  sauge: 'var(--sauge-deep)',
+  vert: 'var(--vert-deep)',
+  ink: 'var(--ink)',
+};
+
 const siteUrl = 'https://www.958.fr';
 const orgJsonLd = {
   '@context': 'https://schema.org',
@@ -93,6 +108,7 @@ const orgJsonLd = {
   <main id="main">
     <!-- ============== HERO ============== -->
     <section class="hero">
+      <span class="glow glow--cuivre hero__glow" aria-hidden="true"></span>
       <div class="container is-full hero__grid">
         <div class="hero__copy">
           <span class="eyebrow eyebrow--cuivre is-bare">9·58</span>
@@ -114,14 +130,14 @@ const orgJsonLd = {
           </div>
         </div>
 
-        <div class="hero__visual reveal">
+        <div class="hero__visual">
           <CockpitCards />
         </div>
       </div>
     </section>
 
-    <!-- ============== CE QUE JE FAIS (parcours) ============== -->
-    <section class="section is-tight band--paper-2" id="methode">
+    <!-- ============== CE QUE JE FAIS (parcours, bande sombre) ============== -->
+    <section class="section is-xl band--ink-rich" id="methode">
       <div class="container is-full">
         <div class="section-head reveal">
           <span class="eyebrow eyebrow--cuivre">Ce que je fais</span>
@@ -155,8 +171,9 @@ const orgJsonLd = {
         </div>
 
         <div class="portes reveal-stagger">
-          {portes.map((p) => (
-            <a href={p.href} class="porte card reveal">
+          {portes.map((p, i) => (
+            <a href={p.href} class="porte card reveal" style={`--accent:${accents[p.glyph]}`}>
+              <span class="porte__num">{String(i + 1).padStart(2, '0')}</span>
               <span class={`glyph glyph--${p.glyph}`}><Icon name={p.icon} size={22} /></span>
               <span class="porte__kicker">{p.kicker}</span>
               <h3 class="porte__title q-title">{p.title}</h3>
@@ -166,6 +183,24 @@ const orgJsonLd = {
                 <Icon name="arrow-right" size={16} class="arrow" />
               </span>
             </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== CHIFFRES (bande cuivre) ============== -->
+    <section class="section is-xl band--cuivre">
+      <div class="container is-full">
+        <div class="section-head reveal" style="max-width:42ch">
+          <span class="eyebrow">9·58 en bref</span>
+          <h2>Une méthode ancrée, des résultats concrets.</h2>
+        </div>
+        <div class="stats reveal-stagger">
+          {stats.map((s) => (
+            <div class="stat reveal">
+              <div class="stat__num">{s.num}</div>
+              <div class="stat__label">{s.label}</div>
+            </div>
           ))}
         </div>
       </div>
@@ -201,8 +236,13 @@ const orgJsonLd = {
 
 <style>
   /* ---------- Hero ---------- */
-  .hero { padding-block: var(--s-9) var(--s-10); position: relative; }
+  .hero { padding-block: var(--s-9) var(--s-10); position: relative; overflow: clip; }
+  .hero__glow {
+    width: 60vw; height: 60vw; max-width: 720px; max-height: 720px;
+    top: -16%; right: -12%;
+  }
   .hero__grid {
+    position: relative; z-index: 1;
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--s-9);
