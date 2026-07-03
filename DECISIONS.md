@@ -22,5 +22,11 @@
 - **Pipeline** : deploy.yml basculé pnpm → npm (le nouveau site ship un package-lock.json).
 - **À traiter en paquet suivant (SIGNALÉ)** : liens footer placeholder `#` (Mentions légales — obligation
   LCEN —, LinkedIn, Ça fait Tilt®). Mentions légales à recréer dans le nouveau site.
-<!-- BASCULE_TIME_PLACEHOLDER -->
+- **MISE EN LIGNE** : 2026-07-03 ~12:46 UTC (14:46 Paris). PR #29 mergée sur `main` (`6d6bcea`) →
+  GitHub Actions run `28661460916` (vert, 32s) → Worker Cloudflare **Version ID `314ed07f-2306-455d-9a51-f320ae0559d9`**.
+- **Contrôles post-bascule OK** (958.fr + www.958.fr) : HTTP **200** HTTPS ; **4 liens Cal.com** présents ;
+  mobile 390px capturé (Chromium headless) = rendu Glaz conforme ; anciennes routes → **301 → /** vérifiées en prod.
+  Edge Cloudflare sert déjà le nouveau HTML (pas de contenu périmé). Aucun rollback nécessaire.
+- **Rollback si besoin** : `git reset --hard 3e3eb1b && git push --force-with-lease origin main` puis
+  `gh workflow run deploy.yml --ref main`. Sauvegarde : `~/backups/958-prod-20260703/`.
 
