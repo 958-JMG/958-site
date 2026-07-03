@@ -1,6 +1,5 @@
-// Cloudflare Workers — flow unifié avec static assets (2025).
-// Le worker TypeScript gère les routes dynamiques (/api/*),
-// tout le reste est servi depuis dist/ via le binding ASSETS.
+// Cloudflare Workers — 958.fr (site statique Astro mono-page, bascule 2026-07-03).
+// Le worker (src/worker.ts) sert dist/ via le binding ASSETS et 301→/ les routes disparues.
 {
   "name": "958-site",
   "main": "./src/worker.ts",
@@ -9,15 +8,10 @@
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
-    "not_found_handling": "404-page",
+    "not_found_handling": "none",
     "html_handling": "auto-trailing-slash"
   },
   "observability": {
     "enabled": true
-  },
-  // Variables injectées dans env au runtime. Publiques (pas de secret).
-  // Le webhook n8n est de toute façon déjà exposé dans le HTML historiquement.
-  "vars": {
-    "N8N_WEBHOOK_URL": "https://jmg958.app.n8n.cloud/webhook/diagnostic-site"
   }
 }

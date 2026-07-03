@@ -29,3 +29,6 @@ pnpm-debug.log*
 
 # Claude preview scaffolding (personnel)
 .claude/
+
+# wrangler local dev state
+.wrangler/
