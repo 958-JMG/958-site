@@ -19,6 +19,13 @@ export default {
   async fetch(request: Request, env: Env, _ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
 
+    // Canonicalisation www → apex : www.958.fr/... → 301 → https://958.fr/... (chemin + query conservés).
+    // Évite le doublon de contenu pour Google. Pas de boucle : l'apex n'a pas le préfixe "www.".
+    if (url.hostname.startsWith('www.')) {
+      url.hostname = url.hostname.slice(4);
+      return Response.redirect(url.toString(), 301);
+    }
+
     // On ne redirige que les navigations GET/HEAD ; les autres méthodes passent tel quel.
     const res = await env.ASSETS.fetch(request);
 
