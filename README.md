@@ -51,8 +51,6 @@ src/
 │   └── v2b.css      # Design tokens v2c (dark cuivre Fraunces)
 └── worker.ts        # Cloudflare Worker : redirects 301 + proxy /api/lead
 public/              # logos, favicons, og-958.png, robots.txt
-deploy/              # workflow n8n + générateur OG
-scripts/             # make-logo-transparent.mjs, make-og-image.mjs
 ```
 
 ## Design tokens v2c (résumé)
@@ -75,7 +73,7 @@ Le worker fait 3 choses :
 
 Push sur `main` → workflow GitHub Actions `Deploy to Cloudflare Workers` → wrangler deploy → ~30 s.
 
-Voir [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) pour la pipeline et [`deploy/n8n-diagnostic-form.json`](deploy/n8n-diagnostic-form.json) pour le workflow du formulaire côté n8n.
+Voir [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) pour la pipeline. Le workflow n8n du formulaire de diagnostic vit côté n8n (l'export `deploy/n8n-diagnostic-form.json` a été retiré du repo).
 
 ## Licence
 
