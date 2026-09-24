@@ -289,6 +289,8 @@
     box-shadow:var(--shadow);
   }
   .recit .portrait img{width:100%;height:100%;object-fit:cover;object-position:center 18%;display:block;}
+  .recit figure{margin:0;}
+  .recit figcaption{margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--a60);}
   @media(max-width:700px){.recit{grid-template-columns:1fr;}.recit .portrait{width:140px;height:170px;}}
   .recit .sign{margin-top:22px;font-size:14px;color:var(--a60);display:flex;align-items:center;gap:12px;}
   .recit .sign .line{width:34px;height:2px;background:var(--ajonc);border-radius:2px;}
