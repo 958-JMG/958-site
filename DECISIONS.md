@@ -24,3 +24,15 @@
   LCEN —, LinkedIn, Ça fait Tilt®). Mentions légales à recréer dans le nouveau site.
 <!-- BASCULE_TIME_PLACEHOLDER -->
 
+## Charte 9·58 2026-2027, V2 accent — 2026-10-07
+
+- **JMG** : « go le site et la page de connexion » ; sur les planches (avant, V1 sobre, V2 accent ; le site au bureau et au
+  téléphone, en descendant la page) : « V2 go pour les deux ». La charte Glaz du 03/07 (lin, ardoise, glaz, ajonc ;
+  Bricolage, Instrument Sans) cède la place à la charte 2026-2027, celle du cockpit, des documents, de la signature et des
+  slides : la page grise #EDEDED, le blanc, le noir #111111, l'orange #FF4F00 (le texte posé dessus en NOIR, 5,7:1) et son
+  encre #B83600 pour un petit texte orange ; tout carré, sans ombre (un filet) ; Inter, IBM Plex Mono pour les étiquettes.
+- **V2** : la barre orange de la signature sur le bord gauche de la page (fixe, de haut en bas).
+- Les trois cockpits du deck : noir (le bâtiment), orange (la menuiserie), blanc (le foncier). Les photos restent ; aucun
+  texte ne change. Au téléphone, le bouton « Voir ce que ça donne chez vous » tient sur une ligne (Inter est plus large).
+- Les jetons gardent leurs noms (glaz, ajonc… valent l'orange) : les composants n'ont pas bougé, seule la feuille change.
+
